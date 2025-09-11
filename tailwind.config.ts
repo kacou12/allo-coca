@@ -39,7 +39,8 @@ module.exports = {
       padding: '2rem',
     },
     fontSize: {
-      sm: '0.875rem', //12px
+      xs: '0.75rem',
+      sm: '0.875rem', //14px
       md: '1rem',
       base: '1rem', //16px,
       //  base: '0.875rem', //14px,
@@ -48,8 +49,8 @@ module.exports = {
       '3xl': '1.953rem',
       '4xl': '2.441rem',
       '5xl': '3.052rem',
-      // Pour un H1 grand (max 65px)
-      'clamp-h1-lg': ['clamp(2.5rem, 7vw, 4.0625rem)', '1'], // 40px à 65px, line-height 1
+      // Pour un H1 grand (max 60px)
+      'clamp-h1-lg': ['clamp(2.5rem, 7vw, 3.75rem)', '1'], // 40px à 65px, line-height 1
       // Pour un H1 plus petit ou un H2 (max 40px)
       'clamp-h1-md': ['clamp(1.875rem, 5vw, 2.5rem)', '1.2'], // 30px à 40px, line-height 1.2
       // Vos clamps existants, ajustés pour la cohérence ou les besoins spécifiques
@@ -61,7 +62,9 @@ module.exports = {
       
       fontFamily: {
         // worksans: ['Public Sans', 'sans-serif'],
-        publicsans: ['Inter', 'TCCC-UnityText', 'sans-serif'],
+        opensans: ['Open Sans', 'sans-serif'],
+        inter: ['Inter',  'sans-serif'],
+        tcc: [ 'TCCC-UnityText Regular', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

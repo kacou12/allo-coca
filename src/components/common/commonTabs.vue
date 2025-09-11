@@ -1,16 +1,36 @@
+<template>
+    <div class="w-fit bg-gray-50 rounded-lg">
+        <div class="relative">
+            <!-- Liste des tabs -->
+            <div ref="tabsList" class="flex p-1 space-x-1 bg-gray-100 rounded-lg flex-wrap">
+                <button v-for="(tab, index) in tabs" :key="tab.id" @click="switchTab(tab.id, index)"
+                    class="relative flex-wrap z-20 px-3 py-1.5 text-sm font-medium transition-all duration-200 rounded-md"
+                    :class="[
+                        activeTab === tab.id
+                            ? 'text-gray-900'
+                            : 'text-gray-600 hover:text-gray-900'
+                    ]">
+                    {{ tab.label }}
+                </button>
+
+                <!-- Indicateur animé -->
+                <div ref="indicator"
+                    class="z-10 absolute   inset-y-1 bg-white rounded-md shadow-sm transition-all duration-200 ease-out" />
+            </div>
+        </div>
+    </div>
+
+    <!-- <transition-group name="fade-up" target="div" appear @click.native="navigate($event)"> -->
+    <div v-for="(tab, index) in tabs" v-show="activeTab == tab.id" :key="index">
+        <div>
+            <slot :name="tab.id"></slot>
+        </div>
+    </div>
+    <!-- </transition-group> -->
+</template>
 <script setup lang="ts">
 import type { Tab } from '@/interfaces/global.interface'
 import { ref, onMounted, type PropType } from 'vue'
-
-
-
-// const tabs = ref<Tab[]>([
-//     { id: 'today', label: 'Aujourd\'hui' },
-//     { id: 'yesterday', label: 'Hier' },
-//     { id: '24h', label: '24 heures' },
-//     { id: '7days', label: '7 jours' },
-//     { id: '30days', label: '30 jours' },
-// ])
 
 const { tabs } = defineProps({
     tabs: {
@@ -53,36 +73,6 @@ onMounted(() => {
 })
 </script>
 
-<template>
-    <div class="w-fit bg-gray-50 rounded-lg">
-        <div class="relative">
-            <!-- Liste des tabs -->
-            <div ref="tabsList" class="flex p-1 space-x-1 bg-gray-100 rounded-lg flex-wrap">
-                <button v-for="(tab, index) in tabs" :key="tab.id" @click="switchTab(tab.id, index)"
-                    class="relative flex-wrap z-20 px-3 py-1.5 text-sm font-medium transition-all duration-200 rounded-md"
-                    :class="[
-                        activeTab === tab.id
-                            ? 'text-gray-900'
-                            : 'text-gray-600 hover:text-gray-900'
-                    ]">
-                    {{ tab.label }}
-                </button>
-
-                <!-- Indicateur animé -->
-                <div ref="indicator"
-                    class="z-10 absolute   inset-y-1 bg-white rounded-md shadow-sm transition-all duration-200 ease-out" />
-            </div>
-        </div>
-    </div>
-
-    <!-- <transition-group name="fade-up" target="div" appear @click.native="navigate($event)"> -->
-    <div v-for="(tab, index) in tabs" v-show="activeTab == tab.id" :key="index">
-        <div>
-            <slot :name="tab.id"></slot>
-        </div>
-    </div>
-    <!-- </transition-group> -->
-</template>
 
 <style scoped>
 .section {
