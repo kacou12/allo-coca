@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RangeCalendarGridBody, type RangeCalendarGridBodyProps } from 'reka-ui'
+import { RangeCalendarGridBody, type RangeCalendarGridBodyProps } from 'radix-vue'
 
 const props = defineProps<RangeCalendarGridBodyProps>()
 </script>

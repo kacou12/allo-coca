@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig } from 'axios'
+import type { AxiosError, AxiosRequestConfig } from 'axios'
 import queryString from 'query-string'
 
 import axios from '@/config/axios'
@@ -39,7 +39,7 @@ export class Http {
       // Http.getError(error)
       const toast = useToast()
       // @ts-ignore
-      toast.error(error.response.data.msg)
+      toast.error((error as AxiosError).response.data.message)
       throw error
     }
   }
@@ -51,7 +51,7 @@ export class Http {
     } catch (error: any) {
       const toast = useToast()
       // @ts-ignore
-      toast.error(error.response.data.msg)
+      toast.error(error.response.data.error)
       throw error
     }
   }

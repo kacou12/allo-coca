@@ -12,8 +12,6 @@
         :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border'"
         class="shadow appearance-none   rounded-lg py-2 px-3 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring  h-[44px] " />
 
-
-
       <div class="min-h-[20px] mt-2">
         <FadeInAnimation mode="out-in">
 

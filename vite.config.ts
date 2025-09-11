@@ -12,15 +12,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  // server: {
-  //   // cors: false,
-  //   proxy: {
-  //     '/api': {
-  //       target: 'http://51.254.97.37:8080',
-  //       changeOrigin: true,
-  //       secure: false,
-  //       rewrite: (path) => path.replace(/^\/api/, ''),
-  //     },
-  //   },
-  // },
 })

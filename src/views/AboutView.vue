@@ -57,14 +57,14 @@
     <!-- Logo et sélection du pays -->
     <div class="p-4">
       <div class="flex items-center mb-4">
-        <img src="/src/assets/appicons.png" alt="Logo" class="w-8 h-8 mr-2" />
+        <img src="/src/assets/images/logos-paytic/paytic.png" alt="Logo" class="w-8 h-8 mr-2" />
         <div>
           <h2 class="font-bold text-lg">Send Chap</h2>
           <p class="text-sm text-gray-500">Espace administration</p>
         </div>
       </div>
       <div class="flex items-center bg-gray-100 rounded-lg p-2">
-        <img src="/src/assets/appicons.png" alt="Côte d'Ivoire" class="w-6 h-6 mr-2" />
+        <img src="/src/assets/images/logos-paytic/paytic.png" alt="Côte d'Ivoire" class="w-6 h-6 mr-2" />
         <span class="text-gray-700 text-sm">Côte d'Ivoire</span>
       </div>
     </div>
@@ -141,7 +141,7 @@
     <!-- Footer utilisateur -->
     <div class="p-4 border-t">
       <div class="flex items-center">
-        <img src="/src/assets/appicons.png" alt="User" class="w-10 h-10 rounded-full mr-2" />
+        <img src="/src/assets/images/logos-paytic/paytic.png" alt="User" class="w-10 h-10 rounded-full mr-2" />
         <div>
           <p class="text-sm font-medium">Philippe Jeans</p>
           <p class="text-sm text-gray-500">philippe@gmail.com</p>

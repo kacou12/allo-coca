@@ -51,8 +51,7 @@
             </Button>
         </PopoverTrigger>
         <PopoverContent class="w-auto p-0">
-            <RangeCalendarRoot :max-value="today(getLocalTimeZone())" v-slot="{ weekDays }" v-model="dates"
-                v-model:placeholder="placeholder" class="p-3">
+            <RangeCalendarRoot v-slot="{ weekDays }" v-model="dates" v-model:placeholder="placeholder" class="p-3">
                 <div class="flex flex-col gap-y-4 mt-4 sm:flex-row sm:gap-x-4 sm:gap-y-0">
                     <div class="flex flex-col gap-4">
                         <div class="flex items-center justify-between">
@@ -181,16 +180,14 @@ import {
     CalendarDate,
     type DateValue,
     isEqualMonth,
-    today,
-    getLocalTimeZone
 } from '@internationalized/date'
 import {
     Calendar as CalendarIcon,
     ChevronLeft,
     ChevronRight,
 } from 'lucide-vue-next'
-import { type DateRange, RangeCalendarRoot, useDateFormatter } from 'reka-ui'
-import { createMonth, type Grid, toDate } from 'reka-ui/date'
+import { type DateRange, RangeCalendarRoot, useDateFormatter } from 'radix-vue'
+import { createMonth, type Grid, toDate } from 'radix-vue/date'
 import { onMounted, type PropType, type Ref, ref, watch } from 'vue'
 import CommonButton from '../buttons/commonButton.vue'
 

@@ -1,8 +1,21 @@
-
-export interface BenefitType {
+export interface Tab {
   id: string
-  date: string
-  amount: string
-  samplingStatus: string
-  info?: string
+  label: string
 }
+
+export interface BenefitTransactionType {
+  id: string
+}
+
+// export enum BenefitTransactionType {
+//   APP_MOBILE = 'payment',
+//   SENDCHAP_BUSINESS = 'transfer',
+//   MERCHANT_PAYMENT = 'purchase',
+// }
+
+// TRANSACTION
+export const BenefitTransactionEnum = Object.freeze({
+  APP_MOBILE: { name: 'App mobile' },
+  SENDCHAP_BUSINESS: { name: 'Sendchap business' },
+  MERCHANT_PAYMENT: { name: 'Paiement marchand' },
+})

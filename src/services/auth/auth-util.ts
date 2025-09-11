@@ -1,16 +1,20 @@
-import { generateColor } from '@/lib/utils'
+// import { generateColor } from '@/lib/utils'
+import { generateColor } from '@/shared/shared'
 import { Authentication } from './auth-constants'
 
 export function getBearerToken(): string {
   return `Bearer ${getAccessToken()}`
 }
+const accesstokenName = 'payticMerchantAccessToken'
 
 export function getAccessToken(): string | null {
-  return localStorage.getItem(Authentication.AccessToken)
+  // return localStorage.getItem(Authentication.AccessToken)
+  return localStorage.getItem(accesstokenName)
 }
 
 export function setAccessToken(accessToken: string): void {
-  localStorage.setItem(Authentication.AccessToken, accessToken)
+  // localStorage.setItem(Authentication.AccessToken, accessToken)
+  localStorage.setItem(accesstokenName, accessToken)
 }
 
 export function getRefreshToken(): string | null {
@@ -50,7 +54,7 @@ export function saveToken(
 }
 
 export function destroySensitiveInfo(): void {
-  localStorage.removeItem(Authentication.AccessToken)
+  localStorage.removeItem(accesstokenName)
   localStorage.removeItem(Authentication.RefreshToken)
   localStorage.removeItem(Authentication.ExpiryIn)
 }

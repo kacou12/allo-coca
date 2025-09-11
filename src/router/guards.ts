@@ -1,28 +1,27 @@
 import { AppRoute } from '@/constants/app-route'
 import { getAccessToken } from '@/services/auth/auth-util'
-
 import type {
   _Awaitable,
   NavigationGuardReturn,
   RouteLocationNormalized,
   RouteLocationNormalizedLoaded,
+  RouteRecordNameGeneric,
 } from 'vue-router'
 
 export function requiresAuth(
   to: RouteLocationNormalized,
   from: RouteLocationNormalizedLoaded,
 ): _Awaitable<NavigationGuardReturn> {
- 
-  const hasToken = !!getAccessToken()
-  const PUBLIC_ROUTES = [AppRoute.LOGIN.name, AppRoute.VERIFY_EMAIL.name]
   if (to.meta.requiresAuth) {
-
-    if (!hasToken) {
+    // see more https://router.vuejs.org/guide/advanced/meta.html
+    // see more https://router.vuejs.org/guide/advanced/navigation-guards.html
+    if (!getAccessToken()) {
       // RouteRecordNameGeneric
       return AppRoute.LOGIN.name
-    } 
-  } else if (hasToken && PUBLIC_ROUTES.includes(to.name!.toString())) {
-    return AppRoute.ABOUT.name
+    }
+  }else {
+    if (getAccessToken()) {
+      return AppRoute.DASHBOARD.name
+    }
   }
-  return true
 }

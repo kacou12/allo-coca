@@ -18,7 +18,7 @@ export default defineConfigWithVueTs(
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
 
-  vueTsConfigs.recommended,
   // pluginVue.configs['flat/essential'],
+  vueTsConfigs.recommended,
   // skipFormatting,
 )

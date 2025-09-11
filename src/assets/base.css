@@ -15,6 +15,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
+    /* --foreground: 211 19% 42%; */
 
     --card: 0 0% 100%;
     --card-foreground: 224 71.4% 4.1%;
@@ -22,8 +23,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 264 48% 56%;
-
+    /* Primary color updated to #0084CE */
+    --primary: 355.2 89% 51%; /* Approximate HSL for #0084CE */
     --primary-foreground: 210 20% 98%;
 
     --secondary: 220 14.3% 95.9%;
@@ -60,7 +61,8 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
+    /* Primary color updated to #0084CE */
+    --primary: 203 100% 75%; /* Approximate HSL for #0084CE in dark mode (lighter) */
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 14.9%;
@@ -96,4 +98,32 @@
   .customHead {
     @apply bg-primary text-primary-foreground;
   }
+  html {
+    @apply text-red-500;
+  }
+}
+:root {
+  --primary-10: #4B060C;
+  --primary-20: #700912;
+  --primary-30: #930D18;
+  --primary-40: #B7101E;
+  --primary-50: #F11123;
+  --primary-60: #F34453;
+  --primary-70: #F57782;
+  --primary-80: #F8A9B1;
+  --primary-90: #FBDDE0;
+  --primary-100: #FDEEF0;
+}
+
+.dark {
+  --primary-10: #930D18;
+  --primary-20: #B7101E;
+  --primary-30: #DA1428;
+  --primary-40: #FF182D;
+  --primary-50: #F34453;
+  --primary-60: #F57782;
+  --primary-70: #F8A9B1;
+  --primary-80: #FBDDE0;
+  --primary-90: #FDEEF0;
+  --primary-100: #FFFFFF;
 }

@@ -8,14 +8,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <td
-    :class="
-      cn(
-        'p-4 align-middle [&:has([role=checkbox])]:pr-0',
-        props.class,
-      )
-    "
-  >
+  <td :class="cn(
+    ' px-5 lg:px-0 py-4 align-middle [&:has([role=checkbox])]:pr-0',
+    props.class,
+  )
+    ">
     <slot />
   </td>
 </template>

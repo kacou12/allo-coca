@@ -3,14 +3,11 @@ import { z } from 'zod'
 
 export const loginSchema = z.object({
   email: z
-    .string({ required_error: "L'adresse email est requise" })
-    .email({ message: "Le format de l'adresse email est invalide" })
-    .trim()
-    .refine((email) => email.endsWith('@sendchap.ci'), {
-      message: "L'email doit appartenir au domaine @sendchap.ci",
-    }),
+    .string({ required_error: i18n.global.t('login.validation.email') })
+    .email({ message: i18n.global.t('login.validation.email') })
+    .trim(),
   password: z
-    .string({ required_error: 'Le mot de passe est requis' })
-    .min(1, { message: 'Le mot de passe ne peut pas être vide' })
+    .string({ required_error: i18n.global.t('login.validation.password') })
+    .min(1, { message: i18n.global.t('login.validation.password') })
     .trim(),
 })

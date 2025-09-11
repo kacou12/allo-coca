@@ -7,20 +7,9 @@ enum AdminRole {
 }
 
 export const AdminRouteApi = {
-  // /admin/api/v1/user/
-  default: '/admin/api/v1/user',
-  getOne: (id: string) => `/admin/api/v1/user/${id}`,
-  getOneName: '/admin/api/v1/user/*',
-  filter: '/admin/api/v1/user',
-  adminsFilter: '/admin/api/v1/user/admins',
-  role: '/admin/api/v1/role',
-  getStats: '/admin/api/v1/user/stats',
-  getRole: (id: string) => `/admin/api/v1/role/${id}`,
-  getRoleName: `/admin/api/v1/role/*`,
-  policy: '/admin/api/v1/policies',
-  addNewPolicies: '/admin/api/v1/role/add_permissions',
-  getPolicy: (id: string) => `/admin/api/v1/policies/role/${id}`,
-  getPolicyName: `/admin/api/v1/policies/role/*`,
+  default: '/api/v1/admins',
+  getOne: (id: string) => `/api/v1/admins/${id}`,
+  filter: '/api/v1/admins/filter',
 }
 
 export { AdminRole }

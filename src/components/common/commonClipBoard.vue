@@ -41,29 +41,35 @@
 </template>
 
 <script setup lang="ts">
-import { copyToClipBoard } from '@/lib/utils';
+import { copyToClipBoard } from '@/shared/shared';
 import { ref, watch } from 'vue';
 import { useToast } from 'vue-toastification';
 import FadeInAnimation from '../animations/fadeInAnimation.vue';
 
 const toast = useToast();
+const emit = defineEmits(['copy']);
 
 const isCopied = ref(false);
 
 
 
-const { dataToCopy } = defineProps({
+const { dataToCopy, successText } = defineProps({
     dataToCopy: {
         type: String || Number,
         required: true,
-
+    },
+    successText: {
+        type: String,
+        default: "copie effectué",
+        required: false,
     }
 })
 
 const copy = () => {
     copyToClipBoard(dataToCopy)
-    toast.info("copie effectué", { timeout: 3000 });
+    toast.info(successText, { timeout: 3000 });
     isCopied.value = true;
+    emit('copy');
 }
 
 watch(isCopied, (n, o) => {

@@ -1,5 +1,5 @@
 <template>
-    <Breadcrumb class="text-sm font-worksans">
+    <Breadcrumb class="text-sm font-publicsans">
         <BreadcrumbList>
             <BreadcrumbItem>
                 <router-link class="transition-colors hover:text-foreground" :to="{ name: links![0].route }">

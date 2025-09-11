@@ -1,8 +1,6 @@
 // const animate = require('tailwindcss-animate')
 // import animations from '@midudev/tailwind-animations'
 
-const { blackA, green, grass, mauve } = require('@radix-ui/colors')
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
@@ -17,26 +15,53 @@ module.exports = {
   ],
 
   theme: {
+    screens: {
+      xs: '425px',
+      // => @media (min-width: 425px) { ... }
+
+      sm: '640px',
+      // => @media (min-width: 640px) { ... }
+
+      md: '768px',
+      // => @media (min-width: 768px) { ... }
+
+      lg: '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      xl: '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl': '1536px',
+      // => @media (min-width: 1536px) { ... }
+    },
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        xs: '425px',
-        '2lg': '1040px',
-
-        '2xl': '1400px',
-      },
+    },
+    fontSize: {
+      sm: '0.875rem', //12px
+      md: '1rem',
+      base: '1rem', //16px,
+      //  base: '0.875rem', //14px,
+      xl: '1.25rem',
+      '2xl': '1.563rem',
+      '3xl': '1.953rem',
+      '4xl': '2.441rem',
+      '5xl': '3.052rem',
+      // Pour un H1 grand (max 65px)
+      'clamp-h1-lg': ['clamp(2.5rem, 7vw, 4.0625rem)', '1'], // 40px à 65px, line-height 1
+      // Pour un H1 plus petit ou un H2 (max 40px)
+      'clamp-h1-md': ['clamp(1.875rem, 5vw, 2.5rem)', '1.2'], // 30px à 40px, line-height 1.2
+      // Vos clamps existants, ajustés pour la cohérence ou les besoins spécifiques
+      'clamp-sm': ['clamp(1.25rem, 3vw, 1.5rem)', '1.5rem'], // 20px à 24px
+      'clamp-md': ['clamp(1.25rem, 4vw, 1.875rem)', '1.5rem'], // 20px à 30px (j'ai légèrement augmenté le max pour md)
+      'clamp-lg': ['clamp(1.25rem, 5vw, 2.25rem)', '1.5rem'], // 20px à 36px
     },
     extend: {
+      
       fontFamily: {
-        worksans: ['Work Sans', 'sans-serif'],
-        merriweather: ['Merriweather', 'serif'],
-        merriweathersans: ['Merriweather Sans', 'sans-serif'],
-      },
-      fontSize: {
-        'clamp-sm': ['clamp(1.25rem, 3vw, 1.5rem)', '1.5rem'],
-        'clamp-md': ['clamp(1.25rem, 4vw, 1.5rem)', '1.5rem'],
-        'clamp-lg': ['clamp(1.25rem, 5vw, 1.5rem)', '1.5rem'],
+        // worksans: ['Public Sans', 'sans-serif'],
+        publicsans: ['Inter', 'TCCC-UnityText', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -45,16 +70,16 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          '10': '#2E176E',
-          '20': '#442685',
-          '30': '#633DA5',
-          '40': '#8559C5',
-          '50': '#AB7AE6',
-          '60': '#C59BF0',
-          '70': '#D7B1F7',
-          '80': '#F5E5FD',
-          '90': '#FBEFFE',
-          '100': '#FEFAFE',
+          '10': 'var(--primary-10)',
+          '20': 'var(--primary-20)',
+          '30': 'var(--primary-30)',
+          '40': 'var(--primary-40)',
+          '50': 'var(--primary-50)',
+          '60': 'var(--primary-60)',
+          '70': 'var(--primary-70)',
+          '80': 'var(--primary-80)',
+          '90': 'var(--primary-90)',
+          '100': 'var(--primary-100)',
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
@@ -184,10 +209,6 @@ module.exports = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
-        ...blackA,
-        ...green,
-        ...grass,
-        ...mauve,
       },
       borderRadius: {
         xl: 'calc(var(--radius) + 4px)',

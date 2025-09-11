@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="relative">
         <Transition name="fadeslide" :mode="mode">
             <slot></slot>
         </Transition>
@@ -35,8 +35,8 @@ defineProps({
 }
 
 /* test */
-/* .fadeslide-leave-active {
+.fadeslide-leave-active {
     position: absolute;
     width: 100%;
-} */
+}
 </style>

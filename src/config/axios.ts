@@ -1,28 +1,26 @@
 // import { refreshToken } from '@/modules/auth/auth-service'
-import axios, { HttpStatusCode, type AxiosInstance } from 'axios'
 import router from '@/router'
+import axios, { AxiosError, HttpStatusCode, type AxiosInstance } from 'axios'
 
-import { destroySensitiveInfo, getAccessToken, getDeviceId } from '@/services/auth/auth-util'
-import { env } from './env'
-import { logout } from '@/services/auth/auth-service'
 import { AppRoute } from '@/constants/app-route'
+import { destroySensitiveInfo, getAccessToken } from '@/services/auth/auth-util'
 import { useLoaderStore } from '@/stores/useLoaderStore'
+import { env } from './env'
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: env.VITE_API_URL,
-  // withCredentials: true,
+  withCredentials: true,
   headers: {
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   },
 })
-
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = getAccessToken() // Retrieve access token
     if (token) {
-      config.headers['Device-Id'] = getDeviceId() // Add device ID
+      // config.headers['Device-Id'] = getDeviceId() // Add device ID
       config.headers['Authorization'] = `Bearer ${token}` // Add authorization header
     }
     return config
@@ -37,13 +35,15 @@ axiosInstance.interceptors.response.use(
   (response) => {
     return response // Return the response as-is
   },
-  async (error) => {
-    const res: ErrorResponse = error?.response?.data
+  async (error: AxiosError) => {
     const originalRequestConfig = error.config
     const { stopLoading } = useLoaderStore()
     stopLoading()
 
-    if (res?.code === HttpStatusCode.Unauthorized || res?.code === HttpStatusCode.NotAcceptable) {
+    if (
+      error?.status === HttpStatusCode.Unauthorized ||
+      error?.status === HttpStatusCode.NotAcceptable
+    ) {
       if (router.currentRoute.value.name !== AppRoute.LOGIN.name) {
         destroySensitiveInfo()
         // const router = useRouter()

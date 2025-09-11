@@ -5,12 +5,11 @@
     <div class="flex flex-col w-full">
 
       <Select v-model="Modelvalue" v-bind="componentField">
-        <SelectTrigger class="space-x-1 min-w-full"
+        <!-- <SelectTrigger class="min-w-[120px] max-w-[350px]  "> -->
+        <SelectTrigger class="space-x-1"
           :class="[`${borderColor}`, open ? 'ring-4 ring-primary-70 transition-all duration-300' : '', `${defaultWidth}`]">
-          <slot name="icon">
-
-          </slot>
-          <SelectValue :placeholder="title" class="text-neutral-50 text-[16px]">
+          <slot name="icon"></slot>
+          <SelectValue :placeholder="title" class="text-[#525866]">
           </SelectValue>
         </SelectTrigger>
         <SelectContent>
@@ -49,7 +48,7 @@ import {
 import { Field } from 'vee-validate';
 import { ref, type PropType } from 'vue';
 import FadeInAnimation from '@/components/animations/fadeInAnimation.vue';
-const Modelvalue = defineModel({ type: String, required: true });
+const Modelvalue = defineModel({ type: String });
 
 
 defineProps({

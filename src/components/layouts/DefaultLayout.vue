@@ -1,15 +1,18 @@
 <template>
-  <div class="flex pt-[75px] xl:pt-0">
+  <div class="flex ">
     <!-- DEBUT NAVBAR -->
     <NavBar></NavBar>
     <!-- FIN NAVBAR -->
 
     <!-- DEBUT BARRE DES MENUS -->
-    <!-- <AsideBar class="w-[290px]" :width-aside-bar="widthAsideBar"></AsideBar> -->
+    <AsideBar class="w-[290px]" :width-aside-bar="widthAsideBar"></AsideBar>
+
+
     <!-- FIN BARRE DES MENUS -->
 
     <!-- DEBUT DES PAGES DU ROUTER -->
-    <div class="p-[2px] lg:p-4  xl:ml-[290px] w-full">
+    <!-- <div class="p-[2px] lg:p-4 mt-16 sm:mt-0 xl:ml-[290px] w-full border bg-[#f5f5f9] min-h-screen "> -->
+    <div class="p-[2px] lg:p-4 mt-16 sm:mt-0 xl:ml-[290px] w-full border  min-h-screen ">
       <router-view></router-view>
     </div>
     <!-- FIN DES PAGES DU ROUTER -->
@@ -17,34 +20,37 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-
+import AsideBar from '../aside/asideBar.vue';
 import NavBar from '../aside/navBar.vue';
-import { storeToRefs } from 'pinia';
-
-import { onBeforeMount, onMounted, watch } from 'vue';
-
+import TestMenuSideBar from '@/components/testMenuSideBar.vue';
+// import TestMenuSideBar from '../testMenuSideBar.vue';
 
 let widthAsideBar = 500;
-
-
-
-// const { isFetched, data: countriesData, isSuccess } = useCountryFiltersQuery(
-//   !!user.value
-// );
-
-// watch(isFetched, (newValue) => {
-//   if (newValue && countriesData.value && user.value?.country == null) {
-//     setCurrentCountry(countriesData.value!.items[0]);
-//   }
-// }, { immediate: true });
-
-
 
 
 
 
 const isOpen = ref(false);
 
+
+
+
+// Déconnexion
+//   const LogOut= async () {
+//   const response = await this.$swal({
+//     title: `Se déconnecter !`,
+//     text: "Êtes vous sûr de vouloir vous déconnecter ?",
+//     type: "success",
+//     showCancelButton: true,
+//     cancelButtonText: "Non !",
+//     confirmButtonText: "Oui confirmer !",
+//     showCloseButton: true,
+//     showLoaderOnConfirm: true,
+//   });
+//   if (response.isConfirmed) {
+//     localStorage.clear();
+//     this.$router.push({ name: 'Login' })
+//   }
 
 
 </script>

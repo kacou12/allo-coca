@@ -4,7 +4,7 @@
         <div class="bg-white p-8 rounded-xl shadow-lg w-full  border max-w-[450px]">
             <!-- Icône ou alerte -->
             <div class="flex justify-center mb-6">
-                <div class="w-12 h-12 bg-neutral-80 text-neutral-10 rounded-full flex items-center justify-center ">
+                <div class="w-12 h-12 bg-neutral-80 text-neutral-10 rounded-full flex items-center justify-center">
                     <!-- <span class="text-2xl font-bold">!</span> -->
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -22,7 +22,8 @@
                 électronique
             </h1>
             <p class="text-[#666666] text-center mb-6 text-[16px] font-normal">
-                Nous avons envoyé un lien de réinitialisation du mot de passe à philippe@gmail.com
+                Nous avons envoyé un lien de réinitialisation du mot de passe à
+                <strong>{{ emailToResetingPassword }}</strong>
             </p>
 
             <!-- Lien retour -->
@@ -34,12 +35,12 @@
                     class="text-[16px]  border w-fit text-primary-40 font-semibold hover:underline">
 
                 </CommonButton> -->
-                <Button class="text-primary text-sm font-medium" @click="$router.push({ name: 'UpdatePassword' })"
-                    variant="link">Cliquer pour renvoyer</Button>
+                <Button class="text-primary text-sm font-medium" @click="forgetPasswordHandler" variant="link">Cliquer
+                    pour renvoyer</Button>
             </div>
 
             <CommonButton class="w-full " :padding-y="5" title="Retour à la connexion" type="outline"
-                @click.prevent="$router.push({ name: 'Login' })">
+                @click.prevent="$router.push({ name: AppRoute.LOGIN.name })">
 
             </CommonButton>
         </div>
@@ -48,6 +49,40 @@
 
 <script setup lang="ts">
 import CommonButton from '@/components/buttons/commonButton.vue';
+import Button from '@/components/ui/button/Button.vue';
+import { useForgetPasswordMutation } from '@/composables/queries/useAuthQueries';
+import { AppRoute } from '@/constants/app-route';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { useLoaderStore } from '@/stores/useLoaderStore';
+import { storeToRefs } from 'pinia';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
+const { startLoading, stopLoading } = useLoaderStore();
+const { emailToResetingPassword } = storeToRefs(useAuthStore());
+
+
+const { mutateAsync: forgetPassword } = useForgetPasswordMutation();
+
+
+
+const forgetPasswordHandler = async () => {
+    try {
+        startLoading()
+        await forgetPassword({
+            email: emailToResetingPassword.value!
+        });
+        toast.success("L'email a été renvoyé avec succès");
+
+
+    } catch (err) {
+
+    } finally {
+        stopLoading()
+
+    }
+
+};
 
 
 </script>

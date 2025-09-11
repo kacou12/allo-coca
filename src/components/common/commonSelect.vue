@@ -5,15 +5,17 @@
 
     <Select v-model="currentSelected">
         <!-- <SelectTrigger class="min-w-[120px] max-w-[350px]  "> -->
-        <SelectTrigger class="space-x-1"
+        <SelectTrigger
             :class="[`${borderColor}`, open ? 'ring-4 ring-primary-70 transition-all duration-300' : '', `${defaultWidth}`]">
-            <slot name="icon"></slot>
-            <SelectValue :placeholder="title" class="text-[#525866]">
-            </SelectValue>
+            <div class="flex gap-1 items-center">
+                <slot name="icon"></slot>
+                <SelectValue :placeholder="title" class="text-[#525866]">
+                </SelectValue>
+            </div>
         </SelectTrigger>
         <SelectContent>
             <SelectGroup>
-                <SelectItem v-for="element in elements" :key="element.name" :value="element.value.toString()">
+                <SelectItem v-for="element in elements" :key="element.value" :value="element.value">
                     <div class=' py-1'> <span class="text-sm font-medium"> {{ element.name }} </span>
                     </div>
                 </SelectItem>

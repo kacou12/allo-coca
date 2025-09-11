@@ -1,96 +1,62 @@
 import { z } from 'zod'
-import type { adminRoleSchema, adminSchema } from './admin-schema'
+import type { adminSchema } from './admin-schema'
 import type { AdminRole } from './admin-constants'
 
-
 export type AdminForm = z.infer<typeof adminSchema>
-export type AdminRoleForm = z.infer<typeof adminRoleSchema>
 
-export type AdminRequest = {
-  email: string
-  firstname: string
-  lastname: string
-  phone: string
-  role_id: string
-  birthdate: string
-  country_id: string
-}
-export type AdminRoleRequest = AdminRoleForm & {
-  description: string
-  permissions: PermissionRequest[]
-}
-export type AdminRoleUpdatePayload = {
-  id?: string
-  name?: string
-  description?: string
-  permissions?: PermissionRequest[]
-}
+export type AdminRequest = AdminForm & {
+  profilePhoto: string
 
-export type PermissionRequest = {
-  v1: string
-  v2: string
+  // grantType: 'password'
+  // clientId: string
+  // clientSecret: string
+  // encryptedAesKey: string
 }
 
 export type AdminResponse = {
-  accepted_tos: boolean
-  active: boolean
-  avatar: string
-  birthdate: string
+  id: string
+  // Photo de profil (généralement stockée comme URL ou File)
+  profilePhoto: string | File
 
-  country_id: string
-  created_at: string
+  // Nom (prénom et nom de famille)
+  firstName: string
+  lastName: string
+
+  // Adresse électronique
   email: string
-  email_verified: boolean
-  firstname: string
-  id: string
-  is_superuser: boolean
-  last_login: string
-  lastname: string
-  password: string
-  phone: string
-  phone_verified: boolean
-  pin_code: string
-  referral_code: string
-  referred_by: string
-  reward_amount: number
-  role: RoleResponse
-  role_id: string
-  sendchap_id: string
-  updated_at: string
-  validated_phone_numbers: string[]
-  verification_status: string
-  withdrawn_amount: number
+
+  // Rôle (probablement une énumération ou une chaîne)
+  role: AdminRole | string
+
+  // Authentification (numéro de téléphone avec préfixe international)
+  phoneNumber: string
+
+  isActive: boolean
 }
 
+export type AdminFiltersPayload = {
+  searchText: string
+  page: number
+  country?: string
+}
 export type AdminUpdatePayload = {
-  // id?: string
+  // id: string
+  // Photo de profil (généralement stockée comme URL ou File)
+  profilePhoto?: string | File
 
-  active?: boolean
-  avatar?: string
-  birthdate?: string
+  // Nom (prénom et nom de famille)
+  firstName?: string
+
+  lastName?: string
+
+  // Adresse électronique
   email?: string
-  firstname?: string
-  lastname?: string
-  phone?: string
-  role_id?: string
-}
 
-export type PermissionResponse = {
-  v1: string
-  v2: string
-}
-export type PermissionDefaultResponse = {
-  v1_object: string
-  v2_action: string
-  subject: string
-}
+  // Rôle (probablement une énumération ou une chaîne)
+  role?: AdminRole | string
 
-// v1: permission.object,
-// v2: permission.action
+  // Authentification (numéro de téléphone avec préfixe international)
+  phoneNumber?: string
 
-export type RoleResponse = {
-  id: string
-  name: string
-  description: string
-  permissions?: PermissionResponse[]
+  isActive?: boolean
 }

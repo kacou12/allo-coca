@@ -1,25 +1,148 @@
-import { AuthRouteApi } from '@/services/auth/auth-constants'
+export const AppRoute = Object.freeze({
+  // APP_MOBILE: { name: 'App mobile' },
+  UNAUTHORIZE: '/unauthorize',
 
-export const AppRoute = {
- LOGIN: {
+  LOGIN: {
     name: 'login',
     path: '/login',
-    v1_object: AuthRouteApi.login, // Rempli basé sur permission-constants.ts
   },
   LOST_PASSWORD: {
     name: 'lost-password',
     path: '/lost-password',
-    v1_object: null, // Rempli basé sur permission-constants.ts
   },
   ABOUT: {
     name: 'about',
     path: '/about',
-    v1_object: '', // Aucune correspondance directe trouvée dans permission-constants.ts
   },
   VERIFY_EMAIL: {
     name: 'verify-email',
     path: '/verify-email',
-    v1_object: null, // Rempli basé sur permission-constants.ts
   },
-  
-}
+  UPDATE_PASSWORD: {
+    name: 'update-password',
+    path: '/reset',
+  },
+  SUCCESS_UPDATE_PASSWORD: {
+    name: 'success-update-password',
+    path: '/success-update-password',
+  },
+
+  DASHBOARD: {
+    name: 'dashboard',
+    path: '/dashboard',
+  },
+  ADMIN: {
+    name: 'admin',
+    path: '/',
+  },
+
+  COLLECTED: {
+    name: 'collected',
+    path: '/collected',
+  },
+  TRANSFERED: {
+    name: 'transfered',
+    path: '/transfered',
+  },
+  TRANSACTIONS: {
+    name: 'transactions',
+    path: '/transactions',
+  },
+  WALLET: {
+    name: 'wallet',
+    path: '/wallet',
+  },
+  CLIENTS: {
+    name: 'clients',
+    path: '/clients',
+  },
+  CLIENT_DETAILS: {
+    name: 'clients-details',
+    path: '/clients-details/:id',
+  },
+  ALL_REQUESTS: {
+    name: 'requests',
+    path: '/requests',
+  },
+  PENDING_REQUESTS: {
+    name: 'pending-requests',
+    path: '/pending-requests',
+  },
+  VALIDATED_REQUESTS: {
+    name: 'validated-requests',
+    path: '/validated-requests',
+  },
+  CANCELLED_REQUESTS: {
+    name: 'cencelled-requests',
+    path: '/cencelled-requests',
+  },
+
+  USERS_MANAGEMENT_USER: {
+    name: 'users-management-user',
+    path: '/users-management/user/:id',
+  },
+
+
+
+
+  // Administration
+  ADMINISTRATION: {
+    name: 'administration',
+    path: '/administration',
+  },
+  // Securité
+  SECURITY: {
+    name: 'security',
+    path: '/security',
+  },
+
+  ADMINISTRATION_USER: {
+    name: 'administration-user',
+    path: '/administration/user/:id',
+  },
+
+
+  // Providers
+
+  PROVIDERS: {
+    name: 'providers',
+    path: '/providers',
+  },
+
+  MERCHANT: {
+    name: 'merchant',
+    path: '/merchant',
+  },
+  MERCHANT_DETAILS: {
+    name: 'merchant-details',
+    path: '/merchant/details/:id',
+  },
+  MERCHANT_WEBHOOKS_KEYS: {
+    name: 'merchant-webhooks-and-keys',
+    path: '/merchant/webhooks-and-keys/:id',
+  },
+  CHARGE: {
+    name: 'charge',
+    path: '/charge',
+  },
+  IP: {
+    name: 'ip',
+    path: '/ip',
+  },
+  KEY: {
+    name: 'key',
+    path: '/key',
+  },
+  WEBHOOK: {
+    name: 'webhook',
+    path: '/webhook',
+  },
+    RATE_BY_AGGREGATOR: {
+    name: 'rates-by-aggregator',
+    path: '/rates-by-aggregator',
+  },
+    PROFIL: {
+    name: 'profil',
+    path: '/profil',
+  },
+})

@@ -1,0 +1,24 @@
+version: "3.9"
+
+networks:
+  traefik-net:
+    external: true
+
+services:
+  dashboard-marchant:
+    image: "${DASHBOARD_MARCHANT_IMAGE}"
+    container_name: dashboard-marchant
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard-marchant.rule=Host(`dashboard.paytic.io`)"
+      - "traefik.http.routers.dashboard-marchant.entrypoints=websecure"
+      - "traefik.http.routers.dashboard-marchant.tls.certresolver=myresolver"
+      - "traefik.http.services.dashboard-marchant.loadbalancer.server.port=80"
+    networks:
+      - traefik-net
+    deploy:
+      restart_policy:
+        condition: any

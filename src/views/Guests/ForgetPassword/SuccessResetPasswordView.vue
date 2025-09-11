@@ -33,7 +33,7 @@
 
 
 
-            <CommonButton @click.prevent="$router.push({ name: 'Login' })" class="w-full mt-3" :padding-y="5"
+            <CommonButton @action="() => $router.push({ name: AppRoute.LOGIN.name })" class="w-full mt-3" :padding-y="5"
                 type="default" title="Retour à la connexion">
             </CommonButton>
         </div>
@@ -43,6 +43,9 @@
 </template>
 
 <script setup lang="ts">
+import CommonButton from '@/components/buttons/commonButton.vue';
+import { AppRoute } from '@/constants/app-route';
+
 
 </script>
 

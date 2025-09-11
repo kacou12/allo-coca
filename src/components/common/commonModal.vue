@@ -5,22 +5,18 @@
             <!-- <Button class=" py-[22px]  text-sm rounded-lg" variant="outline">
                 Rejeter la verification
             </Button> -->
-
-
             <slot name="trigger"></slot>
-
         </DialogTrigger>
-        <DialogContent :onInteractOutside="(e) => {
-            if (isPersisted) {
-                e.preventDefault();
-            }
+        <DialogContent :class="isHeightFull ? 'max-h-[90%]' : ''" class="max-w-[90%] rounded-lg sm:max-w-[480px] font-worksans 
+          ">
+            <form @submit.prevent="() => handleSubmit()" class="space-y-3 flex flex-col h-full">
+                <!-- max-h-[calc(100vh-64px-76px)] overflow-y-auto -->
+                <!-- h-[calc(100%-150px)] -->
 
-        }" :class="dialogClass" class="max-w-[90%]  sm:max-w-[480px] font-worksans ">
-            <form @submit.prevent="() => handleSubmit()">
 
                 <!-- bg-[url('/src/assets/images/hexagone.png')]  -->
-                <DialogHeader :class="[showDivider ? 'border-b-[1px]' : '']" class="flex flex-row bg-[url('/src/assets/images/hexagone.png')] justify-between   border-neutral-200
-                    ">
+                <DialogHeader :class="[showDivider ? 'border-b-[1px]' : '']"
+                    class="flex flex-row justify-between  border-neutral-200">
                     <DialogTitle>
                         <slot name="title"></slot>
                     </DialogTitle>
@@ -43,10 +39,12 @@
 
 
                 </DialogHeader>
-
-                <div :class="`${textDefaulSize} px-4 py-4 ${backgroudColor} rounded-xl`">
-                    <slot name="content"></slot>
-                </div>
+                <section class="flex-1 w-full ">
+                    <div :class="isHeightFull ? 'h-[calc(100vh-250px)]  overflow-y-auto' : ''"
+                        class="text-sm px-4 py-4 bg-white">
+                        <slot name="content"></slot>
+                    </div>
+                </section>
 
 
                 <DialogFooter>
@@ -78,6 +76,10 @@ defineProps({
         default: 'bg-[#F5F5F5]',
         type: String as PropType<'bg-neutral-80' | 'bg-white'>
     },
+    isHeightFull: {
+        default: false,
+        type: Boolean
+    },
     showDivider: {
         default: true,
         type: Boolean
@@ -85,18 +87,6 @@ defineProps({
     handleSubmit: {
         type: Function as PropType<() => void>,
         default: () => { }
-    },
-    isPersisted: {
-        default: false,
-        type: Boolean
-    },
-    textDefaulSize: {
-        default: 'text-sm',
-        type: String
-    },
-    dialogClass: {
-        default: '',
-        type: String
     }
 })
 

@@ -1,57 +1,60 @@
 <template>
 
-  <div ref="el" class="h-screen">
-    <!-- <toastContainers /> -->
-    <!-- <transition name="fade">
+  <div ref="el" class="h-screen  container-with-stable-gutter">
+    <transition name="fade">
       <LoadingBar v-if="loading"></LoadingBar>
-    </transition> -->
+    </transition>
 
 
-    <RouterView class="font-worksans" />
-
+    <RouterView class="font-publicsans" />
+    <!-- <router-view class="font-publicsans" v-slot="{ Component }">
+      <Transition name="fade" :appear="true">
+        <component :is="Component" />
+      </Transition>
+    </router-view> -->
   </div>
 
 </template>
 <script setup lang="ts">
-
-import { onBeforeMount, onMounted, ref, watch } from 'vue';
+import { useIsFetching } from '@tanstack/vue-query';
+import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import LoadingBar from './components/loadingBar.vue';
+import { useLoaderStore } from './composables/queries/useLoader';
 
-import { storeToRefs } from 'pinia';
 
-import { AppRoute } from './constants/app-route';
-import { useToast } from 'vue-toastification';
-
+const { isLoading: loading } = storeToRefs(useLoaderStore());
 
 const route = useRoute();
 const isVisited = ref(false);
-const toast = useToast();
+
+const isFetching = useIsFetching(
+  // { queryKey: [adminQueryKeys.adminFilters] }
+);
+
+// useIsLo
+
+const { startLoading, stopLoading, stopLoadingSkeleton } = useLoaderStore();
+const initialLoadingComplete = ref(false);
 
 
 
 
+watch(isFetching, (newValue) => {
 
 
+  if (newValue > 0 && isVisited.value == false) {
+    startLoading();
 
+    isVisited.value = true;
+  }
+  if (newValue == 0) {
+    stopLoading();
+    stopLoadingSkeleton();
 
-
-
-
-// ENABLE TO FETCH COUNTRY
-// onBeforeMount(async () => {
-//   let data = await refetch();
-//   setListCountries(countriesData.value?.items!);
-// });
-
-
-
-
-
-
-
-
-
+  }
+}, { immediate: true });
 
 </script>
 
