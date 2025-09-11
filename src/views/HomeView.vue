@@ -14,6 +14,46 @@
     </div>
   </section>
 
+  <main class="maxContain3xl">
+    <!-- Nos produits disponibles -->
+    <section>
+      <article class="flex items-start justify-between">
+        <h2 class="font-bold clamp-lg">Nos produits disponibles</h2>
+
+        <div class="space-y-3">
+
+          <p>Compose ton casier comme tu veux ou choisis directement un pack prêt à livrer. Des bouteilles
+            fraîches, des
+            prix fixes, et la livraison offerte chez toi en 24h !</p>
+
+          <div class="flex items-center gap-1">
+
+            <Button variant="link">Configurer mon casier</Button>
+            <ArrowRight></ArrowRight>
+          </div>
+        </div>
+
+      </article>
+
+      <HomeTabs></HomeTabs>
+
+    </section>
+
+    <!-- Vos type de commande -->
+    <section class="text-center space-y-3">
+      <h2>Vos type de commande</h2>
+      <p>Trois façons simples de commander tes boissons préférées</p>
+
+      <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <OrderTyperCard></OrderTyperCard>
+        <OrderTyperCard></OrderTyperCard>
+        <OrderTyperCard></OrderTyperCard>
+      </article>
+
+
+    </section>
+  </main>
+
 
 </template>
 <script setup lang="ts">

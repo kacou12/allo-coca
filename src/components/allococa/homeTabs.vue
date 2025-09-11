@@ -1,28 +1,29 @@
-<template>
+<script setup lang="ts">
+import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from 'radix-vue'
+import WaterCard from './card/waterCard.vue';
+import BeverageCard from './card/beverageCard.vue';
+</script>
 
-    <!-- <Tabs v-model="currentProvider" :default-value="providers![0].id" class="w-full "> -->
-    <Tabs v-model="provider" class="w-full ">
-        <TabsList class="w-full  rounded-xl">
-            <!-- <TabsTrigger v-for="provider in providers" :key="provider.id" class="w-full" :value="provider.id">
-                {{ provider.name }}
-            </TabsTrigger> -->
-            <!-- <TabsTrigger class="w-[25%]" value="orange">
-                Orange
+<template>
+    <TabsRoot class="flex flex-col w-full  " default-value="tab1">
+        <TabsList class="relative shrink-0 flex border-mauve6 w-[380px] " aria-label="Manage your account">
+            <TabsIndicator
+                class="absolute px-2 left-0 h-[2px] bottom-0 w-[--radix-tabs-indicator-size] translate-x-[--radix-tabs-indicator-position] rounded-full transition-[width,transform] duration-300">
+                <div class="bg-black w-full h-full" />
+            </TabsIndicator>
+            <TabsTrigger
+                class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-[#6D6D6D] select-none  rounded-tl-md  hover:[#000000] data-[state=inactive]:cursor-pointer data-[state=active]:text-[#000000] outline-none cursor-default focus-visible:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
+                value="tab1">
+                Boissons gazeuse
             </TabsTrigger>
-            <TabsTrigger class="w-[25%]" value="MTN">
-                MTN
-            </TabsTrigger>
-            <TabsTrigger class="w-[25%]" value="Wave">
-                Wave
-            </TabsTrigger> -->
-            <TabsTrigger value="gas">
-                Boisson gazeuse
-            </TabsTrigger>
-            <TabsTrigger value="water">
-                Eaux minerales
+            <TabsTrigger
+                class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-[#6D6D6D] select-none  rounded-tr-md hover:[#000000] data-[state=inactive]:cursor-pointer data-[state]:text-[#000000] outline-none cursor-default focus-visible:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
+                value="tab2">
+                Eaux minérales
             </TabsTrigger>
         </TabsList>
-        <TabsContent value="gas">
+        <TabsContent class="grow py-5 bg-white rounded-b-md outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+            value="tab1">
             <div class="grid grid-cols-4 gap-4">
                 <BeverageCard></BeverageCard>
                 <BeverageCard></BeverageCard>
@@ -30,24 +31,12 @@
                 <BeverageCard></BeverageCard>
             </div>
         </TabsContent>
-        <TabsContent value="water">
+        <TabsContent class="grow py-5 bg-white rounded-b-md outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+            value="tab2">
             <WaterCard></WaterCard>
             <WaterCard></WaterCard>
             <WaterCard></WaterCard>
             <WaterCard></WaterCard>
         </TabsContent>
-    </Tabs>
+    </TabsRoot>
 </template>
-
-<script setup lang="ts">
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import type { ProviderResponse } from '@/services/providers/provider-type';
-import { computed, nextTick, ref, type PropType } from 'vue';
-import BeverageCard from './card/beverageCard.vue';
-import WaterCard from './card/waterCard.vue';
-
-const provider = defineModel({ type: String });
-
-
-
-</script>

@@ -1,5 +1,6 @@
 // const animate = require('tailwindcss-animate')
 // import animations from '@midudev/tailwind-animations'
+const { blackA, green, grass, mauve } = require('@radix-ui/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -212,6 +213,10 @@ module.exports = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+         ...blackA,
+        ...green,
+        ...grass,
+        ...mauve,
       },
       borderRadius: {
         xl: 'calc(var(--radius) + 4px)',
