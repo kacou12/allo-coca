@@ -1,7 +1,6 @@
 <template>
-    <Button :disabled="isDisabled || isLoading" :variant="type"
-        :class="[type != 'default' ? 'font-medium' : 'font-normal', `py-${paddingY}`, `rounded-${roundSize}`]" class="flex-1 text-sm font-publicsans
-     transition-all duration-300 ease-in-out" @click=" $emit('action')">
+    <Button :disabled="isDisabled || isLoading" :variant="type" :class="[type != 'default' ? '' : '', ``, ``]" class="flex-1 text-sm font-publicsans
+     transition-all py-[20px] rounded-[90px]  duration-300 ease-in-out border-black" @click=" $emit('action')">
         <div v-if="isLoading" class="flex items-center gap-2">
 
             <svg aria-hidden="true" class="w-5 h-5  text-gray-200 animate-spin dark:text-gray-600 fill-primary"
