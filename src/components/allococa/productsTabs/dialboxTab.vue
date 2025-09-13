@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center grow bg-purple-500">
+    <div class="flex items-center grow bg-purple-500 p-4">
 
         <section class="flex-1 flex justify-center items-center ">
             <div class="relative bg-emerald-900">
@@ -17,8 +17,8 @@
         </section>
         <section class="w-[452px] h-[calc(100vh-180px)] bg-green-400 relative">
             <!-- configuration du casier -->
-            <article class="absolute bottom-0 left-0 right-0 bg-yellow-900 h-[calc(100vh-95px)]">
-
+            <article class="absolute bottom-0 left-0 right-0 bg-yellow-900 h-[calc(100vh-95px)] w-full">
+                <ProductConfigurator></ProductConfigurator>
             </article>
         </section>
     </div>
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import ProductConfigurator from './productConfigurator.vue';
 
 
 const casierProducts = ref(7);
