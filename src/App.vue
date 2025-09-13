@@ -1,12 +1,12 @@
 <template>
 
-  <div ref="el" class="h-screen  container-with-stable-gutter">
+  <div ref="el" class="h-screen  ">
     <transition name="fade">
       <LoadingBar v-if="loading"></LoadingBar>
     </transition>
 
 
-    <RouterView class="font-publicsans" />
+    <RouterView class="font-inter" />
     <!-- <router-view class="font-publicsans" v-slot="{ Component }">
       <Transition name="fade" :appear="true">
         <component :is="Component" />

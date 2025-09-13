@@ -101,6 +101,10 @@
   html {
     @apply text-red-500;
   }
+  .maxContain3xl {
+    @apply 2xl:max-w-[1440px] 2xl:px-0 mx-auto xl:px-[56px] px-5;
+    /* @apply  px-5 mx-auto xl:px-[56px]; */
+  }
 }
 :root {
   --primary-10: #4B060C;
