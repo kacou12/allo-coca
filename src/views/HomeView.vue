@@ -145,12 +145,31 @@
     </article>
   </section>
 
+  <!-- Ce qu'en disent nos clients -->
+  <section class="maxContain3xl space-y-10 my-28">
+    <div class="flex items-center justify-between  my-16">
+      <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc ">Ce qu'en disent nos clients</h3>
+      <div>
+        <CommonButton type="default" title="Je passe ma commande"></CommonButton>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between gap-5">
+      <ReviewCard></ReviewCard>
+      <ReviewCard></ReviewCard>
+      <ReviewCard></ReviewCard>
+
+    </div>
+
+  </section>
+
 
 
 </template>
 <script setup lang="ts">
 import HowItWorkCard from '@/components/allococa/card/howItWorkCard.vue';
 import OrderTyperCard from '@/components/allococa/card/orderTyperCard.vue';
+import ReviewCard from '@/components/allococa/card/reviewCard.vue';
 import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaCard.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
