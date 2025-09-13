@@ -6,6 +6,14 @@ export const AppRoute = Object.freeze({
     name: 'login',
     path: '/login',
   },
+  HOME: {
+    name: 'home',
+    path: '/',
+  },
+  HOME_REDIRECT: {
+    name: 'home-redirect',
+    path: '/',
+  },
   LOST_PASSWORD: {
     name: 'lost-password',
     path: '/lost-password',
@@ -33,7 +41,7 @@ export const AppRoute = Object.freeze({
   },
   ADMIN: {
     name: 'admin',
-    path: '/',
+    path: '/admin',
   },
 
   COLLECTED: {

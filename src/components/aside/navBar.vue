@@ -1,77 +1,78 @@
 <template>
-    <nav class="fixed top-0 z-50 w-full bg-white shadow-md border-b border-gray-200 xl:hidden">
-        <div class="px-3 py-3 lg:px-5 lg:pl-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center justify-start">
-                    <!-- <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
-              type="button"
-              class="inline-flex items-center p-2 text-sm text-primary-50 rounded-lg xl:hidden hover:bg-primary-60 focus:outline-none focus:ring-2 focus:ring-gray-200 ">
-              <span class="sr-only">Open sidebar</span>
-              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path clip-rule="evenodd" fill-rule="evenodd"
-                  d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-                </path>
-              </svg>
-            </button> -->
-                    <DrawerSheet></DrawerSheet>
-                    <a @click="$router.push({ name: AppRoute.ADMIN.name })" class="flex ml-2 md:mr-24">
-                        <img :src="appicons" class="h-10 mr-3" alt="Likambo Logo" />
-
-                    </a>
-                </div>
-
-                <!-- DEBUT Icône User -->
-                <div class="flex items-center">
-                    <div class="flex items-center ml-3">
-                        <div>
-                            <button type="button" id="dropdownUser"
-                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                                aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full" src="@/assets/images/avatars/26.png"
-                                    alt="user photo" />
-                            </button>
-                        </div>
-                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                            id="dropdown-user" aria-labelledby="dropdownUser">
-                            <div class="px-4 py-3" role="none">
-                                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    Admin Likambo
-                                </p>
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                    admin@root.com
-                                </p>
-                            </div>
-                            <ul class="py-1" role="none">
-                                <li>
-                                    <a @click="$router.push({ name: AppRoute.ADMIN.name })"
-                                        class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Dashboard</a>
-                                </li>
-                                <li>
-
-                                    <a @click="$router.push({ name: AppRoute.LOGIN.name })"
-                                        class="block px-4 py-2 text-sm text-red-500 cursor-pointer hover:bg-red-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Se déconnecter</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- FIN Icône User -->
-            </div>
+    <div class="z-50 fixed top-0 left-0 right-0 flex justify-between items-center maxContain3xl">
+        <div class="block lg:hidden">
+            <DrawerSheet class=""></DrawerSheet>
         </div>
-    </nav>
+
+        <header class="w-full lg:flex items-center justify-between h-[80px]  ">
+            <section class="hidden lg:flex items-center ">
+                <RouterLink to="/">
+                    <img src="@/assets/allococa/logo-allo-coca.png" alt="Logo" />
+                </RouterLink>
+            </section>
+
+            <section class=" hidden flex-1  lg:flex justify-center gap-8 items-center ">
+                <a class="text-white" href="#" @click.prevent="scrollTo('services')">
+                    Comment ca marche ?
+                </a>
+                <RouterLink to="/" class="text-white">Commander</RouterLink>
+                <a class="text-white" href="#" @click.prevent="scrollTo('services')">
+                    Contactez-nous
+                </a>
+            </section>
+
+            <section class="rounded-full border-[1px] p-2 border-white flex items-center justify-center ">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_13510_633)">
+                        <path
+                            d="M1.7085 1.70831H3.37516L5.59183 12.0583C5.67314 12.4374 5.88405 12.7762 6.18826 13.0165C6.49246 13.2568 6.87092 13.3836 7.2585 13.375H15.4085C15.7878 13.3744 16.1556 13.2444 16.451 13.0065C16.7465 12.7686 16.9519 12.4371 17.0335 12.0666L18.4085 5.87498H4.26683M7.50016 17.5C7.50016 17.9602 7.12707 18.3333 6.66683 18.3333C6.20659 18.3333 5.8335 17.9602 5.8335 17.5C5.8335 17.0397 6.20659 16.6666 6.66683 16.6666C7.12707 16.6666 7.50016 17.0397 7.50016 17.5ZM16.6668 17.5C16.6668 17.9602 16.2937 18.3333 15.8335 18.3333C15.3733 18.3333 15.0002 17.9602 15.0002 17.5C15.0002 17.0397 15.3733 16.6666 15.8335 16.6666C16.2937 16.6666 16.6668 17.0397 16.6668 17.5Z"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_13510_633">
+                            <rect width="20" height="20" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            </section>
+        </header>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { AppRoute } from '@/constants/app-route';
-import DrawerSheet from '../dropdowns/drawer-sheet.vue';
+import CustomButton from "@/components/buttons/customButton.vue";
+import { useWindowSize } from "@vueuse/core";
+import { ref } from 'vue';
+import DrawerSheet from "../dropdowns/drawer-sheet.vue";
+import { AppRoute } from "@/constants/app-route";
+import { useRouter } from 'vue-router';
 
-const appicons = new URL("/src/assets/images/logos-paytic/paytic.png", import.meta.url).href;
+const router = useRouter();
+
+const scrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        console.error(`Element with id "${id}" not found.`);
+    }
+};
+
+const phone = ref();
+
+const { width, } = useWindowSize();
+
+
+interface Props {
+    logoSrc?: string
+    logoAlt?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    logoSrc: '/logo.svg',
+    logoAlt: 'SendChap Logo'
+})
 
 
 </script>
-
-<style scoped></style>

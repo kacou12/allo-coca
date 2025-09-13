@@ -10,7 +10,25 @@ const router = createRouter({
       name: AppRoute.LOGIN.name,
       component: () => import('@/views/guests/LoginView.vue'),
       // beforeEnter:Auth.authIsRequire,
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: false,  },
+    },
+    {
+      path: AppRoute.HOME.path,
+      name: AppRoute.HOME.name,
+      // component: () => import('@/views/HomeView.vue'),
+      component: () => import('@/components/layouts/DefaultLayout.vue'),
+      // beforeEnter:Auth.authIsRequire,
+      redirect: AppRoute.HOME_REDIRECT.path,
+      meta: { requiresAuth: false,layout: 'DefaultLayout' },
+      children: [
+        {
+          path: AppRoute.HOME_REDIRECT.path,
+          name: AppRoute.HOME_REDIRECT.name,
+          component: () => import('@/views/HomeView.vue'),
+          // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: false },
+        },
+      ]
     },
     {
       path: AppRoute.LOST_PASSWORD.path,
@@ -158,6 +176,6 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(requiresAuth)
+// router.beforeEach(requiresAuth)
 
 export default router
