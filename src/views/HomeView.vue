@@ -46,7 +46,29 @@
 
       </article>
 
-      <HomeTabs></HomeTabs>
+      <!-- <HomeTabs></HomeTabs> -->
+      <CommonCocaTabs :tabs="[
+        { value: 'water', label: 'Boissons gazeuse' },
+        { value: 'juice', label: 'Eaux minérales' },
+      ]">
+        <template #water>
+          <div class="grid grid-cols-4 gap-4">
+            <BeverageCard></BeverageCard>
+            <BeverageCard></BeverageCard>
+            <BeverageCard></BeverageCard>
+            <BeverageCard></BeverageCard>
+          </div>
+        </template>
+        <template #juice>
+          <div class="grid grid-cols-4 gap-4">
+            <WaterCard></WaterCard>
+            <WaterCard></WaterCard>
+            <WaterCard></WaterCard>
+            <WaterCard></WaterCard>
+          </div>
+        </template>
+
+      </commonCocaTabs>
 
     </section>
 
@@ -167,9 +189,12 @@
 
 </template>
 <script setup lang="ts">
+import BeverageCard from '@/components/allococa/card/beverageCard.vue';
+import CommonCocaTabs from '@/components/allococa/card/commonCocaTabs.vue';
 import HowItWorkCard from '@/components/allococa/card/howItWorkCard.vue';
 import OrderTyperCard from '@/components/allococa/card/orderTyperCard.vue';
 import ReviewCard from '@/components/allococa/card/reviewCard.vue';
+import WaterCard from '@/components/allococa/card/waterCard.vue';
 import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaCard.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
