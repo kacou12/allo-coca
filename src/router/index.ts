@@ -28,6 +28,13 @@ const router = createRouter({
           // beforeEnter:Auth.authIsRequire,
           meta: { requiresAuth: false },
         },
+        {
+          path: AppRoute.PRODUCTS.path,
+          name: AppRoute.PRODUCTS.name,
+          component: () => import('@/views/allococa/ProductsView.vue'),
+          // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: false },
+        },
       ]
     },
     {
@@ -77,89 +84,6 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
 
-    {
-      path: AppRoute.ADMIN.path,
-      name: AppRoute.ADMIN.name,
-      component: () => import('@/components/layouts/DefaultLayout.vue'),
-      // beforeEnter:Auth.authIsRequire,
-      meta: { layout: 'DefaultLayout', requiresAuth: true },
-      redirect: AppRoute.DASHBOARD,
-      children: [
-        {
-          path: AppRoute.DASHBOARD.path,
-          name: AppRoute.DASHBOARD.name,
-          component: () => import('@/views/DashboardView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-        {
-          path: AppRoute.TRANSFERED.path,
-          name: AppRoute.TRANSFERED.name,
-          component: () => import('@/views/transfered/transferedView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-        {
-          path: AppRoute.COLLECTED.path,
-          name: AppRoute.COLLECTED.name,
-          component: () => import('@/views/collected/collectedView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-        {
-          path: AppRoute.WALLET.path,
-          name: AppRoute.WALLET.name,
-          component: () => import('@/views/wallets/walletsView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-        {
-          path: AppRoute.SECURITY.path,
-          name: AppRoute.SECURITY.name,
-          component: () => import('@/views/security/securityView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-      {
-          path: AppRoute.RATE_BY_AGGREGATOR.path,
-          name: AppRoute.RATE_BY_AGGREGATOR.name,
-          component: () => import('@/views/ratesByAggregator/ratesByAggregatorView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-      {
-          path: AppRoute.PROFIL.path,
-          name: AppRoute.PROFIL.name,
-          component: () => import('@/views/ProfilView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-        {
-          path: AppRoute.TRANSACTIONS.path,
-          name: AppRoute.TRANSACTIONS.name,
-          component: () => import('@/views/transactions/transactionsView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-      
-
-        // Administration   =============== **************
-        {
-          path: AppRoute.ADMINISTRATION.path,
-          name: AppRoute.ADMINISTRATION.name,
-          component: () => import('@/views/administration/AdministrationView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-        {
-          path: AppRoute.ADMINISTRATION_USER.path,
-          name: AppRoute.ADMINISTRATION_USER.name,
-          component: () => import('@/views/administration/administrationUserView.vue'),
-          // beforeEnter:Auth.authIsRequire,
-          meta: { layout: 'DefaultLayout', requiresAuth: true },
-        },
-      ],
-    },
 
     {
       path: AppRoute.ABOUT.path,

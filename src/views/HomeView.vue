@@ -46,29 +46,8 @@
 
       </article>
 
-      <!-- <HomeTabs></HomeTabs> -->
-      <CommonCocaTabs :tabs="[
-        { value: 'water', label: 'Boissons gazeuse' },
-        { value: 'juice', label: 'Eaux minérales' },
-      ]">
-        <template #water>
-          <div class="grid grid-cols-4 gap-4">
-            <BeverageCard></BeverageCard>
-            <BeverageCard></BeverageCard>
-            <BeverageCard></BeverageCard>
-            <BeverageCard></BeverageCard>
-          </div>
-        </template>
-        <template #juice>
-          <div class="grid grid-cols-4 gap-4">
-            <WaterCard></WaterCard>
-            <WaterCard></WaterCard>
-            <WaterCard></WaterCard>
-            <WaterCard></WaterCard>
-          </div>
-        </template>
+      <HomeTabs></HomeTabs>
 
-      </commonCocaTabs>
 
     </section>
 

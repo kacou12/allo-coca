@@ -1,7 +1,7 @@
 <template>
     <div class="z-50 fixed top-0 left-0 right-0 flex justify-between items-center maxContain3xl">
         <div class="block lg:hidden">
-            <DrawerSheet class=""></DrawerSheet>
+            <!-- <DrawerSheet class=""></DrawerSheet> -->
         </div>
 
         <header class="w-full lg:flex items-center justify-between h-[80px]  ">
