@@ -19,8 +19,9 @@
         <section class="w-[452px] h-[calc(100vh-180px)] bg-green-400 relative">
             <!-- configuration du casier -->
             <article class="absolute bottom-0 left-0 right-0 bg-yellow-900 h-[calc(100vh-95px)] w-full">
-                <ProductConfigurator @increase:quantity="increaseQuantity" @decrease:quantity="decreaseQuantity"
-                    @reset:casier="resetCasier" @update:casier-quantity="updateCasierQuantity">
+                <ProductConfigurator :casier-products="casierProducts" @increase:quantity="increaseQuantity"
+                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier"
+                    @update:casier-quantity="updateCasierQuantity">
                 </ProductConfigurator>
             </article>
         </section>

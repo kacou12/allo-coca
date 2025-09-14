@@ -14,8 +14,9 @@
 
             <span class="text-lg font-semibold w-6 text-center text-gray-800">{{ product.quantity }}</span>
 
-            <button @click="increment" :disabled="product.quantity === 24"
-                class="bg-red-600 text-white rounded-full  flex items-center justify-center transition-all duration-300 hover:bg-red-700">
+            <button @click="increment" :disabled="product.quantity == 24 || casierProductsData.products.length == 24"
+                :class="[product.quantity == 24 || casierProductsData.products.length == 24 ? 'bg-gray-100 text-gray-300 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700 text-white']"
+                class=" rounded-full  flex items-center justify-center transition-all duration-300 ">
                 <div class=" w-6 h-6 rounded-full flex items-center justify-center">
                     <div class="">
                         <Plus :size="15"></Plus>
@@ -45,24 +46,31 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '@/services/locker-products/locker-products-type';
+import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
 import { Plus } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { ref, type PropType } from 'vue';
 
 // Définition des props
-interface Props {
-    product: Product;
-}
+// interface Props {
+//     product: Product;
+//     casierProducts: CasierProduct;
+// }
 
-const { product } = defineProps<Props>();
+const { product, casierProductsData } = defineProps({
+    product: {
+        type: Object as PropType<Product>,
+        required: true
+    },
+    casierProductsData: {
+        type: Object as PropType<CasierProduct>,
+        required: true
+    }
+});
 
 // Déclaration de l'émetteur
 const emit = defineEmits<{
     (e: 'update:quantity', data: { id: string, newQuantity: number }): void;
 }>();
-
-// État local pour la quantité
-// const quantity = ref(product.quantity);
 
 // Méthodes pour incrémenter et décrémenter
 const increment = () => {

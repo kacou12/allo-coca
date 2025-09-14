@@ -13,8 +13,8 @@
     <section class="h-full flex flex-col ">
 
       <div class="grid grid-cols-1 sm:grid-cols-2  gap-6 mb-8 flex-1 overflow-y-scroll">
-        <ProductLockerCard v-for="product in products" :key="product.id" :product="product"
-          @update:quantity="updateProductQuantity" />
+        <ProductLockerCard :casier-products-data="casierProducts" :key="product.id" v-for="product in products"
+          :product="product" @update:quantity="updateProductQuantity" />
       </div>
 
 
@@ -72,10 +72,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import type { Product } from 'src/services/locker-products/locker-products-type';
+import { computed, onBeforeMount, ref, watch, type PropType } from 'vue';
+import type { CasierProduct, Product } from 'src/services/locker-products/locker-products-type';
 import ProductLockerCard from './productLockerCard.vue';
 import Button from '@/components/ui/button/Button.vue';
+
+const { casierProducts } = defineProps({
+  casierProducts: {
+    type: Object as PropType<CasierProduct>,
+    required: true
+  }
+})
 
 const emit = defineEmits<{
   (e: 'increase:quantity', product: Product): void;
@@ -94,13 +101,22 @@ const INITIAL_PRODUCTS_DATA =
   ]
   ;
 
+onBeforeMount(() => {
+  products.value = structuredClone(INITIAL_PRODUCTS_DATA.map(product => ({ ...product, quantity: getDefaultProductQuantity(product.id) })));
+})
+
 const products = ref(structuredClone(INITIAL_PRODUCTS_DATA));
+// const products = ref(structuredClone(INITIAL_PRODUCTS_DATA.map(product => ({ ...product, quantity: getDefaultProductQuantity(product.id) }))));
+
+const getDefaultProductQuantity = (idProduct: string) => {
+  return casierProducts.products.find(product => product.id === idProduct)?.quantity ?? 0;
+}
 
 const CASIER_CAPACITY = 24;
 const MIN_ORDER_AMOUNT = 5000;
 
 // New state for desired number of lockers
-const desiredLockers = ref(1); // Default to 1 locker
+const desiredLockers = ref(casierProducts.quantity); // Default to 1 locker
 
 watch(desiredLockers, (newValue) => {
   emit('update:casierQuantity', newValue);
@@ -133,9 +149,6 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
 
     if (newTotalBottles <= maxBottles.value) {
       product.quantity = dataProduct.newQuantity;
-    } else {
-      // Option to handle: alert the user or cap the quantity
-      alert(`Vous ne pouvez pas ajouter plus de ${maxBottles.value} bouteilles.`);
     }
   }
 };
