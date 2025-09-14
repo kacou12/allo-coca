@@ -83,17 +83,18 @@ const emit = defineEmits<{
   (e: 'update:casierQuantity', quantity: number): void;
   (e: 'reset:casier'): void;
 }>();
+const INITIAL_PRODUCTS_DATA =
+  [
+    { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/coca.png', variant: '30cl' },
+    { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
+    { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/fanta.png', variant: '30cl' },
+    { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
+    { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
+    { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
+  ]
+  ;
 
-const PRODUCTS_DATA: Product[] = [
-  { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/coca.png', variant: '30cl' },
-  { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-  { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/fanta.png', variant: '30cl' },
-  { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-  { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-  { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-];
-
-const products = ref(PRODUCTS_DATA);
+const products = ref(structuredClone(INITIAL_PRODUCTS_DATA));
 
 const CASIER_CAPACITY = 24;
 const MIN_ORDER_AMOUNT = 5000;
@@ -112,7 +113,7 @@ const totalLockers = computed(() => Math.floor(totalBottles.value / CASIER_CAPAC
 const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.price, 0));
 const maxBottles = computed(() => desiredLockers.value * CASIER_CAPACITY);
 
-const canAddToBasket = computed(() => totalBottles.value >= CASIER_CAPACITY || subTotal.value >= MIN_ORDER_AMOUNT);
+const canAddToBasket = computed(() => totalBottles.value >= CASIER_CAPACITY && subTotal.value >= MIN_ORDER_AMOUNT);
 
 // Methods
 const updateProductQuantity = (dataProduct: { id: string, newQuantity: number }) => {
@@ -121,6 +122,8 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
     // Only update if the new quantity is within the total limit
     const oldQuantity = product.quantity;
     const newTotalBottles = totalBottles.value - oldQuantity + dataProduct.newQuantity;
+
+    product.quantity = dataProduct.newQuantity;
 
     if (dataProduct.newQuantity > oldQuantity) {
       emit('increase:quantity', product);
@@ -138,7 +141,7 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
 };
 
 const resetQuantities = () => {
-  products.value.forEach(p => (p.quantity = 0));
+  products.value = structuredClone(INITIAL_PRODUCTS_DATA);
   desiredLockers.value = 1; // Also reset the locker count
   emit('reset:casier');
 };

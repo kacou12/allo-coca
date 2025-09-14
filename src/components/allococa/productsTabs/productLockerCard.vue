@@ -3,18 +3,18 @@
         <!-- Contrôles de quantité en position absolue -->
         <div
             class="absolute bottom-4 right-2 left-2 flex items-center justify-between bg-white rounded-full  px-2 py-1">
-            <button @click="decrement" :disabled="quantity === 0" :class="[
+            <button @click="decrement" :disabled="product.quantity === 0" :class="[
                 'rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300',
-                quantity === 0
+                product.quantity === 0
                     ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
                     : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-700'
             ]">
                 <span class="text-lg font-light">-</span>
             </button>
 
-            <span class="text-lg font-semibold w-6 text-center text-gray-800">{{ quantity }}</span>
+            <span class="text-lg font-semibold w-6 text-center text-gray-800">{{ product.quantity }}</span>
 
-            <button @click="increment" :disabled="quantity === 24"
+            <button @click="increment" :disabled="product.quantity === 24"
                 class="bg-red-600 text-white rounded-full  flex items-center justify-center transition-all duration-300 hover:bg-red-700">
                 <div class=" w-6 h-6 rounded-full flex items-center justify-center">
                     <div class="">
@@ -54,7 +54,7 @@ interface Props {
     product: Product;
 }
 
-const props = defineProps<Props>();
+const { product } = defineProps<Props>();
 
 // Déclaration de l'émetteur
 const emit = defineEmits<{
@@ -62,23 +62,23 @@ const emit = defineEmits<{
 }>();
 
 // État local pour la quantité
-const quantity = ref(props.product.quantity);
+// const quantity = ref(product.quantity);
 
 // Méthodes pour incrémenter et décrémenter
 const increment = () => {
-    quantity.value++;
+    // quantity.value++;
     emit('update:quantity', {
-        id: props.product.id,
-        newQuantity: quantity.value
+        id: product.id,
+        newQuantity: product.quantity + 1
     });
 };
 
 const decrement = () => {
-    if (quantity.value > 0) {
-        quantity.value--;
+    if (product.quantity > 0) {
+        // quantity.value--;
         emit('update:quantity', {
-            id: props.product.id,
-            newQuantity: quantity.value
+            id: product.id,
+            newQuantity: product.quantity - 1
         });
     }
 };
