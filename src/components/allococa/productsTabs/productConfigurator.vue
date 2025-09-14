@@ -42,7 +42,7 @@
             </div>
             <div class="flex items-center justify-between">
               <p class="text-sm text-[#888888]">Nombre de Casier</p>
-              <sppan class="font-bold ml-2">{{ totalLockers }} / 10</sppan>
+              <p class="font-bold ml-2">{{ desiredLockers }} </p>
             </div>
             <div class="flex items-center justify-between">
               <p class="text-sm text-[#888888]">Sous-total</p>
@@ -72,10 +72,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { Product } from 'src/services/locker-products/locker-products-type';
 import ProductLockerCard from './productLockerCard.vue';
 import Button from '@/components/ui/button/Button.vue';
+
+const emit = defineEmits<{
+  (e: 'increase:quantity', product: Product): void;
+  (e: 'decrease:quantity', product: Product): void;
+  (e: 'update:casierQuantity', quantity: number): void;
+  (e: 'reset:casier'): void;
+}>();
 
 const PRODUCTS_DATA: Product[] = [
   { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/coca.png', variant: '30cl' },
@@ -94,6 +101,11 @@ const MIN_ORDER_AMOUNT = 5000;
 // New state for desired number of lockers
 const desiredLockers = ref(1); // Default to 1 locker
 
+watch(desiredLockers, (newValue) => {
+  emit('update:casierQuantity', newValue);
+});
+
+
 // Computed properties
 const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0));
 const totalLockers = computed(() => Math.floor(totalBottles.value / CASIER_CAPACITY));
@@ -109,6 +121,13 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
     // Only update if the new quantity is within the total limit
     const oldQuantity = product.quantity;
     const newTotalBottles = totalBottles.value - oldQuantity + dataProduct.newQuantity;
+
+    if (dataProduct.newQuantity > oldQuantity) {
+      emit('increase:quantity', product);
+    } else {
+      emit('decrease:quantity', product);
+    }
+
     if (newTotalBottles <= maxBottles.value) {
       product.quantity = dataProduct.newQuantity;
     } else {
@@ -121,6 +140,7 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
 const resetQuantities = () => {
   products.value.forEach(p => (p.quantity = 0));
   desiredLockers.value = 1; // Also reset the locker count
+  emit('reset:casier');
 };
 
 const addToBasket = () => {

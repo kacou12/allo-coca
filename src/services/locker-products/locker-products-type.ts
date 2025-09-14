@@ -13,3 +13,8 @@ export interface Product {
   image: string
   variant: string
 }
+
+export interface CasierProduct {
+  quantity: number,
+  products:Product[]
+} 

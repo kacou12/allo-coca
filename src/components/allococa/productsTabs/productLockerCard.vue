@@ -14,7 +14,7 @@
 
             <span class="text-lg font-semibold w-6 text-center text-gray-800">{{ quantity }}</span>
 
-            <button @click="increment"
+            <button @click="increment" :disabled="quantity === 24"
                 class="bg-red-600 text-white rounded-full  flex items-center justify-center transition-all duration-300 hover:bg-red-700">
                 <div class=" w-6 h-6 rounded-full flex items-center justify-center">
                     <div class="">
