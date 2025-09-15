@@ -14,6 +14,10 @@ export const AppRoute = Object.freeze({
     name: 'products',
     path: '/products',
   },
+  ORDERS:{
+    name: 'orders',
+    path: '/orders',
+  },
   HOME_REDIRECT: {
     name: 'home-redirect',
     path: '/',

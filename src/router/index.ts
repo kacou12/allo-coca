@@ -35,6 +35,13 @@ const router = createRouter({
           // beforeEnter:Auth.authIsRequire,
           meta: { requiresAuth: false },
         },
+        {
+          path: AppRoute.ORDERS.path,
+          name: AppRoute.ORDERS.name,
+          component: () => import('@/views/allococa/orders/OrdersView.vue'),
+          // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: false },
+        },
       ]
     },
     {

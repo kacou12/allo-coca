@@ -83,7 +83,8 @@
 
 
                     <div class="mt-1">
-                        <Button class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
+                        <Button @click="goToOrderPage"
+                            class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
                             Finaliser ma commande
                         </Button>
                     </div>
@@ -121,6 +122,8 @@ import { storeToRefs } from "pinia";
 import CartLineCard from "./cartLineCard.vue";
 import { computed, ref } from "vue";
 import type { Product } from "@/services/locker-products/locker-products-type";
+import router from "@/router";
+import { AppRoute } from "@/constants/app-route";
 
 const { cartQuantityLength, cart } = storeToRefs(useCart());
 
@@ -155,6 +158,12 @@ const productsDataGrouped = (products: Product[], type: "locker" | "full-locker"
 
     return Array.from(groupedMap.values());
 };
+
+const goToOrderPage = () => {
+    router.push({
+        name: AppRoute.ORDERS.name
+    })
+}
 
 
 
