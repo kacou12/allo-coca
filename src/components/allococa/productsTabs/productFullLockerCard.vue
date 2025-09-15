@@ -12,10 +12,17 @@
         </div> -->
         <div class="absolute bottom-4 right-2 left-2 flex items-center justify-between">
 
-            <CommonButton class="h-[35px]" title="Approvisionner" @click="emit('fullIncrement', product)"
+            <!-- <CommonButton class="h-[35px]" title="Approvisionner"
+                @click="emit('fullIncrement', { ...product, quantity: 1 })"
                 :disabled="casierProductsData.products.length === 24 && casierProductsData.products.length > 0 && casierProductsData.products[0].id == product.id">
 
-            </CommonButton>
+            </CommonButton> -->
+
+            <button :disabled="isDisabled" @click="emit('fullIncrement', { ...product, quantity: 1 })"
+                :class="[isDisabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary-50 hover:bg-primary-40 text-white']"
+                class="w-full py-1 text-sm rounded-[90px] transition-colors duration-200 ">
+                Approvisionner
+            </button>
         </div>
 
         <!-- Nom du produit -->
@@ -40,9 +47,10 @@
 
 <script setup lang="ts">
 import CommonButton from '@/components/buttons/commonButton.vue';
+// import Button from '@/components/ui/button/Button.vue';
 import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
 import { Plus } from 'lucide-vue-next';
-import { ref, type PropType } from 'vue';
+import { computed, ref, type PropType } from 'vue';
 
 // Définition des props
 // interface Props {
@@ -60,6 +68,8 @@ const { product, casierProductsData } = defineProps({
         required: true
     }
 });
+
+const isDisabled = computed(() => casierProductsData.products.length === 24 && casierProductsData.products.length > 0 && casierProductsData.products[0].id == product.id);
 
 // Déclaration de l'émetteur
 const emit = defineEmits<{

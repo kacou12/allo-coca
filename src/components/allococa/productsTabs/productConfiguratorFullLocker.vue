@@ -26,7 +26,8 @@
             <p class="font-semibold text-sm text-gray-700">Nombre de casiers :</p>
           </div>
           <div>
-            <input id="locker-count" type="number" v-model.number="desiredLockers" min="1"
+            <input id="locker-count" type="number" @change="emit('update:casierQuantity', desiredLockers)"
+              v-model.number="desiredLockers" min="1"
               class="w-20 p-2 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
           </div>
         </div>
@@ -86,10 +87,10 @@ const { casierProducts } = defineProps({
 })
 
 const emit = defineEmits<{
-
   (e: 'set:fullQuantity', product: Product): void;
   (e: 'update:casierQuantity', quantity: number): void;
   (e: 'reset:casier'): void;
+  (e: 'cart:addCasier'): void;
 }>();
 const INITIAL_PRODUCTS_DATA =
   [
@@ -118,39 +119,37 @@ const MIN_ORDER_AMOUNT = 5000;
 
 // New state for desired number of lockers
 const desiredLockers = ref(casierProducts.quantity); // Default to 1 locker
-
-watch(desiredLockers, (newValue) => {
-  emit('update:casierQuantity', newValue);
-});
+// const hasBottles = ref(false);
 
 
 // Computed properties
-const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0));
+const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0) * desiredLockers.value);
 const totalLockers = computed(() => Math.floor(totalBottles.value / CASIER_CAPACITY));
-const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.price, 0));
+const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.price, 0) * desiredLockers.value);
 const maxBottles = computed(() => desiredLockers.value * CASIER_CAPACITY);
 
 const canAddToBasket = computed(() => totalBottles.value >= CASIER_CAPACITY && subTotal.value >= MIN_ORDER_AMOUNT);
 
 // Methods
-const updateProductQuantity = (product: Product) => {
-  emit('set:fullQuantity', product);
+const updateProductQuantity = (dataProduct: Product) => {
+  resetQuantities();
+  const product = products.value.find(p => p.id === dataProduct.id);
+  product!.quantity = 24;
+
+  // hasBottles.value = true;
+  emit('set:fullQuantity', dataProduct);
 };
 
 const resetQuantities = () => {
   products.value = structuredClone(INITIAL_PRODUCTS_DATA);
+  // hasBottles.value = false;
   desiredLockers.value = 1; // Also reset the locker count
   emit('reset:casier');
 };
 
 const addToBasket = () => {
-  if (canAddToBasket.value) {
-    const selectedProducts = products.value.filter(p => p.quantity > 0);
-    console.log("Produits ajoutés au panier :", selectedProducts);
-    alert("Produits ajoutés au panier !");
-  } else {
-    alert("Veuillez remplir au moins un casier ou atteindre 5000 FCFA.");
-  }
+  emit('cart:addCasier');
+  resetQuantities();
 };
 </script>
 

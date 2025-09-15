@@ -26,7 +26,8 @@
             <p class="font-semibold text-sm text-gray-700">Nombre de casiers :</p>
           </div>
           <div>
-            <input id="locker-count" type="number" v-model.number="desiredLockers" min="1"
+            <input id="locker-count" type="number" @change="emit('update:casierQuantity', desiredLockers)"
+              v-model.number="desiredLockers" min="1"
               class="w-20 p-2 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
           </div>
         </div>
@@ -52,13 +53,24 @@
         </div>
 
         <button
-          class="flex items-center justify-center w-full px-4 py-3 bg-red-600 text-white rounded-lg font-bold disabled:bg-red-400 disabled:cursor-not-allowed transition-colors duration-200"
+          class="flex items-center justify-center w-full px-4 disabled:text-[#888888] text-sm py-3 disabled:bg-[#F6F6F6] bg-red-600 text-white rounded-[90px]   disabled:cursor-not-allowed transition-colors duration-200"
           :disabled="!canAddToBasket" @click="addToBasket">
-          Ajouter un panier
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-2">
-            <path
-              d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.75 3.75 0 0 0 3.694 2.46l.305-.011c1.543 0 2.946-.685 3.864-1.76l.006-.008.006-.007-.008.006a2.25 2.25 0 0 1-.302.348c-.919 1.077-2.321 1.762-3.864 1.762A3.75 3.75 0 0 1 8.25 12a.75.75 0 0 0-1.5 0c0 1.03.843 1.868 1.866 1.868h.27l-.006.008c.518-.04 1.02-.238 1.455-.615.435-.377.747-.852.92-1.396.173-.545.215-1.11.127-1.685.088-.575-.107-1.15-.39-1.618a2.25 2.25 0 0 1 .462-2.184l2.558-9.592a.75.75 0 0 0-.362-.278L16.254 3.75H17.25a.75.75 0 0 0 0-1.5H5.894c-.17 0-.318.114-.362.278L2.974 12.592a.75.75 0 0 1-.724-.514L2.25 2.25zM12.75 14.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zm-5.25 0a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zm-2.25 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm1.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm5.25 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm1.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5z" />
-          </svg>
+          <div class="flex items-center justify-between w-full">
+            <span>Ajouter au panier</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_13587_449)">
+                <path
+                  d="M1.7085 1.70801H3.37516L5.59183 12.058C5.67314 12.4371 5.88405 12.7759 6.18826 13.0162C6.49246 13.2565 6.87092 13.3833 7.2585 13.3747H15.4085C15.7878 13.3741 16.1556 13.2441 16.451 13.0062C16.7465 12.7683 16.9519 12.4368 17.0335 12.0663L18.4085 5.87467H4.26683M7.50016 17.4997C7.50016 17.9599 7.12707 18.333 6.66683 18.333C6.20659 18.333 5.8335 17.9599 5.8335 17.4997C5.8335 17.0394 6.20659 16.6663 6.66683 16.6663C7.12707 16.6663 7.50016 17.0394 7.50016 17.4997ZM16.6668 17.4997C16.6668 17.9599 16.2937 18.333 15.8335 18.333C15.3733 18.333 15.0002 17.9599 15.0002 17.4997C15.0002 17.0394 15.3733 16.6663 15.8335 16.6663C16.2937 16.6663 16.6668 17.0394 16.6668 17.4997Z"
+                  stroke="#D1D1D1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_13587_449">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+
+          </div>
         </button>
 
         <p class="text-xs text-gray-500 mt-2">
@@ -73,9 +85,12 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount, ref, watch, type PropType } from 'vue';
-import type { CasierProduct, Product } from 'src/services/locker-products/locker-products-type';
+import type { CartLine, CasierProduct, Product } from 'src/services/locker-products/locker-products-type';
 import ProductLockerCard from './productLockerCard.vue';
 import Button from '@/components/ui/button/Button.vue';
+import { useCart } from '@/composables/queries/useCart';
+
+const { addCartLine, clearCart, removeCartLine } = useCart();
 
 const { casierProducts } = defineProps({
   casierProducts: {
@@ -89,6 +104,7 @@ const emit = defineEmits<{
   (e: 'decrease:quantity', product: Product): void;
   (e: 'update:casierQuantity', quantity: number): void;
   (e: 'reset:casier'): void;
+  (e: 'cart:addCasier'): void;
 }>();
 const INITIAL_PRODUCTS_DATA =
   [
@@ -118,15 +134,19 @@ const MIN_ORDER_AMOUNT = 5000;
 // New state for desired number of lockers
 const desiredLockers = ref(casierProducts.quantity); // Default to 1 locker
 
-watch(desiredLockers, (newValue) => {
-  emit('update:casierQuantity', newValue);
-});
+// watch(desiredLockers, (newValue) => {
+//   emit('update:casierQuantity', newValue);
+// });
+
+const onchangeDesiredLockers = () => {
+  emit('update:casierQuantity', desiredLockers.value);
+}
 
 
 // Computed properties
-const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0));
+const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0) * desiredLockers.value);
 const totalLockers = computed(() => Math.floor(totalBottles.value / CASIER_CAPACITY));
-const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.price, 0));
+const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.price, 0) * desiredLockers.value);
 const maxBottles = computed(() => desiredLockers.value * CASIER_CAPACITY);
 
 const canAddToBasket = computed(() => totalBottles.value >= CASIER_CAPACITY && subTotal.value >= MIN_ORDER_AMOUNT);
@@ -160,13 +180,9 @@ const resetQuantities = () => {
 };
 
 const addToBasket = () => {
-  if (canAddToBasket.value) {
-    const selectedProducts = products.value.filter(p => p.quantity > 0);
-    console.log("Produits ajoutés au panier :", selectedProducts);
-    alert("Produits ajoutés au panier !");
-  } else {
-    alert("Veuillez remplir au moins un casier ou atteindre 5000 FCFA.");
-  }
+  emit('cart:addCasier');
+  resetQuantities();
+
 };
 </script>
 

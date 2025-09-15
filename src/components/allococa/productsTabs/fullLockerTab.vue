@@ -7,7 +7,7 @@
                 <div class="absolute top-[7%] left-[6%] lg:left-[4.7%]   grid grid-cols-6 gap-2">
                     <!-- capsule -->
                     <section v-for="product in casierProducts.products"
-                        class=" border-2 col-span-1 max-h-[40px] lg:max-h-[80px]">
+                        class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
                         <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt="">
                     </section>
                     <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
@@ -20,7 +20,8 @@
             <!-- configuration du casier -->
             <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
                 <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
-                    @set:full-quantity="setFullQuantity" @update:casier-quantity="updateCasierQuantity">
+                    @cart:add-casier="addCasierToCart" @set:full-quantity="setFullQuantity"
+                    @update:casier-quantity="updateCasierQuantity">
                 </productConfiguratorFullLocker>
             </article>
         </section>
@@ -30,10 +31,16 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import ProductConfiguratorDialbox from './productConfiguratorDialbox.vue';
-import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
+import type { CartLine, CasierProduct, Product } from '@/services/locker-products/locker-products-type';
 import { productCapsuleData } from '@/services/locker-products/locker-products-constants';
 import ProductConfiguratorFullLocker from './productConfiguratorFullLocker.vue';
+import { useCart } from '@/composables/queries/useCart';
 
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
+
+const { addCartLine, clearCart, removeCartLine } = useCart();
 const casierProducts = ref<CasierProduct>({
     quantity: 1,
     products: [
@@ -61,6 +68,26 @@ const findProductDataCapsule = (productName: string) => {
 
     return new URL(capsuleData!.capsulePath, import.meta.url).href;
 };
+
+const addCasierToCart = () => {
+
+    const cartLine: CartLine = {
+        id: crypto.randomUUID(),
+        type: "full-locker",
+        products: casierProducts.value.products,
+        quantity: casierProducts.value.quantity,
+    }
+
+    addCartLine(cartLine);
+
+    casierProducts.value = {
+        quantity: 1,
+        products: []
+    };
+
+    toast.success("Le casier a bien été ajouté au panier", { timeout: 3000 });
+    // 
+}
 
 
 

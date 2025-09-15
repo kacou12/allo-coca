@@ -12,105 +12,106 @@ import MineralWaterCard from './mineralWaterCard.vue';
 const products = ref([
     {
         "id": "1",
-        "name": "Céleste Naturelle",
+        "name": "Céleste Naturelle 1.5L", // Nom mis à jour pour plus de clarté
         "description": "Pack de 6",
         "price": 1800,
-        "quantity": 0,
-        "image": "url_to_image_01.png",
-        "variant": "1.5L"
+        "quantity": 6, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/celeste.png",
+        "variant": "1.5L",
+        "isNew": true, // Ajout de la propriété "Nouveauté"
     },
     {
         "id": "2",
-        "name": "Céleste Naturelle",
+        "name": "Céleste Naturelle 1.5L",
         "description": "Pack de 9",
         "price": 2475,
-        "quantity": 0,
-        "image": "url_to_image_02.png",
-        "variant": "1.5L"
+        "quantity": 9, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/celeste.png",
+        "variant": "1.5L",
     },
     {
         "id": "3",
-        "name": "Céleste Naturelle",
+        "name": "Céleste Naturelle 1L",
         "description": "Pack de 12",
         "price": 2100,
-        "quantity": 0,
-        "image": "url_to_image_03.png",
-        "variant": "1L"
+        "quantity": 12, // Correct
+        "image": "src/assets/allococa/products/water/celeste-pack-12-1l.png",
+        "variant": "1L",
     },
     {
         "id": "4",
-        "name": "Céleste Naturelle",
+        "name": "Céleste Naturelle 0.5L",
         "description": "Pack de 9",
         "price": 990,
-        "quantity": 0,
-        "image": "url_to_image_04.png",
-        "variant": "0.5L"
+        "quantity": 9, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/celeste-naturel-pack-9-05l.png",
+        "variant": "0.5L",
     },
     {
         "id": "5",
-        "name": "Céleste Naturelle",
+        "name": "Céleste Naturelle 0.33L",
         "description": "Pack de 15",
         "price": 1350,
-        "quantity": 0,
-        "image": "url_to_image_05.png",
-        "variant": "0.33L"
+        "quantity": 15, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/celeste-naturel-pack-15-033l.png",
+        "variant": "0.33L",
     },
     {
         "id": "6",
-        "name": "Céleste",
-        "description": "Bidonbonne",
+        "name": "Céleste 17L",
+        "description": "Bonbonne",
         "price": 2100,
-        "quantity": 0,
-        "image": "url_to_image_06.png",
-        "variant": "17L"
+        "quantity": 1, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/celeste-pack-bonbonne-17l.png",
+        "variant": "17L",
+        "isNew": true, // Ajout de la propriété "Nouveauté"
     },
     {
         "id": "7",
-        "name": "Cristalline",
+        "name": "Cristalline 1.5L",
         "description": "Pack de 6",
         "price": 1500,
-        "quantity": 0,
-        "image": "url_to_image_07.png",
-        "variant": "1.5L"
+        "quantity": 6, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/cristaline-pack-6-15l.png",
+        "variant": "1.5L",
     },
     {
         "id": "8",
-        "name": "Cristalline",
+        "name": "Cristalline 0.5L",
         "description": "Pack de 12",
         "price": 1080,
-        "quantity": 0,
-        "image": "url_to_image_08.png",
-        "variant": "0.5L"
+        "quantity": 12, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/cristaline-pack-12-05l.png",
+        "variant": "0.5L",
     },
     {
         "id": "9",
-        "name": "Cristalline",
+        "name": "Cristalline 0.33L",
         "description": "Pack de 16",
         "price": 1200,
-        "quantity": 0,
-        "image": "url_to_image_09.png",
-        "variant": "0.33L"
+        "quantity": 16, // Correct
+        "image": "src/assets/allococa/products/water/cristaline-pack-16-033l.png",
+        "variant": "0.33L",
     },
     {
         "id": "10",
-        "name": "Awa",
+        "name": "Awa 1.5L",
         "description": "Pack de 6",
         "price": 1800,
-        "quantity": 0,
-        "image": "url_to_image_10.png",
-        "variant": "1.5L"
+        "quantity": 6, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/awa-pack-6-15l.png",
+        "variant": "1.5L",
     },
     {
         "id": "11",
-        "name": "Awa",
+        "name": "Awa 0.5L",
         "description": "Pack de 9",
         "price": 900,
-        "quantity": 0,
-        "image": "url_to_image_11.png",
-        "variant": "0.5L"
+        "quantity": 9, // Corrigé pour correspondre à l'image
+        "image": "src/assets/allococa/products/water/awa-pack-9-05l.png",
+        "variant": "0.5L",
     }
 ]);
-
 </script>
 
 <style scoped></style>

@@ -19,6 +19,8 @@ export interface CasierProduct {
   products:Product[]
 } 
 export interface CartLine {
+  id: string,
   quantity: number,
+  type: "full-locker" | "locker" | "water",
   products:Product[]
 } 

@@ -20,7 +20,7 @@
             <!-- configuration du casier -->
             <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
                 <ProductConfiguratorDialbox :casier-products="casierProducts" @increase:quantity="increaseQuantity"
-                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier"
+                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
                     @update:casier-quantity="updateCasierQuantity">
                 </ProductConfiguratorDialbox>
             </article>
@@ -31,8 +31,15 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import ProductConfiguratorDialbox from './productConfiguratorDialbox.vue';
-import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
+import type { CartLine, CasierProduct, Product } from '@/services/locker-products/locker-products-type';
 import { productCapsuleData } from '@/services/locker-products/locker-products-constants';
+import { useCart } from '@/composables/queries/useCart';
+
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
+
+const { addCartLine, clearCart, removeCartLine } = useCart();
 
 const casierProducts = ref<CasierProduct>({
     quantity: 1,
@@ -40,16 +47,6 @@ const casierProducts = ref<CasierProduct>({
 
     ]
 });
-
-
-// const PRODUCTS_DATA: Product[] = [
-//   { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/coca.png', variant: '30cl' },
-//   { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-//   { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/fanta.png', variant: '30cl' },
-//   { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-//   { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-//   { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-// ];
 
 
 const findProductDataCapsule = (productName: string) => {
@@ -73,7 +70,6 @@ const findProductDataCapsule = (productName: string) => {
 // const casierProducts = ref(7);
 
 const increaseQuantity = (product: Product) => {
-
     casierProducts.value.products = [...casierProducts.value.products, product]
 
 };
@@ -105,6 +101,26 @@ const updateCasierQuantity = (value: number) => {
     casierProducts.value.quantity = value;
 
 };
+
+const addCasierToCart = () => {
+
+    const cartLine: CartLine = {
+        id: crypto.randomUUID(),
+        type: "locker",
+        products: casierProducts.value.products,
+        quantity: casierProducts.value.quantity,
+    }
+
+    addCartLine(cartLine);
+
+    casierProducts.value = {
+        quantity: 1,
+        products: []
+    };
+
+    toast.success("Le casier a bien été ajouté au panier", { timeout: 3000 });
+    // 
+}
 
 
 </script>
