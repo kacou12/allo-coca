@@ -48,6 +48,7 @@
 
       <HomeTabs></HomeTabs>
 
+
     </section>
 
     <!-- Vos type de commande -->
@@ -167,9 +168,12 @@
 
 </template>
 <script setup lang="ts">
+import BeverageCard from '@/components/allococa/card/beverageCard.vue';
+import CommonCocaTabs from '@/components/allococa/card/commonCocaTabs.vue';
 import HowItWorkCard from '@/components/allococa/card/howItWorkCard.vue';
 import OrderTyperCard from '@/components/allococa/card/orderTyperCard.vue';
 import ReviewCard from '@/components/allococa/card/reviewCard.vue';
+import WaterCard from '@/components/allococa/card/waterCard.vue';
 import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaCard.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';

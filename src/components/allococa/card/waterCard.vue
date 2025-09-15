@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
         <section class="h-[268px]  flex items-center justify-center">
-            <img class="w-[61px] h-[186px]" src="@/assets/allococa/products/water/celeste.png" alt=""></img>
+            <img class="w-[69px] h-[220px]" src="@/assets/allococa/products/water/celeste.png" alt=""></img>
         </section>
         <section class="space-y-1">
             <p class="text-[10px]  text-[#888888]">Pack de 6</p>

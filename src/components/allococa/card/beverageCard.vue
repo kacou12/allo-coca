@@ -1,6 +1,6 @@
 <template>
     <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
-        <section class="h-[268px]  flex items-center justify-center">
+        <section class="h-[268px]  flex items-center justify-center ">
             <img src="@/assets/allococa/products/coca.png" alt=""></img>
         </section>
         <section class="space-y-1">
