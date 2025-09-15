@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-xl shadow-lg p-6 mx-auto h-full">
-    <div class="flex items-center justify-between bg-orange-700 mb-2">
+    <div class="flex items-center justify-between  mb-2">
       <h1 class=" font-bold text-gray-800">Je configure mon casier</h1>
 
       <Button @click="resetQuantities"

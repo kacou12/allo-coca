@@ -18,3 +18,7 @@ export interface CasierProduct {
   quantity: number,
   products:Product[]
 } 
+export interface CartLine {
+  quantity: number,
+  products:Product[]
+} 

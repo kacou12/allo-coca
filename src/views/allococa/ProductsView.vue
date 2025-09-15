@@ -1,6 +1,6 @@
 <template>
 
-    <div class="py-10 spac-y-5 pt-[80px] bg-orange-300 h-screen">
+    <div class="py-10 spac-y-5 pt-[80px]   maxContain3xl">
         <section class="flex items-center gap-1">
             <p class="text-[#6D6D6D]">Livraison:</p>
             <p class="text-primary">En 24H et gratuite </p>

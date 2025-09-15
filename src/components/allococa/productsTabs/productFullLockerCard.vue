@@ -12,22 +12,22 @@
         </div> -->
         <div class="absolute bottom-4 right-2 left-2 flex items-center justify-between">
 
-            <CommonButton title="Approvisionner" @click="emit('fullIncrement', product)"
+            <CommonButton class="h-[35px]" title="Approvisionner" @click="emit('fullIncrement', product)"
                 :disabled="casierProductsData.products.length === 24 && casierProductsData.products.length > 0 && casierProductsData.products[0].id == product.id">
 
             </CommonButton>
         </div>
 
         <!-- Nom du produit -->
-        <h3 class=" font-bold text-center mb-4 ">{{ product.name }}</h3>
+        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.name }}</h3>
 
         <!-- Image du produit -->
-        <div class=" flex justify-center ">
+        <div class="max-w-[186px]  ml-5">
             <img :src="product.image" :alt="`Image de ${product.name}`" class="" />
         </div>
 
         <!-- Informations prix et variante -->
-        <div class="space-y-0 absolute right-1 top-1/2 text-xs bg-orange-600">
+        <div class="space-y-0 absolute  top-1/2 text-xs right-[10px]">
             <div class="flex justify-end">
                 <p class=" text-gray-500 font-medium">{{ product.variant }}</p>
             </div>
