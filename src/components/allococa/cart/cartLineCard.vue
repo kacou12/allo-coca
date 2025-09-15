@@ -17,7 +17,7 @@
         </div>
 
         <div class="flex space-x-2">
-            <button
+            <button @click="goUpdatePage"
                 class=" px-4 h-[32px] text-xs font-bold text-black border border-black rounded-full hover:bg-gray-200 transition-colors duration-200">
 
                 {{ cartLine.type == 'water' ? 'Modifier le pack' : 'Modifier le casier' }}
@@ -36,8 +36,11 @@
 
 <script setup lang="ts">
 import { useCart } from '@/composables/queries/useCart';
+import { AppRoute } from '@/constants/app-route';
+import router from '@/router';
 import type { CartLine, Product } from '@/services/locker-products/locker-products-type';
 import { computed, defineProps } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { useToast } from 'vue-toastification';
 
@@ -48,7 +51,51 @@ const { cartLine, type } = defineProps<{
 
 const toast = useToast();
 
-const { removeCartLine } = useCart();
+const route = useRoute();
+
+const { removeCartLine, setCartTabValue } = useCart();
+
+const goUpdatePage = () => {
+    if (type === "locker") {
+        // window.location.href = `/locker/${cartLine.id}`;
+        router.push({
+            name: AppRoute.PRODUCTS.name, query: {
+                type: "locker",
+                id: cartLine.id,
+            },
+        }).then(() => {
+
+            setCartTabValue("casierCompose")
+            router.go(0);
+        });
+    } else if (type === "full-locker") {
+
+        router.push({
+            name: AppRoute.PRODUCTS.name, query: {
+                type: "full-locker",
+                id: cartLine.id,
+            },
+
+        }).then(() => {
+            setCartTabValue("casierComplet")
+            router.go(0);
+        });;
+    } else if (type === "water") {
+        router.push({
+            name: AppRoute.PRODUCTS.name, query: {
+                type: "water",
+                id: cartLine.id,
+            },
+        }).then(() => {
+            setCartTabValue("water")
+            router.go(0);
+        });;
+    }
+
+
+}
+
+
 
 
 interface GroupedItem {

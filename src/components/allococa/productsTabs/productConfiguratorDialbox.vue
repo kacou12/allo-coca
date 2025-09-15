@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl shadow-lg p-6 mx-auto h-full">
+  <div class="bg-white rounded-md shadow-lg p-6 mx-auto h-full">
     <div class="flex items-center justify-between  mb-2">
       <h1 class=" font-bold text-gray-800">Je configure mon casier</h1>
 
@@ -19,7 +19,7 @@
 
 
       <!-- section nombre de casier -->
-      <article class="flex items-center justify-between mb-8">
+      <article class="flex items-center justify-between ">
         <div class="flex items-center justify-between w-full">
           <div>
             <!-- <label for="locker-count" class="font-semibold text-sm text-gray-700"></label> -->
@@ -52,12 +52,14 @@
           </div>
         </div>
 
-        <button
-          class="flex items-center justify-center w-full px-4 disabled:text-[#888888] text-sm py-3 disabled:bg-[#F6F6F6] bg-red-600 text-white rounded-[90px]   disabled:cursor-not-allowed transition-colors duration-200"
-          :disabled="!canAddToBasket" @click="addToBasket">
+        <button class="flex items-center justify-center w-full px-4 text-sm py-3 rounded-[90px] transition-colors duration-200 
+           disabled:text-[#888888] disabled:bg-[#F6F6F6] disabled:cursor-not-allowed
+           bg-red-600 text-white" :disabled="!canAddToBasket" @click="addToBasket">
           <div class="flex items-center justify-between w-full">
-            <span>Ajouter au panier</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span v-if="isEdit">Modifier le panier</span>
+            <span v-else>Ajouterss au panier</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+              class="disabled:stroke-[#888888] stroke-white">
               <g clip-path="url(#clip0_13587_449)">
                 <path
                   d="M1.7085 1.70801H3.37516L5.59183 12.058C5.67314 12.4371 5.88405 12.7759 6.18826 13.0162C6.49246 13.2565 6.87092 13.3833 7.2585 13.3747H15.4085C15.7878 13.3741 16.1556 13.2441 16.451 13.0062C16.7465 12.7683 16.9519 12.4368 17.0335 12.0663L18.4085 5.87467H4.26683M7.50016 17.4997C7.50016 17.9599 7.12707 18.333 6.66683 18.333C6.20659 18.333 5.8335 17.9599 5.8335 17.4997C5.8335 17.0394 6.20659 16.6663 6.66683 16.6663C7.12707 16.6663 7.50016 17.0394 7.50016 17.4997ZM16.6668 17.4997C16.6668 17.9599 16.2937 18.333 15.8335 18.333C15.3733 18.333 15.0002 17.9599 15.0002 17.4997C15.0002 17.0394 15.3733 16.6663 15.8335 16.6663C16.2937 16.6663 16.6668 17.0394 16.6668 17.4997Z"
@@ -69,14 +71,16 @@
                 </clipPath>
               </defs>
             </svg>
-
           </div>
         </button>
 
-        <p class="text-xs text-gray-500 mt-2">
+        <!-- <p class="text-xs text-gray-500 mt-2">
           <span class="text-red-600 font-bold">*</span>
           Constituer au moins un casier ou minimum 5 000 FCFA
-        </p>
+        </p> -->
+        <div class="h-4">
+
+        </div>
       </article>
     </section>
 
@@ -89,8 +93,10 @@ import type { CartLine, CasierProduct, Product } from 'src/services/locker-produ
 import ProductLockerCard from './productLockerCard.vue';
 import Button from '@/components/ui/button/Button.vue';
 import { useCart } from '@/composables/queries/useCart';
+import { useRoute } from 'vue-router';
 
 const { addCartLine, clearCart, removeCartLine } = useCart();
+const route = useRoute();
 
 const { casierProducts } = defineProps({
   casierProducts: {
@@ -105,6 +111,7 @@ const emit = defineEmits<{
   (e: 'update:casierQuantity', quantity: number): void;
   (e: 'reset:casier'): void;
   (e: 'cart:addCasier'): void;
+  (e: 'cart:editCasier'): void;
 }>();
 const INITIAL_PRODUCTS_DATA =
   [
@@ -173,6 +180,12 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
   }
 };
 
+const isEdit = computed(() => {
+  const idCartLine = route.query.id;
+  const type = route.query.type;
+  return idCartLine && type && type !== "locker";
+})
+
 const resetQuantities = () => {
   products.value = structuredClone(INITIAL_PRODUCTS_DATA);
   desiredLockers.value = 1; // Also reset the locker count
@@ -180,7 +193,14 @@ const resetQuantities = () => {
 };
 
 const addToBasket = () => {
-  emit('cart:addCasier');
+  // const idCartLine = route.query.id;
+  // const type = route.query.type;
+  if (isEdit) {
+
+    emit('cart:addCasier');
+    resetQuantities();
+  }
+  emit('cart:editCasier');
   resetQuantities();
 
 };

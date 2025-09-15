@@ -20,7 +20,8 @@
                         @click.prevent="scrollTo('services')">
                         Comment ca marche ?
                     </a>
-                    <RouterLink to="/" :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
+                    <RouterLink :to="{ name: AppRoute.PRODUCTS.name }"
+                        :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
                     </RouterLink>
                     <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
                         @click.prevent="scrollTo('services')">
