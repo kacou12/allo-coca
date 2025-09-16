@@ -57,7 +57,7 @@
            bg-red-600 text-white" :disabled="!canAddToBasket" @click="addToBasket">
           <div class="flex items-center justify-between w-full">
             <span v-if="isEdit">Modifier le panier</span>
-            <span v-else>Ajouterss au panier</span>
+            <span v-else>Ajouter au panier</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
               class="disabled:stroke-[#888888] stroke-white">
               <g clip-path="url(#clip0_13587_449)">
@@ -183,7 +183,7 @@ const updateProductQuantity = (dataProduct: { id: string, newQuantity: number })
 const isEdit = computed(() => {
   const idCartLine = route.query.id;
   const type = route.query.type;
-  return idCartLine && type && type !== "locker";
+  return idCartLine && type && type == "locker";
 })
 
 const resetQuantities = () => {

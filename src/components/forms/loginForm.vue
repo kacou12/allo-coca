@@ -92,7 +92,7 @@ const {
             // console.log("sucess login", response);
             setUser(response.data!.user);
             await refetchUserProfil();
-            router.push({ name: AppRoute.DASHBOARD.name, replace: true }).then(() => {
+            router.push({ name: AppRoute.HOME.name, replace: true }).then(() => {
 
                 toast.success(`Welcome ${response.data!.user.first_name}!`);
             });

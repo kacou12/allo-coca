@@ -1,5 +1,5 @@
 <template>
-    <CommonCocaTabs :tabs="[
+    <CommonCocaTabs v-model="cartTabValue" :tabs="[
         { value: 'water', label: 'Boissons gazeuse' },
         { value: 'juice', label: 'Eaux minérales' },
     ]">
@@ -23,7 +23,11 @@
     </commonCocaTabs>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
 import BeverageCard from './card/beverageCard.vue';
 import CommonCocaTabs from './card/commonCocaTabs.vue';
 import WaterCard from './card/waterCard.vue';
+
+const cartTabValue = ref<"juice" | "water">("juice")
+
 </script>

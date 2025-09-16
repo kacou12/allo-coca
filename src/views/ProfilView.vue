@@ -118,7 +118,6 @@
 <script setup lang="ts">
 import CommonButton from '@/components/buttons/commonButton.vue';
 import CommonClipBoard from '@/components/common/commonClipBoard.vue';
-import UpdatePasswordProfilAdministrationModal from '@/components/main/administration/updatePasswordProfilAdministrationModal.vue';
 import { Input } from '@/components/ui/input';
 import { useUpdateAdminMutation } from '@/composables/queries/useAdminQueries';
 import { useAuthStore } from '@/stores/useAuthStore';
