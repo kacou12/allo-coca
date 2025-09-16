@@ -5,7 +5,7 @@ import { computed, ref } from 'vue'
 export const useCart = defineStore('cart', () => {
   const cart = ref<CartLine[]>([])
 
-  const cartTabValue = ref<"casierCompose"|"casierComplet"|"water">("casierCompose")
+  const cartTabValue = ref<"casierCompose"|"casierComplet"|"water">("casierComplet")
 
   const setCartTabValue = (value: "casierCompose"|"casierComplet"|"water") => {
     cartTabValue.value = value
@@ -59,8 +59,8 @@ export const useCart = defineStore('cart', () => {
     clearCart,
     cartQuantityLength,
     waterProductDefaultQuantity,
-    setCartTabValue,
-    cartTabValue
+    // setCartTabValue,
+    // cartTabValue
   }
   
 },{

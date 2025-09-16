@@ -10,11 +10,11 @@
 
         <section>
             <CommonCocaTabs v-model="cartTabValue" :tabs="tabsData">
-                <template #casierCompose>
-                    <DialboxTab></DialboxTab>
-                </template>
                 <template #casierComplet>
                     <FullLockerTab></FullLockerTab>
+                </template>
+                <template #casierCompose>
+                    <DialboxTab></DialboxTab>
                 </template>
                 <template #water>
                     <MineralWaterTab></MineralWaterTab>
@@ -36,16 +36,36 @@ import { nextTick, onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const tabsData = ref([
-    { value: 'casierCompose', label: 'Casiers à composer' },
     { value: 'casierComplet', label: 'Casiers complets' },
+    { value: 'casierCompose', label: 'Casiers à composer' },
     { value: 'water', label: 'Eau Minérale' },
 ])
 const cocaTabsRef = ref(0);
 
 const route = useRoute();
 
-const { cartTabValue } = storeToRefs(useCart())
+const cartTabValue = ref<"casierCompose" | "casierComplet" | "water">("casierComplet")
 
+
+// const { cartTabValue } = storeToRefs(useCart())
+
+onBeforeMount(() => {
+
+    console.log('casierProducts', { ...route.query });
+    const idCartLine = route.query.id;
+    const type = route.query.type;
+    if (!idCartLine || !type) {
+        return;
+    }
+    if (type == "full-locker") {
+        cartTabValue.value = "casierComplet"
+    } else if (type == "locker") {
+        cartTabValue.value = "casierCompose"
+    }
+    else if (type == "water") {
+        cartTabValue.value = "water"
+    }
+});
 
 
 

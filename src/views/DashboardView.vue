@@ -91,7 +91,7 @@
 
         <div>
 
-          <CustomButton @click="$router.push({ name: AppRoute.TRANSACTIONS.name })" class="px-10" type="default">
+          <CustomButton @click="$router.push({ name: AppRoute.HOME.name })" class="px-10" type="default">
             <span>Voir Tout</span>
             <ArrowRight></ArrowRight>
           </CustomButton>
@@ -99,11 +99,6 @@
       </div>
 
 
-      <CommonDataTable :dynamic-width-columns="false" :page-size="limitModel ? parseInt(limitModel) : 10" ref="my-table"
-        :default-page="filters.page" :total="transactionsDashboardData?.total ?? 0"
-        :columns="collectionAndTransferColumn" :data="transactionsDashboardData?.items ?? []" @go-to-page="goToPage"
-        @prev-page="prevPage" @next-page="nextPage">
-      </CommonDataTable>
     </section>
 
 
@@ -121,8 +116,7 @@ import CommonDataTable from "@/components/common/commonDataTable.vue";
 import CommonDatesFilter from "@/components/common/commonDatesFilter.vue";
 import CommonSelect from '@/components/common/commonSelect.vue';
 import CommonStatisticCard from "@/components/common/commonStatisticCard.vue";
-import { collectionAndTransferColumn } from "@/components/main/dashboard/collectionAndTransferColumn";
-import DashboardTabs from "@/components/main/dashboard/dashboardTabs.vue";
+
 import Skeleton from "@/components/ui/skeleton/Skeleton.vue";
 import SearchBar from '@/components/users/SearchBar.vue';
 import { useDashboardTransactionsFiltersQuery, useDashboardTransactionsStatsQuery } from "@/composables/queries/useTransactionQueries";

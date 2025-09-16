@@ -16,6 +16,10 @@
                 </section>
 
                 <section class=" hidden flex-1  lg:flex justify-center gap-8 items-center ">
+
+                    <RouterLink :to="{ name: AppRoute.HOME.name }"
+                        :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Accueil
+                    </RouterLink>
                     <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
                         @click.prevent="scrollTo('services')">
                         Comment ca marche ?
@@ -23,18 +27,22 @@
                     <RouterLink :to="{ name: AppRoute.PRODUCTS.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
                     </RouterLink>
+                    <RouterLink :to="{ name: AppRoute.ORDERS.name }"
+                        :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Mes commandes
+                    </RouterLink>
                     <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
                         @click.prevent="scrollTo('services')">
                         Contactez-nous
                     </a>
                 </section>
 
-                <section :class="[isScrolledOrHomePage ? 'bg-primary-50 border-primary-50' : 'border-white']"
+                <!-- <section :class="[isScrolledOrHomePage ? 'bg-primary-50 border-primary-50' : 'border-white']"
                     class="relative rounded-full border-[1px] p-2 border-white flex items-center justify-center ">
 
                     <CartSheet></CartSheet>
 
-                </section>
+                </section> -->
+                <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
             </header>
         </section>
     </div>

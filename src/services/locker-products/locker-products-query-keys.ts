@@ -1,5 +1,4 @@
 import type { DefaultFiltersPayload, TransactionFiltersPayload } from '../global.type'
-import type { MerchantStatsPayload } from './locker-products-type' // Added import
 
 export const merchantsQueryKeys = {
   // users: (country: string) => ['users', country],
@@ -22,8 +21,5 @@ export const merchantsQueryKeys = {
       { dates: payload.dates },       // Ajout du champ 'dates'
     ],
   serviceAvailability: ({ country }: { country: string }) => ['serviceAvailability', country],
-  merchantStats: (payload: MerchantStatsPayload) => [
-    'merchantStats',
-    { dates: payload.dates },
-  ],
+  
 }

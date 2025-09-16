@@ -18,6 +18,14 @@ export const AppRoute = Object.freeze({
     name: 'orders',
     path: '/orders',
   },
+  DELIVERY_INITIALISATON:{
+    name: 'delivery-initialization',
+    path: '/delivery/initialization',
+  },
+  DELIVERY_SUCCESS:{
+    name: 'delivery-success',
+    path: '/delivery/success',
+  },
   HOME_REDIRECT: {
     name: 'home-redirect',
     path: '/',

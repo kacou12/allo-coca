@@ -42,6 +42,20 @@ const router = createRouter({
           // beforeEnter:Auth.authIsRequire,
           meta: { requiresAuth: false },
         },
+        {
+          path: AppRoute.DELIVERY_INITIALISATON.path,
+          name: AppRoute.DELIVERY_INITIALISATON.name,
+          component: () => import('@/views/allococa/orders/DeliveryInitialisationView.vue'),
+          // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: false },
+        },
+        {
+          path: AppRoute.DELIVERY_SUCCESS.path,
+          name: AppRoute.DELIVERY_SUCCESS.name,
+          component: () => import('@/views/allococa/orders/DeliverySuccessView.vue'),
+          // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: false },
+        },
       ]
     },
     {

@@ -53,7 +53,7 @@ const toast = useToast();
 
 const route = useRoute();
 
-const { removeCartLine, setCartTabValue } = useCart();
+const { removeCartLine } = useCart();
 
 const goUpdatePage = () => {
     if (type === "locker") {
@@ -65,7 +65,7 @@ const goUpdatePage = () => {
             },
         }).then(() => {
 
-            setCartTabValue("casierCompose")
+            // setCartTabValue("casierCompose")
             router.go(0);
         });
     } else if (type === "full-locker") {
@@ -77,7 +77,7 @@ const goUpdatePage = () => {
             },
 
         }).then(() => {
-            setCartTabValue("casierComplet")
+            // setCartTabValue("casierComplet")
             router.go(0);
         });;
     } else if (type === "water") {
@@ -87,7 +87,7 @@ const goUpdatePage = () => {
                 id: cartLine.id,
             },
         }).then(() => {
-            setCartTabValue("water")
+            // setCartTabValue("water")
             router.go(0);
         });;
     }

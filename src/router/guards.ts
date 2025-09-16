@@ -21,7 +21,7 @@ export function requiresAuth(
     }
   }else {
     if (getAccessToken()) {
-      return AppRoute.DASHBOARD.name
+      return AppRoute.HOME.name
     }
   }
 }
