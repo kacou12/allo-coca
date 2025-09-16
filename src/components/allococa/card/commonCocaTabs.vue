@@ -1,5 +1,5 @@
 <template>
-    <TabsRoot class="flex flex-col w-full" v-model="tabValue">
+    <TabsRoot @update:model-value="onchanged" class="flex flex-col w-full" v-model="tabValue">
         <TabsList class="relative shrink-0 flex border-mauve6 w-fit " aria-label="Manage your account">
             <TabsIndicator
                 class="absolute px-2 left-0 h-[2px] bottom-0 w-[--radix-tabs-indicator-size] translate-x-[--radix-tabs-indicator-position] rounded-full transition-[width,transform] duration-300">
@@ -28,11 +28,15 @@
 
 import { ref } from 'vue'
 import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from 'radix-vue'
+import { useRouter } from 'vue-router'
+import { AppRoute } from '@/constants/app-route';
 
 const tabValue = defineModel({
     type: String,
     required: true
 })
+
+const router = useRouter();
 
 
 interface Tab {
@@ -45,5 +49,17 @@ const props = defineProps<{
     tabs: Tab[]
     defaultTab?: string
 }>()
+
+const onchanged = (value: string) => {
+    if (value != tabValue.value) {
+        router.replace({
+            name: AppRoute.PRODUCTS.name,
+            query: {
+
+            }
+        })
+    }
+}
+
 
 </script>

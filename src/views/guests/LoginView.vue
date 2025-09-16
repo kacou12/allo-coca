@@ -1,36 +1,30 @@
 <template>
-  <div class="flex h-screen w-full p-8">
-    <!-- Section gauche -->
-    <div class="flex flex-col justify-center items-center w-full md:w-1/2 bg-white p-8">
-      <div class="w-full max-w-sm">
-        <div class="flex justify-left mb-5">
-          <img src="@/assets/images/logos-paytic/paytic-logo.png" alt="Logo" class="w-14 h-14" />
-        </div>
-        <h1 class="text-4xl font-merriweather font-semibold mb-2 text-neutral-10">Connexion</h1>
-        <p class="text-neutral-20 mb-8">
-          Bienvenue à nouveau ! Veuillez saisir vos coordonnées.
-        </p>
+  <div class=" h-screen w-full bg-[#FCFCFC]">
+
+    <section class="mx-auto max-w-[450px] space-y-4">
+
+      <h1 class="text-clamp-md font-tcc font-bold  text-center">Connexion à votre espace</h1>
+      <p class="text-neutral-20   text-center">
+        Accédez à votre espace pour finaliser votre commande
+        ou consulter vos précédents casiers.
+      </p>
 
 
-        <LoginForm>
+      <LoginForm class="">
 
-        </LoginForm>
+      </LoginForm>
 
-        <div class="text-center mt-4">
-          <RouterLink :to="{ name: AppRoute.LOST_PASSWORD.name }"
-            class=" text-sm cursor-pointer font-medium hover:underline text-[15px]">
-            Mot de passe oublier
-          </RouterLink>
-        </div>
+      <div class="text-center flex items-center justify-center gap-1">
+        <p class="text-[#4F4F4F] text-xs">Pas encore de compte ?</p>
+        <RouterLink :to="{ name: AppRoute.LOST_PASSWORD.name }"
+          class=" text-xs cursor-pointer font-medium hover:underline ">
+          Rejoigner la famille
+        </RouterLink>
       </div>
-    </div>
-    <!-- Section droite -->
-    <div
-      class="hidden  w-1/2 bg-cover bg-[url('/src/assets/images/fonds/Section2.png')] bg-center  md:block relative  rounded-2xl">
-      <div class="w-full h-[288px]  absolute bottom-0 rounded-2xl">
-        <LoginCaroussel class="rounded-b-2xl"></LoginCaroussel>
-      </div>
-    </div>
+    </section>
+
+
+
   </div>
 </template>
 <script setup lang="ts">

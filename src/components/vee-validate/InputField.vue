@@ -6,16 +6,16 @@
     <!-- <InputText v-bind="componentField" :aria-labelledby="name" :invalid="!!errorMessage" :disabled :placeholder
           :size="size ?? 'small'" /> -->
     <!-- placeholder="Enter votre email" -->
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full ">
 
       <Input v-bind="componentField" :placeholder
         :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border'"
         class="shadow appearance-none   rounded-lg py-2 px-3 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring  h-[44px] " />
 
-      <div class="min-h-[20px] mt-2">
+      <div class="min-h-[20px] ">
         <FadeInAnimation mode="out-in">
 
-          <small v-if="errorMessage" class="app-form-item-error text-error-500 text-sm font-worksans font-normal ">
+          <small v-if="errorMessage" class="app-form-item-error text-error-500 text-xs font-worksans font-normal ">
             {{ errorMessage }}
           </small>
           <div v-else></div>

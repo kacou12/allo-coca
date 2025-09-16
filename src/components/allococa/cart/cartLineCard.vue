@@ -39,7 +39,7 @@ import { useCart } from '@/composables/queries/useCart';
 import { AppRoute } from '@/constants/app-route';
 import router from '@/router';
 import type { CartLine, Product } from '@/services/locker-products/locker-products-type';
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { useToast } from 'vue-toastification';
