@@ -4,16 +4,15 @@
 
     <section class="mx-auto max-w-[450px] space-y-4">
 
-      <h1 class="text-clamp-md font-tcc font-bold  text-center">Connexion à votre espace</h1>
+      <h1 class="text-clamp-md font-tcc font-bold  text-center">Créer un compte</h1>
       <p class="text-neutral-20   text-center">
-        Accédez à votre espace pour finaliser votre commande
-        ou consulter vos précédents casiers.
+        Remplissez les informations ci-dessous pour finaliser votre commande.
       </p>
 
 
-      <LoginForm class="">
+      <RegisterForm class="">
 
-      </LoginForm>
+      </RegisterForm>
 
       <div class="text-center flex items-center justify-center gap-1">
         <p class="text-[#4F4F4F] text-xs">Pas encore de compte ?</p>
@@ -29,6 +28,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import RegisterForm from '@/components/allococa/forms/registerForm.vue';
 import NavBar from '@/components/aside/navBar.vue';
 import LoginForm from '@/components/forms/loginForm.vue';
 import LoginCaroussel from '@/components/modals/loginCaroussel.vue';
