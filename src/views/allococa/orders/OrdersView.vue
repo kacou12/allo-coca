@@ -5,12 +5,15 @@
             <h3 class="text-clamp-md font-bold font-tcc">Mes commandes</h3>
             <div class="flex items-center gap-3">
 
-                <SearchBar></SearchBar>
+                <div class="min-w-[320px]">
+
+                    <SearchBar placeholder="Rechercher une commande"></SearchBar>
+                </div>
                 <CommonDatesFilter :update-handler="updateData" v-model="dates"></commonDatesFilter>
             </div>
         </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
             <OrderCard v-for="order in fakeOrders" :order="order" :key="order.id"></OrderCard>
         </section>
     </div>

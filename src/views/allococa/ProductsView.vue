@@ -31,9 +31,10 @@ import DialboxTab from '@/components/allococa/productsTabs/dialboxTab.vue';
 import FullLockerTab from '@/components/allococa/productsTabs/fullLockerTab.vue';
 import MineralWaterTab from '@/components/allococa/productsTabs/mineralWaterTab.vue';
 import { useCart } from '@/composables/queries/useCart';
+import { AppRoute } from '@/constants/app-route';
 import { storeToRefs } from 'pinia';
-import { nextTick, onBeforeMount, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { nextTick, onBeforeMount, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const tabsData = ref([
     { value: 'casierComplet', label: 'Casiers complets' },
@@ -43,6 +44,7 @@ const tabsData = ref([
 const cocaTabsRef = ref(0);
 
 const route = useRoute();
+const router = useRouter();
 
 const cartTabValue = ref<"casierCompose" | "casierComplet" | "water">("casierComplet")
 

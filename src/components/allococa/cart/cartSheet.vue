@@ -191,7 +191,7 @@ const productsDataGrouped = (products: Product[], type: "locker" | "full-locker"
 const goToOrderPage = () => {
 
     router.push({
-        name: AppRoute.ORDERS.name
+        name: AppRoute.DELIVERY_INITIALISATON.name
     }).then(() => {
         open.value = false;
     })

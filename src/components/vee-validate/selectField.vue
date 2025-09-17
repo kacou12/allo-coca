@@ -7,7 +7,7 @@
       <Select v-model="Modelvalue" v-bind="componentField">
         <!-- <SelectTrigger class="min-w-[120px] max-w-[350px]  "> -->
         <SelectTrigger class="space-x-1"
-          :class="[`${borderColor}`, open ? 'ring-4 ring-primary-70 transition-all duration-300' : '', `${defaultWidth}`]">
+          :class="[`border-[#3D3D3D]`, open ? 'ring-4 ring-primary-70 transition-all duration-300' : '', `${defaultWidth}`]">
           <slot name="icon"></slot>
           <SelectValue :placeholder="title" class="text-[#525866]">
           </SelectValue>
@@ -62,11 +62,11 @@ defineProps({
     required: false,
     default: "w-fit"
   },
-  borderColor: {
-    type: String as PropType<"border-neutral-60" | "border-input">,
-    required: false,
-    default: "border-input"
-  },
+  // borderColor: {
+  //   type: String as PropType<"border-neutral-60" | "border-input">,
+  //   required: false,
+  //   default: "border-input"
+  // },
   type: {
     type: String,
     required: false,

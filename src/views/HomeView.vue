@@ -1,6 +1,6 @@
 <template>
   <!-- banner section -->
-  <section
+  <!-- <section
     class="h-screen relative p-5 bg-[url(/src/assets/allococa/banner/banner-1.jpg)] bg-cover bg-center bg-no-repeat">
     <article class="absolute right-0 left-0 bottom-0   w-full h-1/2 ">
       <div class="w-full h-full relative  maxContain3xl">
@@ -16,7 +16,9 @@
         </div>
       </div>
     </article>
-  </section>
+  </section> -->
+  <HomeCarousel></HomeCarousel>
+
 
   <main class="maxContain3xl py-5">
     <!-- Nos produits disponibles -->
@@ -175,6 +177,7 @@ import OrderTyperCard from '@/components/allococa/card/orderTyperCard.vue';
 import ReviewCard from '@/components/allococa/card/reviewCard.vue';
 import WaterCard from '@/components/allococa/card/waterCard.vue';
 import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaCard.vue';
+import HomeCarousel from '@/components/allococa/homeCarousel.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
 import NavBar from '@/components/aside/navBar.vue';
