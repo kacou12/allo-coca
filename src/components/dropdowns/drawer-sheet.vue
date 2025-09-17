@@ -3,7 +3,7 @@
         <SheetTrigger>
             <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                 type="button"
-                class="inline-flex items-center p-2 text-sm text-primary-50 rounded-lg xl:hidden hover:bg-primary-60 focus:outline-none focus:ring-2 focus:ring-gray-200 ">
+                class="inline-flex items-center p-2 text-sm text-primary-50 rounded-lg xl:hidden hover:bg-primary-60 focus:outline-none focus:ring-0 ">
                 <span class="sr-only">Open sidebar</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">

@@ -1,36 +1,19 @@
 <template>
-  <!-- banner section -->
-  <!-- <section
-    class="h-screen relative p-5 bg-[url(/src/assets/allococa/banner/banner-1.jpg)] bg-cover bg-center bg-no-repeat">
-    <article class="absolute right-0 left-0 bottom-0   w-full h-1/2 ">
-      <div class="w-full h-full relative  maxContain3xl">
-        <div class=" xl:w-[50%] 2xl:w-[40%] absolute bottom-[60px]  space-y-8">
-          <h1 class="text-clamp-h1-lg font-bold font-tcc text-white leading-[70px]">Ton casier <br></br> Coca livré chez
-            toi,
-            sans bouger.
-          </h1>
-          <CustomButton type="default" class="text-white hover:bg-primary-50 ">
-            <span>Je commence ma commande</span>
-            <ShoppingBasket></ShoppingBasket>
-          </CustomButton>
-        </div>
-      </div>
-    </article>
-  </section> -->
+  <!-- banner carousel section -->
   <HomeCarousel></HomeCarousel>
 
 
   <main class="maxContain3xl py-5">
     <!-- Nos produits disponibles -->
     <section>
-      <article class="flex items-start justify-between my-10">
+      <article class="flex flex-col lg:flex-row lg:items-start lg:justify-between my-10 space-y-5 lg:space-y-0">
         <!-- <h3 class="text-clamp-lg">Nos produits disponibles</h3> -->
-        <div class="w-1/2">
+        <div class="lg:w-1/2">
 
           <h3 class="text-clamp-lg font-bold font-tcc">Nos produits disponibles</h3>
         </div>
 
-        <div class="space-y-3 w-1/2 border pl-40">
+        <div class="space-y-3 lg:w-1/2  lg:pl-40">
 
           <p>Compose ton casier comme tu veux ou choisis directement un pack prêt à livrer. Des bouteilles
             fraîches, des
@@ -58,20 +41,36 @@
       <h3 class="text-clamp-lg font-bold font-tcc ">Vos type de commande</h3>
       <p>Trois façons simples de commander tes boissons préférées</p>
 
-      <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:mx-10">
-        <OrderTyperCard></OrderTyperCard>
-        <OrderTyperCard></OrderTyperCard>
-        <OrderTyperCard></OrderTyperCard>
-      </article>
+      <!-- <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:mx-10">
+        <OrderTyperCard :card-data="{
+          description: 'Choisis directement un casier pré-rempli (24 bouteilles) : Coca-Cola, Fanta, Sprite… ',
+          image: '/src/assets/allococa/home/type-commande-section/complet-casier.jpg',
+          title: 'Boissons gazeuses',
+        }"></OrderTyperCard>
+        <OrderTyperCard :card-data="{
+          description: 'Compose ton casier bouteille par bouteille. Tu choisis ce que tu veux, comme tu veux.',
+          image: '/src/assets/allococa/home/type-commande-section/casier-a-ciomposer.png',
+          title: 'Boissons gazeuses'  ,
+        }"></OrderTyperCard>
+        <OrderTyperCard :card-data="{
+          description: 'Commandes en pack d’eaux (Céleste, Cristalline, Awa)',
+          image: '/src/assets/allococa/home/type-commande-section/pack-eau.png',
+          title: 'Boissons gazeuses',
+        }"></OrderTyperCard>
+      </article> -->
+      <div class="xl:mx-10">
+
+        <OrderTypeCarousel></OrderTypeCarousel>
+      </div>
 
 
     </section>
-  </main>
+  </main>cl
 
   <!-- Pas besoin de créer un compte ! -->
   <section class="bg-black">
     <div class="maxContain3xl flex items-center justify-center gap-24 py-16">
-      <div class="space-y-4 max-w-[385px]">
+      <div class="space-y-4 md:max-w-[385px]">
         <article class="space-y-4">
           <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc text-white">Pas besoin de créer un compte !</h3>
           <p class="text-white/70 text-sm">Pas envie de perdre du temps ? Commence ta commande en 1 clic, on
@@ -85,7 +84,7 @@
         </article>
       </div>
 
-      <div>
+      <div class="hidden md:block">
         <img src="/src/assets/allococa/home/section-no-account-need.png" alt="">
       </div>
 
@@ -101,11 +100,11 @@
       <p class="text-black">Trois étapes simples pour recevoir tes boissons</p>
     </div>
 
-    <article class="flex items-center gap-3  justify-center">
+    <article class="flex items-center flex-wrap lg:flex-nowrap gap-3 justify-center mx-5 xl:mx-0">
       <HowItWorkCard></HowItWorkCard>
-      <img src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
+      <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard></HowItWorkCard>
-      <img src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
+      <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard></HowItWorkCard>
 
     </article>
@@ -179,6 +178,7 @@ import WaterCard from '@/components/allococa/card/waterCard.vue';
 import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaCard.vue';
 import HomeCarousel from '@/components/allococa/homeCarousel.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
+import OrderTypeCarousel from '@/components/allococa/orderTypeCarousel.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
 import NavBar from '@/components/aside/navBar.vue';
 import CommonButton from '@/components/buttons/commonButton.vue';

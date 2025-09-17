@@ -107,27 +107,27 @@
   }
 }
 :root {
-  --primary-10: #4B060C;
+  --primary-10: #4b060c;
   --primary-20: #700912;
-  --primary-30: #930D18;
-  --primary-40: #B7101E;
-  --primary-50: #F11123;
-  --primary-60: #F34453;
-  --primary-70: #F57782;
-  --primary-80: #F8A9B1;
-  --primary-90: #FBDDE0;
-  --primary-100: #FDEEF0;
+  --primary-30: #930d18;
+  --primary-40: #b7101e;
+  --primary-50: #f11123;
+  --primary-60: #f34453;
+  --primary-70: #f57782;
+  --primary-80: #f8a9b1;
+  --primary-90: #fbdde0;
+  --primary-100: #fdeef0;
 }
 
 .dark {
-  --primary-10: #930D18;
-  --primary-20: #B7101E;
-  --primary-30: #DA1428;
-  --primary-40: #FF182D;
-  --primary-50: #F34453;
-  --primary-60: #F57782;
-  --primary-70: #F8A9B1;
-  --primary-80: #FBDDE0;
-  --primary-90: #FDEEF0;
-  --primary-100: #FFFFFF;
+  --primary-10: #930d18;
+  --primary-20: #b7101e;
+  --primary-30: #da1428;
+  --primary-40: #ff182d;
+  --primary-50: #f34453;
+  --primary-60: #f57782;
+  --primary-70: #f8a9b1;
+  --primary-80: #fbdde0;
+  --primary-90: #fdeef0;
+  --primary-100: #ffffff;
 }

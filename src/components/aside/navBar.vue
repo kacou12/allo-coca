@@ -1,10 +1,19 @@
 <template>
     <div :class="{ 'bg-white shadow-md': isScrolledOrHomePage }"
         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-screen">
-        <section class="flex justify-between items-center maxContain3xl">
-            <div class="block lg:hidden">
-                <!-- <DrawerSheet class=""></DrawerSheet> -->
+        <section class="flex justify-between items-center maxContain3xl ">
+            <div class="lg:hidden flex gap-5 items-center">
+                <DrawerSheet class=""></DrawerSheet>
+                <section class="">
+                    <RouterLink to="/">
+                        <img v-if="!isScrolledOrHomePage" class="text-primary-50 w-20"
+                            src="@/assets/allococa/logo-allo-coca.svg" alt="Logo" />
+                        <img v-else class="text-primary-50" src="@/assets/allococa/logo-allo-coca-red.png" alt="Logo" />
+                    </RouterLink>
+                </section>
             </div>
+
+
 
             <header class="w-full lg:flex items-center justify-between h-[80px]  ">
                 <section class="hidden lg:flex items-center ">
@@ -36,14 +45,16 @@
                     </a>
                 </section>
 
-                <!-- <section :class="[isScrolledOrHomePage ? 'bg-primary-50 border-primary-50' : 'border-white']"
-                    class="relative rounded-full border-[1px] p-2 border-white flex items-center justify-center ">
+                <div class="hidden lg:block">
 
-                    <CartSheet></CartSheet>
-
-                </section> -->
-                <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+                    <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+                </div>
             </header>
+
+            <div class="block lg:hidden">
+
+                <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+            </div>
         </section>
     </div>
 </template>
@@ -57,6 +68,7 @@ import { AppRoute } from "@/constants/app-route";
 import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
 import CartSheet from "../allococa/cart/cartSheet.vue";
+import DrawerSheet from "../dropdowns/drawer-sheet.vue";
 
 const { cartQuantityLength } = storeToRefs(useCart());
 
