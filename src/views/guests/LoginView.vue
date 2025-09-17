@@ -2,7 +2,7 @@
   <NavBar></NavBar>
   <div class=" h-screen w-full bg-[#FCFCFC]  pt-[110px]   maxContain3xl">
 
-    <section class="mx-auto max-w-[450px] space-y-4">
+    <section class="mx-auto max-w-[450px] space-y-4 mt-[50px]">
 
       <h1 class="text-clamp-md font-tcc font-bold  text-center">Connexion à votre espace</h1>
       <p class="text-neutral-20   text-center">

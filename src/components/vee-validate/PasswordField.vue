@@ -6,7 +6,7 @@
         class="rounded-lg shadow appearance-none border   w-full py-2 pl-3 pr-10 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring focus:ring-primary-40  h-[44px] border-neutral-60" /> -->
 
       <Input v-bind="componentField" :placeholder :type="showPassword ? 'text' : 'password'" id="password"
-        :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border'"
+        :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border border-[#3D3D3D]'"
         class="shadow appearance-none   rounded-lg w-full py-2 px-3 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring  h-[44px] " />
       <button type="button" class="absolute inset-y-0 right-4 text-neutral-20" @click="togglePasswordVisibility">
 

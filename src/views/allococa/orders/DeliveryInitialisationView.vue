@@ -1,55 +1,24 @@
 <template>
-    <div class="py-10 spac-y-5 pt-[110px]   maxContain3xl space-y-4">
+    <div class="py-10 space-y-10 pt-[110px]   max-w-[848px] mx-auto ">
 
-        <section class="shadow-md rounded-lg p-4 text-center space-y-3">
-            <img src="@/assets/allococa/success-delivery.png" alt="">
+        <h3 class="text-clamp-md font-bold font-tcc mt-10">Mes informations de livraison</h3>
 
-            <p class="font-semibold">🎉 Commande validée avec succès !</p>
-
-            <p class="text-sm">Ton casier est en route.
-                Tu recevras un SMS dans quelques instants pour confirmer la
-                livraison.</p>
-
-            <p class="font-semibold">Détail express de la commande</p>
-
-            <div class="space-y-2">
-                <article class="flex justify-between items-center">
-                    <p class="text-xs text-[#454545]">Numéro de commande</p>
-                    <p class="text-xs">#AC-2030</p>
-                </article>
-                <article class="flex justify-between items-center">
-                    <p class="text-xs text-[#454545]">Contenu résumé</p>
-                    <p class="text-xs">1 casier / 2 packs</p>
-                </article>
-                <article class="flex justify-between items-center">
-                    <p class="text-xs text-[#454545]">Montant total</p>
-                    <p class="text-xs">9 600 FCFA</p>
-                </article>
-            </div>
-
-            <p class="text-sm text-[#6D6D6D]">Paiement à la livraison</p>
-
-            <div class="w-full">
-                <Button @click="() => { }"
-                    class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
-                    Commander à nouveau
-                </Button>
-
-                <Button variant="link">Voir mon historique</Button>
-            </div>
-
-        </section>
-
-        <section class="text-sm">
-            <p class="text-[#4F4F4F]">Tu n’as pas reçu ton SMS ?</p>
-            <Button variant="link">Clique ici pour recevoir un nouveau récapitulatif.</Button>
-        </section>
+        <DeliveryForm :order="order"></DeliveryForm>
 
     </div>
 </template>
 
 <script setup lang="ts">
+import DeliveryForm from '@/components/allococa/forms/deliveryForm.vue';
 import Button from '@/components/ui/button/Button.vue';
+
+const order = {
+    id: "1",
+    title: 'Commande 1',
+    casier: 'Casier 1',
+    packs: 'Packs 1',
+    total: 3000
+}
 
 
 </script>

@@ -9,7 +9,7 @@
     <div class="flex flex-col w-full ">
 
       <Input v-bind="componentField" :placeholder
-        :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border'"
+        :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border border-[#3D3D3D]'"
         class="shadow appearance-none   rounded-lg py-2 px-3 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring  h-[44px] " />
 
       <div class="min-h-[24px] ">
@@ -39,13 +39,16 @@ type InputProps = {
   name: string;
   type?: string;
   placeholder?: string;
-  // disabled?: boolean;
+  disabled?: boolean;
   // size?: 'large' | 'small';
   // extra?: string;
 };
 
 withDefaults(defineProps<InputProps>(), {
   type: 'text',
+  disabled: false,
+  placeholder: '',
+
 
   // disabled: false,
   // placeholder: '',

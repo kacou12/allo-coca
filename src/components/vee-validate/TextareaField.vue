@@ -5,7 +5,7 @@
         :size="size ?? 'small'" /> -->
     <!-- placeholder="Enter votre email" -->
     <Textarea v-bind="componentField" :placeholder
-      :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border'"
+      :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : 'border border-[#3D3D3D]'"
       class="shadow appearance-none   rounded-lg w-full py-2 px-3 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring  h-[44px] " />
 
 

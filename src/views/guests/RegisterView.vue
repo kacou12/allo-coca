@@ -2,7 +2,7 @@
   <NavBar></NavBar>
   <div class=" h-screen w-full bg-[#FCFCFC]  pt-[110px]   maxContain3xl">
 
-    <section class="mx-auto max-w-[450px] space-y-4">
+    <section class="mx-auto max-w-[450px] space-y-4 ">
 
       <h1 class="text-clamp-md font-tcc font-bold  text-center">Créer un compte</h1>
       <p class="text-neutral-20   text-center">
