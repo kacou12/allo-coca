@@ -18,8 +18,8 @@
             <!-- configuration du casier -->
             <article class="block lg:hidden w-full">
                 <ProductConfiguratorDialbox :casier-products="casierProducts" @increase:quantity="increaseQuantity"
-                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
-                    @update:casier-quantity="updateCasierQuantity">
+                    @cart:edit-casier="editCasier" @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier"
+                    @cart:add-casier="addCasierToCart" @update:casier-quantity="updateCasierQuantity">
                 </ProductConfiguratorDialbox>
             </article>
             <!-- 83 -->
@@ -28,8 +28,8 @@
             <!-- configuration du casier -->
             <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-100px)] w-full ">
                 <ProductConfiguratorDialbox :casier-products="casierProducts" @increase:quantity="increaseQuantity"
-                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
-                    @update:casier-quantity="updateCasierQuantity">
+                    @cart:edit-casier="editCasier" @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier"
+                    @cart:add-casier="addCasierToCart" @update:casier-quantity="updateCasierQuantity">
                 </ProductConfiguratorDialbox>
             </article>
         </section>
@@ -51,7 +51,7 @@ const toast = useToast();
 
 const route = useRoute();
 
-const { addCartLine, clearCart, removeCartLine } = useCart();
+const { addCartLine, clearCart, removeCartLine, updateCartLine } = useCart();
 const { cart } = storeToRefs(useCart());
 
 const casierProducts = ref<CasierProduct>({
@@ -165,6 +165,34 @@ const addCasierToCart = () => {
     // 
 }
 
+const editCasier = () => {
+    const idCartLine = route.query.id;
+    const type = route.query.type;
+    if (!idCartLine || !type || type !== "full-locker") {
+        toast.error("Quelque chose s'est mal passe");
+
+        return;
+    }
+    // const existingCartLine = cart.value.find(item => item.id === idCartLine);
+
+
+    const cartLine: CartLine = {
+        id: idCartLine as string,
+        type: "full-locker",
+        products: casierProducts.value.products,
+        quantity: casierProducts.value.quantity,
+    }
+
+    updateCartLine(cartLine);
+
+    casierProducts.value = {
+        quantity: 1,
+        products: []
+    };
+
+    toast.success("Le casier a bien été modifié", { timeout: 3000 });
+    // 
+}
 
 </script>
 

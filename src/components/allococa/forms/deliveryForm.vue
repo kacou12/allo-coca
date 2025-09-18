@@ -1,6 +1,6 @@
 <template>
-    <div class="  flex  gap-10 ">
-        <section class="flex-1">
+    <div class="  flex flex-col md:flex-row gap-10 ">
+        <section class="flex-1 order-2 md:order-1">
             <div>
                 <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="email">
                     Prénom & Nom
@@ -96,7 +96,7 @@
                 </TextareaField>
             </div>
         </section>
-        <section class="flex-1 rounded-lg">
+        <section class="flex-1 rounded-lg order-1 md:order-2">
             <div class="bg-[#F6F6F6] rounded-lg p-4  flex flex-col justify-between">
                 <!-- En-tête avec titre et date -->
                 <div class="flex items-center justify-between mb-4 ml-5">

@@ -43,7 +43,7 @@
 
         </section>
 
-        <section class="text-sm flex items-center">
+        <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
             <p class="text-[#4F4F4F]">Tu n’as pas reçu ton SMS ?</p>
             <Button variant="link" class="text-black">Clique ici pour recevoir un nouveau récapitulatif.</Button>
         </section>

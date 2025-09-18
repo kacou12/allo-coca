@@ -176,13 +176,15 @@ const isEdit = computed(() => {
 const addToBasket = () => {
   // const idCartLine = route.query.id;
   // const type = route.query.type;
-  if (isEdit) {
+  if (isEdit.value) {
+
+    emit('cart:editCasier');
+    resetQuantities();
+  } else {
 
     emit('cart:addCasier');
     resetQuantities();
   }
-  emit('cart:editCasier');
-  resetQuantities();
 
 };
 </script>

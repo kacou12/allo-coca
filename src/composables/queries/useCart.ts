@@ -33,6 +33,15 @@ export const useCart = defineStore('cart', () => {
     }
   }
 
+  const updateCartLine = (product: CartLine) => {
+    const existingCartLine = cart.value.find(item => item.id === product.id)
+    if (existingCartLine) {
+      existingCartLine.quantity = product.quantity
+      existingCartLine.products = product.products
+    }
+    
+  }
+
 
   const removeCartLine = (product: CartLine) => {
     cart.value = cart.value.filter(item => item.id !== product.id) ;
@@ -59,6 +68,7 @@ export const useCart = defineStore('cart', () => {
     clearCart,
     cartQuantityLength,
     waterProductDefaultQuantity,
+    updateCartLine
     // setCartTabValue,
     // cartTabValue
   }

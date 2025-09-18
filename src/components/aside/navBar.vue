@@ -30,10 +30,13 @@
                     <RouterLink :to="{ name: AppRoute.HOME.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Accueil
                     </RouterLink>
-                    <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
+                    <RouterLink :to="{ name: AppRoute.LOGIN.name }"
+                        :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Connexion
+                    </RouterLink>
+                    <!-- <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
                         @click.prevent="scrollTo('services')">
                         Comment ca marche ?
-                    </a>
+                    </a> -->
                     <RouterLink :to="{ name: AppRoute.PRODUCTS.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
                     </RouterLink>
@@ -41,8 +44,8 @@
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Mes commandes
                     </RouterLink>
                     <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
-                        @click.prevent="scrollTo('services')">
-                        Contactez-nous
+                        @click.prevent="routeAndScrollTo('comment-ca-marche')">
+                        Comment ça marche
                     </a>
                 </section>
 
@@ -63,7 +66,7 @@
 <script setup lang="ts">
 import { useWindowSize, } from "@vueuse/core";
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useScroll } from '@vueuse/core'
 import { AppRoute } from "@/constants/app-route";
 import { useCart } from "@/composables/queries/useCart";
@@ -79,6 +82,8 @@ const handleScroll = () => {
     windowScrollY.value = window.scrollY;
 };
 const router = useRouter();
+
+const route = useRoute();
 
 const isScrolledOrHomePage = computed(() => (router.currentRoute.value.name == AppRoute.HOME_REDIRECT.name && windowScrollY.value > 0) || router.currentRoute.value.name != AppRoute.HOME_REDIRECT.name);
 
@@ -97,6 +102,15 @@ const scrollTo = (id: string) => {
         element.scrollIntoView({ behavior: 'smooth' });
     } else {
         console.error(`Element with id "${id}" not found.`);
+    }
+};
+
+const routeAndScrollTo = (id: string) => {
+    if (route.name !== AppRoute.HOME_REDIRECT.name) {
+        router.push({ name: AppRoute.HOME_REDIRECT.name, hash: `#${id}`, });
+
+    } else {
+        scrollTo(id);
     }
 };
 

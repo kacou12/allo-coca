@@ -92,7 +92,7 @@
   </section>
 
   <!-- Comment ça marche ? -->
-  <section class="space-y-10 my-28">
+  <section class="space-y-10 py-28" id="comment-ca-marche">
     <div class="space-y-3 text-center ">
 
       <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc ">Comment ça marche ?</h3>
