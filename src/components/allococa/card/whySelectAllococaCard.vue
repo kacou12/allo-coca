@@ -31,7 +31,7 @@ const props = defineProps({
 
 // Crée une URL dynamique pour l'image
 const iconUrl = computed(() => {
-    return new URL(props.icon, import.meta.url).href;
+    return new URL(`../../../assets/allococa/home/section-pourquoi-choisir-allococa/${props.icon}`, import.meta.url).href;
 });
 </script>
 

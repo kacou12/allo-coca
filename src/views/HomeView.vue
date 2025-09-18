@@ -40,24 +40,6 @@
     <section class="text-center space-y-8 my-20">
       <h3 class="text-clamp-lg font-bold font-tcc ">Vos type de commande</h3>
       <p>Trois façons simples de commander tes boissons préférées</p>
-
-      <!-- <article class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:mx-10">
-        <OrderTyperCard :card-data="{
-          description: 'Choisis directement un casier pré-rempli (24 bouteilles) : Coca-Cola, Fanta, Sprite… ',
-          image: '/src/assets/allococa/home/type-commande-section/complet-casier.jpg',
-          title: 'Boissons gazeuses',
-        }"></OrderTyperCard>
-        <OrderTyperCard :card-data="{
-          description: 'Compose ton casier bouteille par bouteille. Tu choisis ce que tu veux, comme tu veux.',
-          image: '/src/assets/allococa/home/type-commande-section/casier-a-ciomposer.png',
-          title: 'Boissons gazeuses'  ,
-        }"></OrderTyperCard>
-        <OrderTyperCard :card-data="{
-          description: 'Commandes en pack d’eaux (Céleste, Cristalline, Awa)',
-          image: '/src/assets/allococa/home/type-commande-section/pack-eau.png',
-          title: 'Boissons gazeuses',
-        }"></OrderTyperCard>
-      </article> -->
       <div class="xl:mx-10">
 
         <OrderTypeCarousel></OrderTypeCarousel>
@@ -102,19 +84,19 @@
 
     <article class="flex items-center  flex-wrap lg:flex-nowrap gap-3 justify-center mx-5 xl:mx-0">
       <HowItWorkCard :data="{
-        image: '/src/assets/allococa/home/comment-ca-marche/shopping-cart.png',
+        image: 'shopping-cart.png',
         title: '1. Choisis tes boissons',
         description: 'Choisis tes boissons en ligne ou par WhatsApp en quelques clics',
       }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
-        image: '/src/assets/allococa/home/comment-ca-marche/zap.png',
+        image: 'zap.png',
         title: '2. Je reçois sous 24h',
         description: 'Livraison gratuite à ton domicilepartout à Abidjan',
       }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
-        image: '/src/assets/allococa/home/comment-ca-marche/refresh.png',
+        image: 'refresh.png',
         title: '3. Je recharge mon casier',
         description: 'Garde ton casier et recommande facilement quand tu veuxs',
       }"></HowItWorkCard>
@@ -135,19 +117,17 @@
         <p class="text-white">Trois étapes simples pour recevoir tes boissons</p>
       </div>
       <div class="flex flex-col lg:grid grid-cols-1  lg:grid-cols-2 gap-3">
-        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/bus.png"
-          title="Livraison gratuite à Abidjan"
+        <WhySelectAllococaCard icon="bus.png" title="Livraison gratuite à Abidjan"
           description="Aucun frais de livraison, où que tu sois dans la capitale" />
 
-        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/shield.png"
-          title="Paiement simple et sécurisé" description="Mobile Money accepté, transactions 100% sécurisées" />
+        <WhySelectAllococaCard icon="shield.png" title="Paiement simple et sécurisé"
+          description="Mobile Money accepté, transactions 100% sécurisées" />
 
-        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/rotate.png"
-          title="Casiers consignés, rechargeables"
+        <WhySelectAllococaCard icon="rotate.png" title="Casiers consignés, rechargeables"
           description="Système écologique, tu paies la consigne une seule fois" />
 
-        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/message.png"
-          title="Assistance WhatsApp en 1 clic" description="Une question ? Notre équipe répond instantanément" />
+        <WhySelectAllococaCard icon="message.png" title="Assistance WhatsApp en 1 clic"
+          description="Une question ? Notre équipe répond instantanément" />
         <div class="col-span-2 rounded-xl py-[26px] bg-white text-center space-y-5">
           <div class=" text-center">
             <h4 class="text-clamp-sm  leading-[40px] font-bold font-tcc">Prêt à passer ta première commande ?
@@ -179,7 +159,7 @@
     </div>
 
 
-    <ReviewCarousel></ReviewCarousel>
+    <ReviewCaro usel></ReviewCaro>
 
 
   </section>

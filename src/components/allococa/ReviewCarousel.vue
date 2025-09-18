@@ -8,28 +8,22 @@
         }" class="z-10 w-full h-full relative " v-slot="{ canScrollNext, canScrollPrev, scrollNext, scrollPrev }">
             <CarouselContent>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                    <ReviewCard avatar="/src/assets/allococa/home/clients/avatar-1.png"
-                        customer-name="Fatou B., Yopougon" :rating="5"
+                    <ReviewCard avatar="avatar-1.png" customer-name="Fatou B., Yopougon" :rating="5"
                         review-text="J'ai reçu mon casier en moins de 2h !Très pratique pour mes soirées entre amis.">
                     </ReviewCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                    <ReviewCard avatar="/src/assets/allococa/home/clients/avatar-2.png"
-                        customer-name="Kouassi M., Cocody" :rating="5"
+                    <ReviewCard avatar="avatar-2.png" customer-name="Kouassi M., Cocody" :rating="5"
                         review-text="C'est trop cool de pouvoir mélanger Coca, Fanta et Sprite dans le même casier !">
                     </ReviewCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                    <ReviewCard avatar="/src/assets/allococa/home/clients/avatar-3.png" customer-name="Aya K., Marcory"
-                        :rating="5"
+                    <ReviewCard avatar="avatar-3.png" customer-name="Aya K., Marcory" :rating="5"
                         review-text="Service client au top sur WhatsApp. Ils ont remplacé une bouteille abîmée le jour même !">
                     </ReviewCard>
                 </CarouselItem>
 
-
             </CarouselContent>
-
-
 
 
         </Carousel>

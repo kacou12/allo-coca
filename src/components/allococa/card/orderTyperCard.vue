@@ -33,7 +33,8 @@ const props = defineProps<{
     cardData: CardData;
 }>();
 
-const imageUrl = computed(() => new URL(props.cardData.image, import.meta.url).href);
+const imageUrl = computed(() => new URL(`../../../assets/allococa/home/type-commande-section/${props.cardData.image}`, import.meta.url).href);
+// const imageUrl = computed(() => new URL(props.cardData.image, import.meta.url).href);
 
 
 </script>

@@ -25,7 +25,7 @@ const { data } = defineProps({
 });
 
 const iconUrl = computed(() => {
-    return new URL(data.image, import.meta.url).href;
+    return new URL(`../../../assets/allococa/home/comment-ca-marche/${data.image}`, import.meta.url).href;
 });
 </script>
 

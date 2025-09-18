@@ -39,7 +39,7 @@ const props = defineProps({
 
 const avatarUrl = computed(() => {
     //   return new URL(`../assets/allococa/home/clients/${props.avatar}`, import.meta.url).href;
-    return new URL(props.avatar, import.meta.url).href;
+    return new URL(`../../../assets/allococa/home/clients/${props.avatar}`, import.meta.url).href;
 });
 </script>
 

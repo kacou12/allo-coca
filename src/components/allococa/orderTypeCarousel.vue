@@ -10,21 +10,21 @@
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
                         description: 'Choisis directement un casier pré-rempli (24 bouteilles) : Coca-Cola, Fanta, Sprite… ',
-                        image: '/src/assets/allococa/home/type-commande-section/complet-casier.jpg',
+                        image: 'complet-casier.jpg',
                         title: 'Boissons gazeuses',
                     }"></OrderTyperCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
                         description: 'Compose ton casier bouteille par bouteille. Tu choisis ce que tu veux, comme tu veux.',
-                        image: '/src/assets/allococa/home/type-commande-section/casier-a-ciomposer.png',
+                        image: 'casier-a-ciomposer.png',
                         title: 'Boissons gazeuses',
                     }"></OrderTyperCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
                         description: 'Commandes en pack d’eaux (Céleste, Cristalline, Awa)',
-                        image: '/src/assets/allococa/home/type-commande-section/pack-eau.png',
+                        image: 'pack-eau.png',
                         title: 'Boissons gazeuses',
                     }"></OrderTyperCard>
                 </CarouselItem>
