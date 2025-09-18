@@ -17,13 +17,14 @@
             </label>
             <PasswordField v-model="password" placeholder="Mot de passe" name="password" />
         </div>
-        <!-- <div class="mb-6 mt-1 flex items-center">
-            <input type="checkbox" id="rememberMe" v-model="rememberMe"
-                class="mr-2 rounded text-primary-40 focus:ring-primary-40" />
-            <label for="rememberMe" class="text-[#1A1A1A] text-sm">
-                Se souvenir pendant 30 jours
-            </label>
-        </div> -->
+
+        <!-- Acceptation des CGU -->
+        <div class="mb-4 flex items-start">
+            <span class="text-neutral-40 text-xs block mt-1">
+                En continuant, vous acceptez les conditions générales d'utilisation et les politique de confidentialités
+            </span>
+        </div>
+
         <CustomButton :is-loading="loading"
             class=" font-worksans rounded-3xl text-white font-normal   text-[15px] py-[22px] px-4  w-full  hover:bg-primary-40 focus:outline-none focus:ring focus:ring-primary-60">
             Se connecter

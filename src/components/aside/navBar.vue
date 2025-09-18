@@ -30,34 +30,50 @@
                     <RouterLink :to="{ name: AppRoute.HOME.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Accueil
                     </RouterLink>
-                    <RouterLink :to="{ name: AppRoute.LOGIN.name }"
+
+                    <!-- <RouterLink :to="{ name: AppRoute.LOGIN.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Connexion
-                    </RouterLink>
-                    <!-- <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
-                        @click.prevent="scrollTo('services')">
-                        Comment ca marche ?
-                    </a> -->
+                    </RouterLink> -->
+
                     <RouterLink :to="{ name: AppRoute.PRODUCTS.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
                     </RouterLink>
+
                     <RouterLink :to="{ name: AppRoute.ORDERS.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Mes commandes
                     </RouterLink>
+
                     <a :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" href="#"
                         @click.prevent="routeAndScrollTo('comment-ca-marche')">
                         Comment ça marche
                     </a>
                 </section>
 
-                <div class="hidden lg:block">
+                <div class="hidden lg:flex items-center gap-5">
 
                     <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+                    <section :class="[isScrolledOrHomePage ? 'bg-primary-50' : 'bg-transparent']"
+                        class="rounded-full border-[1px] p-[4px] cursor-pointer"
+                        @click="router.push({ name: AppRoute.LOGIN.name })">
+
+                        <User2Icon :class="[isScrolledOrHomePage ? 'text-white' : 'text-white']" :stroke-width="1"
+                            :size="28"></User2Icon>
+                    </section>
                 </div>
             </header>
 
             <div class="block lg:hidden">
 
                 <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+
+                <!-- :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" -->
+                <section :class="[isScrolledOrHomePage ? 'bg-primary-50' : 'bg-transparent']"
+                    class="rounded-full border-[1px] p-[4px] cursor-pointer"
+                    @click="router.push({ name: AppRoute.LOGIN.name })">
+
+                    <User2Icon :class="[isScrolledOrHomePage ? 'text-white' : 'text-white']" :stroke-width="1"
+                        :size="28"></User2Icon>
+                </section>
             </div>
         </section>
     </div>
@@ -68,6 +84,8 @@ import { useWindowSize, } from "@vueuse/core";
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useScroll } from '@vueuse/core'
+import { UserCircle2, User2Icon } from 'lucide-vue-next';
+
 import { AppRoute } from "@/constants/app-route";
 import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
