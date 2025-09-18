@@ -12,7 +12,7 @@
 
     <section class="h-full flex flex-col ">
 
-      <div class="grid grid-cols-1 sm:grid-cols-2  gap-6 mb-8 flex-1 overflow-y-scroll">
+      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2  gap-6 mb-8 flex-1 overflow-y-scroll">
         <ProductFullLockerCard :casier-products-data="casierProducts" :key="product.id" v-for="product in products"
           :product="product" @full-increment="updateProductQuantity" />
       </div>

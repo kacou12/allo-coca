@@ -1,8 +1,8 @@
 <template>
     <div class="flex items-center grow py-4">
 
-        <section class="flex-1 flex justify-center items-center ">
-            <div class="relative ">
+        <section class=" flex-1 flex justify-center items-center ">
+            <div class="relative hidden lg:block">
                 <!-- <div class="absolute top-[32px] left-[25px]   grid grid-cols-6 gap-2"> -->
                 <div class="absolute top-[7%] left-[6%] lg:left-[4.7%]   grid grid-cols-6 gap-2">
                     <!-- capsule -->
@@ -14,9 +14,17 @@
                 </div>
                 <img src="@/assets/allococa/locker.png" alt="">
             </div>
+
+            <!-- configuration du casier -->
+            <article class="block lg:hidden w-full">
+                <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
+                    @cart:add-casier="addCasierToCart" @set:full-quantity="setFullQuantity"
+                    @update:casier-quantity="updateCasierQuantity">
+                </productConfiguratorFullLocker>
+            </article>
             <!-- 83 -->
         </section>
-        <section class="w-[452px] h-[calc(100vh-240px)] relative">
+        <section class="hidden lg:block w-[452px] h-[calc(100vh-240px)] relative">
             <!-- configuration du casier -->
             <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
                 <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
