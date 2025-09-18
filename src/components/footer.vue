@@ -2,7 +2,7 @@
     <div class="bg-black py-[50px]">
         <div class="maxContain3xl  ">
 
-            <article class=" flex justify-between items-start mb-16 ">
+            <article class=" flex flex-col lg:flex-row lg:justify-between lg:   items-start mb-16 ">
                 <section class=" space-y-8">
                     <RouterLink to="/">
                         <img src="/src/assets/allococa/logo-allo-coca.png" alt="Logo" />
@@ -54,7 +54,7 @@
                         </svg>
                     </div>
                 </section>
-                <section class="flex items-center gap-14 ">
+                <section class="flex flex-col sm:flex-row sm:items-center gap-14 mt-10 lg:mt-0">
                     <div class="space-y-2 ">
                         <p class="text-[14px] font-opensans text-white text-opacity-60">Liens rapides</p>
                         <article class="space-y-2 text-white">
@@ -74,7 +74,8 @@
                 </section>
 
             </article>
-            <article class="pt-8 mt-8 border-t-[1px] border-t-white/10 flex items-center justify-between text-white">
+            <article
+                class="pt-8 mt-8 space-y-3  border-t-[1px] border-t-white/10 flex flex-col sm:flex-row items-center justify-between text-white">
                 <p>&copy; 2025 AlloCoca.ci - Tous droits réservés</p>
                 <p>Website BY THEDESIGNHERO</p>
             </article>

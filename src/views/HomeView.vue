@@ -65,7 +65,7 @@
 
 
     </section>
-  </main>cl
+  </main>
 
   <!-- Pas besoin de créer un compte ! -->
   <section class="bg-black">
@@ -100,12 +100,24 @@
       <p class="text-black">Trois étapes simples pour recevoir tes boissons</p>
     </div>
 
-    <article class="flex items-center flex-wrap lg:flex-nowrap gap-3 justify-center mx-5 xl:mx-0">
-      <HowItWorkCard></HowItWorkCard>
+    <article class="flex items-center  flex-wrap lg:flex-nowrap gap-3 justify-center mx-5 xl:mx-0">
+      <HowItWorkCard :data="{
+        image: '/src/assets/allococa/home/comment-ca-marche/shopping-cart.png',
+        title: '1. Choisis tes boissons',
+        description: 'Choisis tes boissons en ligne ou par WhatsApp en quelques clics',
+      }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
-      <HowItWorkCard></HowItWorkCard>
+      <HowItWorkCard :data="{
+        image: '/src/assets/allococa/home/comment-ca-marche/zap.png',
+        title: '2. Je reçois sous 24h',
+        description: 'Livraison gratuite à ton domicilepartout à Abidjan',
+      }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
-      <HowItWorkCard></HowItWorkCard>
+      <HowItWorkCard :data="{
+        image: '/src/assets/allococa/home/comment-ca-marche/refresh.png',
+        title: '3. Je recharge mon casier',
+        description: 'Garde ton casier et recommande facilement quand tu veuxs',
+      }"></HowItWorkCard>
 
     </article>
 
@@ -113,20 +125,29 @@
 
   <!-- Pourquoi choisir AlloCoca ? -->
   <section class="bg-black relative py-28 overflow-hidden">
-    <div class="absolute right-0 bottom-[20%]">
+    <div class="z-0 absolute right-0 bottom-[20%] hidden xl:block">
       <img src="/src/assets/allococa/home/section-pourquoi-choisir-allococa/sun-red.png" alt=""></img>
     </div>
-    <article class="maxContain3xl  xl:max-w-[850px] space-y-14">
+    <article class="z-50 maxContain3xl  xl:max-w-[850px] space-y-14">
       <div class="text-center space-y-3 ">
 
         <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc text-white ">Pourquoi choisir AlloCoca ?</h3>
         <p class="text-white">Trois étapes simples pour recevoir tes boissons</p>
       </div>
-      <div class="grid grid-cols-1  lg:grid-cols-2 gap-3">
-        <WhySelectAllococaCard></WhySelectAllococaCard>
-        <WhySelectAllococaCard></WhySelectAllococaCard>
-        <WhySelectAllococaCard></WhySelectAllococaCard>
-        <WhySelectAllococaCard></WhySelectAllococaCard>
+      <div class="flex flex-col lg:grid grid-cols-1  lg:grid-cols-2 gap-3">
+        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/bus.png"
+          title="Livraison gratuite à Abidjan"
+          description="Aucun frais de livraison, où que tu sois dans la capitale" />
+
+        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/shield.png"
+          title="Paiement simple et sécurisé" description="Mobile Money accepté, transactions 100% sécurisées" />
+
+        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/rotate.png"
+          title="Casiers consignés, rechargeables"
+          description="Système écologique, tu paies la consigne une seule fois" />
+
+        <WhySelectAllococaCard icon="/src/assets/allococa/home/section-pourquoi-choisir-allococa/message.png"
+          title="Assistance WhatsApp en 1 clic" description="Une question ? Notre équipe répond instantanément" />
         <div class="col-span-2 rounded-xl py-[26px] bg-white text-center space-y-5">
           <div class=" text-center">
             <h4 class="text-clamp-sm  leading-[40px] font-bold font-tcc">Prêt à passer ta première commande ?
@@ -134,7 +155,7 @@
             <p>Rejoins des milliers de clients satisfaits à Abidjan</p>
 
           </div>
-          <div class="flex justify-center items-center gap-4 ">
+          <div class="flex md:justify-center md:items-center flex-col md:flex-row gap-4 ">
             <div>
               <CommonButton type="default" title="Commander maintenant"></CommonButton>
             </div>
@@ -145,23 +166,21 @@
         </div>
       </div>
     </article>
+
   </section>
 
   <!-- Ce qu'en disent nos clients -->
   <section class="maxContain3xl space-y-10 my-28">
-    <div class="flex items-center justify-between  my-16">
+    <div class="flex flex-col sm:flex-row items-center justify-between  my-16">
       <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc ">Ce qu'en disent nos clients</h3>
       <div>
         <CommonButton type="default" title="Je passe ma commande"></CommonButton>
       </div>
     </div>
 
-    <div class="flex items-center justify-between gap-5">
-      <ReviewCard></ReviewCard>
-      <ReviewCard></ReviewCard>
-      <ReviewCard></ReviewCard>
 
-    </div>
+    <ReviewCarousel></ReviewCarousel>
+
 
   </section>
 
@@ -179,6 +198,7 @@ import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaC
 import HomeCarousel from '@/components/allococa/homeCarousel.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
 import OrderTypeCarousel from '@/components/allococa/orderTypeCarousel.vue';
+import ReviewCarousel from '@/components/allococa/ReviewCarousel.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
 import NavBar from '@/components/aside/navBar.vue';
 import CommonButton from '@/components/buttons/commonButton.vue';
