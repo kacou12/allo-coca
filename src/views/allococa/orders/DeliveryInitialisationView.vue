@@ -1,5 +1,5 @@
 <template>
-    <div class="py-10 space-y-10 pt-[110px]   max-w-[848px] mx-auto ">
+    <div class="py-10 space-y-10 pt-[110px]   max-w-[848px] mx-auto px-5">
 
         <h3 class="text-clamp-md font-bold font-tcc mt-10">Mes informations de livraison</h3>
 

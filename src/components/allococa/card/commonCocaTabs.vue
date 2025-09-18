@@ -53,7 +53,7 @@ const props = defineProps<{
 const onchanged = (value: string) => {
     if (value != tabValue.value) {
         router.replace({
-            name: AppRoute.PRODUCTS.name,
+
             query: {
 
             }

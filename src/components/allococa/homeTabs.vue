@@ -1,24 +1,29 @@
 <template>
     <CommonCocaTabs v-model="cartTabValue" :tabs="[
-        { value: 'water', label: 'Boissons gazeuse' },
-        { value: 'juice', label: 'Eaux minérales' },
+        { value: 'juice', label: 'Boissons gazeuse' },
+        { value: 'water', label: 'Eaux minérales' },
     ]">
-        <template #water>
-            <div class="grid grid-cols-4 gap-4">
-                <BeverageCard></BeverageCard>
-                <BeverageCard></BeverageCard>
-                <BeverageCard></BeverageCard>
-                <BeverageCard></BeverageCard>
-            </div>
-        </template>
         <template #juice>
-            <div class="grid grid-cols-4 gap-4">
+            <!-- <div class="grid grid-cols-4 gap-4">
                 <WaterCard></WaterCard>
                 <WaterCard></WaterCard>
                 <WaterCard></WaterCard>
                 <WaterCard></WaterCard>
-            </div>
+            </div> -->
+            <BeverageCarousel class=""></BeverageCarousel>
         </template>
+        <template #water>
+            <!-- <div class="lg:grid grid-cols-4 gap-4 hidden">
+                <BeverageCard></BeverageCard>
+                <BeverageCard></BeverageCard>
+                <BeverageCard></BeverageCard>
+                <BeverageCard></BeverageCard>
+            </div> -->
+
+            <WaterCardCarousel class=""></WaterCardCarousel>
+
+        </template>
+
 
     </commonCocaTabs>
 </template>
@@ -27,6 +32,8 @@ import { ref } from 'vue';
 import BeverageCard from './card/beverageCard.vue';
 import CommonCocaTabs from './card/commonCocaTabs.vue';
 import WaterCard from './card/waterCard.vue';
+import BeverageCarousel from './beverageCarousel.vue';
+import WaterCardCarousel from './waterCardCarousel.vue';
 
 const cartTabValue = ref<"juice" | "water">("juice")
 

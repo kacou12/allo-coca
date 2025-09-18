@@ -4,6 +4,18 @@ import { requiresAuth } from "./guards";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_API_URL),
+   scrollBehavior(to, from, savedPosition) {
+     if (to.hash) {
+      return {
+        el: to.hash, // Scroll to the element with the ID specified in the hash
+        behavior: 'smooth', // Optional: for smooth scrolling
+      };
+    } else if (savedPosition) {
+      return savedPosition; // Restore scroll position on back/forward navigation
+    } else {
+      return { top: 0 }; // Default: scroll to the top of the page
+    }
+  },
   routes: [
     {
       path: AppRoute.LOGIN.path,

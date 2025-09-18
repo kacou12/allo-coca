@@ -1,8 +1,8 @@
 <template>
     <div class="flex items-center grow py-4">
 
-        <section class="flex-1 flex justify-center items-center ">
-            <div class="relative ">
+        <section class=" flex-1 flex justify-center items-center ">
+            <div class="relative hidden lg:block">
                 <!-- <div class="absolute top-[32px] left-[25px]   grid grid-cols-6 gap-2"> -->
                 <div class="absolute top-[7%] left-[6%] lg:left-[4.7%]   grid grid-cols-6 gap-2">
                     <!-- capsule -->
@@ -14,14 +14,22 @@
                 </div>
                 <img src="@/assets/allococa/locker.png" alt="">
             </div>
+
+            <!-- configuration du casier -->
+            <article class="block lg:hidden w-full">
+                <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
+                    @cart:edit-casier="editCasier" @cart:add-casier="addCasierToCart"
+                    @set:full-quantity="setFullQuantity" @update:casier-quantity="updateCasierQuantity">
+                </productConfiguratorFullLocker>
+            </article>
             <!-- 83 -->
         </section>
-        <section class="w-[452px] h-[calc(100vh-240px)] relative">
+        <section class="hidden lg:block w-[452px] h-[calc(100vh-240px)] relative">
             <!-- configuration du casier -->
             <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
                 <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
-                    @cart:add-casier="addCasierToCart" @set:full-quantity="setFullQuantity"
-                    @update:casier-quantity="updateCasierQuantity">
+                    @cart:edit-casier="editCasier" @cart:add-casier="addCasierToCart"
+                    @set:full-quantity="setFullQuantity" @update:casier-quantity="updateCasierQuantity">
                 </productConfiguratorFullLocker>
             </article>
         </section>
@@ -37,15 +45,17 @@ import ProductConfiguratorFullLocker from './productConfiguratorFullLocker.vue';
 import { useCart } from '@/composables/queries/useCart';
 
 import { useToast } from 'vue-toastification';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
 
 const route = useRoute();
 
+const router = useRouter();
+
 const toast = useToast();
 
-const { addCartLine, clearCart, removeCartLine } = useCart();
+const { addCartLine, clearCart, removeCartLine, updateCartLine } = useCart();
 const { cart } = storeToRefs(useCart());
 const casierProducts = ref<CasierProduct>({
     quantity: 1,
@@ -108,6 +118,41 @@ const addCasierToCart = () => {
     };
 
     toast.success("Le casier a bien été ajouté au panier", { timeout: 3000 });
+    // 
+}
+
+const editCasier = () => {
+    const idCartLine = route.query.id;
+    const type = route.query.type;
+    if (!idCartLine || !type || type !== "full-locker") {
+        toast.error("Quelque chose s'est mal passe");
+
+        return;
+    }
+    // const existingCartLine = cart.value.find(item => item.id === idCartLine);
+
+
+    const cartLine: CartLine = {
+        id: idCartLine as string,
+        type: "full-locker",
+        products: casierProducts.value.products,
+        quantity: casierProducts.value.quantity,
+    }
+
+    updateCartLine(cartLine);
+
+    casierProducts.value = {
+        quantity: 1,
+        products: []
+    };
+    router.replace({
+
+        query: {
+
+        }
+    })
+
+    toast.success("Le casier a bien été modifié", { timeout: 3000 });
     // 
 }
 

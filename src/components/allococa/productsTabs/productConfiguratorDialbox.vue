@@ -12,7 +12,7 @@
 
     <section class="h-full flex flex-col ">
 
-      <div class="grid grid-cols-1 sm:grid-cols-2  gap-6 mb-8 flex-1 overflow-y-scroll">
+      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2  gap-6 mb-8 flex-1 overflow-y-scroll">
         <ProductLockerCard :casier-products-data="casierProducts" :key="product.id" v-for="product in products"
           :product="product" @update:quantity="updateProductQuantity" />
       </div>
@@ -195,13 +195,15 @@ const resetQuantities = () => {
 const addToBasket = () => {
   // const idCartLine = route.query.id;
   // const type = route.query.type;
-  if (isEdit) {
+  if (isEdit.value) {
 
+    emit('cart:editCasier');
+    resetQuantities();
+
+  } else {
     emit('cart:addCasier');
     resetQuantities();
   }
-  emit('cart:editCasier');
-  resetQuantities();
 
 };
 </script>

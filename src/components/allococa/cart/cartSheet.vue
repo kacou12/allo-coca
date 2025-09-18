@@ -3,7 +3,7 @@
         <SheetTrigger as-child>
 
             <section :class="[isScrolled ? 'bg-primary-50 border-primary-50' : 'border-white']"
-                class="relative rounded-full border-[1px] p-2 border-white flex items-center justify-center cursor-pointer">
+                class="relative rounded-full border-[1px] p-2 border-white flex items-center justify-center cursor-pointer w-fit ">
 
                 <article class="">
 

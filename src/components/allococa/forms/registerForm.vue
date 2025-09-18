@@ -47,6 +47,8 @@
             class="font-worksans rounded-3xl text-white font-normal text-[15px] py-[22px] px-4 w-full hover:bg-primary-40 focus:outline-none focus:ring focus:ring-primary-60">
             Rejoindre la famille
         </CustomButton>
+
+
     </form>
 </template>
 
