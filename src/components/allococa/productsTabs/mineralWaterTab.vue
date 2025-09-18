@@ -16,7 +16,7 @@ const products = ref([
         "description": "Pack de 6",
         "price": 1800,
         "quantity": 6, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/celeste.png",
+        "image": "celeste.png",
         "variant": "1.5L",
         "isNew": true, // Ajout de la propriété "Nouveauté"
     },
@@ -26,7 +26,7 @@ const products = ref([
         "description": "Pack de 9",
         "price": 2475,
         "quantity": 9, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/celeste.png",
+        "image": "celeste.png",
         "variant": "1.5L",
     },
     {
@@ -35,7 +35,7 @@ const products = ref([
         "description": "Pack de 12",
         "price": 2100,
         "quantity": 12, // Correct
-        "image": "src/assets/allococa/products/water/celeste-pack-12-1l.png",
+        "image": "celeste-pack-12-1l.png",
         "variant": "1L",
     },
     {
@@ -44,7 +44,7 @@ const products = ref([
         "description": "Pack de 9",
         "price": 990,
         "quantity": 9, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/celeste-naturel-pack-9-05l.png",
+        "image": "celeste-naturel-pack-9-05l.png",
         "variant": "0.5L",
     },
     {
@@ -53,7 +53,7 @@ const products = ref([
         "description": "Pack de 15",
         "price": 1350,
         "quantity": 15, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/celeste-naturel-pack-15-033l.png",
+        "image": "celeste-naturel-pack-15-033l.png",
         "variant": "0.33L",
     },
     {
@@ -62,7 +62,7 @@ const products = ref([
         "description": "Bonbonne",
         "price": 2100,
         "quantity": 1, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/celeste-pack-bonbonne-17l.png",
+        "image": "celeste-pack-bonbonne-17l.png",
         "variant": "17L",
         "isNew": true, // Ajout de la propriété "Nouveauté"
     },
@@ -72,7 +72,7 @@ const products = ref([
         "description": "Pack de 6",
         "price": 1500,
         "quantity": 6, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/cristaline-pack-6-15l.png",
+        "image": "cristaline-pack-6-15l.png",
         "variant": "1.5L",
     },
     {
@@ -81,7 +81,7 @@ const products = ref([
         "description": "Pack de 12",
         "price": 1080,
         "quantity": 12, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/cristaline-pack-12-05l.png",
+        "image": "cristaline-pack-12-05l.png",
         "variant": "0.5L",
     },
     {
@@ -90,7 +90,7 @@ const products = ref([
         "description": "Pack de 16",
         "price": 1200,
         "quantity": 16, // Correct
-        "image": "src/assets/allococa/products/water/cristaline-pack-16-033l.png",
+        "image": "cristaline-pack-16-033l.png",
         "variant": "0.33L",
     },
     {
@@ -99,7 +99,7 @@ const products = ref([
         "description": "Pack de 6",
         "price": 1800,
         "quantity": 6, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/awa-pack-6-15l.png",
+        "image": "awa-pack-6-15l.png",
         "variant": "1.5L",
     },
     {
@@ -108,7 +108,7 @@ const products = ref([
         "description": "Pack de 9",
         "price": 900,
         "quantity": 9, // Corrigé pour correspondre à l'image
-        "image": "src/assets/allococa/products/water/awa-pack-9-05l.png",
+        "image": "awa-pack-9-05l.png",
         "variant": "0.5L",
     }
 ]);

@@ -30,7 +30,7 @@
 
         <!-- Image du produit -->
         <div class="max-w-[186px]  ml-5">
-            <img :src="product.image" :alt="`Image de ${product.name}`" class="" />
+            <img :src="imageUrl" :alt="`Image de ${product.name}`" class="" />
         </div>
 
         <!-- Informations prix et variante -->
@@ -68,6 +68,8 @@ const { product, casierProductsData } = defineProps({
         required: true
     }
 });
+
+const imageUrl = computed(() => new URL(`../../../assets/allococa/products/${product.image}`, import.meta.url).href);
 
 const isDisabled = computed(() => casierProductsData.products.length === 24 && casierProductsData.products.length > 0 && casierProductsData.products[0].id == product.id);
 

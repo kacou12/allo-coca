@@ -114,12 +114,12 @@ const emit = defineEmits<{
 }>();
 const INITIAL_PRODUCTS_DATA =
   [
-    { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/coca.png', variant: '30cl' },
-    { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-    { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/fanta.png', variant: '30cl' },
-    { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-    { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-    { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
+    { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'coca.png', variant: '30cl' },
+    { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+    { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'fanta.png', variant: '30cl' },
+    { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+    { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+    { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
   ]
   ;
 

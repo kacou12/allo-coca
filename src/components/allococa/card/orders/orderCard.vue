@@ -39,13 +39,13 @@
         </div>
 
         <!-- Boutons d'action -->
-        <div class="flex space-x-3">
+        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
             <button @click="$emit('reorder')"
-                class="flex-1 bg-primary-50 hover:bg-primary-40 rounded-3xl text-white px-4 py-2  text-sm font-medium transition-colors">
+                class="sm:flex-1 bg-primary-50 hover:bg-primary-40 rounded-3xl text-white px-4 py-2  text-sm font-medium transition-colors">
                 Recommander
             </button>
             <button @click="$emit('modify')"
-                class="flex-1 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2  rounded-3xl text-sm font-medium border  transition-colors border-black">
+                class="sm:flex-1 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2  rounded-3xl text-sm font-medium border  transition-colors border-black">
                 Modifier
             </button>
         </div>

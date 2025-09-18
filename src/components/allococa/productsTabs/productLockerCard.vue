@@ -31,7 +31,7 @@
 
         <!-- Image du produit -->
         <div class="max-w-[186px]  ml-5">
-            <img :src="product.image" :alt="`Image de ${product.name}`" class="" />
+            <img :src="imageUrl" :alt="`Image de ${product.name}`" class="" />
         </div>
 
         <!-- Informations prix et variante -->
@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
 import { Minus, Plus } from 'lucide-vue-next';
-import { ref, type PropType } from 'vue';
+import { computed, ref, type PropType } from 'vue';
 
 // Définition des props
 // interface Props {
@@ -67,6 +67,9 @@ const { product, casierProductsData } = defineProps({
         required: true
     }
 });
+
+const imageUrl = computed(() => new URL(`../../../assets/allococa/products/${product.image}`, import.meta.url).href);
+
 
 // Déclaration de l'émetteur
 const emit = defineEmits<{

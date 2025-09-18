@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
         <section class="h-[268px]  flex items-center justify-center">
-            <img class="w-[69px] h-[220px]" :src="product.image" alt=""></img>
+            <img class="w-[69px] h-[220px]" :src="imageUrl" alt=""></img>
         </section>
         <section class="space-y-1">
             <p class="text-[10px]  text-[#888888]">Pack de {{ product.quantity }}</p>
@@ -47,7 +47,10 @@ import { useCart } from '@/composables/queries/useCart';
 import type { Product } from '@/services/locker-products/locker-products-type';
 import { formatPrice } from '@/shared/shared';
 import { ArrowRight, Minus, Plus, ShoppingBasket } from 'lucide-vue-next';
-import { ref, type PropType } from 'vue';
+import { computed, ref, type PropType } from 'vue';
+
+const imageUrl = computed(() => new URL(`../../../assets/allococa/products/water/${product.image}`, import.meta.url).href);
+
 
 const { cart, waterProductDefaultQuantity, addCartLine, removeCartLine, clearCart } = useCart()
 

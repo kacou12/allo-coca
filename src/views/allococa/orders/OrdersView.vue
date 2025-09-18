@@ -1,11 +1,11 @@
 <template>
     <div class="py-10 spac-y-5 pt-[110px]   maxContain3xl ">
-        <section class="flex items-center justify-between">
+        <section class="flex flex-col space-y-5 lg:space-y-0 lg:flex-row items-center justify-between ">
 
             <h3 class="text-clamp-md font-bold font-tcc">Mes commandes</h3>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-col lg:flex-row items-center gap-3  ">
 
-                <div class="min-w-[320px]">
+                <div class="sm:min-w-[320px] w-full">
 
                     <SearchBar placeholder="Rechercher une commande"></SearchBar>
                 </div>
