@@ -9,7 +9,7 @@
             <CarouselContent>
                 <CarouselItem class="p-0">
                     <section
-                        class="h-screen relative  bg-[url(/src/assets/allococa/banner/banner-1.jpg)] bg-cover bg-center bg-no-repeat bg-orange-600">
+                        class="h-screen relative  bg-[url(/src/assets/allococa/banner/banner-1.jpg)] bg-cover bg-center bg-no-repeat bg-primary-50">
                         <article class="absolute right-0 left-0 bottom-0   w-full h-1/2 ">
                             <div class="w-full h-full relative  maxContain3xl ">
                                 <div class=" xl:w-[50%] 2xl:w-[40%] absolute bottom-[60px] ml-5 xl:ml-0  space-y-8">
