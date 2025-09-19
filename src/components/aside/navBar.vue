@@ -62,7 +62,7 @@
                 </div>
             </header>
 
-            <div class="block lg:hidden">
+            <div class="flex items-center gap-2 lg:hidden">
 
                 <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
 
