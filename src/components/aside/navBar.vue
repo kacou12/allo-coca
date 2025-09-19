@@ -6,9 +6,9 @@
                 <DrawerSheet class=""></DrawerSheet>
                 <section class="">
                     <RouterLink to="/">
-                        <img v-if="!isScrolledOrHomePage" class="text-primary-50 w-20 "
+                        <img v-if="!isScrolledOrHomePage" class="text-primary-50 min-w-10 w-20 "
                             src="@/assets/allococa/logo-allo-coca.svg" alt="Logo" />
-                        <img v-else class="text-primary-50 w-20" src="@/assets/allococa/logo-allo-coca-red.png"
+                        <img v-else class="text-primary-50 min-w-10 " src="@/assets/allococa/logo-allo-coca-red.png"
                             alt="Logo" />
                     </RouterLink>
                 </section>

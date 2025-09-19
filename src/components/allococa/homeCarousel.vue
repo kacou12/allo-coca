@@ -13,7 +13,10 @@
                         <article class="absolute right-0 left-0 bottom-0   w-full h-1/2 ">
                             <div class="w-full h-full relative  maxContain3xl ">
                                 <div class=" xl:w-[50%] 2xl:w-[40%] absolute bottom-[60px] ml-5 xl:ml-0  space-y-8">
-                                    <h1 class="text-clamp-h1-lg font-bold font-tcc text-white leading-[70px]">Ton casier
+                                    <h1
+                                        class="text-clamp-h1-lg font-bold font-tcc text-white leading-[50px] md:leading-[70px]">
+                                        Ton
+                                        casier
                                         <br></br> Coca livré chez
                                         toi,
                                         sans bouger.
@@ -35,7 +38,9 @@
                         <article class="absolute right-0 left-0 bottom-0   w-full h-1/2 ">
                             <div class="w-full h-full relative  maxContain3xl">
                                 <div class=" xl:w-[50%] 2xl:w-[40%] absolute bottom-[60px] ml-5 xl:ml-0 space-y-8">
-                                    <h1 class="text-clamp-h1-lg font-bold font-tcc text-white leading-[70px]">Ton pack
+                                    <h1
+                                        class="text-clamp-h1-lg font-bold font-tcc text-white leading-[50px] md:leading-[70px]">
+                                        Ton pack
                                         d’eau<br></br>livré chez toi,sans bouger.
                                     </h1>
                                     <CustomButton type="default" class="text-white hover:bg-primary-50 ">
