@@ -1,7 +1,7 @@
 <template>
     <div class="rounded-xl overflow-hidden bg-red-600 shadow-lg">
         <section class="h-[300px]">
-            <img class="w-full h-full object-cover" :src="imageUrl" />
+            <img class="w-full h-full object-cover" alt="" :src="imageUrl" />
         </section>
 
         <article class="p-4 bg-red-600 text-white text-start ">
@@ -11,7 +11,8 @@
                 <p class="text-sm mb-4 line-clamp-2">{{ cardData.description }}</p>
             </div>
 
-            <TextLinkWithArrow color="text-white" text="Voir les casiers"></TextLinkWithArrow>
+            <TextLinkWithArrow @click="$router.push({ name: AppRoute.PRODUCTS.name })" color="text-white"
+                text="Voir les casiers"></TextLinkWithArrow>
         </article>
     </div>
 </template>
@@ -19,6 +20,7 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue';
 import TextLinkWithArrow from '../textLinkWithArrow.vue';
+import { AppRoute } from '@/constants/app-route';
 
 
 export interface CardData {

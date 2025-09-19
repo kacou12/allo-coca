@@ -61,8 +61,10 @@
             plus tard.</p>
         </article>
         <article class="space-y-8">
-          <TextLinkWithArrow color="text-white" text="Commence sans Compte"></TextLinkWithArrow>
-          <TextLinkWithArrow color="text-white" text="Retrouvez une commande"></TextLinkWithArrow>
+          <TextLinkWithArrow @click="$router.push({ name: AppRoute.PRODUCTS.name })" color="text-white"
+            text="Commence sans Compte"></TextLinkWithArrow>
+          <TextLinkWithArrow @click="$router.push({ name: AppRoute.ORDERS.name })" color="text-white"
+            text="Retrouvez une commande"></TextLinkWithArrow>
         </article>
       </div>
 
@@ -137,7 +139,8 @@
           </div>
           <div class="flex md:justify-center md:items-center flex-col md:flex-row gap-4 ">
             <div>
-              <CommonButton type="default" title="Commander maintenant"></CommonButton>
+              <CommonButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
+                title="Commander maintenant"></CommonButton>
             </div>
             <div>
               <CommonButton type="outline" title="Contacter via Whatsapp"></CommonButton>
@@ -154,7 +157,8 @@
     <div class="flex flex-col sm:flex-row items-center justify-between  my-16">
       <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc ">Ce qu'en disent nos clients</h3>
       <div>
-        <CommonButton type="default" title="Je passe ma commande"></CommonButton>
+        <CommonButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
+          title="Je passe ma commande"></CommonButton>
       </div>
     </div>
 
@@ -185,6 +189,7 @@ import CommonButton from '@/components/buttons/commonButton.vue';
 import CustomButton from '@/components/buttons/customButton.vue';
 import CommonTabs from '@/components/common/commonTabs.vue';
 import Button from '@/components/ui/button/Button.vue';
+import { AppRoute } from '@/constants/app-route';
 import { ArrowRight, ShoppingBasket } from 'lucide-vue-next';
 
 </script>

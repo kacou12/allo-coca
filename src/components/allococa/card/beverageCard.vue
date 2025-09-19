@@ -10,7 +10,8 @@
                 <p class="text-sm text-[#888888]">30cl</p>
                 <p class="text-sm pl-2">250 FCFA</p>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between cursor-pointer"
+                @click="$router.push({ name: AppRoute.PRODUCTS.name })">
                 <Button class="rounded-[90px] h-8 border-black" variant="outline">
                     <div class="flex items-center gap-1">
                         <ShoppingBasket></ShoppingBasket>
@@ -18,7 +19,7 @@
                     </div>
                 </Button>
 
-                <Button class=" border-black" variant="ghost">
+                <Button @click="$router.push({ name: AppRoute.PRODUCTS.name })" class=" border-black" variant="ghost">
                     <div class="border-black border-[1px] bg-white p-2 rounded-full">
 
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,6 +39,7 @@
 <script setup lang="ts">
 import CustomButton from '@/components/buttons/customButton.vue';
 import Button from '@/components/ui/button/Button.vue';
+import { AppRoute } from '@/constants/app-route';
 import { ArrowRight, ShoppingBasket } from 'lucide-vue-next';
 
 

@@ -69,7 +69,7 @@
                                     </SheetClose>
 
                                 </li>
-                                <li class="items-center flex ">
+                                <!-- <li class="items-center flex ">
                                     <SheetClose class="w-full">
                                         <a href="#" @click.prevent="routeAndScrollTo('contact-us')"
                                             class="flex items-center p-2 w-full  rounded-lg 
@@ -81,7 +81,7 @@
                                         </a>
                                     </SheetClose>
 
-                                </li>
+                                </li> -->
 
 
                             </ul>
