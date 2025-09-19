@@ -47,13 +47,16 @@ import { useCart } from '@/composables/queries/useCart';
 import type { Product } from '@/services/locker-products/locker-products-type';
 import { formatPrice } from '@/shared/shared';
 import { ArrowRight, Minus, Plus, ShoppingBasket } from 'lucide-vue-next';
+import { storeToRefs } from 'pinia';
 import { computed, ref, type PropType } from 'vue';
+import { useToast } from 'vue-toastification';
 
 const imageUrl = computed(() => new URL(`../../../assets/allococa/products/water/${product.image}`, import.meta.url).href);
+const toast = useToast();
 
+const { waterProductDefaultQuantity, addCartLine, removeCartLine, clearCart } = useCart()
 
-const { cart, waterProductDefaultQuantity, addCartLine, removeCartLine, clearCart } = useCart()
-
+const { cart } = storeToRefs(useCart());
 const { product } = defineProps({
     product: {
         type: Object as PropType<Product>,
@@ -65,12 +68,20 @@ const quantity = ref(waterProductDefaultQuantity(product.id));
 const incrementWaterpPack = () => {
     quantity.value++;
 
+    const existingCartLine = cart.value.find(item => item.id === product.id);
+
     addCartLine({
         id: product.id,
         type: "water",
         products: [{ ...product, quantity: 1 }],
         quantity: quantity.value,
     })
+
+    if (!existingCartLine) {
+        toast.success("Le pack a bien été ajouté au panier", { timeout: 3000 });
+    }
+
+
 
 };
 

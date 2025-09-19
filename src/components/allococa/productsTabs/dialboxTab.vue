@@ -8,7 +8,7 @@
                     <!-- capsule -->
                     <section v-for="product in casierProducts.products"
                         class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
-                        <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt="">
+                        <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule>
                     </section>
                     <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
                 </div>
@@ -46,6 +46,7 @@ import { useCart } from '@/composables/queries/useCart';
 import { useToast } from 'vue-toastification';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import LockerCapsule from './lockerCapsule.vue';
 
 const toast = useToast();
 
@@ -92,6 +93,8 @@ onBeforeMount(() => {
 // })
 
 
+
+
 const findProductDataCapsule = (productName: string) => {
     const test = productCapsuleData.find(product => product.name.toLowerCase() === productName.toLowerCase());
 
@@ -99,10 +102,10 @@ const findProductDataCapsule = (productName: string) => {
 
     const capsuleData = productCapsuleData.find(product => product.name === productName.toLowerCase());
 
-    return new URL(capsuleData!.capsulePath, import.meta.url).href;
+    // return new URL(capsuleData!.capsulePath, import.meta.url).href;
+    // return new URL(`../../../assets/allococa/products/${capsuleData!.capsulePath}`, import.meta.url).href;
+    return capsuleData!.capsulePath;
 };
-
-
 
 
 
