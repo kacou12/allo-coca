@@ -21,7 +21,8 @@
                                         toi,
                                         sans bouger.
                                     </h1>
-                                    <CustomButton type="default" class="text-white hover:bg-primary-50 ">
+                                    <CustomButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
+                                        class="text-white hover:bg-primary-50 ">
                                         <span>Je commence ma commande</span>
                                         <ShoppingBasket></ShoppingBasket>
                                     </CustomButton>
@@ -43,7 +44,8 @@
                                         Ton pack
                                         d’eau<br></br>livré chez toi,sans bouger.
                                     </h1>
-                                    <CustomButton type="default" class="text-white hover:bg-primary-50 ">
+                                    <CustomButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
+                                        class="text-white hover:bg-primary-50 ">
                                         <span>Je commence ma commande</span>
                                         <ShoppingBasket></ShoppingBasket>
                                     </CustomButton>
@@ -74,6 +76,7 @@ import { ArrowLeft, ArrowRight, ShoppingBasket } from 'lucide-vue-next';
 import { Button } from '../ui/button';
 import Autoplay from 'embla-carousel-autoplay'
 import CustomButton from '../buttons/customButton.vue';
+import { AppRoute } from '@/constants/app-route';
 
 
 // const { orientation, canScrollPrev, scrollPrev } = useCarousel()

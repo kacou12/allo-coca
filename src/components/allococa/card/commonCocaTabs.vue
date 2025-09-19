@@ -7,9 +7,9 @@
             </TabsIndicator>
 
             <TabsTrigger v-for="tab in tabs" :key="tab.value"
-                class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-[#6D6D6D] select-none  rounded-tl-md  hover:[#000000] data-[state=inactive]:cursor-pointer data-[state=active]:text-[#000000] outline-none cursor-default focus-visible:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
+                class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[12px] md:text-[15px] leading-none text-[#6D6D6D] select-none  rounded-tl-md  hover:[#000000] data-[state=inactive]:cursor-pointer data-[state=active]:text-[#000000] outline-none cursor-default focus-visible:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
                 :value="tab.value">
-                <span class="text-nowrap">{{ tab.label }}</span>
+                <span class="md:text-nowrap">{{ tab.label }}</span>
             </TabsTrigger>
 
         </TabsList>

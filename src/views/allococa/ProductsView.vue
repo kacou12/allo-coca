@@ -1,7 +1,7 @@
 <template>
 
     <div class="py-10 spac-y-5 pt-[110px]   maxContain3xl ">
-        <section class="flex items-center gap-1 mb-4">
+        <section class="flex items-center gap-1 mb-4 flex-wrap">
             <p class="text-[#6D6D6D]">Livraison:</p>
             <p class="text-primary">En 24H et gratuite </p>
             <p class="text-[#6D6D6D]">. Sur-mesure:</p>
