@@ -34,7 +34,7 @@
                 Total
             </div>
             <div class=" font-bold text-gray-900">
-                {{ order.total }} FCFA
+                {{ formatPrice(order.total) }} FCFA
             </div>
         </div>
 
@@ -44,15 +44,16 @@
                 class="sm:flex-1 bg-primary-50 hover:bg-primary-40 rounded-3xl text-white px-4 py-2  text-sm font-medium transition-colors">
                 Recommander
             </button>
-            <button @click="$emit('modify')"
+            <!-- <button @click="$emit('modify')"
                 class="sm:flex-1 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2  rounded-3xl text-sm font-medium border  transition-colors border-black">
                 Modifier
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { formatPrice } from '@/shared/shared'
 import type { PropType } from 'vue'
 
 interface Order {

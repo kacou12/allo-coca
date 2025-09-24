@@ -163,7 +163,7 @@
     </div>
 
 
-    <ReviewCaro usel></ReviewCaro>
+    <ReviewCarousel></ReviewCarousel>
 
 
   </section>
@@ -172,24 +172,14 @@
 
 </template>
 <script setup lang="ts">
-import BeverageCard from '@/components/allococa/card/beverageCard.vue';
-import CommonCocaTabs from '@/components/allococa/card/commonCocaTabs.vue';
 import HowItWorkCard from '@/components/allococa/card/howItWorkCard.vue';
-import OrderTyperCard from '@/components/allococa/card/orderTyperCard.vue';
-import ReviewCard from '@/components/allococa/card/reviewCard.vue';
-import WaterCard from '@/components/allococa/card/waterCard.vue';
 import WhySelectAllococaCard from '@/components/allococa/card/whySelectAllococaCard.vue';
 import HomeCarousel from '@/components/allococa/homeCarousel.vue';
 import HomeTabs from '@/components/allococa/homeTabs.vue';
 import OrderTypeCarousel from '@/components/allococa/orderTypeCarousel.vue';
 import ReviewCarousel from '@/components/allococa/ReviewCarousel.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
-import NavBar from '@/components/aside/navBar.vue';
 import CommonButton from '@/components/buttons/commonButton.vue';
-import CustomButton from '@/components/buttons/customButton.vue';
-import CommonTabs from '@/components/common/commonTabs.vue';
-import Button from '@/components/ui/button/Button.vue';
 import { AppRoute } from '@/constants/app-route';
-import { ArrowRight, ShoppingBasket } from 'lucide-vue-next';
 
 </script>

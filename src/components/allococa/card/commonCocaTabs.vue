@@ -51,7 +51,7 @@ const props = defineProps<{
 }>()
 
 const onchanged = (value: string) => {
-    if (value != tabValue.value) {
+    if (value != tabValue.value && router.currentRoute.value.name != AppRoute.HOME_REDIRECT.name) {
         router.replace({
 
             query: {
