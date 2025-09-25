@@ -18,14 +18,14 @@
                     <OrderTyperCard :card-data="{
                         description: 'Compose ton casier bouteille par bouteille. Tu choisis ce que tu veux, comme tu veux.',
                         image: 'casier-a-ciomposer.png',
-                        title: 'Boissons gazeuses',
+                        title: 'Casiers prêts à boire',
                     }"></OrderTyperCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
                         description: 'Commandes en pack d’eaux (Céleste, Cristalline, Awa)',
                         image: 'pack-eau.png',
-                        title: 'Boissons gazeuses',
+                        title: 'Eaux minerales',
                     }"></OrderTyperCard>
                 </CarouselItem>
 

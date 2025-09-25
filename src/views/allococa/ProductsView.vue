@@ -39,7 +39,7 @@ import { useRoute, useRouter } from 'vue-router';
 const tabsData = ref([
     { value: 'casierComplet', label: 'Casiers complets' },
     { value: 'casierCompose', label: 'Casiers à composer' },
-    { value: 'water', label: 'Eau Minérale' },
+    { value: 'water', label: 'Eaux minérales' },
 ])
 const cocaTabsRef = ref(0);
 

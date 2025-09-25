@@ -62,7 +62,7 @@
         </article>
         <article class="space-y-8">
           <TextLinkWithArrow @click="$router.push({ name: AppRoute.PRODUCTS.name })" color="text-white"
-            text="Commence sans Compte"></TextLinkWithArrow>
+            text="Commence sans compte"></TextLinkWithArrow>
           <TextLinkWithArrow @click="$router.push({ name: AppRoute.ORDERS.name })" color="text-white"
             text="Retrouvez une commande"></TextLinkWithArrow>
         </article>
@@ -94,13 +94,13 @@
       <HowItWorkCard :data="{
         image: 'zap.png',
         title: '2. Je reçois sous 24h',
-        description: 'Livraison gratuite à ton domicilepartout à Abidjan',
+        description: 'Livraison gratuite à ton domicile partout à Abidjan',
       }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
         image: 'refresh.png',
         title: '3. Je recharge mon casier',
-        description: 'Garde ton casier et recommande facilement quand tu veuxs',
+        description: 'Garde ton casier et recommande facilement quand tu veux',
       }"></HowItWorkCard>
 
     </article>
@@ -109,10 +109,11 @@
 
   <!-- Pourquoi choisir AlloCoca ? -->
   <section class="bg-black relative py-28 overflow-hidden">
-    <div class="z-0 absolute right-0 bottom-[20%] hidden xl:block">
+
+    <div class=" absolute  right-0 bottom-[20%] hidden xl:block">
       <img src="/src/assets/allococa/home/section-pourquoi-choisir-allococa/sun-red.png" alt=""></img>
     </div>
-    <article class="z-50 maxContain3xl  xl:max-w-[850px] space-y-14">
+    <article class=" z-40 maxContain3xl  xl:max-w-[850px] space-y-14">
       <div class="text-center space-y-3 ">
 
         <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc text-white ">Pourquoi choisir AlloCoca ?</h3>
@@ -149,6 +150,7 @@
         </div>
       </div>
     </article>
+
 
   </section>
 

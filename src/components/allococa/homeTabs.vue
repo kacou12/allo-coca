@@ -1,6 +1,6 @@
 <template>
     <CommonCocaTabs v-model="cartTabValue" :tabs="[
-        { value: 'juice', label: 'Boissons gazeuse' },
+        { value: 'juice', label: 'Boissons gazeuses' },
         { value: 'water', label: 'Eaux minérales' },
     ]">
         <template #juice>

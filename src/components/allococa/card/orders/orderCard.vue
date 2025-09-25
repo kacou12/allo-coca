@@ -34,7 +34,7 @@
                 Total
             </div>
             <div class=" font-bold text-gray-900">
-                {{ formatPrice(order.total) }} FCFA
+                {{ formatPrice(order.total) }}
             </div>
         </div>
 
