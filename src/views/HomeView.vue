@@ -109,7 +109,6 @@
 
   <!-- Pourquoi choisir AlloCoca ? -->
   <section class="bg-black relative py-28 overflow-hidden">
-
     <div class=" absolute  right-0 bottom-[20%] hidden xl:block">
       <img src="/src/assets/allococa/home/section-pourquoi-choisir-allococa/sun-red.png" alt=""></img>
     </div>
