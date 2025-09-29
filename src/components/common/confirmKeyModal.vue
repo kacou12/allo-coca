@@ -6,7 +6,6 @@
         <DialogContent :onInteractOutside="(e) => {
             e.preventDefault();
         }" class="max-w-[90%] rounded-lg sm:max-w-[750px] font-worksans ">
-            <!-- bg-[url('/src/assets/images/hexagone.png')]  -->
             <DialogHeader :class="[showDivider ? 'border-b-[1px]' : '']"
                 class="flex flex-row justify-between   border-neutral-200">
                 <DialogTitle>

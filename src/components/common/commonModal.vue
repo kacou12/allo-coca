@@ -13,8 +13,6 @@
                 <!-- max-h-[calc(100vh-64px-76px)] overflow-y-auto -->
                 <!-- h-[calc(100%-150px)] -->
 
-
-                <!-- bg-[url('/src/assets/images/hexagone.png')]  -->
                 <DialogHeader :class="[showDivider ? 'border-b-[1px]' : '']"
                     class="flex flex-row justify-between  border-neutral-200">
                     <DialogTitle>
