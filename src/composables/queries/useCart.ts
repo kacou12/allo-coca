@@ -1,4 +1,4 @@
-import type { CartLine } from '@/services/locker-products/locker-products-type'
+import type { CartLine, CartPayloadOrderLine } from '@/services/locker-products/locker-products-type'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
@@ -9,6 +9,20 @@ export const useCart = defineStore('cart', () => {
 
   const setCartTabValue = (value: "casierCompose"|"casierComplet"|"water") => {
     cartTabValue.value = value
+  }
+
+  const formatCartLineToOrderPayload = ():CartPayloadOrderLine[] => {
+    return cart.value.map(item => {
+      return {
+        qty: item.quantity,
+        casierLines: item.products.map(product => {
+          return {
+            variant_id: product.id,
+            qty: product.quantity ?? 1
+          }
+        })
+      }
+    })
   }
 
 
@@ -68,7 +82,8 @@ export const useCart = defineStore('cart', () => {
     clearCart,
     cartQuantityLength,
     waterProductDefaultQuantity,
-    updateCartLine
+    updateCartLine,
+    formatCartLineToOrderPayload
     // setCartTabValue,
     // cartTabValue
   }

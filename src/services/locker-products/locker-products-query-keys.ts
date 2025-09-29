@@ -1,17 +1,17 @@
 import type { DefaultFiltersPayload, TransactionFiltersPayload } from '../global.type'
 
-export const merchantsQueryKeys = {
+export const productsQueryKeys = {
   // users: (country: string) => ['users', country],
-  merchant: ({ id }: { id: string }) => ['merchant', id],
-  merchantsPagination: (page: number, country: string) => ['merchant', page, country],
-  merchantsFilters: (payload: DefaultFiltersPayload) => [
-    'merchant',
+  product: ({ id }: { id: string }) => ['product', id],
+  productsPagination: (page: number, limit: number, category_id: string) => ['products', { page, limit, category_id }],
+  productsFilters: (payload: DefaultFiltersPayload) => [
+    'product',
     payload.page,
     payload.q,
     // payload.country_id,
   ],
-    transactionsMerchantFilters: (payload: TransactionFiltersPayload) => [
-      'transactionsMerchantFilters',
+    transactionsProductFilters: (payload: TransactionFiltersPayload) => [
+      'transactionsProductFilters',
       { limit: payload.limit },
       { page: payload.page },
       { q: payload.q },

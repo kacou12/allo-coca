@@ -27,27 +27,29 @@
         </section>
 
         <!-- Nom du produit -->
-        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.name }}</h3>
+        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }}</h3>
 
         <!-- Image du produit -->
-        <div class="max-w-[186px]  ml-5">
-            <img :src="imageUrl" :alt="`Image de ${product.name}`" class="" />
+        <div class="max-w-[186px] w-[60px] h-[186px]  ml-5">
+            <img :src="product.image_url" :alt="`Image de ${product.product.name}`"
+                class="object-cover h-full w-full" />
         </div>
 
         <!-- Informations prix et variante -->
         <div class="space-y-0 absolute right-[10px] top-1/2 text-xs ">
             <div class="flex justify-end">
-                <p class=" text-gray-500 font-medium">{{ product.variant }}</p>
+                <p class=" text-gray-500 font-medium">{{ product.label }}</p>
             </div>
             <div class="text-left">
-                <p class=" font-bold text-gray-800">{{ product.price }} FCFA</p>
+                <p class=" font-bold text-gray-800">{{ formatPrice(product.unit_price) }}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
+import type { CasierProduct, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
+import { formatPrice } from '@/shared/shared';
 import { Minus, Plus } from 'lucide-vue-next';
 import { computed, ref, type PropType } from 'vue';
 
@@ -59,7 +61,7 @@ import { computed, ref, type PropType } from 'vue';
 
 const { product, casierProductsData } = defineProps({
     product: {
-        type: Object as PropType<Product>,
+        type: Object as PropType<ProductResponse>,
         required: true
     },
     casierProductsData: {
@@ -68,7 +70,7 @@ const { product, casierProductsData } = defineProps({
     }
 });
 
-const imageUrl = computed(() => new URL(`../../../assets/allococa/products/${product.image}`, import.meta.url).href);
+// const imageUrl = computed(() => new URL(`../../../assets/allococa/products/${product.image}`, import.meta.url).href);
 
 
 // Déclaration de l'émetteur

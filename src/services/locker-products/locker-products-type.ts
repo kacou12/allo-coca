@@ -4,23 +4,86 @@ export interface LockerProduct {
   type: "locker" | "water",
   products:Product[]
 }
-export interface Product {
-  id: string,
-  name: string,
-  description: string,
-  price: number
-  quantity: number
-  image: string
-  variant: string
+
+export interface DeliveryPayload {
+    fullName?: string;
+    phone?: string;
+    common?: string;
+    deliveryAdress?: string;
+    instructions?: string;
 }
 
-export interface CasierProduct {
-  quantity: number,
-  products:Product[]
-} 
+
 export interface CartLine {
   id: string,
   quantity: number,
   type: "full-locker" | "locker" | "water",
   products:Product[]
 } 
+export interface Product {
+  id: string,
+  name: string,
+  description: string,
+  price: number
+  icon_url: string
+  quantity: number
+  image_url: string
+  // variant: string
+}
+export interface ProductResponse {
+  product_id: string
+  size: string
+  label: string
+  quantity: number
+  unit_price: number
+  image_url: string
+  icon_url: string
+  sort_order: number
+  id: string
+  created_at: string
+  updated_at: string
+  product: ProductVariant
+}
+
+export interface ProductVariant {
+  id: string
+  name: string
+  description: string
+  image_url: string
+  category_id: string
+  created_at: string
+  status: boolean
+}
+
+export interface CasierProduct {
+  quantity: number,
+  products:Product[]
+} 
+
+
+export interface CreateOrderPayload {
+  delivery: Delivery
+  order: Order
+}
+
+ interface Delivery {
+  full_name: string
+  phone_number: string
+  municipality: string
+  address: string
+  notes: string
+}
+
+ interface Order {
+  items: CartPayloadOrderLine[]
+}
+
+export interface CartPayloadOrderLine {
+  qty: number
+  casierLines: CasierLine[]
+}
+
+ interface CasierLine {
+  variant_id: string
+  qty: number
+}

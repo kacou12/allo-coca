@@ -1,6 +1,6 @@
-export const MerchantRouteApi = {
-  default: '/locker-products',
-  create: '/admin/api/v1/merchant-charge/multiple',
+export const lockerRouteApi = {
+  default: 'app/api/v1/variant/',
+  createOrder: '/client/api/v1/order/',
   stats: '/merchant/api/v1/transaction/info_stats',
 
   transactions: (id: string) => `/admin/api/v1/transaction/merchant/${id}`,
