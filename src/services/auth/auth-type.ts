@@ -1,8 +1,10 @@
 import { z } from "zod";
-import type { loginSchema } from "./auth-schema";
+import type { loginSchema, registerSchema } from "./auth-schema";
 import type { MerchantResponse } from "../merchants/merchant-type";
 
 export type LoginForm = z.infer<typeof loginSchema>;
+
+export type RegisterForm = z.infer<typeof registerSchema>;
 
 export type Authentication = {
   access_token: string;
@@ -12,8 +14,13 @@ export type Authentication = {
 };
 
 export type LoginRequest = LoginForm & {};
+export type RegisterRequest = Omit<RegisterForm, "confirmPassword">;
+
 
 export type LoginResponse = Authentication & {
+  user: AuthResponse;
+};
+export type RegisterResponse = Authentication & {
   user: AuthResponse;
 };
 

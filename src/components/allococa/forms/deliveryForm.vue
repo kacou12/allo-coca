@@ -109,20 +109,21 @@
                     <!-- Items de la commande -->
                     <div class="space-y-2 mb-4 ml-5">
                         <!-- Casier -->
-                        <div v-if="order.casier" class="flex items-start space-x-2">
+                        <div v-if="hasCasier" class="flex items-start space-x-2">
                             <!-- <div class="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div> -->
-                            <div class="flex items-center">
-                                <span class="text-sm font-semibold ">Casier</span>
+                            <div class="flex items-start">
+                                <span class="text-sm font-semibold ">Casier: </span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
-                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap }}</span>
+                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap
+                                    }}</span>
                             </div>
                         </div>
 
                         <!-- Packs -->
-                        <div v-if="order.packs" class="flex items-start space-x-2">
+                        <div v-if="hasPack" class="flex items-start space-x-2">
                             <!-- <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div> -->
-                            <div class="flex items-center">
-                                <span class="text-sm font-semibold ">Packs</span>
+                            <div class="flex items-start">
+                                <span class="text-sm font-semibold ">Packs:</span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.packs }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ packsRecap }}</span>
                             </div>
@@ -137,7 +138,7 @@
                             Total
                         </div>
                         <div class=" font-bold text-gray-900">
-                            {{ subtotal }} FCFA
+                            {{ formatPrice(subtotal) }}
                         </div>
                     </div>
 
@@ -175,6 +176,9 @@ import { useLoaderStore } from '@/stores/useLoaderStore';
 import { useToast } from 'vue-toastification';
 import { useCart } from '@/composables/queries/useCart';
 import { storeToRefs } from 'pinia';
+import { formatPrice } from '@/shared/shared';
+import cloneDeep from 'lodash/cloneDeep';
+import { clone } from 'lodash';
 
 const deliverySchema = z.object({
     fullName: z.string()
@@ -198,8 +202,8 @@ const deliverySchema = z.object({
         .or(z.literal(''))
 });
 
-const { cart } = storeToRefs(useCart());
-const { formatCartLineToOrderPayload, total } = useCart();
+const { cart, subtotal, casierLength, packLength } = storeToRefs(useCart());
+const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
 const { startLoading, stopLoading } = useLoaderStore();
 
@@ -210,18 +214,7 @@ const { handleSubmit, resetForm } = useForm({
     validationSchema: toTypedSchema(deliverySchema)
 });
 
-defineProps({
-    order: {
-        type: Object as PropType<{
-            id: string;
-            title: string;
-            casier: string;
-            packs: string;
-            total: number;
-        }>,
-        required: true
-    }
-})
+
 
 
 const deliveryState = ref<DeliveryPayload>(
@@ -236,7 +229,14 @@ const deliveryState = ref<DeliveryPayload>(
 );
 const goToSuccessPage = () => {
     console.log('go to success page');
-    router.push({ name: AppRoute.DELIVERY_SUCCESS.name });
+    router.push({
+        name: AppRoute.DELIVERY_SUCCESS.name, query: {
+            totalCasier: cloneDeep(casierLength.value),
+            totalPack: cloneDeep(packLength.value),
+            subtotal: cloneDeep(subtotal.value),
+            reference: "#AC-2030"
+        }
+    });
 }
 
 const createOrderHandler = async () => {
@@ -259,6 +259,7 @@ const createOrderHandler = async () => {
         resetForm();
         toast.success("La commande a bien été créee");
         goToSuccessPage();
+        clearCart();
     } catch (err) {
 
     } finally {
@@ -273,10 +274,20 @@ const onSubmit = handleSubmit(async () => {
     await createOrderHandler();
 });
 
+const hasCasier = computed(() => {
+    return cart.value.some((line: CartLine) => line.type === 'locker' || line.type === 'fullLocker');
+});
+
+const hasPack = computed(() => {
+    return cart.value.some((line: CartLine) => line.type === 'water');
+})
+
+
+
 
 const casiersRecap = computed(() => {
     const casiers = cart.value.filter(
-        (line: CartLine) => line.type === 'full-locker' || line.type === 'locker'
+        (line: CartLine) => line.type === 'fullLocker' || line.type === 'locker'
     );
 
     if (casiers.length === 0) return null;
@@ -359,7 +370,7 @@ const packsRecap = computed(() => {
 
 
 
-const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full-locker" | "water") => {
+const productsDataGrouped = (products: ProductResponse[], type: "locker" | "fullLocker" | "water") => {
     const groupedMap = new Map<string, ProductResponse>();
 
     let setProducts = products;
@@ -385,21 +396,21 @@ const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full
 };
 
 
-const subtotal = computed(() => {
-    const test = cart.value.reduce((total, cartLine) => {
-        const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
-        return total + groupedProducts.reduce((total, product) => {
-            return total + product.unit_price * product.quantity
-        }, 0);
-    }, 0);
+// const subtotal = computed(() => {
+//     const test = cart.value.reduce((total, cartLine) => {
+//         const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
+//         return total + groupedProducts.reduce((total, product) => {
+//             return total + product.unit_price * product.quantity
+//         }, 0);
+//     }, 0);
 
-    return cart.value.reduce((total, cartLine) => {
-        const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
-        return total + groupedProducts.reduce((total, product) => {
-            return total + product.unit_price * product.quantity
-        }, 0) * cartLine.quantity;
-    }, 0);
-})
+//     return cart.value.reduce((total, cartLine) => {
+//         const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
+//         return total + groupedProducts.reduce((total, product) => {
+//             return total + product.unit_price * product.quantity
+//         }, 0) * cartLine.quantity;
+//     }, 0);
+// })
 
 </script>
 

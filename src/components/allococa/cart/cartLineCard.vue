@@ -52,7 +52,7 @@ import { useToast } from 'vue-toastification';
 
 const { cartLine, type } = defineProps<{
     cartLine: CartLine,
-    type: "locker" | "full-locker" | "water"
+    type: "locker" | "fullLocker" | "water"
 }>();
 
 const toast = useToast();
@@ -74,11 +74,11 @@ const goUpdatePage = () => {
             // setCartTabValue("casierCompose")
             router.go(0);
         });
-    } else if (type === "full-locker") {
+    } else if (type === "fullLocker") {
 
         router.push({
             name: AppRoute.PRODUCTS.name, query: {
-                type: "full-locker",
+                type: "fullLocker",
                 id: cartLine.id,
             },
 
@@ -140,7 +140,8 @@ const removeCartLineAction = () => {
 }
 
 const cartLineSubTotal = computed(() => {
-    return cartLine.products.reduce((total, product) => {
+
+    return productsDataGrouped.value.reduce((total, product) => {
         return total + product.unit_price * product.quantity
     }, 0);
 });

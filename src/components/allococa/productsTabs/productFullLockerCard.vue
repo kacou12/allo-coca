@@ -20,7 +20,7 @@
         <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }}</h3>
 
         <!-- Image du produit -->
-        <div class="w-[60px] h-[186px] bg-green-500  ml-5">
+        <div class="w-[60px] h-[186px] ml-5">
             <img :src="product.image_url" :alt="`Image de ${product.product.name}`"
                 class="object-cover h-full w-full" />
         </div>

@@ -1,10 +1,10 @@
 <template>
     <form @submit.prevent="onSubmit" class="mx-5">
         <div class="">
-            <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="fullname">
+            <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="name">
                 Nom complet
             </label>
-            <InputField v-model="fullname" placeholder="Entrer votre nom complet" name="fullname" />
+            <InputField v-model="name" placeholder="Entrer votre nom complet" name="name" />
         </div>
         <div class="">
             <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="email">
@@ -17,17 +17,24 @@
                 Téléphone
             </label>
             <InputField v-model="phone" placeholder="Entrer votre numéro de téléphone" name="phone" /> -->
-            <section class="space-y-2 mb-4">
+            <section class="space-y-2 ">
                 <p class="text-sm text-[#3D3D3D]  font-medium">Numero de téléphone</p>
                 <div class="flex gap-3 w-full max-w-[712px] relative">
-                    <Input v-model="phone" class="pl-14 border-[#3D3D3D]" id="email"
+                    <!-- <Input v-model="phone" class="pl-14 border-[#3D3D3D]" id="email"
                         placeholder="numero de téléphone" />
                     <span
                         class="absolute start-0 inset-y-0 font-bold flex items-center justify-center text-sm px-2 border-r  text-black">
                         +225
-                    </span>
+                    </span> -->
+                    <InputField v-model="phone" placeholder="0506582036" name="phone" />
                 </div>
             </section>
+        </div>
+        <div class="">
+            <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="address">
+                Adresse
+            </label>
+            <InputField v-model="address" placeholder="Cocody Saint Jean" name="address" />
         </div>
 
         <div class="">
@@ -37,10 +44,10 @@
             <PasswordField v-model="password" placeholder="Mot de passe" name="password" />
         </div>
         <div class="mb-6">
-            <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="confirm_password">
+            <label class="block text-[#3D3D3D] text-sm font-medium mb-2" for="confirmPassword">
                 Confirmer le mot de passe
             </label>
-            <PasswordField v-model="confirm_password" placeholder="Confirmer le mot de passe" name="confirm_password" />
+            <PasswordField v-model="confirmPassword" placeholder="Confirmer le mot de passe" name="confirmPassword" />
         </div>
 
         <CustomButton :is-loading="loading"
@@ -65,82 +72,59 @@ import CustomButton from '@/components/buttons/customButton.vue';
 import InputField from '@/components/vee-validate/InputField.vue';
 import PasswordField from '@/components/vee-validate/PasswordField.vue';
 import Input from '@/components/ui/input/Input.vue';
+import type { RegisterForm, RegisterRequest } from '@/services/auth/auth-type';
+import { registerSchema } from '@/services/auth/auth-schema';
+import { registerUser } from '@/services/auth/auth-service';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { AppRoute } from '@/constants/app-route';
 
-// --- Définir le schéma de validation Zod pour l'inscription ---
-// Le schéma inclut la confirmation du mot de passe en utilisant la méthode .refine()
-const registerSchema = z.object({
-    fullname: z.string().min(1, 'Le nom complet est requis'),
-    email: z.string().email('Format d\'email invalide').min(1, 'L\'email est requis'),
-    phone: z.string().min(10, 'Numéro de téléphone invalide'), // Exemple de validation simple
-    password: z.string().min(6, 'Le mot de passe doit contenir au moins 6 caractères'),
-    confirm_password: z.string().min(1, 'La confirmation du mot de passe est requise'),
-}).refine(data => data.password === data.confirm_password, {
-    message: 'Les mots de passe ne correspondent pas',
-    path: ['confirm_password'], // Le message d'erreur sera affiché sous ce champ
-});
+const { setUser } = useAuthStore();
 
-// --- Définir le type des données du formulaire à partir du schéma Zod ---
-type RegisterForm = z.infer<typeof registerSchema>;
+const {
+    isPending: loading,
+    isError,
+    error,
+    mutate,
+    mutateAsync
+} = useMutation({
+    mutationFn: (credential: RegisterRequest) => registerUser(credential),
+    onSuccess: async (response) => {
+        if (response) {
+            // console.log("sucess login", response);
+            setUser(response.data!.user);
+            // await refetchUserProfil();
+            router.push({ name: AppRoute.HOME.name, replace: true }).then(() => {
 
-// --- API Service (mock pour l'exemple) ---
-// En production, cette fonction serait dans un fichier de service, par exemple `auth-service.ts`
-const registerWithCredential = async (credentials: RegisterForm) => {
-    // Simuler un appel API réussi
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log('Inscription réussie pour :', credentials.email);
-            resolve({
-                data: {
-                    user: {
-                        first_name: credentials.fullname.split(' ')[0],
-                    },
-                },
+                toast.success(`Welcome ${response.data!.user.name}!`);
             });
-        }, 1000);
-    });
-};
+            //   resetForm();
+            //   if (route.query?.redirect) {
+            //     router.push({ path: route.query.redirect as string, replace: true });
+            //   } else {
+            //     router.push({ name: AppRoute.DASHBOARD, replace: true });
+            //   }
+        }
+    },
+});
 
 const router = useRouter();
 const toast = useToast();
 
-const fullname = ref('');
+const name = ref('');
 const email = ref('');
 const phone = ref('');
 const password = ref('');
-const confirm_password = ref('');
+const address = ref('');
+const confirmPassword = ref('');
 
 const { handleSubmit, resetForm } = useForm({
     validationSchema: toTypedSchema(registerSchema)
 });
 
-const {
-    isPending: loading,
-    mutate,
-} = useMutation({
-    mutationFn: (credentials: RegisterForm) => registerWithCredential(credentials),
-    onSuccess: async (response) => {
-        if (response) {
-            // Afficher une notification de succès
-            // toast.success(`Bienvenue, ${response.data.user.first_name}!`);
-
-            // // Rediriger vers la page de connexion
-            // router.push({ name: 'login', replace: true });
-
-            resetForm();
-        }
-    },
-    onError: (error) => {
-        console.error('Erreur d\'inscription:', error);
-        toast.error('Une erreur est survenue lors de l\'inscription.');
-    },
-});
 
 const onSubmit = handleSubmit((values) => {
-    // Appel de la mutation pour envoyer les données au serveur
     mutate(values);
 });
 </script>
 
-<style scoped>
-/* Les styles sont les mêmes que ceux du formulaire de connexion */
-</style>
+<style scoped></style>

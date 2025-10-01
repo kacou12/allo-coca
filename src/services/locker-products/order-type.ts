@@ -24,6 +24,7 @@ interface Delivery {
 
 interface Item2 {
   id: string
+  type: string
   variant: Variant
   quantity: number
   unit_price: number

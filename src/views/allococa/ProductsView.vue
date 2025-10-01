@@ -67,7 +67,7 @@ onBeforeMount(() => {
     if (!idCartLine || !type) {
         return;
     }
-    if (type == "full-locker") {
+    if (type == "fullLocker") {
         cartTabValue.value = "casierComplet"
     } else if (type == "locker") {
         cartTabValue.value = "casierCompose"

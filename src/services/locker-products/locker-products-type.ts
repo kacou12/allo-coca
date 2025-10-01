@@ -15,9 +15,8 @@ export interface DeliveryPayload {
 
 
 export interface CartLine {
-  id: string,
-  quantity: number,
-  type: "full-locker" | "locker" | "water",
+  id: string,  quantity: number,
+  type: "fullLocker" | "locker" | "water",
   products:ProductResponse[]
 } 
 export interface Product {
@@ -57,6 +56,7 @@ export interface ProductVariant {
 
 export interface CasierProduct {
   quantity: number,
+  type: "locker" | "water" | "fullLocker"
   products:ProductResponse[]
 } 
 
@@ -80,6 +80,7 @@ export interface CreateOrderPayload {
 
 export interface CartPayloadOrderLine {
   qty: number
+  type: "locker" | "water" | "fullLocker"
   casierLines: CasierLine[]
 }
 

@@ -75,6 +75,7 @@ const { addCartLine, clearCart, removeCartLine, updateCartLine } = useCart();
 const { cart } = storeToRefs(useCart());
 const casierProducts = ref<CasierProduct>({
     quantity: 1,
+    type: "fullLocker",
     products: [
 
     ]
@@ -86,11 +87,12 @@ onBeforeMount(() => {
     console.log('casierProducts', { ...route.query });
     const idCartLine = route.query.id;
     const type = route.query.type;
-    if (!idCartLine || !type || type !== "full-locker") {
+    if (!idCartLine || !type || type !== "fullLocker") {
         return;
     }
     const findedCartLine = cart.value.find(cartLine => cartLine.id === idCartLine);
     casierProducts.value = {
+        type: type,
         quantity: findedCartLine?.quantity ?? 1,
         products: findedCartLine?.products ?? []
     };
@@ -111,13 +113,13 @@ const findProductDataCapsule = (productName: string) => {
     return capsuleData!.capsulePath;
 };
 
-const imageUrl = computed(() => findProductDataCapsule("full-locker"));
+const imageUrl = computed(() => findProductDataCapsule("fullLocker"));
 
 const addCasierToCart = () => {
 
     const cartLine: CartLine = {
         id: crypto.randomUUID(),
-        type: "full-locker",
+        type: casierProducts.value.type,
         products: casierProducts.value.products,
         quantity: casierProducts.value.quantity,
     }
@@ -125,6 +127,7 @@ const addCasierToCart = () => {
     addCartLine(cartLine);
 
     casierProducts.value = {
+        type: "fullLocker",
         quantity: 1,
         products: []
     };
@@ -136,7 +139,7 @@ const addCasierToCart = () => {
 const editCasier = () => {
     const idCartLine = route.query.id;
     const type = route.query.type;
-    if (!idCartLine || !type || type !== "full-locker") {
+    if (!idCartLine || !type || type !== "fullLocker") {
         toast.error("Quelque chose s'est mal passe");
 
         return;
@@ -146,7 +149,7 @@ const editCasier = () => {
 
     const cartLine: CartLine = {
         id: idCartLine as string,
-        type: "full-locker",
+        type: "fullLocker",
         products: casierProducts.value.products,
         quantity: casierProducts.value.quantity,
     }
@@ -154,6 +157,7 @@ const editCasier = () => {
     updateCartLine(cartLine);
 
     casierProducts.value = {
+        type: "fullLocker",
         quantity: 1,
         products: []
     };
@@ -190,6 +194,7 @@ const resetCasier = () => {
     console.log("resetCasier");
     console.log('====================================');
     casierProducts.value = {
+        type: "fullLocker",
         quantity: 1,
         products: []
     };

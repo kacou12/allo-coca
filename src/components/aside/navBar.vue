@@ -39,7 +39,7 @@
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
                     </RouterLink>
 
-                    <RouterLink :to="{ name: AppRoute.ORDERS.name }"
+                    <RouterLink v-if="isAuth" :to="{ name: AppRoute.ORDERS.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Mes commandes
                     </RouterLink>
 
@@ -93,8 +93,10 @@ import { storeToRefs } from "pinia";
 import CartSheet from "../allococa/cart/cartSheet.vue";
 import DrawerSheet from "../dropdowns/drawer-sheet.vue";
 import UserMenu from "./userMenu.vue";
+import { useAuthStore } from "@/stores/useAuthStore";
 
-const { cartQuantityLength } = storeToRefs(useCart());
+const { cartQuantityLength, } = storeToRefs(useCart());
+const { isAuth } = storeToRefs(useAuthStore());
 
 const windowScrollY = ref(0);
 

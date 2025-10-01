@@ -38,10 +38,10 @@
 
         <!-- Boutons d'action -->
         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
-            <button @click="$emit('reorder')"
+            <!-- <button @click="$emit('reorder')"
                 class="sm:flex-1 bg-primary-50 hover:bg-primary-40 rounded-3xl text-white px-4 py-2 text-sm font-medium transition-colors">
                 Recommander
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
@@ -78,7 +78,7 @@ const formatOrderDate = (dateString: string) => {
 // Récapitulatif des casiers
 const casiersRecap = computed(() => {
     const casiers = props.order.items.filter(
-        (item) => item.items_details.mode === 'locker' || item.items_details.mode === 'full-locker'
+        (item) => item.type === 'locker' || item.type === 'fullLocker'
     )
 
     if (casiers.length === 0) return null
@@ -109,7 +109,7 @@ const casiersRecap = computed(() => {
 // Récapitulatif des packs
 const packsRecap = computed(() => {
     const packs = props.order.items.filter(
-        (item) => item.items_details.mode === 'water'
+        (item) => item.type === 'water'
     )
 
     if (packs.length === 0) return null

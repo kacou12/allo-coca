@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import { requiresAuth } from "./guards";
 import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
+import { getAccessToken } from "@/services/auth/auth-util";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_API_URL),
@@ -24,14 +26,14 @@ const router = createRouter({
       name: AppRoute.LOGIN.name,
       component: () => import("@/views/guests/LoginView.vue"),
       // beforeEnter:Auth.authIsRequire,
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: true },
     },
     {
       path: AppRoute.REGISTER.path,
       name: AppRoute.REGISTER.name,
       component: () => import("@/views/guests/RegisterView.vue"),
       // beforeEnter:Auth.authIsRequire,
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: true },
     },
     {
       path: AppRoute.HOME.path,
@@ -61,6 +63,7 @@ const router = createRouter({
           name: AppRoute.ORDERS.name,
           component: () => import("@/views/allococa/orders/OrdersView.vue"),
           // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: true },
         },
         {
           path: AppRoute.DELIVERY_INITIALISATON.path,
@@ -70,6 +73,10 @@ const router = createRouter({
           // beforeEnter:Auth.authIsRequire,
           beforeEnter: (to, from) => {
             const { cart } = storeToRefs(useCart());
+            const { isAuth } = storeToRefs(useAuthStore());
+            if (!isAuth.value) {
+              return AppRoute.LOGIN.name;
+            }
             if (cart.value.length > 0) {
               return true;
             }

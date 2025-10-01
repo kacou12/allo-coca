@@ -53,8 +53,8 @@ import { useAuthProfilQuery } from '@/composables/queries/useAuthQueries';
 
 const rememberMe = ref(false)
 
-const password = ref(import.meta.env.PROD ? '' : 'QWERTY');
-const email = ref(import.meta.env.PROD ? '' : 'user@gmail.com');
+const password = ref(import.meta.env.PROD ? '' : 'azertyuiop');
+const email = ref(import.meta.env.PROD ? '' : 'kacou585@gmail.com');
 
 
 
@@ -74,7 +74,6 @@ const {
     isError,
     error,
     mutate,
-    mutateAsync
 } = useMutation({
     mutationFn: (credential: LoginForm) => loginWithCredential(credential),
     onSuccess: async (response) => {

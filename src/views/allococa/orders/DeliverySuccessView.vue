@@ -10,49 +10,68 @@
             <p class="font-semibold">🎉 Commande validée avec succès !</p>
 
             <p class="text-sm">Ton casier est en route.
-                Tu recevras un SMS dans quelques instants pour confirmer la
+                Tu recevras un SMS ou un mail dans quelques instants pour confirmer la
                 livraison.</p>
 
             <p class="font-semibold">Détail express de la commande</p>
 
             <div class="space-y-2">
                 <article class="flex justify-between items-center">
-                    <p class="text-xs text-[#454545]">Numéro de commande</p>
-                    <p class="text-xs">#AC-2030</p>
+                    <p class="text-sm text-[#454545]">Numéro de commande</p>
+                    <p class="text-sm font-bold">#AC-2030</p>
                 </article>
                 <article class="flex justify-between items-center">
-                    <p class="text-xs text-[#454545]">Contenu résumé</p>
-                    <p class="text-xs">1 casier / 2 packs</p>
+                    <p class="text-sm text-[#454545]">Contenu résumé</p>
+                    <p class="text-sm font-bold">{{ totalCasier }} casier(s) / {{ totalPack }} pack(s)</p>
                 </article>
                 <article class="flex justify-between items-center">
-                    <p class="text-xs text-[#454545]">Montant total</p>
-                    <p class="text-xs">9 600 FCFA</p>
+                    <p class="text-sm text-[#454545]">Montant total</p>
+                    <p class="text-sm font-bold">{{ formatPrice(subtotal) }}</p>
                 </article>
             </div>
 
             <p class="text-sm text-[#6D6D6D]">Paiement à la livraison</p>
 
             <div class="w-full">
-                <Button @click="() => { }"
+                <!-- <Button @click="() => { }"
                     class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
                     Commander à nouveau
-                </Button>
+                </Button> -->
 
-                <Button variant="link" class="text-black">Voir mon historique</Button>
+                <Button @click="$router.push({ name: AppRoute.ORDERS.name })" variant="link" class="text-black">Voir mon
+                    historique</Button>
             </div>
 
         </section>
 
-        <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
+        <!-- <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
             <p class="text-[#4F4F4F]">Tu n’as pas reçu ton SMS ?</p>
             <Button variant="link" class="text-black">Clique ici pour recevoir un nouveau récapitulatif.</Button>
-        </section>
+        </section> -->
 
     </div>
 </template>
 
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
+import { useCart } from '@/composables/queries/useCart';
+import { AppRoute } from '@/constants/app-route';
+import { formatPrice } from '@/shared/shared';
+import { useRoute } from 'vue-router';
+
+
+const route = useRoute();
+const totalCasier = route.query['totalCasier']
+const totalPack = route.query['totalPack']
+const subtotal = parseInt(route.query['subtotal'] as string)
+const reference = route.query['reference']
+
+const { formatCartLineToOrderPayload, total, clearCart } = useCart();
+
+
+
+
+
 
 
 </script>

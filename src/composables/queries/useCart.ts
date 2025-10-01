@@ -1,4 +1,4 @@
-import type { CartLine, CartPayloadOrderLine } from '@/services/locker-products/locker-products-type'
+import type { CartLine, CartPayloadOrderLine, ProductResponse } from '@/services/locker-products/locker-products-type'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
@@ -14,6 +14,7 @@ export const useCart = defineStore('cart', () => {
   const formatCartLineToOrderPayload = ():CartPayloadOrderLine[] => {
     return cart.value.map(item => {
       return {
+        type: item.type,
         qty: item.quantity,
         casierLines: item.products.map(product => {
           return {
@@ -24,6 +25,14 @@ export const useCart = defineStore('cart', () => {
       }
     })
   }
+
+  const casierLength = computed(() => {
+    return cart.value.map((line: CartLine) => line.type === 'locker' || line.type === 'fullLocker').length;
+});
+
+const packLength = computed(() => {
+    return cart.value.map((line: CartLine) => line.type === 'water').length;
+})
 
 
   const cartQuantityLength = computed(() => {
@@ -74,6 +83,41 @@ export const useCart = defineStore('cart', () => {
     
   }
 
+  const productsDataGrouped = (products: ProductResponse[], type: "locker" | "fullLocker" | "water") => {
+    const groupedMap = new Map<string, ProductResponse>();
+
+    let setProducts = products;
+
+    if (type === "locker") {
+
+        setProducts = Array.from(new Set(products));
+    }
+
+    // const setProducts = new Set(products);
+
+    setProducts.forEach(product => {
+        const existing = groupedMap.get(product.id);
+
+        if (existing) {
+            existing.quantity += product.quantity;
+        } else {
+            groupedMap.set(product.id, { ...product });
+        }
+    });
+
+    return Array.from(groupedMap.values());
+};
+
+
+const subtotal = computed(() => {
+    return cart.value.reduce((total, cartLine) => {
+        const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
+        return total + groupedProducts.reduce((total, product) => {
+            return total + product.unit_price * product.quantity
+        }, 0) * cartLine.quantity;
+    }, 0);
+})
+
   return {
     cart,
     total,
@@ -83,7 +127,11 @@ export const useCart = defineStore('cart', () => {
     cartQuantityLength,
     waterProductDefaultQuantity,
     updateCartLine,
-    formatCartLineToOrderPayload
+    formatCartLineToOrderPayload,
+    subtotal,
+    casierLength,
+    packLength,
+    
     // setCartTabValue,
     // cartTabValue
   }

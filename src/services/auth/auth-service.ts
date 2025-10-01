@@ -4,6 +4,8 @@ import type {
   LoginForm,
   LoginRequest,
   RefreshTokenRequest,
+  RegisterForm,
+  RegisterRequest,
   ResetPasswordRequest,
 } from "@/services/auth/auth-type";
 import {
@@ -19,6 +21,7 @@ import {
   logoutApi,
   profilApi,
   refreshTokenApi,
+  registerApi,
   resetPasswordApi,
   updatePasswordApi,
 } from "./auth-api";
@@ -46,6 +49,24 @@ export async function loginWithCredential({ email, password }: LoginForm) {
     );
   }
 }
+export async function registerUser(data: RegisterRequest) {
+  const toast = useToast();
+  try {
+
+
+    const res = await registerApi(data);
+    const { access_token } = res.data?.data! ?? {};
+    saveToken(access_token);
+
+    return res.data;
+  } catch (error: any) {
+    const localError = error as AxiosError<ErrorResponse>;
+    toast.error(
+      localError.response?.data.error ?? "Quelque chose s'est mal passé",
+    );
+  }
+}
+
 export async function updatePassword(payload: {
   password: string;
   new_password: string;

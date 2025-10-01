@@ -39,7 +39,7 @@ export class Http {
       // Http.getError(error)
       const toast = useToast()
       // @ts-ignore
-      toast.error((error as AxiosError).response.data.message)
+      toast.error((error as AxiosError).response.data.msg)
       throw error
     }
   }

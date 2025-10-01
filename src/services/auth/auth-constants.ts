@@ -7,6 +7,7 @@ export enum Authentication {
 
 export const AuthRouteApi = {
   login: "/client/api/v1/auth/login",
+  register: "/client/api/v1/auth/register",
   profile: "/client/api/v1/auth/me",
   forgetPassword: "/client/api/v1/auth/forgot-password",
   resetPassword: (token: string) =>

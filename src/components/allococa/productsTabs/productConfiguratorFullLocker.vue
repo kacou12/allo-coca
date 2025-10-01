@@ -179,7 +179,7 @@ const resetQuantities = () => {
 const isEdit = computed(() => {
   const idCartLine = route.query.id;
   const type = route.query.type;
-  return idCartLine && type && type == "full-locker";
+  return idCartLine && type && type == "fullLocker";
 })
 
 const addToBasket = () => {

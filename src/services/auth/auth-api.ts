@@ -6,10 +6,13 @@ import type {
   LoginResponse,
   RefreshTokenRequest,
   RefreshTokenResponse,
+  RegisterRequest,
+  RegisterResponse,
   ResetPasswordRequest,
 } from "./auth-type";
 import { getBearerToken, getDeviceId } from "./auth-util";
 import { AuthRouteApi } from "./auth-constants";
+import type { Register } from "@tanstack/vue-query";
 
 export async function loginApi(data: LoginRequest) {
   // if (import.meta.env.VITE_MOCK_API == 'true') {
@@ -18,11 +21,11 @@ export async function loginApi(data: LoginRequest) {
   // }
 
   return await axios.post<SuccessResponse<LoginResponse>>(
-    `${AuthRouteApi.login}?username=${data.email}&password=${data.password}`,
-    // {
-    //   username: data.email,
-    //   password: data.password,
-    // },
+    AuthRouteApi.login,
+    {
+      email: data.email,
+      password: data.password,
+    },
 
     //  {
     // headers: {
@@ -30,6 +33,17 @@ export async function loginApi(data: LoginRequest) {
     //   'Access-Control-Allow-Origin': '*',
     // },
     // }
+  );
+}
+export async function registerApi(data: RegisterRequest) {
+  // if (import.meta.env.VITE_MOCK_API == 'true') {
+  // TODO: remove this once you have auth
+  //   return { data: mockReponse.login } as any
+  // }
+
+  return await axios.post<SuccessResponse<RegisterResponse>>(
+    AuthRouteApi.register,
+    data,
   );
 }
 export async function profilApi() {

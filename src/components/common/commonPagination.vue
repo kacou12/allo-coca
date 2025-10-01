@@ -1,6 +1,6 @@
 <template>
     <Pagination v-slot="{ page }" :total="total" :sibling-count="1" show-edges :page="currentPage">
-        <PaginationList v-slot="{ items }" class="flex justify-between p-4">
+        <PaginationList v-slot="{ items }" class="flex justify-between p-4 space-x-2">
             <!-- <PaginationFirst /> -->
             <PaginationPrev @click="emit('prevPage')" />
             <div class="flex items-center gap-1">

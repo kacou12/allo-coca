@@ -47,6 +47,7 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { AppRoute } from "@/constants/app-route";
+import { destroySensitiveInfo } from "@/services/auth/auth-util";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useLoaderStore } from "@/stores/useLoaderStore";
 import { User2Icon } from "lucide-vue-next";
@@ -68,7 +69,9 @@ const { logout } = useAuthStore();
 const handleLogout = () => {
     startLoading();
     logout();
-    setTimeout(() => { stopLoading() }, 3000);
+    destroySensitiveInfo();
+
+    setTimeout(() => { stopLoading() }, 1000);
 }
 
 
