@@ -1,14 +1,14 @@
 <template>
     <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
         <section class="h-[268px]  flex items-center justify-center">
-            <img class="w-[69px] h-[220px]" :src="imageUrl" alt=""></img>
+            <img class="w-[69px] h-[220px]" :src="product.image_url" alt=""></img>
         </section>
         <section class="space-y-1">
-            <p class="text-[10px]  text-[#888888]">Pack de {{ product.quantity }}</p>
-            <p class="font-medium text-lg">Céleste Naturelle 1.5L</p>
+            <p class="text-[10px]  text-[#888888]">{{ product.product.description }}</p>
+            <p class="font-medium text-lg">{{ product.product.name }}</p>
             <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
-                <p class="text-sm text-[#888888]">{{ product.quantity }}</p>
-                <p class="text-sm pl-2">{{ formatPrice(product.price) }}</p>
+                <p class="text-sm text-[#888888]">{{ product.label }}</p>
+                <p class="text-sm pl-2">{{ formatPrice(product.unit_price) }}</p>
             </div>
             <!-- Contrôles de quantité en position absolue -->
             <section
@@ -44,14 +44,14 @@
 import CustomButton from '@/components/buttons/customButton.vue';
 import Button from '@/components/ui/button/Button.vue';
 import { useCart } from '@/composables/queries/useCart';
-import type { Product } from '@/services/locker-products/locker-products-type';
+import type { Product, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { formatPrice } from '@/shared/shared';
 import { ArrowRight, Minus, Plus, ShoppingBasket } from 'lucide-vue-next';
 import { storeToRefs } from 'pinia';
 import { computed, ref, type PropType } from 'vue';
 import { useToast } from 'vue-toastification';
 
-const imageUrl = computed(() => new URL(`../../../assets/allococa/products/water/${product.image}`, import.meta.url).href);
+// const imageUrl = computed(() => new URL(`../../../assets/allococa/products/water/${product.image}`, import.meta.url).href);
 const toast = useToast();
 
 const { waterProductDefaultQuantity, addCartLine, removeCartLine, clearCart } = useCart()
@@ -59,7 +59,7 @@ const { waterProductDefaultQuantity, addCartLine, removeCartLine, clearCart } = 
 const { cart } = storeToRefs(useCart());
 const { product } = defineProps({
     product: {
-        type: Object as PropType<Product>,
+        type: Object as PropType<ProductResponse>,
         required: true
     },
 });
@@ -73,7 +73,10 @@ const incrementWaterpPack = () => {
     addCartLine({
         id: product.id,
         type: "water",
-        products: [{ ...product, quantity: 1 }],
+        products: [{
+            ...product,
+            quantity: 1
+        }],
         quantity: quantity.value,
     })
 
@@ -91,7 +94,10 @@ const decrementWaterpPack = () => {
         removeCartLine({
             id: product.id,
             type: "water",
-            products: [{ ...product, quantity: 1 }],
+            products: [{
+                ...product,
+                quantity: 1
+            }],
             quantity: quantity.value,
         })
     }

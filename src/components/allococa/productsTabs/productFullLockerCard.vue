@@ -1,15 +1,6 @@
 <template>
     <div class="bg-white rounded-sm border p-1 relative h-[236px]">
-        <!-- Contrôles de quantité en position absolue -->
-        <!-- <div
-        @click="fullIncrement" :disabled="casierProductsData.products.length === 24"
-            class="absolute bottom-4 right-2 left-2 flex items-center justify-between bg-white rounded-full  px-2 py-1">
-            
 
-            <span class="text-lg font-semibold w-6 text-center text-gray-800">Approvisionner</span>
-
-         
-        </div> -->
         <div class="absolute bottom-4 right-2 left-2 flex items-center justify-between">
 
             <!-- <CommonButton class="h-[35px]" title="Approvisionner"
@@ -26,31 +17,31 @@
         </div>
 
         <!-- Nom du produit -->
-        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.name }}</h3>
+        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }}</h3>
 
         <!-- Image du produit -->
-        <div class="max-w-[186px]  ml-5">
-            <img :src="imageUrl" :alt="`Image de ${product.name}`" class="" />
+        <div class="w-[60px] h-[186px] ml-5">
+            <img :src="product.image_url" :alt="`Image de ${product.product.name}`"
+                class="object-cover h-full w-full" />
         </div>
 
         <!-- Informations prix et variante -->
         <div class="space-y-0 absolute  top-1/2 text-xs right-[10px]">
             <div class="flex justify-end">
-                <p class=" text-gray-500 font-medium">{{ product.variant }}</p>
+                <p class=" text-gray-500 font-medium">{{ product.label }}</p>
             </div>
             <div class="text-left">
-                <p class=" font-bold text-gray-800">{{ product.price }} FCFA</p>
+                <p class=" font-bold text-gray-800">{{ formatPrice(product.unit_price) }} </p>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import CommonButton from '@/components/buttons/commonButton.vue';
 // import Button from '@/components/ui/button/Button.vue';
-import type { CasierProduct, Product } from '@/services/locker-products/locker-products-type';
-import { Plus } from 'lucide-vue-next';
-import { computed, ref, type PropType } from 'vue';
+import type { CasierProduct, ProductResponse } from '@/services/locker-products/locker-products-type';
+import { formatPrice } from '@/shared/shared';
+import { computed, type PropType } from 'vue';
 
 // Définition des props
 // interface Props {
@@ -60,7 +51,7 @@ import { computed, ref, type PropType } from 'vue';
 
 const { product, casierProductsData } = defineProps({
     product: {
-        type: Object as PropType<Product>,
+        type: Object as PropType<ProductResponse>,
         required: true
     },
     casierProductsData: {
@@ -69,13 +60,13 @@ const { product, casierProductsData } = defineProps({
     }
 });
 
-const imageUrl = computed(() => new URL(`../../../assets/allococa/products/${product.image}`, import.meta.url).href);
+// const imageUrl = computed(() => new URL(`../../../assets/allococa/products/${product.image}`, import.meta.url).href);
 
 const isDisabled = computed(() => casierProductsData.products.length === 24 && casierProductsData.products.length > 0 && casierProductsData.products[0].id == product.id);
 
 // Déclaration de l'émetteur
 const emit = defineEmits<{
-    (e: 'fullIncrement', product: Product): void;
+    (e: 'fullIncrement', product: ProductResponse): void;
 }>();
 
 

@@ -7,7 +7,11 @@
             loop: true,
         }" class="z-10 w-full h-full relative " v-slot="{ canScrollNext, canScrollPrev, scrollNext, scrollPrev }">
             <CarouselContent>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <CarouselItem v-for="product in productsData!.items" :key="product.id"
+                    class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <WaterCard :product="product"></WaterCard>
+                </CarouselItem>
+                <!-- <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                     <WaterCard></WaterCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
@@ -15,10 +19,7 @@
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                     <WaterCard></WaterCard>
-                </CarouselItem>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <WaterCard></WaterCard>
-                </CarouselItem>
+                </CarouselItem> -->
 
             </CarouselContent>
 
@@ -36,26 +37,21 @@
 
 <script setup lang="ts">
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ArrowLeft, ArrowRight, ShoppingBasket } from 'lucide-vue-next';
-import { Button } from '../ui/button';
-import Autoplay from 'embla-carousel-autoplay'
-import CustomButton from '../buttons/customButton.vue';
-import BeverageCard from './card/beverageCard.vue';
+import type { Product } from '@/services/locker-products/locker-products-type';
+import Autoplay from 'embla-carousel-autoplay';
+import type { PropType } from 'vue';
 import WaterCard from './card/waterCard.vue';
+import { useProductsByCategoryQuery } from '@/composables/queries/useProductsQueries';
 
 
-// const { orientation, canScrollPrev, scrollPrev } = useCarousel()
+const { categoryId } = defineProps({
+    categoryId: {
+        type: String,
+        required: true
+    }
+})
 
-// const { orientation, canScrollNext, scrollNext, canScrollPrev, scrollPrev } = useCarousel()
+const { data: productsData, isFetched, isLoading } = useProductsByCategoryQuery(categoryId)
 
-const carousselItems = [
-    "“Simplifiez vos paiements de masse avec Sendchap Business, la solution efficace pour vos transactions d’entreprise.”",
-    "“Automatisez et centralisez vos paiements de masse en quelques clics, sans les tracas des virements multiples”",
-    "“Envoyez des paiements à travers plusieurs réseaux de mobile money (Moov, Orange, MTN, Wave), garantissant une couverture maximale et une flexibilité accrue”",
-    "“Accédez à des Analyse de donnéess détaillés et en temps réel pour suivre vos transactions et optimiser la gestion financière de votre entreprise.”"
-
-]
 
 </script>
-
-<style scoped></style>

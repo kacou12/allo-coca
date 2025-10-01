@@ -8,8 +8,8 @@
                     <!-- capsule -->
                     <section v-for="product in casierProducts.products"
                         class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
-                        <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule>
-                        <!-- <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt=""> -->
+                        <!-- <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule> -->
+                        <LockerCapsule :product-image="product.icon_url"></LockerCapsule>
                     </section>
                     <!-- <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt=""> -->
                     <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
@@ -18,20 +18,22 @@
             </div>
 
             <!-- configuration du casier -->
-            <article class="block lg:hidden w-full">
+            <article v-if="isFetched" class="block lg:hidden w-full">
                 <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
-                    @cart:edit-casier="editCasier" @cart:add-casier="addCasierToCart"
-                    @set:full-quantity="setFullQuantity" @update:casier-quantity="updateCasierQuantity">
+                    :default-products="productsData!.items" @cart:edit-casier="editCasier"
+                    @cart:add-casier="addCasierToCart" @set:full-quantity="setFullQuantity"
+                    @update:casier-quantity="updateCasierQuantity">
                 </productConfiguratorFullLocker>
             </article>
             <!-- 83 -->
         </section>
         <section class="hidden lg:block w-[452px] h-[calc(100vh-240px)] relative">
             <!-- configuration du casier -->
-            <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
+            <article v-if="isFetched" class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
                 <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
-                    @cart:edit-casier="editCasier" @cart:add-casier="addCasierToCart"
-                    @set:full-quantity="setFullQuantity" @update:casier-quantity="updateCasierQuantity">
+                    :default-products="productsData!.items" @cart:edit-casier="editCasier"
+                    @cart:add-casier="addCasierToCart" @set:full-quantity="setFullQuantity"
+                    @update:casier-quantity="updateCasierQuantity">
                 </productConfiguratorFullLocker>
             </article>
         </section>
@@ -41,7 +43,7 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, ref } from 'vue';
 import ProductConfiguratorDialbox from './productConfiguratorDialbox.vue';
-import type { CartLine, CasierProduct, Product } from '@/services/locker-products/locker-products-type';
+import type { CartLine, CasierProduct, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { productCapsuleData } from '@/services/locker-products/locker-products-constants';
 import ProductConfiguratorFullLocker from './productConfiguratorFullLocker.vue';
 import { useCart } from '@/composables/queries/useCart';
@@ -50,6 +52,7 @@ import { useToast } from 'vue-toastification';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import LockerCapsule from './lockerCapsule.vue';
+import { useProductsByCategoryQuery } from '@/composables/queries/useProductsQueries';
 
 
 const route = useRoute();
@@ -58,10 +61,21 @@ const router = useRouter();
 
 const toast = useToast();
 
+const { categoryId } = defineProps({
+    categoryId: {
+        type: String,
+        required: true
+    }
+})
+
+const { data: productsData, isFetched, isLoading } = useProductsByCategoryQuery(categoryId)
+
+
 const { addCartLine, clearCart, removeCartLine, updateCartLine } = useCart();
 const { cart } = storeToRefs(useCart());
 const casierProducts = ref<CasierProduct>({
     quantity: 1,
+    type: "fullLocker",
     products: [
 
     ]
@@ -73,25 +87,18 @@ onBeforeMount(() => {
     console.log('casierProducts', { ...route.query });
     const idCartLine = route.query.id;
     const type = route.query.type;
-    if (!idCartLine || !type || type !== "full-locker") {
+    if (!idCartLine || !type || type !== "fullLocker") {
         return;
     }
     const findedCartLine = cart.value.find(cartLine => cartLine.id === idCartLine);
     casierProducts.value = {
+        type: type,
         quantity: findedCartLine?.quantity ?? 1,
         products: findedCartLine?.products ?? []
     };
 });
 
 
-// const PRODUCTS_DATA: Product[] = [
-//   { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/coca.png', variant: '30cl' },
-//   { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-//   { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/fanta.png', variant: '30cl' },
-//   { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-//   { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-//   { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'src/assets/allococa/products/cocktail-fanta.png', variant: '30cl' },
-// ];
 
 
 const findProductDataCapsule = (productName: string) => {
@@ -106,13 +113,13 @@ const findProductDataCapsule = (productName: string) => {
     return capsuleData!.capsulePath;
 };
 
-const imageUrl = computed(() => findProductDataCapsule("full-locker"));
+const imageUrl = computed(() => findProductDataCapsule("fullLocker"));
 
 const addCasierToCart = () => {
 
     const cartLine: CartLine = {
         id: crypto.randomUUID(),
-        type: "full-locker",
+        type: casierProducts.value.type,
         products: casierProducts.value.products,
         quantity: casierProducts.value.quantity,
     }
@@ -120,6 +127,7 @@ const addCasierToCart = () => {
     addCartLine(cartLine);
 
     casierProducts.value = {
+        type: "fullLocker",
         quantity: 1,
         products: []
     };
@@ -131,7 +139,7 @@ const addCasierToCart = () => {
 const editCasier = () => {
     const idCartLine = route.query.id;
     const type = route.query.type;
-    if (!idCartLine || !type || type !== "full-locker") {
+    if (!idCartLine || !type || type !== "fullLocker") {
         toast.error("Quelque chose s'est mal passe");
 
         return;
@@ -141,7 +149,7 @@ const editCasier = () => {
 
     const cartLine: CartLine = {
         id: idCartLine as string,
-        type: "full-locker",
+        type: "fullLocker",
         products: casierProducts.value.products,
         quantity: casierProducts.value.quantity,
     }
@@ -149,6 +157,7 @@ const editCasier = () => {
     updateCartLine(cartLine);
 
     casierProducts.value = {
+        type: "fullLocker",
         quantity: 1,
         products: []
     };
@@ -173,7 +182,7 @@ const editCasier = () => {
 
 // const casierProducts = ref(7);
 
-const setFullQuantity = (product: Product) => {
+const setFullQuantity = (product: ProductResponse) => {
 
     casierProducts.value.products = Array(24).fill(product);
 }
@@ -185,6 +194,7 @@ const resetCasier = () => {
     console.log("resetCasier");
     console.log('====================================');
     casierProducts.value = {
+        type: "fullLocker",
         quantity: 1,
         products: []
     };

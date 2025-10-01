@@ -39,7 +39,7 @@
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Commander
                     </RouterLink>
 
-                    <RouterLink :to="{ name: AppRoute.ORDERS.name }"
+                    <RouterLink v-if="isAuth" :to="{ name: AppRoute.ORDERS.name }"
                         :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']">Mes commandes
                     </RouterLink>
 
@@ -52,13 +52,14 @@
                 <div class="hidden lg:flex items-center gap-5">
 
                     <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
-                    <section :class="[isScrolledOrHomePage ? 'bg-primary-50' : 'bg-transparent']"
+                    <!-- <section :class="[isScrolledOrHomePage ? 'bg-primary-50' : 'bg-transparent']"
                         class="rounded-full border-[1px] p-[4px] cursor-pointer"
                         @click="router.push({ name: AppRoute.LOGIN.name })">
 
                         <User2Icon :class="[isScrolledOrHomePage ? 'text-white' : 'text-white']" :stroke-width="1"
                             :size="28"></User2Icon>
-                    </section>
+                    </section> -->
+                    <UserMenu :is-scrolled-or-home-page="isScrolledOrHomePage"></UserMenu>
                 </div>
             </header>
 
@@ -91,8 +92,11 @@ import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
 import CartSheet from "../allococa/cart/cartSheet.vue";
 import DrawerSheet from "../dropdowns/drawer-sheet.vue";
+import UserMenu from "./userMenu.vue";
+import { useAuthStore } from "@/stores/useAuthStore";
 
-const { cartQuantityLength } = storeToRefs(useCart());
+const { cartQuantityLength, } = storeToRefs(useCart());
+const { isAuth } = storeToRefs(useAuthStore());
 
 const windowScrollY = ref(0);
 

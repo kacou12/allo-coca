@@ -53,8 +53,8 @@ import { useAuthProfilQuery } from '@/composables/queries/useAuthQueries';
 
 const rememberMe = ref(false)
 
-const password = ref(import.meta.env.PROD ? '' : '3Uek4Co3nhKfICJ');
-const email = ref(import.meta.env.PROD ? '' : 'test@gmail.com');
+const password = ref(import.meta.env.PROD ? '' : 'azertyuiop');
+const email = ref(import.meta.env.PROD ? '' : 'kacou585@gmail.com');
 
 
 
@@ -63,7 +63,7 @@ const router = useRouter();
 const { setUser } = useAuthStore();
 const toast = useToast();
 
-const { data: userProfil, refetch: refetchUserProfil } = useAuthProfilQuery({})
+const { data: userProfil } = useAuthProfilQuery({})
 
 const { handleSubmit, resetForm } = useForm({
     validationSchema: toTypedSchema(loginSchema)
@@ -74,17 +74,16 @@ const {
     isError,
     error,
     mutate,
-    mutateAsync
 } = useMutation({
     mutationFn: (credential: LoginForm) => loginWithCredential(credential),
     onSuccess: async (response) => {
         if (response) {
             // console.log("sucess login", response);
             setUser(response.data!.user);
-            await refetchUserProfil();
+            // await refetchUserProfil();
             router.push({ name: AppRoute.HOME.name, replace: true }).then(() => {
 
-                toast.success(`Welcome ${response.data!.user.first_name}!`);
+                toast.success(`Welcome ${response.data!.user.name}!`);
             });
             //   resetForm();
             //   if (route.query?.redirect) {

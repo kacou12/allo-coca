@@ -5,14 +5,20 @@
             <div class="text-sm font-semibold">{{ cartLineSubTotal * cartLine.quantity }} FCFA</div>
         </div>
 
-        <div class=" text-gray-700 text-xs">
+        <div class=" text-gray-700 text-xs" v-if="cartLine.type == 'water'">
+            <div>
+                quantité: {{ cartLine.quantity }} pack(s)
+            </div>
+        </div>
+        <div class=" text-gray-700 text-xs" v-else>
             <div>
                 quantité: {{ cartLine.quantity }} casier(s)
             </div>
         </div>
         <div class="mb-4 text-gray-700 text-xs">
             <div v-for="product in productsDataGrouped" :key="product.id">
-                {{ product.name }}: {{ product.quantity }} bouteille(s)
+                <!-- {{ product.product.name }}: {{ product.quantity }} bouteille(s) -->
+                {{ product.product.name }}: {{ product.quantity }} bouteille(s)
             </div>
         </div>
 
@@ -38,7 +44,7 @@
 import { useCart } from '@/composables/queries/useCart';
 import { AppRoute } from '@/constants/app-route';
 import router from '@/router';
-import type { CartLine, Product } from '@/services/locker-products/locker-products-type';
+import type { CartLine, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -46,7 +52,7 @@ import { useToast } from 'vue-toastification';
 
 const { cartLine, type } = defineProps<{
     cartLine: CartLine,
-    type: "locker" | "full-locker" | "water"
+    type: "locker" | "fullLocker" | "water"
 }>();
 
 const toast = useToast();
@@ -68,11 +74,11 @@ const goUpdatePage = () => {
             // setCartTabValue("casierCompose")
             router.go(0);
         });
-    } else if (type === "full-locker") {
+    } else if (type === "fullLocker") {
 
         router.push({
             name: AppRoute.PRODUCTS.name, query: {
-                type: "full-locker",
+                type: "fullLocker",
                 id: cartLine.id,
             },
 
@@ -104,7 +110,7 @@ interface GroupedItem {
     totalQuantity: number;
 }
 const productsDataGrouped = computed(() => {
-    const groupedMap = new Map<string, Product>();
+    const groupedMap = new Map<string, ProductResponse>();
     let setProducts = cartLine.products;
     if (type === "locker") {
 
@@ -134,8 +140,9 @@ const removeCartLineAction = () => {
 }
 
 const cartLineSubTotal = computed(() => {
-    return cartLine.products.reduce((total, product) => {
-        return total + product.price * product.quantity
+
+    return productsDataGrouped.value.reduce((total, product) => {
+        return total + product.unit_price * product.quantity
     }, 0);
 });
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full  relative">
+    <div class="w-full  relative" v-if="isFetched">
 
         <Carousel :plugins="[Autoplay({
             delay: 5000,
@@ -7,18 +7,20 @@
             loop: true,
         }" class="z-10 w-full h-full relative " v-slot="{ canScrollNext, canScrollPrev, scrollNext, scrollPrev }">
             <CarouselContent>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <BeverageCard></BeverageCard>
+                <!-- <CarouselItem v-for="product in products" :key="product.id"
+                    class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <BeverageCard :product="product"  ></BeverageCard>
+                </CarouselItem> -->
+                <CarouselItem v-for="product in productsData!.items" :key="product.id"
+                    class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <BeverageCard :product="product"></BeverageCard>
+                </CarouselItem>
+                <!-- <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <BeverageCard :product="products[0]"></BeverageCard>
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <BeverageCard></BeverageCard>
-                </CarouselItem>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <BeverageCard></BeverageCard>
-                </CarouselItem>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <BeverageCard></BeverageCard>
-                </CarouselItem>
+                    <BeverageCard :product="products[0]"></BeverageCard>
+                </CarouselItem> -->
 
             </CarouselContent>
 
@@ -36,25 +38,17 @@
 
 <script setup lang="ts">
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ArrowLeft, ArrowRight, ShoppingBasket } from 'lucide-vue-next';
-import { Button } from '../ui/button';
-import Autoplay from 'embla-carousel-autoplay'
-import CustomButton from '../buttons/customButton.vue';
+import { useProductsByCategoryQuery } from '@/composables/queries/useProductsQueries';
+import Autoplay from 'embla-carousel-autoplay';
 import BeverageCard from './card/beverageCard.vue';
 
+const { categoryId } = defineProps({
+    categoryId: {
+        type: String,
+        required: true
+    }
+})
 
-// const { orientation, canScrollPrev, scrollPrev } = useCarousel()
-
-// const { orientation, canScrollNext, scrollNext, canScrollPrev, scrollPrev } = useCarousel()
-
-const carousselItems = [
-    "“Simplifiez vos paiements de masse avec Sendchap Business, la solution efficace pour vos transactions d’entreprise.”",
-    "“Automatisez et centralisez vos paiements de masse en quelques clics, sans les tracas des virements multiples”",
-    "“Envoyez des paiements à travers plusieurs réseaux de mobile money (Moov, Orange, MTN, Wave), garantissant une couverture maximale et une flexibilité accrue”",
-    "“Accédez à des Analyse de donnéess détaillés et en temps réel pour suivre vos transactions et optimiser la gestion financière de votre entreprise.”"
-
-]
+const { data: productsData, isFetched, isLoading } = useProductsByCategoryQuery(categoryId)
 
 </script>
-
-<style scoped></style>

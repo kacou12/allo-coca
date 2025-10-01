@@ -8,16 +8,22 @@
             <p class="text-primary">100%</p>
         </section>
 
-        <section>
+        <section v-if="isFetched && categoriesData?.items">
             <CommonCocaTabs v-model="cartTabValue" :tabs="tabsData">
                 <template #casierComplet>
-                    <FullLockerTab></FullLockerTab>
+                    <FullLockerTab
+                        :categoryId="categoriesData.items.filter(category => category.name.toLowerCase().includes('boisson'))[0].id">
+                    </FullLockerTab>
                 </template>
                 <template #casierCompose>
-                    <DialboxTab></DialboxTab>
+                    <DialboxTab
+                        :categoryId="categoriesData.items.filter(category => category.name.toLowerCase().includes('boisson'))[0].id">
+                    </DialboxTab>
                 </template>
                 <template #water>
-                    <MineralWaterTab></MineralWaterTab>
+                    <MineralWaterTab
+                        :categoryId="categoriesData.items.filter(category => !category.name.toLowerCase().includes('boisson'))[0].id">
+                    </MineralWaterTab>
                 </template>
 
             </commonCocaTabs>
@@ -30,10 +36,8 @@ import CommonCocaTabs from '@/components/allococa/card/commonCocaTabs.vue';
 import DialboxTab from '@/components/allococa/productsTabs/dialboxTab.vue';
 import FullLockerTab from '@/components/allococa/productsTabs/fullLockerTab.vue';
 import MineralWaterTab from '@/components/allococa/productsTabs/mineralWaterTab.vue';
-import { useCart } from '@/composables/queries/useCart';
-import { AppRoute } from '@/constants/app-route';
-import { storeToRefs } from 'pinia';
-import { nextTick, onBeforeMount, ref, watch } from 'vue';
+import { useCategoriesQuery } from '@/composables/queries/useCategoryQueries';
+import { onBeforeMount, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const tabsData = ref([
@@ -49,6 +53,10 @@ const router = useRouter();
 const cartTabValue = ref<"casierCompose" | "casierComplet" | "water">("casierComplet")
 
 
+
+const { data: categoriesData, isLoading, isFetched } = useCategoriesQuery()
+
+
 // const { cartTabValue } = storeToRefs(useCart())
 
 onBeforeMount(() => {
@@ -59,7 +67,7 @@ onBeforeMount(() => {
     if (!idCartLine || !type) {
         return;
     }
-    if (type == "full-locker") {
+    if (type == "fullLocker") {
         cartTabValue.value = "casierComplet"
     } else if (type == "locker") {
         cartTabValue.value = "casierCompose"

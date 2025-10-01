@@ -8,7 +8,8 @@
                     <!-- capsule -->
                     <section v-for="product in casierProducts.products"
                         class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
-                        <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule>
+                        <!-- <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule> -->
+                        <LockerCapsule :product-image="product.icon_url"></LockerCapsule>
                     </section>
                     <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
                 </div>
@@ -16,20 +17,22 @@
             </div>
 
             <!-- configuration du casier -->
-            <article class="block lg:hidden w-full">
-                <ProductConfiguratorDialbox :casier-products="casierProducts" @increase:quantity="increaseQuantity"
-                    @cart:edit-casier="editCasier" @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier"
-                    @cart:add-casier="addCasierToCart" @update:casier-quantity="updateCasierQuantity">
+            <article v-if="isFetched" class="block lg:hidden w-full">
+                <ProductConfiguratorDialbox :default-products="productsData!.items" :casier-products="casierProducts"
+                    @increase:quantity="increaseQuantity" @cart:edit-casier="editCasier"
+                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
+                    @update:casier-quantity="updateCasierQuantity">
                 </ProductConfiguratorDialbox>
             </article>
             <!-- 83 -->
         </section>
         <section class="hidden lg:block w-[452px] h-[calc(100vh-240px)]  relative ">
             <!-- configuration du casier -->
-            <article class="absolute bottom-0 left-0 right-0  h-[calc(100vh-100px)] w-full ">
-                <ProductConfiguratorDialbox :casier-products="casierProducts" @increase:quantity="increaseQuantity"
-                    @cart:edit-casier="editCasier" @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier"
-                    @cart:add-casier="addCasierToCart" @update:casier-quantity="updateCasierQuantity">
+            <article v-if="isFetched" class="absolute bottom-0 left-0 right-0  h-[calc(100vh-100px)] w-full ">
+                <ProductConfiguratorDialbox :default-products="productsData!.items" :casier-products="casierProducts"
+                    @increase:quantity="increaseQuantity" @cart:edit-casier="editCasier"
+                    @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
+                    @update:casier-quantity="updateCasierQuantity">
                 </ProductConfiguratorDialbox>
             </article>
         </section>
@@ -39,7 +42,7 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, onMounted, ref, watch } from 'vue';
 import ProductConfiguratorDialbox from './productConfiguratorDialbox.vue';
-import type { CartLine, CasierProduct, Product } from '@/services/locker-products/locker-products-type';
+import type { CartLine, CasierProduct, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { productCapsuleData } from '@/services/locker-products/locker-products-constants';
 import { useCart } from '@/composables/queries/useCart';
 
@@ -47,6 +50,17 @@ import { useToast } from 'vue-toastification';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import LockerCapsule from './lockerCapsule.vue';
+import { useProductsByCategoryQuery } from '@/composables/queries/useProductsQueries';
+
+const { categoryId } = defineProps({
+    categoryId: {
+        type: String,
+        required: true
+    }
+})
+
+const { data: productsData, isFetched, isLoading } = useProductsByCategoryQuery(categoryId)
+
 
 const toast = useToast();
 
@@ -56,6 +70,7 @@ const { addCartLine, clearCart, removeCartLine, updateCartLine } = useCart();
 const { cart } = storeToRefs(useCart());
 
 const casierProducts = ref<CasierProduct>({
+    type: "locker",
     quantity: 1,
     products: [
 
@@ -72,6 +87,7 @@ onBeforeMount(() => {
     }
     const findedCartLine = cart.value.find(cartLine => cartLine.id === idCartLine);
     casierProducts.value = {
+        type: "locker",
         quantity: findedCartLine?.quantity ?? 1,
         products: findedCartLine?.products ?? []
     };
@@ -115,12 +131,12 @@ const findProductDataCapsule = (productName: string) => {
 
 // const casierProducts = ref(7);
 
-const increaseQuantity = (product: Product) => {
-    casierProducts.value.products = [...casierProducts.value.products, product]
+const increaseQuantity = (product: ProductResponse) => {
 
+    casierProducts.value.products = [...casierProducts.value.products, ...Array(1).fill(product)];
 };
 
-const decreaseQuantity = (product: Product) => {
+const decreaseQuantity = (product: ProductResponse) => {
 
     const reversedIndex = [...casierProducts.value.products].reverse().findIndex(obj => obj.id === product.id);
 
@@ -137,6 +153,7 @@ const resetCasier = () => {
     console.log("resetCasier");
     console.log('====================================');
     casierProducts.value = {
+        type: "locker",
         quantity: 1,
         products: []
     };
@@ -160,6 +177,7 @@ const addCasierToCart = () => {
     addCartLine(cartLine);
 
     casierProducts.value = {
+        type: "locker",
         quantity: 1,
         products: []
     };
@@ -171,7 +189,7 @@ const addCasierToCart = () => {
 const editCasier = () => {
     const idCartLine = route.query.id;
     const type = route.query.type;
-    if (!idCartLine || !type || type !== "full-locker") {
+    if (!idCartLine || !type || type !== "fullLocker") {
         toast.error("Quelque chose s'est mal passe");
 
         return;
@@ -181,7 +199,7 @@ const editCasier = () => {
 
     const cartLine: CartLine = {
         id: idCartLine as string,
-        type: "full-locker",
+        type: "fullLocker",
         products: casierProducts.value.products,
         quantity: casierProducts.value.quantity,
     }
@@ -189,6 +207,7 @@ const editCasier = () => {
     updateCartLine(cartLine);
 
     casierProducts.value = {
+        type: "locker",
         quantity: 1,
         products: []
     };

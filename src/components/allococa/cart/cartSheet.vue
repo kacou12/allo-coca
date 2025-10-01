@@ -65,24 +65,24 @@
                                     <span class="font-semibold">{{ subtotal }} FCFA</span>
                                 </div>
 
-                                <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
+                                <!-- <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
                                     <span>Consignation</span>
                                     <span class="font-semibold">{{ consignation }} FCFA</span>
-                                </div>
+                                </div> -->
 
-                                <div class="flex items-center space-x-2 text-base">
+                                <!-- <div class="flex items-center space-x-2 text-base">
                                     <input type="checkbox" id="consignation-checkbox" v-model="hasCrates"
                                         class="form-checkbox h-4 w-4 text-primary-50 rounded" />
                                     <label for="consignation-checkbox" class="text-gray-700 text-sm ">Je possède déjà
                                         mes
                                         casiers
                                         (retirer la consigne)</label>
-                                </div>
+                                </div> -->
 
-                                <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
+                                <!-- <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
                                     <span>Livraison</span>
                                     <span class="font-semibold">{{ deliveryFee }} FCFA</span>
-                                </div>
+                                </div> -->
 
                                 <div
                                     class="flex justify-between items-center text-sm font-bold pt-3 border-t border-gray-300">
@@ -141,7 +141,7 @@ import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
 import CartLineCard from "./cartLineCard.vue";
 import { computed, ref } from "vue";
-import type { Product } from "@/services/locker-products/locker-products-type";
+import type { Product, ProductResponse } from "@/services/locker-products/locker-products-type";
 import router from "@/router";
 import { AppRoute } from "@/constants/app-route";
 
@@ -163,8 +163,8 @@ const total = computed(() => {
 })
 
 
-const productsDataGrouped = (products: Product[], type: "locker" | "full-locker" | "water") => {
-    const groupedMap = new Map<string, Product>();
+const productsDataGrouped = (products: ProductResponse[], type: "locker" | "fullLocker" | "water") => {
+    const groupedMap = new Map<string, ProductResponse>();
 
     let setProducts = products;
 
@@ -200,20 +200,20 @@ const goToOrderPage = () => {
 
 
 
-const deliveryFee = ref(1200)
+const deliveryFee = ref(0)
 
 const subtotal = computed(() => {
     const test = cart.value.reduce((total, cartLine) => {
         const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
         return total + groupedProducts.reduce((total, product) => {
-            return total + product.price * product.quantity
+            return total + product.unit_price * product.quantity
         }, 0);
     }, 0);
 
     return cart.value.reduce((total, cartLine) => {
         const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
         return total + groupedProducts.reduce((total, product) => {
-            return total + product.price * product.quantity
+            return total + product.unit_price * product.quantity
         }, 0) * cartLine.quantity;
     }, 0);
 })

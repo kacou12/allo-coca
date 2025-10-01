@@ -1,6 +1,6 @@
 <template>
     <!-- capsule -->
-    <img class="w-full h-full object-cover" :src="imgUrl" alt="">
+    <img class="w-full h-full object-cover" :src="productImage" alt="">
 </template>
 
 <script setup lang="ts">

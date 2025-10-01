@@ -89,46 +89,54 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, ref, watch, type PropType } from 'vue';
-import type { CasierProduct, Product } from 'src/services/locker-products/locker-products-type';
-import ProductLockerCard from './productLockerCard.vue';
 import Button from '@/components/ui/button/Button.vue';
-import ProductFullLockerCard from './productFullLockerCard.vue';
+import type { CasierProduct, ProductResponse } from 'src/services/locker-products/locker-products-type';
+import { computed, onBeforeMount, ref, type PropType } from 'vue';
 import { useRoute } from 'vue-router';
+import ProductFullLockerCard from './productFullLockerCard.vue';
+import cloneDeep from 'lodash/cloneDeep';
 
-const { casierProducts } = defineProps({
+const { casierProducts, defaultProducts } = defineProps({
   casierProducts: {
     type: Object as PropType<CasierProduct>,
+    required: true
+  },
+  defaultProducts: {
+    type: Array as PropType<ProductResponse[]>,
     required: true
   }
 })
 
+
+
+
 const route = useRoute();
 
 const emit = defineEmits<{
-  (e: 'set:fullQuantity', product: Product): void;
+  (e: 'set:fullQuantity', product: ProductResponse): void;
   (e: 'update:casierQuantity', quantity: number): void;
   (e: 'reset:casier'): void;
   (e: 'cart:addCasier'): void;
   (e: 'cart:editCasier'): void;
 }>();
-const INITIAL_PRODUCTS_DATA =
-  [
-    { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'coca.png', variant: '30cl' },
-    { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
-    { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'fanta.png', variant: '30cl' },
-    { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
-    { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
-    { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
-  ]
-  ;
+// const INITIAL_PRODUCTS_DATA =
+//   [
+//     { id: '1', name: 'Coca-Cola', description: '', price: 250, quantity: 0, image: 'coca.png', variant: '30cl' },
+//     { id: '2', name: 'Coca-Cola Zéro', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+//     { id: '3', name: 'Fanta Orange', description: '', price: 250, quantity: 0, image: 'fanta.png', variant: '30cl' },
+//     { id: '4', name: 'Fanta Cocktail', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+//     { id: '5', name: 'Fanta Fruits rouge', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+//     { id: '6', name: 'Fanta Pommes', description: '', price: 250, quantity: 0, image: 'cocktail-fanta.png', variant: '30cl' },
+//   ]
+//   ;
 
 onBeforeMount(() => {
-  products.value = structuredClone(INITIAL_PRODUCTS_DATA.map(product => ({ ...product, quantity: getDefaultProductQuantity(product.id) })));
+  // products.value = structuredClone(INITIAL_PRODUCTS_DATA.map(product => ({ ...product, quantity: getDefaultProductQuantity(product.id) })));
+  products.value = cloneDeep(defaultProducts.map(product => ({ ...product, quantity: getDefaultProductQuantity(product.id) })));
 })
 
-const products = ref(structuredClone(INITIAL_PRODUCTS_DATA));
-// const products = ref(structuredClone(INITIAL_PRODUCTS_DATA.map(product => ({ ...product, quantity: getDefaultProductQuantity(product.id) }))));
+// const products = ref(structuredClone(INITIAL_PRODUCTS_DATA));
+const products = ref(cloneDeep(defaultProducts));
 
 const getDefaultProductQuantity = (idProduct: string) => {
   return casierProducts.products.find(product => product.id === idProduct)?.quantity ?? 0;
@@ -145,23 +153,24 @@ const desiredLockers = ref(casierProducts.quantity); // Default to 1 locker
 // Computed properties
 const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0) * desiredLockers.value);
 const totalLockers = computed(() => Math.floor(totalBottles.value / CASIER_CAPACITY));
-const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.price, 0) * desiredLockers.value);
+const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.unit_price, 0) * desiredLockers.value);
 const maxBottles = computed(() => desiredLockers.value * CASIER_CAPACITY);
 
 const canAddToBasket = computed(() => totalBottles.value >= CASIER_CAPACITY && subTotal.value >= MIN_ORDER_AMOUNT);
 
 // Methods
-const updateProductQuantity = (dataProduct: Product) => {
+const updateProductQuantity = (dataProduct: ProductResponse) => {
   resetQuantities();
   const product = products.value.find(p => p.id === dataProduct.id);
   product!.quantity = 24;
+
 
   // hasBottles.value = true;
   emit('set:fullQuantity', dataProduct);
 };
 
 const resetQuantities = () => {
-  products.value = structuredClone(INITIAL_PRODUCTS_DATA);
+  products.value = cloneDeep(defaultProducts);
   // hasBottles.value = false;
   desiredLockers.value = 1; // Also reset the locker count
   emit('reset:casier');
@@ -170,7 +179,7 @@ const resetQuantities = () => {
 const isEdit = computed(() => {
   const idCartLine = route.query.id;
   const type = route.query.type;
-  return idCartLine && type && type == "full-locker";
+  return idCartLine && type && type == "fullLocker";
 })
 
 const addToBasket = () => {
