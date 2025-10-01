@@ -113,7 +113,8 @@
                             <!-- <div class="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div> -->
                             <div class="flex items-center">
                                 <span class="text-sm font-semibold ">Casier</span>
-                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span>
+                                <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
+                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap }}</span>
                             </div>
                         </div>
 
@@ -122,7 +123,8 @@
                             <!-- <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div> -->
                             <div class="flex items-center">
                                 <span class="text-sm font-semibold ">Packs</span>
-                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.packs }}</span>
+                                <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.packs }}</span> -->
+                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ packsRecap }}</span>
                             </div>
                         </div>
                     </div>
@@ -135,7 +137,7 @@
                             Total
                         </div>
                         <div class=" font-bold text-gray-900">
-                            {{ order.total }} FCFA
+                            {{ subtotal }} FCFA
                         </div>
                     </div>
 
@@ -166,7 +168,7 @@ import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useMutation } from '@tanstack/vue-query';
-import type { CartLine, CreateOrderPayload, DeliveryPayload } from '@/services/locker-products/locker-products-type';
+import type { CartLine, CreateOrderPayload, DeliveryPayload, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { useCreateOrderMutation } from '@/composables/queries/useOrderQueries';
 import { z } from 'zod';
 import { useLoaderStore } from '@/stores/useLoaderStore';
@@ -197,9 +199,9 @@ const deliverySchema = z.object({
 });
 
 const { cart } = storeToRefs(useCart());
-const { formatCartLineToOrderPayload } = useCart();
+const { formatCartLineToOrderPayload, total } = useCart();
 
-const { startLoading } = useLoaderStore();
+const { startLoading, stopLoading } = useLoaderStore();
 
 const router = useRouter();
 const toast = useToast();
@@ -259,6 +261,8 @@ const createOrderHandler = async () => {
         goToSuccessPage();
     } catch (err) {
 
+    } finally {
+        stopLoading();
     }
 
 }
@@ -277,19 +281,50 @@ const casiersRecap = computed(() => {
 
     if (casiers.length === 0) return null;
 
-    const items: string[] = [];
+    const productQuantities: Record<string, { name: string; quantity: number }> = {};
 
     casiers.forEach((line: CartLine) => {
         line.products.forEach((product) => {
             const totalQuantity = line.quantity * product.quantity;
-            items.push(`${totalQuantity}x ${product.name}`);
+            const productId = product.product.id;
+
+            if (productQuantities[productId]) {
+                productQuantities[productId].quantity += totalQuantity;
+            } else {
+                productQuantities[productId] = {
+                    name: product.product.name,
+                    quantity: totalQuantity
+                };
+            }
         });
     });
+
+    const items = Object.values(productQuantities).map(
+        ({ quantity, name }) => `${quantity}x ${name}`
+    );
 
     return items.join(', ');
 });
 
 // Récapitulatif des packs (eau)
+// const packsRecap = computed(() => {
+//     const packs = cart.value.filter(
+//         (line: CartLine) => line.type === 'water'
+//     );
+
+//     if (packs.length === 0) return null;
+
+//     const items: string[] = [];
+
+//     packs.forEach((line: CartLine) => {
+//         line.products.forEach((product) => {
+//             const totalQuantity = line.quantity * product.quantity;
+//             items.push(`${totalQuantity}x ${product.product.name}`);
+//         });
+//     });
+
+//     return items.join(', ');
+// });
 const packsRecap = computed(() => {
     const packs = cart.value.filter(
         (line: CartLine) => line.type === 'water'
@@ -297,18 +332,74 @@ const packsRecap = computed(() => {
 
     if (packs.length === 0) return null;
 
-    const items: string[] = [];
+    const productQuantities: Record<string, { name: string; quantity: number }> = {};
 
     packs.forEach((line: CartLine) => {
         line.products.forEach((product) => {
             const totalQuantity = line.quantity * product.quantity;
-            items.push(`${totalQuantity}x ${product.name}`);
+            const productId = product.product.id;
+
+            if (productQuantities[productId]) {
+                productQuantities[productId].quantity += totalQuantity;
+            } else {
+                productQuantities[productId] = {
+                    name: product.product.name,
+                    quantity: totalQuantity
+                };
+            }
         });
     });
+
+    const items = Object.values(productQuantities).map(
+        ({ quantity, name }) => `${quantity}x ${name}`
+    );
 
     return items.join(', ');
 });
 
+
+
+const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full-locker" | "water") => {
+    const groupedMap = new Map<string, ProductResponse>();
+
+    let setProducts = products;
+
+    if (type === "locker") {
+
+        setProducts = Array.from(new Set(products));
+    }
+
+    // const setProducts = new Set(products);
+
+    setProducts.forEach(product => {
+        const existing = groupedMap.get(product.id);
+
+        if (existing) {
+            existing.quantity += product.quantity;
+        } else {
+            groupedMap.set(product.id, { ...product });
+        }
+    });
+
+    return Array.from(groupedMap.values());
+};
+
+
+const subtotal = computed(() => {
+    const test = cart.value.reduce((total, cartLine) => {
+        const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
+        return total + groupedProducts.reduce((total, product) => {
+            return total + product.unit_price * product.quantity
+        }, 0);
+    }, 0);
+
+    return cart.value.reduce((total, cartLine) => {
+        const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
+        return total + groupedProducts.reduce((total, product) => {
+            return total + product.unit_price * product.quantity
+        }, 0) * cartLine.quantity;
+    }, 0);
+})
 
 </script>
 

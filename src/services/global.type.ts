@@ -5,6 +5,13 @@ export type DefaultFiltersPayload = {
   page: number
   dates?: [Date, Date]
 }
+export type OrderFiltersPayload = {
+  q?: string
+  page: number,
+  limit: number
+  dates: [Date?, Date?]
+}
+
 export type KeyFilterPayload = {
   environment: string    
   name: string

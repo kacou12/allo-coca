@@ -1,6 +1,8 @@
 import { AppRoute } from "@/constants/app-route";
 import { createRouter, createWebHistory } from "vue-router";
 import { requiresAuth } from "./guards";
+import { useCart } from "@/composables/queries/useCart";
+import { storeToRefs } from "pinia";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_API_URL),
@@ -59,7 +61,6 @@ const router = createRouter({
           name: AppRoute.ORDERS.name,
           component: () => import("@/views/allococa/orders/OrdersView.vue"),
           // beforeEnter:Auth.authIsRequire,
-          meta: { requiresAuth: false },
         },
         {
           path: AppRoute.DELIVERY_INITIALISATON.path,
@@ -67,6 +68,13 @@ const router = createRouter({
           component: () =>
             import("@/views/allococa/orders/DeliveryInitialisationView.vue"),
           // beforeEnter:Auth.authIsRequire,
+          beforeEnter: (to, from) => {
+            const { cart } = storeToRefs(useCart());
+            if (cart.value.length > 0) {
+              return true;
+            }
+            return AppRoute.HOME.name;
+          },
           meta: { requiresAuth: false },
         },
         {
@@ -75,6 +83,13 @@ const router = createRouter({
           component: () =>
             import("@/views/allococa/orders/DeliverySuccessView.vue"),
           // beforeEnter:Auth.authIsRequire,
+          beforeEnter: (to, from) => {
+            const { cart } = storeToRefs(useCart());
+            if (from.name === AppRoute.DELIVERY_INITIALISATON.name) {
+              return true;
+            }
+            return AppRoute.HOME.name;
+          },
           meta: { requiresAuth: false },
         },
       ],
@@ -144,6 +159,6 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach(requiresAuth)
+router.beforeEach(requiresAuth)
 
 export default router;

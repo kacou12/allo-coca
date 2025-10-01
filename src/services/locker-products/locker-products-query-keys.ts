@@ -1,4 +1,4 @@
-import type { DefaultFiltersPayload, TransactionFiltersPayload } from '../global.type'
+import type { DefaultFiltersPayload, OrderFiltersPayload, TransactionFiltersPayload } from '../global.type'
 
 export const productsQueryKeys = {
   // users: (country: string) => ['users', country],
@@ -19,6 +19,13 @@ export const productsQueryKeys = {
       { type: payload.type },
       { operator: payload.operator }, // Ajout du champ 'operator'
       { dates: payload.dates },       // Ajout du champ 'dates'
+    ],
+    ordersFilters: (payload: OrderFiltersPayload) => [
+      'ordersFilters',
+      { limit: payload.limit },
+      { page: payload.page },
+      { q: payload.q },
+     { dates: payload.dates },       // Ajout du champ 'dates'
     ],
   serviceAvailability: ({ country }: { country: string }) => ['serviceAvailability', country],
   

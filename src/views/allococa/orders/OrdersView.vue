@@ -9,12 +9,14 @@
 
                     <SearchBar placeholder="Rechercher une commande"></SearchBar>
                 </div>
-                <CommonDatesFilter :update-handler="updateData" v-model="dates"></commonDatesFilter>
+                <CommonDatesFilter :can-reset-filter="true" :update-handler="updateData" @reset-filter="resetFilter"
+                    v-model="dates">
+                </commonDatesFilter>
             </div>
         </section>
 
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-            <OrderCard v-for="order in fakeOrders" :order="order" :key="order.id"></OrderCard>
+            <OrderCard v-for="order in ordersData?.items" :order="order" :key="order.id"></OrderCard>
         </section>
     </div>
 </template>
@@ -23,25 +25,48 @@
 import OrderCard from '@/components/allococa/card/orders/orderCard.vue';
 import CommonDatesFilter from '@/components/common/commonDatesFilter.vue';
 import SearchBar from '@/components/users/SearchBar.vue';
-import { useAuthStore } from "@/stores/useAuthStore";
+import { useOrdersFiltersQuery } from '@/composables/queries/useOrderQueries';
 import { useLoaderStore } from "@/stores/useLoaderStore";
-import { useTransactionFiltersStore } from "@/stores/useTransactionFilterStore";
-import {
-    CalendarDate
-} from '@internationalized/date';
-import { useWindowSize } from '@vueuse/core';
-import { ArrowRight } from "lucide-vue-next";
-import { storeToRefs } from "pinia";
 import type { DateRange } from "radix-vue";
-import { ref, watch, type Ref } from "vue";
+import { ref, type Ref } from "vue";
 
-let date = new Date();
+const { filters, data: ordersData } = useOrdersFiltersQuery();
+
+const { startLoading, stopLoading, startLoadingSkeleton } = useLoaderStore();
+
+let date = new Date()
+
+
+
 
 const dates = ref({
-    start: new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-    end: new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+    start: undefined,
+    end: undefined,
+    // start: new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+    // end: new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
 }) as Ref<DateRange>
 
+const resetFilter = () => {
+    console.log("reset");
+    dates.value = {
+        start: undefined,
+        end: undefined,
+    };
+    filters.dates = [];
+}
+
+const updateData = () => {
+
+    console.log("wataru");
+    const startDate = dates.value.start!.toDate('Africa/Abidjan')
+    const endDate = dates.value.end!.toDate('Africa/Abidjan')
+    filters.dates = [dates.value.start!.toDate('Africa/Abidjan'), dates.value.end!.toDate('Africa/Abidjan')]
+    startLoadingSkeleton();
+}
+
+
+
+// useOrdersFiltersQuery
 
 const fakeOrders = ref(
     [
@@ -161,12 +186,6 @@ const fakeOrders = ref(
         }]
 );
 
-const updateData = () => {
-    // tabsValue.value = "";
-    const startDate = dates.value.start!.toDate('Africa/Abidjan')
-    const endDate = dates.value.end!.toDate('Africa/Abidjan')
-    // filters.dates = [dates.value.start!.toDate('Africa/Abidjan'), dates.value.end!.toDate('Africa/Abidjan')]
-}
 
 </script>
 

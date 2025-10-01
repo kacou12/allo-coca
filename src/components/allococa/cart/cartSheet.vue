@@ -141,7 +141,7 @@ import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
 import CartLineCard from "./cartLineCard.vue";
 import { computed, ref } from "vue";
-import type { Product } from "@/services/locker-products/locker-products-type";
+import type { Product, ProductResponse } from "@/services/locker-products/locker-products-type";
 import router from "@/router";
 import { AppRoute } from "@/constants/app-route";
 
@@ -163,8 +163,8 @@ const total = computed(() => {
 })
 
 
-const productsDataGrouped = (products: Product[], type: "locker" | "full-locker" | "water") => {
-    const groupedMap = new Map<string, Product>();
+const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full-locker" | "water") => {
+    const groupedMap = new Map<string, ProductResponse>();
 
     let setProducts = products;
 
@@ -206,14 +206,14 @@ const subtotal = computed(() => {
     const test = cart.value.reduce((total, cartLine) => {
         const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
         return total + groupedProducts.reduce((total, product) => {
-            return total + product.price * product.quantity
+            return total + product.unit_price * product.quantity
         }, 0);
     }, 0);
 
     return cart.value.reduce((total, cartLine) => {
         const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type);
         return total + groupedProducts.reduce((total, product) => {
-            return total + product.price * product.quantity
+            return total + product.unit_price * product.quantity
         }, 0) * cartLine.quantity;
     }, 0);
 })

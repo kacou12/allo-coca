@@ -6,11 +6,11 @@ export interface LockerProduct {
 }
 
 export interface DeliveryPayload {
-    fullName?: string;
-    phone?: string;
-    common?: string;
-    deliveryAdress?: string;
-    instructions?: string;
+  fullName?: string;
+  phone?: string;
+  common?: string;
+  deliveryAdress?: string;
+  instructions?: string;
 }
 
 
@@ -18,7 +18,7 @@ export interface CartLine {
   id: string,
   quantity: number,
   type: "full-locker" | "locker" | "water",
-  products:Product[]
+  products:ProductResponse[]
 } 
 export interface Product {
   id: string,
@@ -57,7 +57,7 @@ export interface ProductVariant {
 
 export interface CasierProduct {
   quantity: number,
-  products:Product[]
+  products:ProductResponse[]
 } 
 
 

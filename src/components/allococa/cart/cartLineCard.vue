@@ -5,14 +5,20 @@
             <div class="text-sm font-semibold">{{ cartLineSubTotal * cartLine.quantity }} FCFA</div>
         </div>
 
-        <div class=" text-gray-700 text-xs">
+        <div class=" text-gray-700 text-xs" v-if="cartLine.type == 'water'">
+            <div>
+                quantité: {{ cartLine.quantity }} pack(s)
+            </div>
+        </div>
+        <div class=" text-gray-700 text-xs" v-else>
             <div>
                 quantité: {{ cartLine.quantity }} casier(s)
             </div>
         </div>
         <div class="mb-4 text-gray-700 text-xs">
             <div v-for="product in productsDataGrouped" :key="product.id">
-                {{ product.name }}: {{ product.quantity }} bouteille(s)
+                <!-- {{ product.product.name }}: {{ product.quantity }} bouteille(s) -->
+                {{ product.product.name }}: {{ product.quantity }} bouteille(s)
             </div>
         </div>
 
@@ -38,7 +44,7 @@
 import { useCart } from '@/composables/queries/useCart';
 import { AppRoute } from '@/constants/app-route';
 import router from '@/router';
-import type { CartLine, Product } from '@/services/locker-products/locker-products-type';
+import type { CartLine, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -104,7 +110,7 @@ interface GroupedItem {
     totalQuantity: number;
 }
 const productsDataGrouped = computed(() => {
-    const groupedMap = new Map<string, Product>();
+    const groupedMap = new Map<string, ProductResponse>();
     let setProducts = cartLine.products;
     if (type === "locker") {
 
@@ -135,7 +141,7 @@ const removeCartLineAction = () => {
 
 const cartLineSubTotal = computed(() => {
     return cartLine.products.reduce((total, product) => {
-        return total + product.price * product.quantity
+        return total + product.unit_price * product.quantity
     }, 0);
 });
 

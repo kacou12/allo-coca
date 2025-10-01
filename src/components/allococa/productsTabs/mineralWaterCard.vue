@@ -74,12 +74,7 @@ const incrementWaterpPack = () => {
         id: product.id,
         type: "water",
         products: [{
-            description: product.product.description,
-            id: product.id,
-            image_url: product.image_url,
-            name: product.product.name,
-            price: product.unit_price,
-            icon_url: product.icon_url,
+            ...product,
             quantity: 1
         }],
         quantity: quantity.value,
@@ -100,12 +95,7 @@ const decrementWaterpPack = () => {
             id: product.id,
             type: "water",
             products: [{
-                description: product.product.description,
-                id: product.id,
-                image_url: product.image_url,
-                name: product.product.name,
-                price: product.unit_price,
-                icon_url: product.icon_url,
+                ...product,
                 quantity: 1
             }],
             quantity: quantity.value,

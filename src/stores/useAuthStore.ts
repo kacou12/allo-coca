@@ -24,7 +24,7 @@ export const useAuthStore = defineStore(
 
     const logout = () => {
       user.value = null;
-      //   t    oken.value = null
+      //   token.value = null
     };
 
     return {

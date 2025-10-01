@@ -59,7 +59,7 @@ defineProps({
     }
 })
 
-const { startLoading } = useLoaderStore();
+const { startLoading, stopLoading } = useLoaderStore();
 
 const { isAuth } = storeToRefs(useAuthStore());
 
@@ -68,6 +68,7 @@ const { logout } = useAuthStore();
 const handleLogout = () => {
     startLoading();
     logout();
+    setTimeout(() => { stopLoading() }, 3000);
 }
 
 
