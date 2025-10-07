@@ -1,7 +1,7 @@
 export const lockerRouteApi = {
-  default: 'app/api/v1/variant/',
-  order: '/client/api/v1/order/',
-  createOrder: '/client/api/v1/order/',
+  default: 'app/api/v1/variant',
+  order: '/client/api/v1/order',
+  createOrder: '/client/api/v1/order',
   stats: '/merchant/api/v1/transaction/info_stats',
 
   transactions: (id: string) => `/admin/api/v1/transaction/merchant/${id}`,

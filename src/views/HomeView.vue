@@ -31,7 +31,7 @@
 
       </article>
 
-      <!-- <HomeTabs></HomeTabs> -->
+      <HomeTabs></HomeTabs>
 
 
     </section>

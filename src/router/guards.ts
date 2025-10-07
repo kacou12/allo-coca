@@ -16,7 +16,7 @@ export function requiresAuth(
   if (to.meta.requiresAuth) {
     // see more https://router.vuejs.org/guide/advanced/meta.html
     // see more https://router.vuejs.org/guide/advanced/navigation-guards.html
-    if (!getAccessToken() && to.name !== AppRoute.LOGIN.name) {
+    if (!getAccessToken() && (to.name !== AppRoute.LOGIN.name && to.name !== AppRoute.REGISTER.name)) {
       // RouteRecordNameGeneric
       return AppRoute.LOGIN.path
     }else if((to.name === AppRoute.LOGIN.name || to.name === AppRoute.REGISTER.name) && getAccessToken()) {
