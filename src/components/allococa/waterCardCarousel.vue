@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full  relative">
+    <div class="w-full  relative" v-if="isFetched">
 
         <Carousel :plugins="[Autoplay({
             delay: 5000,
@@ -11,16 +11,6 @@
                     class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                     <WaterCard :product="product"></WaterCard>
                 </CarouselItem>
-                <!-- <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <WaterCard></WaterCard>
-                </CarouselItem>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <WaterCard></WaterCard>
-                </CarouselItem>
-                <CarouselItem class=" md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <WaterCard></WaterCard>
-                </CarouselItem> -->
-
             </CarouselContent>
 
 
