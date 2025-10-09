@@ -1,6 +1,7 @@
 import type { CartLine, CartPayloadOrderLine, ProductResponse } from '@/services/locker-products/locker-products-type'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { uniqBy } from 'lodash';
 
 export const useCart = defineStore('cart', () => {
   const cart = ref<CartLine[]>([])
@@ -90,7 +91,8 @@ const packLength = computed(() => {
 
     if (type === "locker") {
 
-        setProducts = Array.from(new Set(products));
+        // setProducts = Array.from(new Set(products));
+        setProducts = uniqBy(setProducts, 'product_id');
     }
 
     // const setProducts = new Set(products);

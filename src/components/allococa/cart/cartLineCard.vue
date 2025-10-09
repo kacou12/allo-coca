@@ -47,7 +47,7 @@ import router from '@/router';
 import type { CartLine, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-
+import { uniqBy } from 'lodash';
 import { useToast } from 'vue-toastification';
 
 const { cartLine, type } = defineProps<{
@@ -114,7 +114,8 @@ const productsDataGrouped = computed(() => {
     let setProducts = cartLine.products;
     if (type === "locker") {
 
-        setProducts = Array.from(new Set(cartLine.products));
+        // setProducts = Array.from(new Set(cartLine.products));
+        setProducts = uniqBy(cartLine.products, 'product_id');
     }
 
 

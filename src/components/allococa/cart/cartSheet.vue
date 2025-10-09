@@ -144,6 +144,8 @@ import { computed, ref } from "vue";
 import type { Product, ProductResponse } from "@/services/locker-products/locker-products-type";
 import router from "@/router";
 import { AppRoute } from "@/constants/app-route";
+import { uniqBy } from 'lodash';
+
 
 defineProps({
     isScrolled: {
@@ -169,8 +171,7 @@ const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full
     let setProducts = products;
 
     if (type === "locker") {
-
-        setProducts = Array.from(new Set(products));
+        setProducts = uniqBy(setProducts, 'product_id');
     }
 
     // const setProducts = new Set(products);

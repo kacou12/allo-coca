@@ -115,7 +115,7 @@
                                 <span class="text-sm font-semibold ">Casier: </span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap
-                                    }}</span>
+                                }}</span>
                             </div>
                         </div>
 
@@ -178,7 +178,8 @@ import { useCart } from '@/composables/queries/useCart';
 import { storeToRefs } from 'pinia';
 import { formatPrice } from '@/shared/shared';
 import cloneDeep from 'lodash/cloneDeep';
-import { clone } from 'lodash';
+import { clone, uniqBy } from 'lodash';
+
 
 const deliverySchema = z.object({
     fullName: z.string()
@@ -292,10 +293,12 @@ const casiersRecap = computed(() => {
 
     if (casiers.length === 0) return null;
 
+
     const productQuantities: Record<string, { name: string; quantity: number }> = {};
 
     casiers.forEach((line: CartLine) => {
-        line.products.forEach((product) => {
+        let setProducts = uniqBy(line.products, 'product_id');;
+        setProducts.forEach((product) => {
             const totalQuantity = line.quantity * product.quantity;
             const productId = product.product.id;
 
@@ -377,7 +380,9 @@ const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full
 
     if (type === "locker") {
 
-        setProducts = Array.from(new Set(products));
+        // setProducts = Array.from(new Set(products));
+
+        setProducts = uniqBy(products, 'product_id');
     }
 
     // const setProducts = new Set(products);
