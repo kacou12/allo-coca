@@ -9,6 +9,7 @@ export interface OrderResponse {
   user_id: string
   user: User
   order_date: string
+  reference:string
 }
 
 interface Delivery {

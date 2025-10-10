@@ -193,7 +193,8 @@ const isEdit = computed(() => {
 
 const resetQuantities = () => {
   // products.value = structuredClone(INITIAL_PRODUCTS_DATA);
-  products.value = cloneDeep(defaultProducts);
+  // products.value = cloneDeep(defaultProducts);
+  products.value = cloneDeep(defaultProducts.map(product => ({ ...product, quantity: 0 })));
   desiredLockers.value = 1; // Also reset the locker count
   emit('reset:casier');
 };

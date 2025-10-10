@@ -1,14 +1,14 @@
 <template>
     <div class="bg-[#F6F6F6] rounded-lg p-6 flex flex-col justify-between">
         <!-- En-tête avec titre et date -->
-        <div class="flex items-center justify-between mb-4 ml-5">
+        <div class="flex items-center justify-between mb-4 ">
             <h3 class="text-lg font-semibold text-gray-800">
-                Commande du {{ formatOrderDate(order.order_date) }}
+                Commande : {{ order.reference }}
             </h3>
         </div>
 
         <!-- Items de la commande -->
-        <div class="space-y-2 mb-4 ml-5">
+        <div class="space-y-2 mb-4 ">
             <!-- Casier -->
             <div v-if="casiersRecap" class="flex items-start space-x-2">
                 <div class="flex items-center">

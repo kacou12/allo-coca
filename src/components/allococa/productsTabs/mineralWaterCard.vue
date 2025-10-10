@@ -1,13 +1,13 @@
 <template>
     <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
         <section class="h-[268px]  flex items-center justify-center">
-            <img class="w-[69px] h-[220px]" :src="product.image_url" alt=""></img>
+            <img class="min-w-[69px] h-[220px]" :src="product.image_url" alt=""></img>
         </section>
         <section class="space-y-1">
-            <p class="text-[10px]  text-[#888888]">{{ product.product.description }}</p>
-            <p class="font-medium text-lg">{{ product.product.name }}</p>
+            <p class="text-[10px]  text-[#888888]">{{ product.description }}</p>
+            <p class="font-medium text-lg">{{ product.product.name }} {{ product.label }}</p>
             <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
-                <p class="text-sm text-[#888888]">{{ product.label }}</p>
+                <p class="text-sm text-[#888888]">{{ product.size }}</p>
                 <p class="text-sm pl-2">{{ formatPrice(product.unit_price) }}</p>
             </div>
             <!-- Contrôles de quantité en position absolue -->

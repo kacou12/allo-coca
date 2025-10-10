@@ -17,7 +17,7 @@
         </div>
 
         <!-- Nom du produit -->
-        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }}</h3>
+        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }} {{ product.label }}</h3>
 
         <!-- Image du produit -->
         <div class="w-[60px] h-[186px] ml-5">
@@ -28,7 +28,7 @@
         <!-- Informations prix et variante -->
         <div class="space-y-0 absolute  top-1/2 text-xs right-[10px]">
             <div class="flex justify-end">
-                <p class=" text-gray-500 font-medium">{{ product.label }}</p>
+                <p class=" text-gray-500 font-medium">{{ product.size }}</p>
             </div>
             <div class="text-left">
                 <p class=" font-bold text-gray-800">{{ formatPrice(product.unit_price) }} </p>

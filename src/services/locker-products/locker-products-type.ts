@@ -31,6 +31,7 @@ export interface Product {
 }
 export interface ProductResponse {
   product_id: string
+  description: string
   size: string
   label: string
   quantity: number

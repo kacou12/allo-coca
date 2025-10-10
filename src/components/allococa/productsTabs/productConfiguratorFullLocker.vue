@@ -151,9 +151,9 @@ const desiredLockers = ref(casierProducts.quantity); // Default to 1 locker
 
 
 // Computed properties
-const totalBottles = computed(() => products.value.reduce((sum, p) => sum + p.quantity, 0) * desiredLockers.value);
+const totalBottles = computed(() => casierProducts.products.reduce((sum, p) => sum + p.quantity, 0) * desiredLockers.value);
 const totalLockers = computed(() => Math.floor(totalBottles.value / CASIER_CAPACITY));
-const subTotal = computed(() => products.value.reduce((sum, p) => sum + p.quantity * p.unit_price, 0) * desiredLockers.value);
+const subTotal = computed(() => casierProducts.products.reduce((sum, p) => sum + p.quantity * p.unit_price, 0) * desiredLockers.value);
 const maxBottles = computed(() => desiredLockers.value * CASIER_CAPACITY);
 
 const canAddToBasket = computed(() => totalBottles.value >= CASIER_CAPACITY && subTotal.value >= MIN_ORDER_AMOUNT);

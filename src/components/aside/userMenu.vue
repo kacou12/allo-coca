@@ -18,19 +18,19 @@
                 <!-- <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> -->
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem @click="handleLogout">
+            <DropdownMenuItem class="cursor-pointer" @click="handleLogout">
                 <span>Déconnexion</span>
                 <!-- <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> -->
             </DropdownMenuItem>
         </DropdownMenuContent>
         <DropdownMenuContent v-else class="w-56">
 
-            <DropdownMenuItem @click="$router.push({ name: AppRoute.LOGIN.name })">
+            <DropdownMenuItem class="cursor-pointer" @click="$router.push({ name: AppRoute.LOGIN.name })">
                 <span>Connexion</span>
                 <!-- <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> -->
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem @click="$router.push({ name: AppRoute.REGISTER.name })">
+            <DropdownMenuItem class="cursor-pointer" @click="$router.push({ name: AppRoute.REGISTER.name })">
                 <span>Inscription</span>
                 <!-- <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> -->
             </DropdownMenuItem>
