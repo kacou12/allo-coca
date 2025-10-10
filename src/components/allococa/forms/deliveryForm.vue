@@ -179,6 +179,7 @@ import { storeToRefs } from 'pinia';
 import { formatPrice } from '@/shared/shared';
 import cloneDeep from 'lodash/cloneDeep';
 import { clone } from 'lodash';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const deliverySchema = z.object({
     fullName: z.string()
@@ -203,6 +204,7 @@ const deliverySchema = z.object({
 });
 
 const { cart, subtotal, casierLength, packLength } = storeToRefs(useCart());
+const { user } = storeToRefs(useAuthStore());
 const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
 const { startLoading, stopLoading } = useLoaderStore();
@@ -219,10 +221,10 @@ const { handleSubmit, resetForm } = useForm({
 
 const deliveryState = ref<DeliveryPayload>(
     {
-        fullName: undefined,
-        phone: undefined,
+        fullName: user.value?.name,
+        phone: user.value?.phone,
         common: undefined,
-        deliveryAdress: undefined,
+        deliveryAdress: user.value?.address,
         instructions: undefined
 
     }

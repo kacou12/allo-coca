@@ -9,13 +9,13 @@ export type RegisterForm = z.infer<typeof registerSchema>;
 export type Authentication = {
   access_token: string;
   access_token_type: string;
+  refresh_token: string;
   duration: string;
   deviceId: string;
 };
 
 export type LoginRequest = LoginForm & {};
 export type RegisterRequest = Omit<RegisterForm, "confirmPassword">;
-
 
 export type LoginResponse = Authentication & {
   user: AuthResponse;

@@ -1,0 +1,34 @@
+<template>
+    <div class="w-full ">
+        <!-- background-color':${getTransactionStatusData} -->
+        <div :style="{ backgroundColor: getTransactionStatusData(orderStatusConfigEnumData)?.color, color: getTransactionStatusData(orderStatusConfigEnumData)?.textColor }"
+            class="text-xs text-center font-normal px-2 py-[2px] rounded-sm w-full">
+            {{ getTransactionStatusData(orderStatusConfigEnumData)?.name }}</div>
+    </div>
+</template>
+
+<script setup lang="ts">
+
+import { orderStatusConfigEnumData, type OrderResponse, type StatusConfigEnum } from '@/services/locker-products/order-type';
+import type { PropType } from 'vue';
+
+const getTransactionStatusData = (dataConfigEnums: StatusConfigEnum[]) => {
+    for (let index = 0; index < dataConfigEnums.length; index++) {
+        const itemEnum = dataConfigEnums[index];
+        if (order.status.toLowerCase() === itemEnum.value.toLowerCase()) {
+            return itemEnum;
+        }
+
+    }
+}
+
+const { order } = defineProps({
+    order: {
+        type: Object as PropType<OrderResponse>,
+        required: true
+    }
+})
+
+</script>
+
+<style scoped></style>

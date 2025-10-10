@@ -9,9 +9,9 @@
 
                     <SearchBar placeholder="Rechercher une commande"></SearchBar>
                 </div>
-                <CommonDatesFilter :can-reset-filter="true" :update-handler="updateData" @reset-filter="resetFilter"
+                <!-- <CommonDatesFilter :can-reset-filter="true" :update-handler="updateData" @reset-filter="resetFilter"
                     v-model="dates">
-                </commonDatesFilter>
+                </commonDatesFilter> -->
             </div>
         </section>
 
