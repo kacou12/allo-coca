@@ -9,20 +9,21 @@
             <p class="text-[10px]  text-[#888888]">
                 <!-- <span v-if="product.quantity">{{ product.quantity }}</span>
                 <span v-if="product.size">{{ product.size }}</span> -->
-                <span>{{ product.product.description }}</span>
+                <span>{{ product.description }}</span>
             </p>
 
-            <p class="font-medium text-lg">{{ product.product.name }}</p>
+            <p class="font-medium text-lg">{{ product.product.name }} {{ product.label }}</p>
 
-            <div class="divide-x-[1px] divide-[#D1D1D1] space-x-2 mt-1 flex items-center gap-2">
-                <p class="text-sm pl-2">{{ formatPrice(product.unit_price) }} </p>
+            <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
+                <p class="text-sm text-[#888888]">{{ product.size }}</p>
+                <p class="text-sm pl-2">{{ formatPrice(product.unit_price) }}</p>
             </div>
 
             <div class="flex items-center justify-between">
                 <Button class="rounded-[90px] h-8 border-black" variant="outline">
                     <div class="flex items-center gap-1">
                         <ShoppingBasket></ShoppingBasket>
-                        <!-- <span class="text-xs font-medium">{{ product.variant || 'Pack' }}</span> -->
+                        <span class="text-xs font-medium">{{ product.size }}</span>
                     </div>
                 </Button>
 

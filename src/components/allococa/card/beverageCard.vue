@@ -4,10 +4,11 @@
             <img :src="product.image_url" :alt="product.product.name" class="w-[69px] h-[220px]" />
         </section>
         <section class="space-y-1">
-            <p class="text-[10px] text-[#888888]">{{ product.product.description }}</p>
-            <p class="font-medium text-lg">{{ product.product.name }}</p>
-            <div class="divide-x-[1px] divide-[#D1D1D1] space-x-2 mt-1 flex items-center gap-2">
-                <p class="text-sm text-[#888888]">{{ product.label }}</p>
+            <p class="text-[10px] text-[#888888]">{{ product.description }}</p>
+            <p class="font-medium text-lg">{{ product.product.name }} {{ product.label }}</p>
+
+            <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
+                <p class="text-sm text-[#888888]">{{ product.size }}</p>
                 <p class="text-sm pl-2">{{ formatPrice(product.unit_price) }}</p>
             </div>
             <div class="flex items-center justify-between">
