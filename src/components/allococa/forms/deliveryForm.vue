@@ -115,7 +115,7 @@
                                 <span class="text-sm font-semibold ">Casier: </span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap
-                                    }}</span>
+                                }}</span>
                             </div>
                         </div>
 
@@ -179,6 +179,7 @@ import { storeToRefs } from 'pinia';
 import { formatPrice } from '@/shared/shared';
 import cloneDeep from 'lodash/cloneDeep';
 import { clone, uniqBy } from 'lodash';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 
 const deliverySchema = z.object({
