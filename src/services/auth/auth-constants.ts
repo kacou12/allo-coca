@@ -1,6 +1,6 @@
 export enum Authentication {
   AccessToken = "access-token",
-  RefreshToken = "refresh-token",
+  RefreshToken = "allococa-refresh-token",
   DeviceId = "device-id",
   ExpiryIn = "expires-in",
 }
@@ -15,5 +15,5 @@ export const AuthRouteApi = {
   updatePassword: "/client/api/v1/auth/password-update",
   // getOne: (id: string) => `/api/v1/admins/${id}`,
   logout: "/client/api/v1/auth/logout",
-  refreshToken: "/client/api/v1/auth/refresh-token",
+  refreshToken: "/client/api/v1/auth/refresh",
 };

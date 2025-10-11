@@ -115,7 +115,7 @@
                                 <span class="text-sm font-semibold ">Casier: </span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap
-                                }}</span>
+                                    }}</span>
                             </div>
                         </div>
 
@@ -204,6 +204,7 @@ const deliverySchema = z.object({
 });
 
 const { cart, subtotal, casierLength, packLength } = storeToRefs(useCart());
+const { user } = storeToRefs(useAuthStore());
 const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
 const { startLoading, stopLoading } = useLoaderStore();
@@ -220,10 +221,10 @@ const { handleSubmit, resetForm } = useForm({
 
 const deliveryState = ref<DeliveryPayload>(
     {
-        fullName: undefined,
-        phone: undefined,
+        fullName: user.value?.name,
+        phone: user.value?.phone,
         common: undefined,
-        deliveryAdress: undefined,
+        deliveryAdress: user.value?.address,
         instructions: undefined
 
     }

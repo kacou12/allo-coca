@@ -1,24 +1,31 @@
-import type { DefaultFiltersPayload } from '../global.type'
-import { createKeyApi, deleteKeyApi, fetchKeyByIdApi, fetchFiltersKeysApi } from './key-api'
-import type { KeyRequest, KeyResponse } from './key-type'
+import type { DefaultFiltersPayload } from "../global.type";
+import {
+  createKeyApi,
+  deleteKeyApi,
+  fetchKeyByIdApi,
+  fetchFiltersKeysApi,
+} from "./key-api";
+import type { KeyRequest, KeyResponse } from "./key-type";
 
 export async function fetchFiltersKeys(
   payload?: DefaultFiltersPayload,
 ): Promise<PaginationResponse<KeyResponse> | undefined> {
   try {
-    const res = await fetchFiltersKeysApi(payload)
-    return res?.data
+    const res = await fetchFiltersKeysApi(payload);
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
-export async function fetchKeyById(id: string): Promise<KeyResponse | undefined> {
+export async function fetchKeyById(
+  id: string,
+): Promise<KeyResponse | undefined> {
   try {
-    const res = await fetchKeyByIdApi({ id })
-    return res?.data
+    const res = await fetchKeyByIdApi({ id });
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
@@ -27,26 +34,28 @@ export async function fetchKeyById(id: string): Promise<KeyResponse | undefined>
 //     const res = await updateKeyApi({ id, data })
 //     return res?.data
 //   } catch (error: any) {
-//     throw Error(error.response.data.message)
+//     throw Error(error.response.data.msg)
 //   }
 // }
 
-export async function createKey(data: KeyRequest): Promise<KeyResponse | undefined> {
+export async function createKey(
+  data: KeyRequest,
+): Promise<KeyResponse | undefined> {
   try {
-    const res = await createKeyApi(data)
-    return res?.data
+    const res = await createKeyApi(data);
+    return res?.data;
   } catch (error: any) {
     console.log(error);
-    
-    throw Error(error.response.data.error)
+
+    throw Error(error.response.data.error);
   }
 }
 
 export async function deleteKey(id: string): Promise<any | undefined> {
   try {
-    const res = await deleteKeyApi({ id })
-    return res?.data
+    const res = await deleteKeyApi({ id });
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.error)
+    throw Error(error.response.data.error);
   }
 }

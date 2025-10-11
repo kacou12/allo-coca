@@ -5,6 +5,7 @@
             <h3 class="text-lg font-semibold text-gray-800">
                 Commande : {{ order.reference }}
             </h3>
+            <OrderStatusBloc :order="order"></OrderStatusBloc>
         </div>
 
         <!-- Items de la commande -->
@@ -50,6 +51,7 @@
 import type { OrderResponse } from '@/services/locker-products/order-type'
 import { formatPrice } from '@/shared/shared'
 import { computed, type PropType } from 'vue'
+import OrderStatusBloc from './orderStatusBloc.vue'
 
 const props = defineProps({
     order: {

@@ -3,6 +3,7 @@ import type {
   AuthResponse,
   LoginForm,
   LoginRequest,
+  LoginResponse,
   RefreshTokenRequest,
   RegisterForm,
   RegisterRequest,
@@ -38,31 +39,29 @@ export async function loginWithCredential({ email, password }: LoginForm) {
     };
 
     const res = await loginApi(data);
-    const { access_token } = res.data?.data! ?? {};
-    saveToken(access_token);
+    const { access_token, refresh_token } = res.data?.data! ?? {};
+    saveToken(access_token, refresh_token);
 
     return res.data;
   } catch (error: any) {
     const localError = error as AxiosError<ErrorResponse>;
     toast.error(
-      localError.response?.data.error ?? "Quelque chose s'est mal passé",
+      localError.response?.data.msg ?? "Quelque chose s'est mal passé",
     );
   }
 }
 export async function registerUser(data: RegisterRequest) {
   const toast = useToast();
   try {
-
-
     const res = await registerApi(data);
-    const { access_token } = res.data?.data! ?? {};
-    saveToken(access_token);
+    const { access_token, refresh_token } = res.data?.data! ?? {};
+    saveToken(access_token, refresh_token);
 
     return res.data;
   } catch (error: any) {
     const localError = error as AxiosError<ErrorResponse>;
     toast.error(
-      localError.response?.data.error ?? "Quelque chose s'est mal passé",
+      localError.response?.data.msg ?? "Quelque chose s'est mal passé",
     );
   }
 }
@@ -79,7 +78,7 @@ export async function updatePassword(payload: {
   } catch (error: any) {
     const localError = error as AxiosError<ErrorResponse>;
     toast.error(
-      localError.response?.data.error ?? "Quelque chose s'est mal passé",
+      localError.response?.data.msg ?? "Quelque chose s'est mal passé",
     );
     throw error;
   }
@@ -94,7 +93,7 @@ export async function forgetPassword({ email }: { email: string }) {
   } catch (error: any) {
     const localError = error as AxiosError<ErrorResponse>;
     toast.error(
-      localError.response?.data.error ?? "Quelque chose s'est mal passé",
+      localError.response?.data.msg ?? "Quelque chose s'est mal passé",
     );
     throw error;
   }
@@ -108,7 +107,7 @@ export async function resetPassword(payload: ResetPasswordRequest) {
   } catch (error: any) {
     const localError = error as AxiosError<ErrorResponse>;
     toast.error(
-      localError.response?.data.error ?? "Quelque chose s'est mal passé",
+      localError.response?.data.msg ?? "Quelque chose s'est mal passé",
     );
     throw error;
   }
@@ -125,12 +124,12 @@ export async function fetchProfil(): Promise<AuthResponse | undefined> {
   } catch (error: any) {
     const localError = error as AxiosError<ErrorResponse>;
     toast.error(
-      localError.response?.data.message ?? "Quelque chose s'est mal passé",
+      localError.response?.data.msg ?? "Quelque chose s'est mal passé",
     );
   }
 }
 
-export async function refreshToken(): Promise<string | undefined> {
+export async function refreshToken(): Promise<LoginResponse | undefined> {
   try {
     // if (getRefreshToken() && getDeviceId()) {
     // const data: RefreshTokenRequest = {
@@ -140,15 +139,11 @@ export async function refreshToken(): Promise<string | undefined> {
     //   refreshToken: getRefreshToken() ?? '',
     // }
 
-    const res = await refreshTokenApi();
-    const accessToken = res.data;
-    saveToken(accessToken);
+    const res = await refreshTokenApi(getRefreshToken()!);
+    const { access_token, duration, refresh_token } = res.data?.data! ?? {};
+    saveToken(access_token, refresh_token);
     // TODO: display dialog session expired
-    return "Successfully";
-    // }
-
-    // destroySensitiveInfo()
-    // router.push({ name: AppRoute.LOGIN.name })
+    return res.data.data;
   } catch (error: any) {
     // TODO: display dialog session expired
     destroySensitiveInfo();

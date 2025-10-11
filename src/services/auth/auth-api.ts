@@ -81,9 +81,14 @@ export async function resetPasswordApi(payload: ResetPasswordRequest) {
   );
 }
 
-export async function refreshTokenApi() {
+export async function refreshTokenApi(refreshToken: string) {
   // return await axios.post<SuccessResponse<RefreshTokenResponse>>('/admin/api/v1/auth/refresh-token')
-  return await axios.post<string>(AuthRouteApi.refreshToken);
+  return await axios.post<SuccessResponse<LoginResponse>>(
+    AuthRouteApi.refreshToken,
+    {
+      refresh_token: refreshToken,
+    },
+  );
 }
 
 export async function logoutApi() {

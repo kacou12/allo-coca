@@ -10,7 +10,7 @@
             <p class="font-semibold">🎉 Commande validée avec succès !</p>
 
             <p class="text-sm">Ton casier est en route.
-                Tu recevras un SMS ou un mail dans quelques instants pour confirmer la
+                Vous recevrez un mail dans quelques instants pour confirmer la
                 livraison.</p>
 
             <p class="font-semibold">Détail express de la commande</p>
@@ -18,7 +18,7 @@
             <div class="space-y-2">
                 <article class="flex justify-between items-center">
                     <p class="text-sm text-[#454545]">Numéro de commande</p>
-                    <p class="text-sm font-bold">#AC-2030</p>
+                    <p class="text-sm font-bold">#{{ reference }}</p>
                 </article>
                 <article class="flex justify-between items-center">
                     <p class="text-sm text-[#454545]">Contenu résumé</p>
@@ -33,21 +33,16 @@
             <p class="text-sm text-[#6D6D6D]">Paiement à la livraison</p>
 
             <div class="w-full">
-                <!-- <Button @click="() => { }"
-                    class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
-                    Commander à nouveau
-                </Button> -->
-
                 <Button @click="$router.push({ name: AppRoute.ORDERS.name })" variant="link" class="text-black">Voir mon
                     historique</Button>
             </div>
 
         </section>
 
-        <!-- <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
+        <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
             <p class="text-[#4F4F4F]">Tu n’as pas reçu ton SMS ?</p>
             <Button variant="link" class="text-black">Clique ici pour recevoir un nouveau récapitulatif.</Button>
-        </section> -->
+        </section>
 
     </div>
 </template>
@@ -57,10 +52,13 @@ import Button from '@/components/ui/button/Button.vue';
 import { useCart } from '@/composables/queries/useCart';
 import { AppRoute } from '@/constants/app-route';
 import { formatPrice } from '@/shared/shared';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'; // Import useRouter
+import { onMounted } from 'vue'; // Import onMounted hook
 
 
 const route = useRoute();
+const router = useRouter(); // Initialize router for programmatic navigation
+
 const totalCasier = route.query['totalCasier']
 const totalPack = route.query['totalPack']
 const subtotal = parseInt(route.query['subtotal'] as string)
@@ -68,11 +66,22 @@ const reference = route.query['reference']
 
 const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
+// Set the time for redirection (2 minutes = 120,000 milliseconds)
+const REDIRECT_DELAY_MS = 2 * 60 * 1000;
 
+onMounted(() => {
+    // Set a timeout to redirect the user
+    setTimeout(() => {
+        // Navigate the user to the home page or another relevant page
+        // For example, redirecting to the order history page or the main page:
+        router.push({ name: AppRoute.HOME.name });
 
+        // OR redirect to the order history page you already linked:
+        // router.push({ name: AppRoute.ORDERS.name }); 
 
-
-
+        console.log(`Redirecting after ${REDIRECT_DELAY_MS / 1000} seconds.`);
+    }, REDIRECT_DELAY_MS);
+});
 
 </script>
 

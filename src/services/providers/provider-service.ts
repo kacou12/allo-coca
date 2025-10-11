@@ -1,21 +1,25 @@
-import type { DefaultFiltersPayload } from '../global.type'
+import type { DefaultFiltersPayload } from "../global.type";
 import {
   createProviderApi,
   deleteProviderApi,
   fetchFiltersProvidersApi,
   fetchProviderByIdApi,
   updateProviderApi,
-} from './provider-api'
-import type { ProviderRequest, ProviderResponse, ProviderUpdatePayload } from './provider-type'
+} from "./provider-api";
+import type {
+  ProviderRequest,
+  ProviderResponse,
+  ProviderUpdatePayload,
+} from "./provider-type";
 
 export async function fetchFiltersProviders(
   payload: DefaultFiltersPayload,
 ): Promise<PaginationResponse<ProviderResponse> | undefined> {
   try {
-    let payloadData = { ...payload }
+    let payloadData = { ...payload };
     const res = await fetchFiltersProvidersApi({
       payload,
-    })
+    });
 
     let customData = res?.data;
 
@@ -25,24 +29,23 @@ export async function fetchFiltersProviders(
       return dateB.getTime() - dateA.getTime(); // dateB - dateA pour le plus récent au plus ancien
     });
 
-
     return customData;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
 export async function fetchProviderById({
   id,
 }: {
-  id: string
+  id: string;
 }): Promise<ProviderResponse | undefined> {
   try {
-    const res = await fetchProviderByIdApi({ id: id })
+    const res = await fetchProviderByIdApi({ id: id });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
@@ -50,41 +53,45 @@ export async function updateProvider({
   id,
   data,
 }: {
-  id: string
-  data: ProviderUpdatePayload
+  id: string;
+  data: ProviderUpdatePayload;
 }): Promise<any | undefined> {
   try {
     const res = await updateProviderApi({
       data: data,
       id: id,
-    })
+    });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 export async function createProvider({
   data,
 }: {
-  data: ProviderRequest
+  data: ProviderRequest;
 }): Promise<any | undefined> {
   try {
-    const res = await createProviderApi(data)
+    const res = await createProviderApi(data);
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
-export async function deleteProvider({ id }: { id: string }): Promise<any | undefined> {
+export async function deleteProvider({
+  id,
+}: {
+  id: string;
+}): Promise<any | undefined> {
   try {
     const res = await deleteProviderApi({
       id: id,
-    })
+    });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }

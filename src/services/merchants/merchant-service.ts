@@ -1,5 +1,5 @@
-import type { DefaultFiltersPayload } from '../global.type'
-import type { TransactionResponse } from '../transactions/transaction-type'
+import type { DefaultFiltersPayload } from "../global.type";
+import type { TransactionResponse } from "../transactions/transaction-type";
 import {
   createMerchantApi,
   deleteMerchantApi,
@@ -9,17 +9,24 @@ import {
   fetchTransactionsFiltersMerchantApi,
   updateMerchantApi,
   updateMerchantChargesApi,
-} from './merchant-api'
-import type { MerchantPayinPayoutChargePayload, MerchantRequest, MerchantResponse, MerchantStatsPayload, MerchantStatsResponse, MerchantUpdatePayload } from './merchant-type' // Added MerchantStatsPayload, MerchantStatsResponse
+} from "./merchant-api";
+import type {
+  MerchantPayinPayoutChargePayload,
+  MerchantRequest,
+  MerchantResponse,
+  MerchantStatsPayload,
+  MerchantStatsResponse,
+  MerchantUpdatePayload,
+} from "./merchant-type"; // Added MerchantStatsPayload, MerchantStatsResponse
 
 export async function fetchFiltersMerchants(
   payload: DefaultFiltersPayload,
 ): Promise<PaginationResponse<MerchantResponse> | undefined> {
   try {
-    let payloadData = { ...payload }
+    let payloadData = { ...payload };
     const res = await fetchFiltersMerchantsApi({
       payload,
-    })
+    });
 
     let customData = res?.data;
 
@@ -29,22 +36,21 @@ export async function fetchFiltersMerchants(
       return dateB.getTime() - dateA.getTime(); // dateB - dateA pour le plus récent au plus ancien
     });
 
-
     return customData;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 export async function fetchTransactionsFiltersMerchant(
-  id:string,
+  id: string,
   payload: DefaultFiltersPayload,
 ): Promise<PaginationResponse<TransactionResponse> | undefined> {
   try {
-    let payloadData = { ...payload }
+    let payloadData = { ...payload };
     const res = await fetchTransactionsFiltersMerchantApi({
       id,
       payload,
-    })
+    });
 
     let customData = res?.data;
 
@@ -54,24 +60,23 @@ export async function fetchTransactionsFiltersMerchant(
       return dateB.getTime() - dateA.getTime(); // dateB - dateA pour le plus récent au plus ancien
     });
 
-
     return customData;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
 export async function fetchMerchantById({
   id,
 }: {
-  id: string
+  id: string;
 }): Promise<MerchantResponse | undefined> {
   try {
-    const res = await fetchMerchantByIdApi({ id: id })
+    const res = await fetchMerchantByIdApi({ id: id });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
@@ -79,68 +84,71 @@ export async function updateMerchant({
   id,
   data,
 }: {
-  id: string
-  data: MerchantUpdatePayload
+  id: string;
+  data: MerchantUpdatePayload;
 }): Promise<any | undefined> {
   try {
     const res = await updateMerchantApi({
       data: data,
       id: id,
-    })
+    });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 export async function updateMerchantCharges({
-
   data,
 }: {
-
-  data: MerchantPayinPayoutChargePayload[]
+  data: MerchantPayinPayoutChargePayload[];
 }): Promise<any | undefined> {
   try {
     const res = await updateMerchantChargesApi({
       data: data,
-    })
+    });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
 
-export async function fetchMerchantStats(payload?: MerchantStatsPayload): Promise<MerchantStatsResponse | undefined> {
+export async function fetchMerchantStats(
+  payload?: MerchantStatsPayload,
+): Promise<MerchantStatsResponse | undefined> {
   try {
-    const res = await fetchMerchantStatsApi(payload)
-    return res?.data
-  }
-  catch (error: any) {
-    throw Error(error.response.data.message)
+    const res = await fetchMerchantStatsApi(payload);
+    return res?.data;
+  } catch (error: any) {
+    throw Error(error.response.data.msg);
   }
 }
 export async function createMerchant({
   data,
 }: {
-  data: MerchantRequest
+  data: MerchantRequest;
 }): Promise<any | undefined> {
   try {
-    const res = await createMerchantApi(data)
+    const res = await createMerchantApi(data);
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
-export async function deleteMerchant({ id }: { id: string }): Promise<any | undefined> {
+export async function deleteMerchant({
+  id,
+}: {
+  id: string;
+}): Promise<any | undefined> {
   try {
     const res = await deleteMerchantApi({
       id: id,
-    })
+    });
 
-    return res?.data
+    return res?.data;
   } catch (error: any) {
-    throw Error(error.response.data.message)
+    throw Error(error.response.data.msg);
   }
 }
