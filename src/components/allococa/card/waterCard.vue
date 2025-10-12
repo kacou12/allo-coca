@@ -2,7 +2,7 @@
     <div v-if="product" class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
 
         <section class="h-[268px]  flex items-center justify-center">
-            <img class="w-[69px] h-[220px]" :src="product.product.image_url" :alt="product.product.name">
+            <img class="w-[69px] h-[220px]" :src="product.image_url" :alt="product.product.name">
         </section>
 
         <section class="space-y-1">
