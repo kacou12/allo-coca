@@ -115,7 +115,7 @@ const productsDataGrouped = computed(() => {
     if (type === "locker") {
 
         // setProducts = Array.from(new Set(cartLine.products));
-        setProducts = uniqBy(cartLine.products, 'product_id');
+        setProducts = uniqBy(cartLine.products, 'id');
     }
 
 

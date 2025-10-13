@@ -5,7 +5,7 @@
     <!-- FIN NAVBAR -->
 
     <!-- DEBUT DES PAGES DU ROUTER -->
-    <div class=" min-h-screen ">
+    <div class=" min-h-screen z-[-1]">
       <router-view></router-view>
     </div>
     <!-- FIN DES PAGES DU ROUTER -->

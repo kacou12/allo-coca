@@ -115,7 +115,7 @@
                                 <span class="text-sm font-semibold ">Casier: </span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap
-                                }}</span>
+                                    }}</span>
                             </div>
                         </div>
 
@@ -299,7 +299,7 @@ const casiersRecap = computed(() => {
     const productQuantities: Record<string, { name: string; quantity: number }> = {};
 
     casiers.forEach((line: CartLine) => {
-        let setProducts = uniqBy(line.products, 'product_id');;
+        let setProducts = uniqBy(line.products, 'id');
         setProducts.forEach((product) => {
             const totalQuantity = line.quantity * product.quantity;
             const productId = product.product.id;
@@ -384,7 +384,7 @@ const productsDataGrouped = (products: ProductResponse[], type: "locker" | "full
 
         // setProducts = Array.from(new Set(products));
 
-        setProducts = uniqBy(products, 'product_id');
+        setProducts = uniqBy(products, 'id');
     }
 
     // const setProducts = new Set(products);

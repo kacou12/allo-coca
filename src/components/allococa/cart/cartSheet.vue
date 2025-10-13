@@ -141,7 +141,7 @@ import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
 import CartLineCard from "./cartLineCard.vue";
 import { computed, ref } from "vue";
-import type { Product, ProductResponse } from "@/services/locker-products/locker-products-type";
+import type { CartLine, Product, ProductResponse } from "@/services/locker-products/locker-products-type";
 import router from "@/router";
 import { AppRoute } from "@/constants/app-route";
 import { uniqBy } from 'lodash';
@@ -168,10 +168,13 @@ const total = computed(() => {
 const productsDataGrouped = (products: ProductResponse[], type: "locker" | "fullLocker" | "water") => {
     const groupedMap = new Map<string, ProductResponse>();
 
+    const bottlesName = products.map(product => product.product.name);
+
+
     let setProducts = products;
 
     if (type === "locker") {
-        setProducts = uniqBy(setProducts, 'product_id');
+        setProducts = uniqBy(setProducts, 'id');
     }
 
     // const setProducts = new Set(products);

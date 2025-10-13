@@ -4,7 +4,7 @@
             <img class="min-w-[69px] h-[220px]" :src="product.image_url" alt=""></img>
         </section>
         <section class="space-y-1">
-            <p class="text-[10px]  text-[#888888]">{{ product.description }}</p>
+            <p class="text-[13px]  text-[#888888]">{{ product.description }}</p>
             <p class="font-medium text-lg">{{ product.product.name }} {{ product.label }}</p>
             <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
                 <p class="text-sm text-[#888888]">{{ product.size }}</p>
