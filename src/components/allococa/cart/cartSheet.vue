@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="flex items-center justify-between space-x-2 text-base">
-                                    <section>
+                                    <section class="flex items-center gap-1">
 
                                         <input type="checkbox" id="consignation-checkbox" v-model="has_own_lockers"
                                             class="form-checkbox h-4 w-4 text-primary-50 rounded" />
