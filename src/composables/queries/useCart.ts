@@ -37,6 +37,17 @@ export const useCart = defineStore(
       });
     };
 
+    const casierQuantityLength = computed(() => {
+      return cart.value
+        .filter(
+          (line: CartLine) =>
+            line.type === "locker" || line.type === "fullLocker",
+        )
+        .reduce((total, item) => {
+          return total + item.quantity;
+        }, 0);
+    });
+
     const casierLength = computed(() => {
       return cart.value.map(
         (line: CartLine) =>
@@ -155,6 +166,7 @@ export const useCart = defineStore(
       subtotal,
       casierLength,
       packLength,
+      casierQuantityLength
 
       // setCartTabValue,
       // cartTabValue

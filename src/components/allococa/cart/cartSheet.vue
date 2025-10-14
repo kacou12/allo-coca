@@ -65,24 +65,33 @@
                                     <span class="font-semibold">{{ subtotal }} FCFA</span>
                                 </div>
 
-                                <!-- <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
+                                <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
                                     <span>Consignation</span>
-                                    <span class="font-semibold">{{ consignation }} FCFA</span>
-                                </div> -->
+                                    <span class="font-semibold">{{ amountConsignation }} FCFA</span>
+                                </div>
 
-                                <!-- <div class="flex items-center space-x-2 text-base">
-                                    <input type="checkbox" id="consignation-checkbox" v-model="hasCrates"
-                                        class="form-checkbox h-4 w-4 text-primary-50 rounded" />
-                                    <label for="consignation-checkbox" class="text-gray-700 text-sm ">Je possède déjà
-                                        mes
-                                        casiers
-                                        (retirer la consigne)</label>
-                                </div> -->
+                                <div class="flex items-center justify-between space-x-2 text-base">
+                                    <section>
 
-                                <!-- <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
+                                        <input type="checkbox" id="consignation-checkbox" v-model="has_own_lockers"
+                                            class="form-checkbox h-4 w-4 text-primary-50 rounded" />
+                                        <label for="consignation-checkbox" class="text-gray-700 text-sm ">Je possède
+                                            déjà
+                                            mes
+                                            casiers
+                                            (retirer la consigne)</label>
+                                    </section>
+                                    <section v-if="has_own_lockers">
+                                        <input id="locker-count" type="number" v-model="count_has_own_lockers" :min="1"
+                                            :max="casierQuantityLength"
+                                            class="w-20 p-2 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                                    </section>
+                                </div>
+
+                                <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
                                     <span>Livraison</span>
-                                    <span class="font-semibold">{{ deliveryFee }} FCFA</span>
-                                </div> -->
+                                    <span class="font-semibold">0 FCFA</span>
+                                </div>
 
                                 <div
                                     class="flex justify-between items-center text-sm font-bold pt-3 border-t border-gray-300">
@@ -140,7 +149,7 @@ import { useCart } from "@/composables/queries/useCart";
 
 import { storeToRefs } from "pinia";
 import CartLineCard from "./cartLineCard.vue";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import type { CartLine, Product, ProductResponse } from "@/services/locker-products/locker-products-type";
 import router from "@/router";
 import { AppRoute } from "@/constants/app-route";
@@ -154,14 +163,30 @@ defineProps({
     },
 })
 
-const { cartQuantityLength, cart } = storeToRefs(useCart());
+const { cartQuantityLength, cart, casierQuantityLength } = storeToRefs(useCart());
 
 const open = ref(false);
 
-const hasCrates = ref(false);
+const count_has_own_lockers = ref(1);
+
+const has_own_lockers = ref(false);
+
+const amountConsignation = computed(() => {
+    if (has_own_lockers.value) {
+        return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
+    }
+    return casierQuantityLength.value * 3600;
+
+});
+
+watch(count_has_own_lockers, (newValue, oldValue) => {
+    console.log('====================================');
+    console.log(newValue);
+    console.log('====================================');
+})
 
 const total = computed(() => {
-    return subtotal.value + deliveryFee.value;
+    return subtotal.value + deliveryFee.value + amountConsignation.value;
 })
 
 
@@ -222,6 +247,6 @@ const subtotal = computed(() => {
     }, 0);
 })
 
-const consignation = ref(0);
+
 // const { addCartLine, clearCart, removeCartLine } = useCart();
 </script>
