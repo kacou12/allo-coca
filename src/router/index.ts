@@ -66,6 +66,13 @@ const router = createRouter({
           meta: { requiresAuth: true },
         },
         {
+          path: AppRoute.PROFIL.path,
+          name: AppRoute.PROFIL.name,
+          component: () => import("@/views/allococa/ProfilView.vue"),
+          // beforeEnter:Auth.authIsRequire,
+          meta: { requiresAuth: true,  },
+        },
+        {
           path: AppRoute.DELIVERY_INITIALISATON.path,
           name: AppRoute.DELIVERY_INITIALISATON.name,
           component: () =>

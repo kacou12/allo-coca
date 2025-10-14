@@ -1,7 +1,9 @@
+import { AppRoute } from "@/constants/app-route";
 import { MerchantStatusEnum } from "@/constants/constant.enum";
+import router from "@/router";
 import type { AuthResponse } from "@/services/auth/auth-type";
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 export const useAuthStore = defineStore(
   "auth",
@@ -26,6 +28,15 @@ export const useAuthStore = defineStore(
       user.value = null;
       //   token.value = null
     };
+
+    watch(
+      user,
+      (newUser) => {
+        if (!newUser) {
+          router.push({ name: AppRoute.LOGIN.name });
+        }
+      },
+    );
 
     return {
       setUser,

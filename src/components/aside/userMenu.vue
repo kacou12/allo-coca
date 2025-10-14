@@ -13,7 +13,7 @@
         </DropdownMenuTrigger>
         <DropdownMenuContent v-if="isAuth" class="w-56">
 
-            <DropdownMenuItem>
+            <DropdownMenuItem class="cursor-pointer" @click="$router.push({ name: AppRoute.PROFIL.name })">
                 <span>Mon compte</span>
                 <!-- <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> -->
             </DropdownMenuItem>

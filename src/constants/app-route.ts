@@ -22,6 +22,10 @@ export const AppRoute = Object.freeze({
     name: "orders",
     path: "/orders",
   },
+  PROFIL: {
+    name: "profil",
+    path: "/profil",
+  },
   DELIVERY_INITIALISATON: {
     name: "delivery-initialization",
     path: "/delivery/initialization",

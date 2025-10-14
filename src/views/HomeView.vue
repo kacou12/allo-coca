@@ -15,8 +15,7 @@
 
         <div class="space-y-3 lg:w-1/2  lg:pl-40">
 
-          <p>Compose ton casier comme tu veux ou choisis directement un pack prêt à livrer. Des bouteilles
-            fraîches, des
+          <p>Compose ton casier comme tu veux ou choisis directement un pack prêt à livrer. Des bouteilles, des
             prix fixes, et la livraison offerte chez toi en 24h !</p>
 
           <!-- <div class="flex items-center gap-[5px]">
