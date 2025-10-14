@@ -1,10 +1,10 @@
 <template>
     <div class="flex items-center grow py-4">
 
-        <section class=" flex-1 flex justify-center items-center ">
+        <section class=" flex-1 flex flex-col lg:flex-row justify-center items-center">
             <div class="relative hidden lg:block">
                 <!-- <div class="absolute top-[32px] left-[25px]   grid grid-cols-6 gap-2"> -->
-                <div class="absolute top-[7%] left-[6%] lg:left-[4.7%]   grid grid-cols-6 gap-2">
+                <div class="absolute top-[7%] lg:left-[4.7%]  right-[5%]  grid grid-cols-6 gap-2">
                     <!-- capsule -->
                     <section v-for="product in casierProducts.products"
                         class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
@@ -18,7 +18,21 @@
             </div>
 
             <!-- configuration du casier -->
-            <article v-if="isFetched" class="block lg:hidden w-full">
+            <article v-if="isFetched" class="block lg:hidden w-full ">
+                <div class="relative  w-full md:w-1/2 md:mx-auto">
+                    <!-- <div class="absolute top-[32px] left-[25px]   grid grid-cols-6 gap-2"> -->
+                    <div class="absolute top-[7%] bottom-[18%] right-[5%] left-[4.7%]   grid grid-cols-6 gap-2 ">
+                        <!-- capsule -->
+                        <section v-for="product in casierProducts.products"
+                            class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
+                            <!-- <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule> -->
+                            <LockerCapsule :product-image="product.icon_url"></LockerCapsule>
+                        </section>
+                        <!-- <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt=""> -->
+                        <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
+                    </div>
+                    <img class="w-full" src="@/assets/allococa/locker.png" alt="">
+                </div>
                 <ProductConfiguratorFullLocker :casier-products="casierProducts" @reset:casier="resetCasier"
                     :default-products="productsData!.items" @cart:edit-casier="editCasier"
                     @cart:add-casier="addCasierToCart" @set:full-quantity="setFullQuantity"

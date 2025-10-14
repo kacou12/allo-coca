@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
         <section class="h-[268px]  flex items-center justify-center">
-            <img class="min-w-[69px] h-[220px]" :src="product.image_url" alt=""></img>
+            <img class="min-w-[69px] max-h-[220px]" :src="product.image_url" alt=""></img>
         </section>
         <section class="space-y-1">
             <p class="text-[13px]  text-[#888888]">{{ product.description }}</p>

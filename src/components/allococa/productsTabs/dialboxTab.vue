@@ -1,23 +1,38 @@
 <template>
     <div class="flex items-center grow  py-4">
 
-        <section class="flex-1 flex justify-center items-center ">
-            <div class="relative hidden lg:block ">
+        <section class=" flex-1 flex flex-col lg:flex-row justify-center items-center">
+            <div class="relative hidden lg:block">
                 <!-- <div class="absolute top-[32px] left-[25px]   grid grid-cols-6 gap-2"> -->
-                <div class="absolute top-[7%] left-[6%] lg:left-[4.7%]   grid grid-cols-6 gap-2">
+                <div class="absolute top-[7%] lg:left-[4.7%]  right-[5%]  grid grid-cols-6 gap-2">
                     <!-- capsule -->
                     <section v-for="product in casierProducts.products"
                         class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
                         <!-- <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule> -->
                         <LockerCapsule :product-image="product.icon_url"></LockerCapsule>
                     </section>
+                    <!-- <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt=""> -->
                     <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
                 </div>
                 <img src="@/assets/allococa/locker.png" alt="">
             </div>
 
             <!-- configuration du casier -->
-            <article v-if="isFetched" class="block lg:hidden w-full">
+            <article v-if="isFetched" class="block lg:hidden w-full ">
+                <div class="relative  w-full md:w-1/2 md:mx-auto">
+                    <!-- <div class="absolute top-[32px] left-[25px]   grid grid-cols-6 gap-2"> -->
+                    <div class="absolute top-[7%] bottom-[18%] right-[5%] left-[4.7%]   grid grid-cols-6 gap-2 ">
+                        <!-- capsule -->
+                        <section v-for="product in casierProducts.products"
+                            class=" col-span-1 max-h-[40px] lg:max-h-[80px]">
+                            <!-- <LockerCapsule :product-image="findProductDataCapsule(product.name)"></LockerCapsule> -->
+                            <LockerCapsule :product-image="product.icon_url"></LockerCapsule>
+                        </section>
+                        <!-- <img class="w-full h-full object-cover" :src="findProductDataCapsule(product.name)" alt=""> -->
+                        <!-- src="@/assets/allococa/products/capsules/coca-capsule.png" alt=""> -->
+                    </div>
+                    <img class="w-full " src="@/assets/allococa/locker.png" alt="">
+                </div>
                 <ProductConfiguratorDialbox :default-products="productsData!.items" :casier-products="casierProducts"
                     @increase:quantity="increaseQuantity" @cart:edit-casier="editCasier"
                     @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
@@ -26,9 +41,9 @@
             </article>
             <!-- 83 -->
         </section>
-        <section class="hidden lg:block w-[452px] h-[calc(100vh-240px)]  relative ">
+        <section class="hidden lg:block w-[452px] h-[calc(100vh-240px)] relative">
             <!-- configuration du casier -->
-            <article v-if="isFetched" class="absolute bottom-0 left-0 right-0  h-[calc(100vh-100px)] w-full ">
+            <article v-if="isFetched" class="absolute bottom-0 left-0 right-0  h-[calc(100vh-95px)] w-full">
                 <ProductConfiguratorDialbox :default-products="productsData!.items" :casier-products="casierProducts"
                     @increase:quantity="increaseQuantity" @cart:edit-casier="editCasier"
                     @decrease:quantity="decreaseQuantity" @reset:casier="resetCasier" @cart:add-casier="addCasierToCart"
@@ -40,17 +55,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue';
-import ProductConfiguratorDialbox from './productConfiguratorDialbox.vue';
-import type { CartLine, CasierProduct, Product, ProductResponse } from '@/services/locker-products/locker-products-type';
-import { productCapsuleData } from '@/services/locker-products/locker-products-constants';
 import { useCart } from '@/composables/queries/useCart';
+import { productCapsuleData } from '@/services/locker-products/locker-products-constants';
+import type { CartLine, CasierProduct, ProductResponse } from '@/services/locker-products/locker-products-type';
+import { onBeforeMount, ref } from 'vue';
+import ProductConfiguratorDialbox from './productConfiguratorDialbox.vue';
 
-import { useToast } from 'vue-toastification';
-import { useRoute } from 'vue-router';
-import { storeToRefs } from 'pinia';
-import LockerCapsule from './lockerCapsule.vue';
 import { useProductsByCategoryQuery } from '@/composables/queries/useProductsQueries';
+import { storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
+import { useToast } from 'vue-toastification';
+import LockerCapsule from './lockerCapsule.vue';
 
 const { categoryId } = defineProps({
     categoryId: {

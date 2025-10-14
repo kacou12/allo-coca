@@ -1,24 +1,24 @@
 <template>
 
-    <!-- <form @submit.prevent="$router.push({ name: 'dashboard' })"> -->
     <form @submit.prevent="onSubmit" class="mx-5">
         <div class="">
             <label class="block text-neutral-20 text-sm font-medium mb-2" for="email">
                 Email
             </label>
-            <!-- <Input type="email" id="email" v-model="email" placeholder="Enter votre email"
-                class="shadow appearance-none border  rounded-lg w-full py-2 px-3 text-neutral-20 placeholder:text-neutral-40 leading-tight focus:outline-none focus:ring focus:ring-primary-40 h-[44px] border-neutral-60"
-                required /> -->
             <InputField v-model="email" placeholder="Entrer votre email" name="email" />
         </div>
-        <div class="">
-            <label class="block text-neutral-20 text-sm font-medium mb-2" for="password">
+        <div class="mb-4"> <label class="block text-neutral-20 text-sm font-medium mb-2" for="password">
                 Mot de passe
             </label>
             <PasswordField v-model="password" placeholder="Mot de passe" name="password" />
+
+            <div class="text-right mt-2">
+                <Button @click.prevent="$router.push({ name: AppRoute.LOST_PASSWORD.name })" variant="link"> Mot de
+                    passe oublié ?</Button>
+            </div>
         </div>
 
-        <!-- Acceptation des CGU -->
+
         <div class="mb-4 flex items-start">
             <span class="text-neutral-40 text-xs block mt-1">
                 En continuant, vous acceptez les conditions générales d'utilisation et les politique de confidentialités
@@ -50,6 +50,8 @@ import PasswordField from '../vee-validate/PasswordField.vue';
 
 import { useToast } from 'vue-toastification';
 import { useAuthProfilQuery } from '@/composables/queries/useAuthQueries';
+import CommonButton from '../buttons/commonButton.vue';
+import { Button } from '../ui/button';
 
 const rememberMe = ref(false)
 

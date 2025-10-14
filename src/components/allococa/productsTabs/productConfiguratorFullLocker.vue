@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white rounded-lg shadow-lg p-6 mx-auto h-full">
+  <div class="bg-white rounded-lg lg:shadow-lg lg:p-6 py-6 mx-auto h-full">
     <div class="flex items-center justify-between  mb-2">
-      <h1 class=" font-bold text-gray-800">Je configure mon casier</h1>
+      <h1 class=" font-bold text-gray-800 text-xs md:text-md">Je configure mon casier</h1>
 
       <Button @click="resetQuantities"
         class="text-sm bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition-colors duration-200">
@@ -12,7 +12,7 @@
 
     <section class="h-full flex flex-col ">
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2  gap-6 mb-8 flex-1 overflow-y-scroll">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2  lg:gap-6 gap-2 mb-8 flex-1 overflow-y-scroll">
         <ProductFullLockerCard :casier-products-data="casierProducts" :key="product.id" v-for="product in products"
           :product="product" @full-increment="updateProductQuantity" />
       </div>

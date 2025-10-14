@@ -11,18 +11,20 @@
 
             <button :disabled="isDisabled" @click="emit('fullIncrement', { ...product, quantity: 1 })"
                 :class="[isDisabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary-50 hover:bg-primary-40 text-white']"
-                class="w-full py-1 text-sm rounded-[90px] transition-colors duration-200 ">
+                class="w-full py-1  text-xs md:text-sm rounded-[90px] transition-colors duration-200 ">
                 Approvisionner
             </button>
         </div>
 
         <!-- Nom du produit -->
-        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }} {{ product.label }}</h3>
+        <h3 class=" font-bold text-xs md:text-sm text-center mb-4 line-clamp-2">{{ product.product.name }} {{
+            product.label
+            }}</h3>
 
         <!-- Image du produit -->
-        <div class="w-[60px] h-[186px] ml-5">
+        <div class=" ml-5">
             <img :src="product.image_url" :alt="`Image de ${product.product.name}`"
-                class="object-cover h-full w-full" />
+                class="object-cover w-[60px] max-h-[186px]" />
         </div>
 
         <!-- Informations prix et variante -->

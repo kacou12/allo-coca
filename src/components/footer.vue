@@ -77,7 +77,7 @@
             <article
                 class="pt-8 mt-8 space-y-3  border-t-[1px] border-t-white/10 flex flex-col sm:flex-row items-center justify-between text-white">
                 <p>&copy; 2025 AlloCoca.ci - Tous droits réservés</p>
-                <p>Website BY THEDESIGNHERO</p>
+                <!-- <p>Website BY THEDESIGNHERO</p> -->
             </article>
         </div>
     </div>

@@ -10,8 +10,7 @@
 
                     <h1 class="text-md xl:text-xl font-bold font-merriweathersans leading-6 text-black">Vos informations
                         personnelles</h1>
-                    <p class="text-neutral-30 text-sm font-normal">Mettez à jour vos accès et vos données
-                        personnelles ici.</p>
+                    <p class="text-neutral-30 text-sm font-normal">Vos données personnelles sont accessibles ici.</p>
 
 
                 </section>

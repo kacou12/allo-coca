@@ -13,7 +13,7 @@
                 <Minus :size="15"></Minus>
             </button>
 
-            <span class="text-lg font-semibold w-6 text-center text-gray-800">{{ product.quantity }}</span>
+            <span class="text-sm md:text-lg font-semibold w-6 text-center text-gray-800">{{ product.quantity }}</span>
 
             <button @click="increment" :disabled="product.quantity == 24 || casierProductsData.products.length == 24"
                 :class="[product.quantity == 24 || casierProductsData.products.length == 24 ? 'bg-gray-100 text-gray-300 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700 text-white']"
@@ -27,12 +27,14 @@
         </section>
 
         <!-- Nom du produit -->
-        <h3 class=" font-bold text-sm text-center mb-4 ">{{ product.product.name }} {{ product.label }}</h3>
+        <h3 class=" font-bold text-xs md:text-sm text-center mb-4 line-clamp-2">{{ product.product.name }} {{
+            product.label
+            }}</h3>
 
         <!-- Image du produit -->
-        <div class="max-w-[186px] w-[60px] h-[186px]  ml-5">
+        <div class=" ml-5">
             <img :src="product.image_url" :alt="`Image de ${product.product.name}`"
-                class="object-cover h-full w-full" />
+                class="object-cover w-[60px] max-h-[186px]" />
         </div>
 
         <!-- Informations prix et variante -->
