@@ -28,14 +28,18 @@
 
             <!-- Lien retour -->
             <div class="text-center mt-3 mb-6 flex items-center space-x-2 ">
-                <span class="text-neutral-20 text-center  text-sm">Vous n'avez pas reçu l'e-mail ?
+                <div class="h-8 bg-green-400">
 
-                </span>
+                    <span class="text-neutral-20 text-center  text-sm">Vous n'avez pas reçu l'e-mail ?
+
+                    </span>
+                </div>
                 <!-- <CommonButton  title="Cliquer pour renvoyer" type="link"
                     class="text-[16px]  border w-fit text-primary-40 font-semibold hover:underline">
 
                 </CommonButton> -->
-                <Button class="text-primary text-sm font-medium" @click="forgetPasswordHandler" variant="link">Cliquer
+                <Button class="text-primary text-sm font-medium bg-purple-400" @click="forgetPasswordHandler"
+                    variant="link">Cliquer
                     pour renvoyer</Button>
             </div>
 

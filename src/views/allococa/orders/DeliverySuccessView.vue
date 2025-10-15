@@ -70,12 +70,15 @@ const reference = route.query['reference']
 const REDIRECT_DELAY_MS = 2 * 60 * 1000;
 
 // Set a timeout to redirect the user
-setTimeout(() => {
+onMounted(() => {
+    setTimeout(() => {
 
-    router.push({ name: AppRoute.HOME.name });
+        router.push({ name: AppRoute.HOME.name });
 
-    console.log(`Redirecting after ${REDIRECT_DELAY_MS / 1000} seconds.`);
-}, REDIRECT_DELAY_MS);
+        console.log(`Redirecting after ${REDIRECT_DELAY_MS / 1000} seconds.`);
+    }, REDIRECT_DELAY_MS);
+
+});
 
 </script>
 

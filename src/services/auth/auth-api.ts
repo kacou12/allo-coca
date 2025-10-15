@@ -67,8 +67,10 @@ export async function updatePasswordApi({
   });
 }
 export async function forgetPasswordApi({ email }: { email: string }) {
-  return await axios.post<SuccessResponse<any>>(AuthRouteApi.forgetPassword, {
-    email,
+  return await axios.post<SuccessResponse<any>>(AuthRouteApi.forgetPassword,undefined, {
+    params: {
+      email,
+    }
   });
 }
 export async function resetPasswordApi(payload: ResetPasswordRequest) {

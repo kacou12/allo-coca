@@ -32,8 +32,39 @@ export const useCart = defineStore(
       cartTabValue.value = value;
     };
 
+    const productsDataGroupedOnlyLockerOrFullLocker = (products: ProductResponse[], type: "locker" | "fullLocker") => {
+    const groupedMap = new Map<string, ProductResponse>();
+
+    const bottlesName = products.map(product => product.product.name);
+
+
+    let setProducts = products;
+
+    // if (type === "locker") {
+        setProducts = uniqBy(setProducts, 'product_id');
+    // }
+
+
+
+    setProducts.forEach(product => {
+        const existing = groupedMap.get(product.id);
+
+        if (existing) {
+            existing.quantity += product.quantity;
+        } else {
+            groupedMap.set(product.id, { ...product });
+        }
+    });
+
+    return Array.from(groupedMap.values());
+};
+
     const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
       return cart.value.map((item) => {
+        let localProducts = item.products;
+        if(item.type !=  "water"){
+          localProducts =   productsDataGroupedOnlyLockerOrFullLocker(item.products, item.type)
+        }
         return {
           type: item.type,
           qty: item.quantity,
