@@ -36,6 +36,9 @@ export interface OrderResponse {
   user: User;
   order_date: string;
   reference: string;
+  is_settled: boolean;
+  number_of_casier: number;
+
 }
 
 interface Delivery {

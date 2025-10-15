@@ -18,7 +18,7 @@
             <div class="space-y-2">
                 <article class="flex justify-between items-center">
                     <p class="text-sm text-[#454545]">Numéro de commande</p>
-                    <p class="text-sm font-bold">#{{ reference }}</p>
+                    <p class="text-sm font-bold">{{ reference }}</p>
                 </article>
                 <article class="flex justify-between items-center">
                     <p class="text-sm text-[#454545]">Contenu résumé</p>
@@ -39,10 +39,10 @@
 
         </section>
 
-        <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
+        <!-- <section class="text-sm flex items-center flex-wrap md:flex-nowrap justify-center md:justify-start">
             <p class="text-[#4F4F4F]">Tu n’as pas reçu ton SMS ?</p>
             <Button variant="link" class="text-black">Clique ici pour recevoir un nouveau récapitulatif.</Button>
-        </section>
+        </section> -->
 
     </div>
 </template>
@@ -53,7 +53,7 @@ import { useCart } from '@/composables/queries/useCart';
 import { AppRoute } from '@/constants/app-route';
 import { formatPrice } from '@/shared/shared';
 import { useRoute, useRouter } from 'vue-router'; // Import useRouter
-import { onMounted } from 'vue'; // Import onMounted hook
+import { onMounted, watch } from 'vue'; // Import onMounted hook
 
 
 const route = useRoute();
@@ -64,24 +64,18 @@ const totalPack = route.query['totalPack']
 const subtotal = parseInt(route.query['subtotal'] as string)
 const reference = route.query['reference']
 
-const { formatCartLineToOrderPayload, total, clearCart } = useCart();
+// const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
 // Set the time for redirection (2 minutes = 120,000 milliseconds)
 const REDIRECT_DELAY_MS = 2 * 60 * 1000;
 
-onMounted(() => {
-    // Set a timeout to redirect the user
-    setTimeout(() => {
-        // Navigate the user to the home page or another relevant page
-        // For example, redirecting to the order history page or the main page:
-        router.push({ name: AppRoute.HOME.name });
+// Set a timeout to redirect the user
+setTimeout(() => {
 
-        // OR redirect to the order history page you already linked:
-        // router.push({ name: AppRoute.ORDERS.name }); 
+    router.push({ name: AppRoute.HOME.name });
 
-        console.log(`Redirecting after ${REDIRECT_DELAY_MS / 1000} seconds.`);
-    }, REDIRECT_DELAY_MS);
-});
+    console.log(`Redirecting after ${REDIRECT_DELAY_MS / 1000} seconds.`);
+}, REDIRECT_DELAY_MS);
 
 </script>
 

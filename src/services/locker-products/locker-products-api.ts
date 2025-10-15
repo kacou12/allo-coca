@@ -37,7 +37,7 @@ export async function fetchFilterOrdersApi(
 
 export async function createOrderApi(
   data: CreateOrderPayload,
-): Promise<SuccessResponse<any> | undefined> {
+): Promise<SuccessResponse<OrderResponse> | undefined> {
   const result = await Http.post<SuccessResponse<any>>(
     lockerRouteApi.createOrder,
     data,

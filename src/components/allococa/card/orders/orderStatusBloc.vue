@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full ">
+    <div class=" ">
         <!-- background-color':${getTransactionStatusData} -->
         <div :style="{ backgroundColor: getTransactionStatusData(orderStatusConfigEnumData)?.color, color: getTransactionStatusData(orderStatusConfigEnumData)?.textColor }"
             class="text-xs text-center font-normal px-2 py-[2px] rounded-sm w-full">

@@ -1,7 +1,7 @@
 <template>
     <div class="bg-[#F6F6F6] rounded-lg p-6 flex flex-col justify-between">
         <!-- En-tête avec titre et date -->
-        <div class="flex items-center justify-between mb-4 ">
+        <div class="flex items-center justify-between mb-4 space-x-2 ">
             <h3 class="text-lg font-semibold text-gray-800">
                 Commande : {{ order.reference }}
             </h3>
@@ -9,28 +9,44 @@
         </div>
 
         <!-- Items de la commande -->
-        <div class="space-y-2 mb-4 ">
+        <div class="space-y-2 mb-4 w-full ">
+            <div class="flex items-start space-x-2 w-full">
+                <div class="flex items-center justify-between w-full">
+                    <span class="text-sm font-semibold">Date : </span>
+                    <span class="text-sm text-gray-600 ml-1">{{ formatRelativeDate(new
+                        Date(order.delivery.created_at)) }}</span>
+                </div>
+            </div>
+
             <!-- Casier -->
-            <div v-if="casiersRecap" class="flex items-start space-x-2">
-                <div class="flex items-center">
-                    <span class="text-sm font-semibold">Casier</span>
+            <div v-if="casiersRecap" class="flex items-start space-x-2 w-full">
+                <div class="flex items-center w-full justify-between">
+                    <span class="text-sm font-semibold">Casier(s) : </span>
                     <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap }}</span>
                 </div>
             </div>
 
+            <div v-if="order.is_settled" class="flex items-start space-x-2 w-full">
+                <div class="flex items-center w-full justify-between">
+                    <span class="text-sm font-semibold">Casier(s) consigné(s) : </span>
+                    <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.number_of_casier }}</span>
+                </div>
+            </div>
+
+
             <!-- Packs -->
-            <div v-if="packsRecap" class="flex items-start space-x-2">
-                <div class="flex items-center">
-                    <span class="text-sm font-semibold">Packs</span>
+            <div v-if="packsRecap" class="flex items-start space-x-2 w-full">
+                <div class="flex items-center w-full justify-between">
+                    <span class="text-sm font-semibold">Pack(s) : </span>
                     <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ packsRecap }}</span>
                 </div>
             </div>
         </div>
 
         <!-- Total -->
-        <div class="mb-4">
+        <div class="mb-4 flex items-center justify-between">
             <div class="font-medium text-gray-800">
-                Total
+                Total :
             </div>
             <div class="font-bold text-gray-900">
                 {{ formatPrice(order.total_amount) }}
@@ -49,7 +65,7 @@
 
 <script setup lang="ts">
 import type { OrderResponse } from '@/services/locker-products/order-type'
-import { formatPrice } from '@/shared/shared'
+import { formatPrice, formatRelativeDate } from '@/shared/shared'
 import { computed, type PropType } from 'vue'
 import OrderStatusBloc from './orderStatusBloc.vue'
 

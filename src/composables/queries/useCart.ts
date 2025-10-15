@@ -4,13 +4,23 @@ import type {
   ProductResponse,
 } from "@/services/locker-products/locker-products-type";
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { uniqBy } from "lodash";
 
 export const useCart = defineStore(
   "cart",
   () => {
     const cart = ref<CartLine[]>([]);
+
+    const count_has_own_lockers = ref(0);
+
+    const has_own_lockers = ref(false);
+
+    watch(has_own_lockers, (newValue, oldValue) => {
+        if (!newValue) {
+            count_has_own_lockers.value = 0;
+        }
+    })
 
     const cartTabValue = ref<"casierCompose" | "casierComplet" | "water">(
       "casierComplet",
@@ -98,6 +108,7 @@ export const useCart = defineStore(
 
     const clearCart = () => {
       cart.value = [];
+      has_own_lockers.value = false;
     };
 
     const waterProductDefaultQuantity = (id_water_product: string) => {
@@ -150,8 +161,16 @@ export const useCart = defineStore(
           }, 0) *
             cartLine.quantity
         );
-      }, 0);
+      }, 0)+  amountConsignation.value;
     });
+
+    const amountConsignation = computed(() => {
+      if (has_own_lockers.value) {
+          return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
+      }
+      return casierQuantityLength.value * 3600;
+
+   });
 
     return {
       cart,
@@ -166,8 +185,10 @@ export const useCart = defineStore(
       subtotal,
       casierLength,
       packLength,
-      casierQuantityLength
-
+      casierQuantityLength,
+      has_own_lockers,
+      count_has_own_lockers,
+      amountConsignation,
       // setCartTabValue,
       // cartTabValue
     };

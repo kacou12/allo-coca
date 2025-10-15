@@ -163,21 +163,27 @@ defineProps({
     },
 })
 
-const { cartQuantityLength, cart, casierQuantityLength } = storeToRefs(useCart());
+const { cartQuantityLength, cart, casierQuantityLength, has_own_lockers, count_has_own_lockers, amountConsignation } = storeToRefs(useCart());
 
 const open = ref(false);
 
-const count_has_own_lockers = ref(1);
+// const count_has_own_lockers = ref(0);
 
-const has_own_lockers = ref(false);
+// const has_own_lockers = ref(false);
 
-const amountConsignation = computed(() => {
-    if (has_own_lockers.value) {
-        return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
-    }
-    return casierQuantityLength.value * 3600;
+// watch(has_own_lockers, (newValue, oldValue) => {
+//     if (!newValue) {
+//         count_has_own_lockers.value = 0;
+//     }
+// })
 
-});
+// const amountConsignation = computed(() => {
+//     if (has_own_lockers.value) {
+//         return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
+//     }
+//     return casierQuantityLength.value * 3600;
+
+// });
 
 watch(count_has_own_lockers, (newValue, oldValue) => {
     console.log('====================================');

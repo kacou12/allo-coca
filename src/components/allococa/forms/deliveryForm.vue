@@ -115,7 +115,7 @@
                                 <span class="text-sm font-semibold ">Casier: </span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.casier }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap
-                                    }}</span>
+                                }}</span>
                             </div>
                         </div>
 
@@ -126,6 +126,14 @@
                                 <span class="text-sm font-semibold ">Packs:</span>
                                 <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.packs }}</span> -->
                                 <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ packsRecap }}</span>
+                            </div>
+                        </div>
+                        <div v-if="has_own_lockers" class="flex items-start space-x-2">
+                            <!-- <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div> -->
+                            <div class="flex items-start">
+                                <span class="text-sm font-semibold ">Consigne casiers:</span>
+                                <!-- <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.packs }}</span> -->
+                                <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ count_has_own_lockers }}</span>
                             </div>
                         </div>
                     </div>
@@ -180,6 +188,7 @@ import { formatPrice } from '@/shared/shared';
 import cloneDeep from 'lodash/cloneDeep';
 import { clone, uniqBy } from 'lodash';
 import { useAuthStore } from '@/stores/useAuthStore';
+import type { OrderResponse } from '@/services/locker-products/order-type';
 
 
 const deliverySchema = z.object({
@@ -204,7 +213,7 @@ const deliverySchema = z.object({
         .or(z.literal(''))
 });
 
-const { cart, subtotal, casierLength, packLength } = storeToRefs(useCart());
+const { cart, subtotal, casierLength, casierQuantityLength, packLength, has_own_lockers, count_has_own_lockers } = storeToRefs(useCart());
 const { user } = storeToRefs(useAuthStore());
 const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
@@ -230,14 +239,14 @@ const deliveryState = ref<DeliveryPayload>(
 
     }
 );
-const goToSuccessPage = () => {
+const goToSuccessPage = (order: OrderResponse) => {
     console.log('go to success page');
     router.push({
         name: AppRoute.DELIVERY_SUCCESS.name, query: {
-            totalCasier: cloneDeep(casierLength.value),
+            totalCasier: cloneDeep(casierQuantityLength.value),
             totalPack: cloneDeep(packLength.value),
             subtotal: cloneDeep(subtotal.value),
-            reference: "#AC-2030"
+            reference: cloneDeep(order.reference),
         }
     });
 }
@@ -253,15 +262,17 @@ const createOrderHandler = async () => {
             notes: deliveryState.value.instructions!,
         },
         order: {
-            items: items
+            items: items,
+            is_settled: has_own_lockers.value,
+            number_of_casier: count_has_own_lockers.value,
         }
     }
     try {
         startLoading();
-        await createOrder(payload);
+        const orderResponse = await createOrder(payload);
         resetForm();
         toast.success("La commande a bien été créee");
-        goToSuccessPage();
+        goToSuccessPage(orderResponse!);
         clearCart();
     } catch (err) {
 
@@ -284,6 +295,7 @@ const hasCasier = computed(() => {
 const hasPack = computed(() => {
     return cart.value.some((line: CartLine) => line.type === 'water');
 })
+
 
 
 

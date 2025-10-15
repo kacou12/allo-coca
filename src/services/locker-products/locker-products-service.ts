@@ -38,7 +38,7 @@ export async function fetchFilterOrders(
 }
 export async function createOrder(
   data: CreateOrderPayload,
-): Promise<PaginationResponse<any> | undefined> {
+): Promise<OrderResponse | undefined> {
   try {
     const res = await createOrderApi(data);
     return res?.data;

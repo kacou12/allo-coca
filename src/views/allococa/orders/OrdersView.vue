@@ -1,5 +1,5 @@
 <template>
-    <div class="py-10 spac-y-5 pt-[110px]   maxContain3xl ">
+    <div class="py-10 space-y-5 pt-[110px]   maxContain3xl ">
         <section class="flex flex-col space-y-5 lg:space-y-0 lg:flex-row items-center justify-between ">
 
             <h3 class="text-clamp-md font-bold font-tcc">Mes commandes</h3>
@@ -15,9 +15,9 @@
             </div>
         </section>
 
-        <article class="flex flex-col justify-between items-center  min-h-[calc(100vh-250px)] ">
+        <article class="flex flex-col justify-between items-center  min-h-[calc(100vh-250px)] w-full ">
 
-            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+            <section v-if="isFetched" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 ">
                 <OrderCard v-for="order in ordersData?.items" :order="order" :key="order.id"></OrderCard>
             </section>
 
@@ -42,7 +42,7 @@ import { useLoaderStore } from "@/stores/useLoaderStore";
 import type { DateRange } from "radix-vue";
 import { ref, type Ref } from "vue";
 
-const { filters, data: ordersData, isFetched, } = useOrdersFiltersQuery();
+const { filters, data: ordersData, isFetched } = useOrdersFiltersQuery();
 
 const { startLoading, stopLoading, startLoadingSkeleton } = useLoaderStore();
 

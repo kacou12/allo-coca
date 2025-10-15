@@ -12,6 +12,8 @@ export interface DeliveryPayload {
   instructions?: string;
 }
 
+
+
 export interface CartLine {
   id: string;
   quantity: number;
@@ -74,6 +76,9 @@ interface Delivery {
 }
 
 interface Order {
+
+  is_settled: boolean;
+  number_of_casier: number;
   items: CartPayloadOrderLine[];
 }
 
