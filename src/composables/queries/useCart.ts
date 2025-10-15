@@ -32,33 +32,53 @@ export const useCart = defineStore(
       cartTabValue.value = value;
     };
 
-    const productsDataGroupedOnlyLockerOrFullLocker = (products: ProductResponse[], type: "locker" | "fullLocker") => {
-    const groupedMap = new Map<string, ProductResponse>();
+  // const productsDataGroupedOnlyLockerOrFullLocker = (products: ProductResponse[], type: "locker" | "fullLocker") => {
+  //   const groupedMap = new Map<string, ProductResponse>();
 
-    const bottlesName = products.map(product => product.product.name);
-
-
-    let setProducts = products;
-
-    // if (type === "locker") {
-        setProducts = uniqBy(setProducts, 'product_id');
-    // }
+  //   const bottlesName = products.map(product => product.product.name);
 
 
+  //   let setProducts = products;
 
-    setProducts.forEach(product => {
-        const existing = groupedMap.get(product.id);
+  //   // if (type === "locker") {
+  //       setProducts = uniqBy(setProducts, 'product_id');
+  //   // }
 
-        if (existing) {
-            existing.quantity += product.quantity;
-        } else {
-            groupedMap.set(product.id, { ...product });
-        }
-    });
 
-    return Array.from(groupedMap.values());
+
+  //   setProducts.forEach(product => {
+  //       const existing = groupedMap.get(product.id);
+
+  //       if (existing) {
+  //           existing.quantity += product.quantity;
+  //       } else {
+  //           groupedMap.set(product.id, { ...product });
+  //       }
+  //   });
+
+  //   return Array.from(groupedMap.values());
+ 
+  // };
+
+
+  const productsDataGroupedOnlyLockerOrFullLocker = (
+  products: ProductResponse[], 
+  type: "locker" | "fullLocker"
+) => {
+  const grouped = products.reduce((acc, product) => {
+    const key = product.product_id;
+    
+    if (acc[key]) {
+      acc[key].quantity += product.quantity;
+    } else {
+      acc[key] = { ...product };
+    }
+    
+    return acc;
+  }, {} as Record<string, ProductResponse>);
+
+  return Object.values(grouped);
 };
-
     const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
       return cart.value.map((item) => {
         let localProducts = item.products;
