@@ -67,7 +67,7 @@ const reference = route.query['reference']
 // const { formatCartLineToOrderPayload, total, clearCart } = useCart();
 
 // Set the time for redirection (2 minutes = 120,000 milliseconds)
-const REDIRECT_DELAY_MS = 2 * 60 * 1000;
+const REDIRECT_DELAY_MS = 1 * 60 * 1000 * 0.5
 
 // Set a timeout to redirect the user
 onMounted(() => {

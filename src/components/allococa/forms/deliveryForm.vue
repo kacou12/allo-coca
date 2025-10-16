@@ -245,7 +245,7 @@ const goToSuccessPage = (order: OrderResponse) => {
         name: AppRoute.DELIVERY_SUCCESS.name, query: {
             totalCasier: cloneDeep(casierQuantityLength.value),
             totalPack: cloneDeep(packLength.value),
-            subtotal: cloneDeep(subtotal.value),
+            subtotal: cloneDeep(order.total_amount),
             reference: cloneDeep(order.reference),
         }
     });

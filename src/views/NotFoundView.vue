@@ -17,7 +17,7 @@
                             The page you are looking for is not available!
                         </p>
 
-                        <CommonButton @action="() => { $router.push({ name: AppRoute.LOGIN.name }) }" type="default"
+                        <CommonButton @action="() => { $router.push({ name: AppRoute.HOME.name }) }" type="default"
                             title="Retour a l'accueil">
                         </CommonButton>
                         <!-- 

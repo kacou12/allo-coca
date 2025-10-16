@@ -37,7 +37,7 @@
                     <p class="flex-1 text-neutral-20 ">Nom</p>
                 </div>
                 <div class="flex gap-3 w-full max-w-[512px]  ">
-                    <Input v-model="userState.name" type="Nom complet" id="Nom complet" class="" required />
+                    <Input v-model="userState.name" type="Nom complet" id="Nom complet" class="" disabled />
 
                 </div>
             </section>
@@ -46,7 +46,7 @@
                     <p class="flex-1 text-neutral-20 ">Adresse</p>
                 </div>
                 <div class="flex gap-3 w-full max-w-[512px]  ">
-                    <Input v-model="userState.address" type="Adresse" id="Adresse" class="" required />
+                    <Input v-model="userState.address" type="Adresse" id="Adresse" class="" disabled />
 
                 </div>
             </section>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="flex gap-3 w-full max-w-[512px] relative">
                     <Input v-model="userState.email" type="email" id="email" value="philippe@gmail.com"
-                        placeholder="email" class="w-full pl-9" required />
+                        placeholder="email" class="w-full pl-9" disabled />
                     <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
                         <!-- sms icons -->
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="flex gap-3 w-full max-w-[512px] relative">
                     <Input v-model="userState.phone" class="pl-14" id="email" value="0787995058"
-                        placeholder="numéro de téléphone" required />
+                        placeholder="numéro de téléphone" disabled />
                     <span
                         class="absolute start-0 inset-y-0 flex items-center justify-center px-2 border-r text-neutral-30">
                         +225

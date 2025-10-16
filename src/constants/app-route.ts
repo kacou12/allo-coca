@@ -52,7 +52,7 @@ export const AppRoute = Object.freeze({
   },
   UPDATE_PASSWORD: {
     name: "update-password",
-    path: "/reset",
+    path: "/reset-password",
   },
   SUCCESS_UPDATE_PASSWORD: {
     name: "success-update-password",

@@ -17,7 +17,7 @@
 
         <article class="flex flex-col justify-between items-center  min-h-[calc(100vh-250px)] w-full ">
 
-            <section v-if="isFetched" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 ">
+            <section v-if="isFetched" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 w-full">
                 <OrderCard v-for="order in ordersData?.items" :order="order" :key="order.id"></OrderCard>
             </section>
 
