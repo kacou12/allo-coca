@@ -36,104 +36,127 @@
 
         </SheetTrigger>
         <SheetContent class=" px-3">
-            <section v-if="cartQuantityLength > 0">
+            <form @submit.prevent="onSubmit" class="mx-5">
 
-                <SheetHeader class="translate-y-[-10px]">
-                    <SheetTitle>Mon panier</SheetTitle>
+                <section v-if="cartQuantityLength > 0">
 
-                </SheetHeader>
+                    <SheetHeader class="translate-y-[-10px]">
+                        <SheetTitle>Mon panier</SheetTitle>
 
-
-                <!-- content cart -->
-
-                <div class="flex flex-col justify-between h-[calc(100vh-60px)] ">
-                    <section class="py-1 px-1 space-y-4 flex-1 overflow-y-scroll ">
-
-                        <CartLineCard v-for="cartLine in cart" :key="cartLine.id" :cartLine="cartLine"
-                            :type="cartLine.type" />
-
-                    </section>
+                    </SheetHeader>
 
 
-                    <!-- Résumé de ma commande -->
-                    <div>
-                        <section class="py-4 space-y-4">
-                            <div class="space-y-4">
-                                <h2 class="text-md font-bold">Résumé de ma commande</h2>
-                                <div class="flex justify-between items-center text-sm ">
-                                    <span>Sous-total</span>
-                                    <span class="font-semibold">{{ subtotal }} FCFA</span>
-                                </div>
+                    <!-- content cart -->
 
-                                <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
-                                    <span>Consignation</span>
-                                    <span class="font-semibold">{{ amountConsignation }} FCFA</span>
-                                </div>
+                    <div class="flex flex-col justify-between h-[calc(100vh-60px)] ">
+                        <section class="py-1 px-1 space-y-4 flex-1 overflow-y-scroll ">
 
-                                <div class="flex items-center justify-between space-x-2 text-base">
-                                    <section class="flex items-center gap-1">
+                            <CartLineCard v-for="cartLine in cart" :key="cartLine.id" :cartLine="cartLine"
+                                :type="cartLine.type" />
 
-                                        <input type="checkbox" id="consignation-checkbox" v-model="has_own_lockers"
-                                            class="form-checkbox h-4 w-4 text-primary-50 rounded" />
-                                        <label for="consignation-checkbox" class="text-gray-700 text-sm ">Je possède
-                                            déjà
-                                            mes
-                                            casiers
-                                            (retirer la consigne)</label>
-                                    </section>
-                                    <section v-if="has_own_lockers">
-                                        <input id="locker-count" type="number" v-model="count_has_own_lockers" :min="1"
-                                            :max="casierQuantityLength"
-                                            class="w-20 p-2 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
-                                    </section>
-                                </div>
-
-                                <div class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
-                                    <span>Livraison</span>
-                                    <span class="font-semibold">0 FCFA</span>
-                                </div>
-
-                                <div
-                                    class="flex justify-between items-center text-sm font-bold pt-3 border-t border-gray-300">
-                                    <span>Total</span>
-                                    <span class="text-primary-50">{{ total }} FCFA</span>
-                                </div>
-                            </div>
                         </section>
 
 
-                        <div class="mt-1">
-                            <Button @click="goToOrderPage"
-                                class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
-                                Finaliser ma commande
-                            </Button>
+                        <!-- Résumé de ma commande -->
+                        <div>
+                            <section class="py-4 space-y-4">
+                                <div class="space-y-4">
+                                    <h2 class="text-md font-bold">Résumé de ma commande</h2>
+                                    <div class="flex justify-between items-center text-sm ">
+                                        <span>Sous-total</span>
+                                        <span class="font-semibold">{{ subtotal }} FCFA</span>
+                                    </div>
+
+                                    <div
+                                        class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
+                                        <span>Consignation</span>
+                                        <span class="font-semibold">{{ amountConsignation }} FCFA</span>
+                                    </div>
+
+                                    <article>
+                                        <div class="flex items-center justify-between space-x-2 text-base">
+                                            <section class="flex items-center gap-1">
+
+                                                <input type="checkbox" id="consignation-checkbox"
+                                                    v-model="has_own_lockers"
+                                                    class="form-checkbox h-4 w-4 text-primary-50 rounded" />
+                                                <label for="consignation-checkbox" class="text-gray-700 text-sm ">Je
+                                                    possède
+                                                    déjà
+                                                    mes
+                                                    casiers
+                                                    (retirer la consigne)</label>
+                                            </section>
+                                            <section v-if="has_own_lockers">
+                                                <InputNumberField id="locker-count" name="lockerCount" type="number"
+                                                    v-model="count_has_own_lockers" :min="0" :max="casierQuantityLength"
+                                                    class="w-20 p-2 text-center  rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                                            </section>
+                                        </div>
+                                        <div class="min-h-[24px] ">
+                                            <FadeInAnimation mode="out-in">
+
+                                                <!-- <small v-if="errors.lockerCount"
+                                                    class="app-form-item-error text-error-500 text-xs font-worksans font-normal ">
+                                                    {{ errors.lockerCount }}
+                                                </small> -->
+                                                <small v-if="hasErrorConsignation"
+                                                    class="app-form-item-error text-error-500 text-xs font-worksans font-normal ">
+                                                    Veuillez sélectionner le nombre de casiers que vous souhaitez
+                                                    consigner.
+                                                </small>
+
+                                            </FadeInAnimation>
+                                        </div>
+                                    </article>
+
+                                    <div
+                                        class="flex justify-between items-center text-sm  border-t pt-3  border-gray-300">
+                                        <span>Livraison</span>
+                                        <span class="font-semibold">0 FCFA</span>
+                                    </div>
+
+                                    <div
+                                        class="flex justify-between items-center text-sm font-bold pt-3 border-t border-gray-300">
+                                        <span>Total</span>
+                                        <span class="text-primary-50">{{ total }} FCFA</span>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                            <div class="mt-1">
+                                <Button type="submit" :disabled="!!errors.lockerCount"
+                                    class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
+                                    Finaliser ma commande
+                                </Button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- content cart end -->
+                    <!-- content cart end -->
 
-                <SheetFooter>
-                    <SheetClose as-child>
-                        <!-- <Button type="submit">
-                            Save changes
-                        </Button> -->
-                    </SheetClose>
-                </SheetFooter>
-            </section>
-            <section v-else class="h-screen flex justify-center items-center">
+                    <SheetFooter>
+                        <SheetClose as-child>
+                            <!-- <Button type="submit">
+                                Save changes
+                            </Button> -->
+                        </SheetClose>
+                    </SheetFooter>
+                </section>
+                <section v-else class="h-screen flex justify-center items-center">
 
-                <div>
-                    <img src="@/assets/allococa/empty-cart.gif" alt="">
-                    <p class="text-sm text-[#888888]">Votre panier est vide</p>
-                </div>
+                    <div>
+                        <img src="@/assets/allococa/empty-cart.gif" alt="">
+                        <p class="text-sm text-[#888888]">Votre panier est vide</p>
+                    </div>
 
-            </section>
+                </section>
+            </form>
         </SheetContent>
     </Sheet>
 </template>
 <script setup lang="ts">
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
     Sheet,
@@ -154,6 +177,12 @@ import type { CartLine, Product, ProductResponse } from "@/services/locker-produ
 import router from "@/router";
 import { AppRoute } from "@/constants/app-route";
 import { uniqBy } from 'lodash';
+import { useForm } from 'vee-validate';
+import { z } from 'zod';
+import { toTypedSchema } from '@vee-validate/zod';
+import Input from "@/components/ui/input/Input.vue";
+import FadeInAnimation from "@/components/animations/fadeInAnimation.vue";
+import InputNumberField from "@/components/vee-validate/InputNumberField.vue";
 
 
 defineProps({
@@ -163,27 +192,45 @@ defineProps({
     },
 })
 
+
+
+
+
 const { cartQuantityLength, cart, casierQuantityLength, has_own_lockers, count_has_own_lockers, amountConsignation } = storeToRefs(useCart());
+
+const hasErrorConsignation = computed(() => {
+    return has_own_lockers.value && count_has_own_lockers.value < 1;
+})
+
+const cartSchema = z.object({
+    lockerCount: z.number()
+        .min(1, 'min 1 locker')
+        .optional()
+
+}).refine(
+    (data) => {
+        if (has_own_lockers.value) {
+            return data.lockerCount && data.lockerCount >= 1;
+        }
+        return true;
+    },
+    {
+        message: 'Veuillez sélectionner le nombre de casiers que vous souhaitez consigner.',
+        path: ['lockerCount']
+    }
+);
 
 const open = ref(false);
 
-// const count_has_own_lockers = ref(0);
+const { handleSubmit, resetForm, errors } = useForm({
+    validationSchema: toTypedSchema(cartSchema)
+});
 
-// const has_own_lockers = ref(false);
 
-// watch(has_own_lockers, (newValue, oldValue) => {
-//     if (!newValue) {
-//         count_has_own_lockers.value = 0;
-//     }
-// })
+const onSubmit = handleSubmit(async () => {
+    goToOrderPage();
+});
 
-// const amountConsignation = computed(() => {
-//     if (has_own_lockers.value) {
-//         return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
-//     }
-//     return casierQuantityLength.value * 3600;
-
-// });
 
 watch(count_has_own_lockers, (newValue, oldValue) => {
     console.log('====================================');

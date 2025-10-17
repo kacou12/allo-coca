@@ -56,19 +56,28 @@
 
 
                 </CarouselItem>
+
                 <CarouselItem class="p-0">
                     <section
                         class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-3.jpg)] bg-cover bg-center bg-no-repeat">
                     </section>
                 </CarouselItem>
+
                 <CarouselItem class="p-0">
                     <section
                         class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-4.jpg)] bg-cover bg-center bg-no-repeat">
                     </section>
                 </CarouselItem>
+
                 <CarouselItem class="p-0">
                     <section
                         class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-5.jpg)] bg-cover bg-center bg-no-repeat">
+                    </section>
+                </CarouselItem>
+
+                <CarouselItem class="p-0">
+                    <section
+                        class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-6.jpg)] bg-cover bg-center bg-no-repeat">
                     </section>
                 </CarouselItem>
             </CarouselContent>
