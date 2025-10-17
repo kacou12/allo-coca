@@ -93,14 +93,14 @@
                                                     class="w-20 p-2 text-center  rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
                                             </section>
                                         </div>
-                                        <div class="min-h-[24px] ">
+                                        <div class="min-h-[24px] " v-if="hasErrorConsignation">
                                             <FadeInAnimation mode="out-in">
 
                                                 <!-- <small v-if="errors.lockerCount"
                                                     class="app-form-item-error text-error-500 text-xs font-worksans font-normal ">
                                                     {{ errors.lockerCount }}
                                                 </small> -->
-                                                <small v-if="hasErrorConsignation"
+                                                <small
                                                     class="app-form-item-error text-error-500 text-xs font-worksans font-normal ">
                                                     Veuillez sélectionner le nombre de casiers que vous souhaitez
                                                     consigner.
