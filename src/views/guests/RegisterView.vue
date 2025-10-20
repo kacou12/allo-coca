@@ -27,7 +27,7 @@
             <p class="text-[#4F4F4F] text-xs">Pas encore de compte ?</p>
             <RouterLink :to="{ name: AppRoute.LOST_PASSWORD.name }"
               class=" text-xs cursor-pointer font-medium hover:underline ">
-              Rejoigner la famille
+              Rejoignez la famille
             </RouterLink>
           </div> -->
       </section>

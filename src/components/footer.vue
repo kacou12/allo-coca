@@ -9,8 +9,8 @@
                     </RouterLink>
                     <div class="2xl:w-[50%]">
 
-                        <p class="text-white">AlloCoca.ci - Ton service de livraison de boissons
-                            préféré à Abidjan. T'as soif ? Clique, on arrive.
+                        <p class="text-white">AlloCoca.ci - Ton service préféré de livraison de boissons à Abidjan. T'as
+                            soif ? Clique, on arrive.
                         </p>
                     </div>
 
@@ -58,8 +58,16 @@
                     <div class="space-y-2 ">
                         <p class="text-[14px] font-opensans text-white text-opacity-60">Liens rapides</p>
                         <article class="space-y-2 text-white">
-                            <p>Comment ça marche</p>
-                            <p>Commander</p>
+                            <a class="hover:underline" href="#" @click.prevent="routeAndScrollTo('comment-ca-marche')">
+                                Comment ça marche
+                            </a>
+                            <div>
+                                <a class="hover:underline" href="#"
+                                    @click.prevent="$router.push({ name: AppRoute.PRODUCTS.name })">
+                                    Commander
+                                </a>
+                            </div>
+
                             <p>Contact</p>
                         </article>
                     </div>
@@ -84,6 +92,37 @@
 </template>
 
 <script setup lang="ts">
+import { AppRoute } from '@/constants/app-route';
+import { computed, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const windowScrollY = ref(0);
+
+const isScrolledOrHomePage = computed(() => (router.currentRoute.value.name == AppRoute.HOME_REDIRECT.name && windowScrollY.value > 0) || router.currentRoute.value.name != AppRoute.HOME_REDIRECT.name);
+
+
+const router = useRouter();
+
+const route = useRoute();
+
+const scrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        console.error(`Element with id "${id}" not found.`);
+    }
+};
+
+
+const routeAndScrollTo = (id: string) => {
+    if (route.name !== AppRoute.HOME_REDIRECT.name) {
+        router.push({ name: AppRoute.HOME_REDIRECT.name, hash: `#${id}`, });
+
+    } else {
+        scrollTo(id);
+    }
+};
 
 </script>
 

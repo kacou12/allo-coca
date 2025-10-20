@@ -35,7 +35,7 @@
 
 
         </SheetTrigger>
-        <SheetContent class=" px-3">
+        <SheetContent class=" px-3  w-[90%] sm:w-fit">
             <form @submit.prevent="onSubmit" class="mx-5">
 
                 <section v-if="cartQuantityLength > 0">
@@ -58,7 +58,7 @@
 
 
                         <!-- Résumé de ma commande -->
-                        <div>
+                        <div class="pb-12 md:pb-0">
                             <section class="py-4 space-y-4">
                                 <div class="space-y-4">
                                     <h2 class="text-md font-bold">Résumé de ma commande</h2>
@@ -125,7 +125,7 @@
                             </section>
 
 
-                            <div class="mt-1">
+                            <div class=" md:mt-1">
                                 <Button type="submit" :disabled="!!errors.lockerCount"
                                     class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60 ">
                                     Finaliser ma commande

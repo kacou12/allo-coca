@@ -37,7 +37,7 @@
 
     <!-- Vos type de commande -->
     <section class="text-center space-y-8 my-20">
-      <h3 class="text-clamp-lg font-bold font-tcc ">Vos type de commande</h3>
+      <h3 class="text-clamp-lg font-bold font-tcc ">Vos types de commande</h3>
       <p>Trois façons simples de commander tes boissons préférées</p>
       <div class="xl:mx-10">
 
@@ -142,7 +142,7 @@
                 title="Commander maintenant"></CommonButton>
             </div>
             <div>
-              <CommonButton type="outline" title="Contacter via Whatsapp"></CommonButton>
+              <CommonButton @click="openChatWithMessage" type="outline" title="Contacter via Whatsapp"></CommonButton>
             </div>
           </div>
         </div>
@@ -181,5 +181,16 @@ import ReviewCarousel from '@/components/allococa/ReviewCarousel.vue';
 import TextLinkWithArrow from '@/components/allococa/textLinkWithArrow.vue';
 import CommonButton from '@/components/buttons/commonButton.vue';
 import { AppRoute } from '@/constants/app-route';
+
+const openChatWithMessage = () => {
+  const phoneNumber = '33612345678';
+  const message = "Bonjour, j'ai une question sur votre produit.";
+
+  // Encodage du message pour l'URL
+  const encodedMessage = encodeURIComponent(message);
+
+  const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+  window.open(url, '_blank');
+}
 
 </script>

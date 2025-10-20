@@ -23,7 +23,7 @@
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
-                        description: 'Commandes en pack d’eaux (Céleste, Cristalline, Awa)',
+                        description: 'Commandes en packs d’eaux (Céleste, Cristalline, Awa)',
                         image: 'pack-eau.png',
                         title: 'Eaux minerales',
                     }"></OrderTyperCard>

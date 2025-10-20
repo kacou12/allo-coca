@@ -7,18 +7,28 @@
 
         <div class=" text-gray-700 text-xs" v-if="cartLine.type == 'water'">
             <div>
-                quantité: {{ cartLine.quantity }} pack(s)
+                Quantité: {{ cartLine.quantity }} pack(s)
             </div>
         </div>
         <div class=" text-gray-700 text-xs" v-else>
             <div>
-                quantité: {{ cartLine.quantity }} casier(s)
+                Quantité: {{ cartLine.quantity }} casier(s)
             </div>
         </div>
         <div class="mb-4 text-gray-700 text-xs">
             <div v-for="product in productsDataGrouped" :key="product.id">
                 <!-- {{ product.product.name }}: {{ product.quantity }} bouteille(s) -->
-                {{ product.product.name }}: {{ product.quantity }} bouteille(s)
+                <span v-if="cartLine.type != 'water'">
+
+                    {{ product.product.name }} {{ product.label }}: {{ product.quantity * cartLine.quantity }}
+                    bouteille(s)
+                </span>
+                <span v-else>
+
+                    {{ product.product.name }} {{ product.label }}: {{ parseInt(product.description.split(' ')[1]) *
+                        cartLine.quantity }}
+                    bouteille(s)
+                </span>
             </div>
         </div>
 
