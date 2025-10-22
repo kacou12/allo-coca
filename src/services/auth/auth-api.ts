@@ -76,10 +76,12 @@ export async function forgetPasswordApi({ email }: { email: string }) {
 export async function resetPasswordApi(payload: ResetPasswordRequest) {
   return await axios.post<SuccessResponse<any>>(
     AuthRouteApi.resetPassword(payload.token),
-    {
-      new_password: payload.new_password,
-      confirmed_password: payload.confirmed_password,
-    },
+  undefined,{
+    params: {
+      token: payload.token,
+      new_password: payload.new_password
+    }
+  } 
   );
 }
 
