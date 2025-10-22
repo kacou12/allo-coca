@@ -198,7 +198,7 @@ const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
 
     const amountConsignation = computed(() => {
       if (has_own_lockers.value) {
-          return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
+            return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
       }
       return casierQuantityLength.value * 3600;
 

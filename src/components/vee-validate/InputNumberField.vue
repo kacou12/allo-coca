@@ -1,16 +1,16 @@
 <template>
-  <div class="w-20">
 
-    <Field v-slot="{ componentField, errorMessage, }" :name>
+
+  <Field v-slot="{ componentField, errorMessage }" :name>
+    <div>
 
       <Input type="number" v-bind="componentField" :default-value="0" :placeholder :min :max
         :class="errorMessage ? ' border-error-light-2 focus:ring-transparent' : ''"
-        class="shadow appearance-none   rounded-lg" />
-
-
+        class="shadow appearance-none   rounded-lg w-20" />
       <!-- </FormItem> -->
-    </Field>
-  </div>
+    </div>
+  </Field>
+
 </template>
 
 <script setup lang="ts">

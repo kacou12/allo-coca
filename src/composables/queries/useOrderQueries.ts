@@ -8,6 +8,7 @@ import { computed, reactive, watch } from 'vue'
 
 const initialFilters: OrderFiltersPayload = {
   q: undefined,
+  search: undefined,
   page: 1,
   limit: 10,
   dates:[]

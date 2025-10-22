@@ -25,6 +25,7 @@ export const productsQueryKeys = {
       { limit: payload.limit },
       { page: payload.page },
       { q: payload.q },
+      { search: payload.search },
      { dates: payload.dates },       // Ajout du champ 'dates'
     ],
   serviceAvailability: ({ country }: { country: string }) => ['serviceAvailability', country],

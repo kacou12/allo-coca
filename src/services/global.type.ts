@@ -7,6 +7,7 @@ export type DefaultFiltersPayload = {
 }
 export type OrderFiltersPayload = {
   q?: string
+  search?: string
   page: number,
   limit: number
   dates: [Date?, Date?]

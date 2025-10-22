@@ -5,10 +5,10 @@
             <h3 class="text-clamp-md font-bold font-tcc">Mes commandes</h3>
             <div class="flex flex-col lg:flex-row items-center gap-3  ">
 
-                <div class="sm:min-w-[320px] w-full">
+                <!-- <div class="sm:min-w-[320px] w-full">
 
-                    <SearchBar placeholder="Rechercher une commande"></SearchBar>
-                </div>
+                    <SearchBar v-model="filters.search" placeholder="Rechercher une commande"></SearchBar>
+                </div> -->
                 <!-- <CommonDatesFilter :can-reset-filter="true" :update-handler="updateData" @reset-filter="resetFilter"
                     v-model="dates">
                 </commonDatesFilter> -->

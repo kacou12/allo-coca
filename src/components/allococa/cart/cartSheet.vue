@@ -90,7 +90,7 @@
                                             <section v-if="has_own_lockers">
                                                 <InputNumberField id="locker-count" name="lockerCount" type="number"
                                                     v-model="count_has_own_lockers" :min="0" :max="casierQuantityLength"
-                                                    class="w-20 p-2 text-center  rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                                                    class="p-2 text-center rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
                                             </section>
                                         </div>
                                         <div class="min-h-[24px] " v-if="!!errors.lockerCount">
@@ -201,6 +201,14 @@ const { cartQuantityLength, cart, casierQuantityLength, has_own_lockers, count_h
 const hasErrorConsignation = computed(() => {
     return has_own_lockers.value && count_has_own_lockers.value < 1;
 })
+
+//     const amountConsignation = computed(() => {
+//       if (has_own_lockers.value) {
+//           return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
+//       }
+//       return casierQuantityLength.value * 3600;
+
+//    });
 
 const cartSchema = z.object({
     lockerCount: z.number()
