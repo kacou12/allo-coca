@@ -93,7 +93,7 @@
                                                     class="w-20 p-2 text-center  rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
                                             </section>
                                         </div>
-                                        <div class="min-h-[24px] " v-if="hasErrorConsignation">
+                                        <div class="min-h-[24px] " v-if="!!errors.lockerCount">
                                             <FadeInAnimation mode="out-in">
 
                                                 <!-- <small v-if="errors.lockerCount"
