@@ -9,7 +9,7 @@
             <CarouselContent>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
-                        description: 'Choisis directement un casier pré-rempli (24 bouteilles) : Coca-Cola, Fanta, Sprite… ',
+                        description: 'choisissez directement un casier pré-rempli (24 bouteilles) : Coca-Cola, Fanta, Sprite… ',
                         image: 'complet-casier.jpg',
                         title: 'Boissons gazeuses',
                     }"></OrderTyperCard>
@@ -23,7 +23,7 @@
                 </CarouselItem>
                 <CarouselItem class=" md:basis-1/2 lg:basis-1/3 ">
                     <OrderTyperCard :card-data="{
-                        description: 'Commandes en packs d’eaux (Céleste, Cristalline, Awa)',
+                        description: 'Commandez en pack d’eau (Céleste, Cristalline, Awa)',
                         image: 'pack-eau.png',
                         title: 'Eaux minerales',
                     }"></OrderTyperCard>

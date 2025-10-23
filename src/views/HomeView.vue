@@ -15,7 +15,7 @@
 
         <div class="space-y-3 lg:w-1/2  lg:pl-40">
 
-          <p>Compose ton casier comme tu veux ou choisis directement un pack prêt à livrer. Des bouteilles, des
+          <p>Compose ton casier comme tu veux ou choisissez directement un pack prêt à livrer. Des bouteilles, des
             prix fixes, et la livraison offerte chez toi en 24h !</p>
 
           <!-- <div class="flex items-center gap-[5px]">
@@ -38,7 +38,7 @@
     <!-- Vos type de commande -->
     <section class="text-center space-y-8 my-20">
       <h3 class="text-clamp-lg font-bold font-tcc ">Vos types de commande</h3>
-      <p>Trois façons simples de commander tes boissons préférées</p>
+      <p>Trois façons simples de commander vos boissons préférées</p>
       <div class="xl:mx-10">
 
         <OrderTypeCarousel></OrderTypeCarousel>
@@ -54,14 +54,14 @@
       <div class="space-y-4 md:max-w-[385px]">
         <article class="space-y-4">
           <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc text-white">Pas besoin de créer un compte !</h3>
-          <p class="text-white/70 text-sm">Pas envie de perdre du temps ? Commence ta commande en 1 clic, on
-            prendra tes
-            infos
+          <p class="text-white/70 text-sm">Pas envie de perdre du temps ? Commencez votre commande en 1 clic, on
+            prendra vos
+            informations
             plus tard.</p>
         </article>
         <article class="space-y-8">
           <TextLinkWithArrow @click="$router.push({ name: AppRoute.PRODUCTS.name })" color="text-white"
-            text="Commence sans compte"></TextLinkWithArrow>
+            text="Commencez sans compte"></TextLinkWithArrow>
           <TextLinkWithArrow @click="$router.push({ name: AppRoute.ORDERS.name })" color="text-white"
             text="Retrouvez une commande"></TextLinkWithArrow>
         </article>
@@ -86,20 +86,20 @@
     <article class="flex items-center  flex-wrap lg:flex-nowrap gap-3 justify-center mx-5 xl:mx-0">
       <HowItWorkCard :data="{
         image: 'shopping-cart.png',
-        title: '1. Choisis tes boissons',
-        description: 'Choisis tes boissons en ligne ou par WhatsApp en quelques clics',
+        title: '1. Choisissez vos boissons',
+        description: 'Choisissez vos boissons en ligne ou par WhatsApp en quelques clics',
       }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
         image: 'zap.png',
-        title: '2. Je reçois sous 24h',
-        description: 'Livraison gratuite à ton domicile partout à Abidjan',
+        title: '2. Réception sous 24h',
+        description: 'Livraisons à votre domicile partout à Abidjan',
       }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
         image: 'refresh.png',
-        title: '3. Je recharge mon casier',
-        description: 'Garde ton casier et recommande facilement quand tu veux',
+        title: '3. Rechargez votre casier',
+        description: 'Gardez votre casier et recommandez facilement quand vous voudrez',
       }"></HowItWorkCard>
 
     </article>
@@ -108,41 +108,42 @@
 
   <!-- Pourquoi choisir AlloCoca ? -->
   <section class="bg-black relative py-28 overflow-hidden">
-    <div class=" absolute  right-0 bottom-[20%] hidden xl:block">
+    <div class=" absolute z-0 right-0 bottom-[20%] hidden xl:block">
       <img src="/src/assets/allococa/home/section-pourquoi-choisir-allococa/sun-red.png" alt=""></img>
     </div>
     <article class=" z-40 maxContain3xl  xl:max-w-[850px] space-y-14">
       <div class="text-center space-y-3 ">
 
         <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc text-white ">Pourquoi choisir AlloCoca ?</h3>
-        <p class="text-white">Trois étapes simples pour recevoir tes boissons</p>
+        <p class="text-white">Trois étapes simples pour recevoir vos boissons</p>
       </div>
       <div class="flex flex-col lg:grid grid-cols-1  lg:grid-cols-2 gap-3">
         <WhySelectAllococaCard icon="bus.png" title="Livraison gratuite à Abidjan"
-          description="Aucun frais de livraison, où que tu sois dans la capitale" />
+          description="Aucun frais de livraison, où que vous soyez dans la capitale" />
 
         <WhySelectAllococaCard icon="shield.png" title="Paiement simple et sécurisé"
           description="Mobile Money accepté, transactions 100% sécurisées" />
 
         <WhySelectAllococaCard icon="rotate.png" title="Casiers consignés, rechargeables"
-          description="Système écologique, tu paies la consigne une seule fois" />
+          description="Système écologique, vous payez la consigne une seule fois" />
 
         <WhySelectAllococaCard icon="message.png" title="Assistance WhatsApp en 1 clic"
-          description="Une question ? Notre équipe répond instantanément" />
+          description="Une question ? notre équipe répond instantanément" />
         <div class="col-span-2 rounded-xl py-[26px] bg-white text-center space-y-5">
           <div class=" text-center">
-            <h4 class="text-clamp-sm  leading-[40px] font-bold font-tcc">Prêt à passer ta première commande ?
+            <h4 class="text-clamp-sm  leading-[40px] font-bold font-tcc">Prêt à passer votre première commande ?
             </h4>
-            <p>Rejoins des milliers de clients satisfaits à Abidjan</p>
+            <p>Rejoignez des milliers de clients satisfaits à Abidjan</p>
 
           </div>
           <div class="flex md:justify-center md:items-center flex-col md:flex-row gap-4 ">
             <div>
               <CommonButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
-                title="Commander maintenant"></CommonButton>
+                title="Commandez maintenant"></CommonButton>
             </div>
             <div>
-              <CommonButton @click="openChatWithMessage" type="outline" title="Contacter via Whatsapp"></CommonButton>
+              <CommonButton @click="openChatWithMessage" type="outline" title="Contactez-nous via WhatsApp">
+              </CommonButton>
             </div>
           </div>
         </div>
@@ -183,7 +184,7 @@ import CommonButton from '@/components/buttons/commonButton.vue';
 import { AppRoute } from '@/constants/app-route';
 
 const openChatWithMessage = () => {
-  const phoneNumber = '33612345678';
+  const phoneNumber = '+2250585445252';
   const message = "Bonjour, j'ai une question sur votre produit.";
 
   // Encodage du message pour l'URL
