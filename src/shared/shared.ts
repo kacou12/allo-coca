@@ -1,132 +1,164 @@
-import axios from 'axios'
-
+import axios from "axios";
 
 export const formatRelativeDate = (date: Date): string => {
-  const now = new Date()
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
-  const inputDate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const yesterday = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() - 1,
+  );
+  const inputDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  );
 
   // Formater l'heure
-  const timeFormatter = new Intl.DateTimeFormat('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
+  const timeFormatter = new Intl.DateTimeFormat("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false, // Utiliser le format 24h
-  })
+  });
 
-  const timeString = `à ${timeFormatter.format(date)}`
+  const timeString = `à ${timeFormatter.format(date)}`;
 
   // Comparer les dates
   if (inputDate.getTime() === today.getTime()) {
-    return `Aujourd’hui ${timeString}`
+    return `Aujourd’hui ${timeString}`;
   } else if (inputDate.getTime() === yesterday.getTime()) {
-    return `Hier ${timeString}`
+    return `Hier ${timeString}`;
   } else {
     // Formater la date pour les autres cas
-    const dateFormatter = new Intl.DateTimeFormat('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    })
-    return `${dateFormatter.format(date)} ${timeString}`
+    const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    return `${dateFormatter.format(date)} ${timeString}`;
   }
-}
+};
 
-export const formatPhoneNumber = (phone: string): string => `+225${phone}`
+export const formatPhoneNumber = (phone: string): string => `+225${phone}`;
 
 export const copyToClipBoard = (text: string) => {
-  navigator.clipboard.writeText(text)
-}
+  navigator.clipboard.writeText(text);
+};
 
 export const generateColor = (): string => {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`
-}
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+};
 
-export async function downloadFileWithAxios(url: string, filename: string): Promise<File> {
+export async function downloadFileWithAxios(
+  url: string,
+  filename: string,
+): Promise<File> {
   try {
     const response = await axios({
       url,
-      method: 'GET',
-      responseType: 'blob',
-    })
+      method: "GET",
+      responseType: "blob",
+    });
 
     return new File([response.data], filename, {
-      type: response.headers['content-type'],
-    })
+      type: response.headers["content-type"],
+    });
   } catch (error) {
-    console.error('Erreur lors du téléchargement avec axios:', error)
-    throw error
+    console.error("Erreur lors du téléchargement avec axios:", error);
+    throw error;
   }
 }
 
 export const defaultProviderColor = [
   {
-    name: 'mtn',
-    color: '#ffc403',
+    name: "mtn",
+    color: "#ffc403",
   },
   {
-    name: 'orange',
-    color: '#f58220',
+    name: "orange",
+    color: "#f58220",
   },
   {
-    name: 'moov',
-    color: '#005ca8',
+    name: "moov",
+    color: "#005ca8",
   },
   {
-    name: 'wave',
-    color: '#1dc8ff',
+    name: "wave",
+    color: "#1dc8ff",
   },
-]
+];
 
-export const createDecreasingArray = ({ startValue = 1, step = 0.05, numberOfElements = 4 }) => {
-  const result = []
+export const createDecreasingArray = ({
+  startValue = 1,
+  step = 0.05,
+  numberOfElements = 4,
+}) => {
+  const result = [];
 
   for (let i = 0; i < numberOfElements; i++) {
     // Utilisation de toFixed(2) pour éviter les problèmes d'arrondi en JS
-    const value = parseFloat((startValue - i * step).toFixed(2))
-    result.unshift(value) // Ajoute au début du tableau
+    const value = parseFloat((startValue - i * step).toFixed(2));
+    result.unshift(value); // Ajoute au début du tableau
   }
 
-  return result
-}
+  return result;
+};
 
 export const normalizeData = (
   data: number[],
 ): {
-  normalizedData: number[]
-  scaleFactor: number
+  normalizedData: number[];
+  scaleFactor: number;
 } => {
-  const maxValue = Math.max(...data)
+  const maxValue = Math.max(...data);
 
   // Déterminer le facteur de mise à l'échelle approprié
-  let scaleFactor = 1
+  let scaleFactor = 1;
   if (maxValue > 1000000) {
-    scaleFactor = 1000000 // En millions
+    scaleFactor = 1000000; // En millions
   } else if (maxValue > 1000) {
-    scaleFactor = 1000 // En milliers
+    scaleFactor = 1000; // En milliers
   }
 
   return {
     normalizedData: data.map((val) => val / scaleFactor),
     scaleFactor,
-  }
-}
+  };
+};
 
 /**
  * Retourne un objet Date représentant aujourd'hui à minuit (00:00:00)
  * @returns {Date} L'objet Date pour aujourd'hui à minuit
  */
 export const getMidnightToday = () => {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  return today
-}
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+};
 
 export const formatPrice = (price: number, current?: string): string => {
   // return price.toLocaleString('fr-FR', { style: 'currency', currency: 'XOF' })
 
-  return new Intl.NumberFormat('fr-FR', {
-    style: 'currency',
-    currency: current ?? 'XOF',
-  }).format(price)
-}
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: current ?? "XOF",
+  }).format(price);
+};
+
+export const toLowercaseFirstLetterOfEachWord = (str: string) => {
+  // Divise la chaîne en un tableau de mots
+  const words = str.split(" ");
+
+  // Mappe sur chaque mot
+  const result = words.map((word) => {
+    // Si le mot n'est pas vide
+    if (word.length > 0) {
+      // Met la première lettre en minuscule et ajoute le reste du mot
+      return word.charAt(0).toLowerCase() + word.slice(1);
+    }
+    return word; // Retourne la chaîne vide ou l'espace s'il y en a
+  });
+
+  // Rejoint les mots avec un espace pour former la nouvelle chaîne
+  return result.join(" ");
+};

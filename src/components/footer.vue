@@ -9,8 +9,8 @@
                     </RouterLink>
                     <div class="2xl:w-[50%]">
 
-                        <p class="text-white">AlloCoca.ci - Ton service préféré de livraison de boissons à Abidjan. T'as
-                            soif ? Clique, on arrive.
+                        <p class="text-white">AlloCoca.ci - Ton service préféré de livraison de boissons à Abidjan. Vous
+                            avez soif ? Cliquez, on arrive
                         </p>
                     </div>
 

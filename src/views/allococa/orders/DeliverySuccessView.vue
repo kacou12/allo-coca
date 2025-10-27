@@ -9,8 +9,8 @@
 
             <p class="font-semibold">🎉 Commande validée avec succès !</p>
 
-            <p class="text-sm">Ta commande est en route.
-                Vous recevrez un mail dans quelques instants pour confirmer la
+            <p class="text-sm">Votre casier est en route.
+                Vous recevrez un e-mail dans quelques instants pour confirmer la
                 livraison.</p>
 
             <p class="font-semibold">Détail express de la commande</p>

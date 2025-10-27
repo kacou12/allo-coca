@@ -5,7 +5,8 @@
         </section>
         <section class="space-y-1">
             <p class="text-[13px]  text-[#888888]">{{ product.description }}</p>
-            <p class="font-medium text-lg">{{ product.product.name }} {{ product.label }}</p>
+            <p class="font-medium text-lg">{{ product.product.name }} {{ toLowercaseFirstLetterOfEachWord(product.label)
+                }}</p>
             <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
                 <p class="text-sm text-[#888888]">{{ product.size }}</p>
                 <p class="text-sm pl-2">{{ formatPrice(product.unit_price) }}</p>
@@ -45,7 +46,7 @@ import CustomButton from '@/components/buttons/customButton.vue';
 import Button from '@/components/ui/button/Button.vue';
 import { useCart } from '@/composables/queries/useCart';
 import type { Product, ProductResponse } from '@/services/locker-products/locker-products-type';
-import { formatPrice } from '@/shared/shared';
+import { formatPrice, toLowercaseFirstLetterOfEachWord } from '@/shared/shared';
 import { ArrowRight, Minus, Plus, ShoppingBasket } from 'lucide-vue-next';
 import { storeToRefs } from 'pinia';
 import { computed, ref, type PropType } from 'vue';

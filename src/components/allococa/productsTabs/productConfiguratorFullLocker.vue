@@ -23,7 +23,7 @@
         <div class="flex items-center justify-between w-full">
           <div>
             <!-- <label for="locker-count" class="font-semibold text-sm text-gray-700"></label> -->
-            <p class="font-semibold text-sm text-gray-700">Nombre de casiers :</p>
+            <p class="font-semibold text-sm text-gray-700">Nombre de casier :</p>
           </div>
           <div>
             <input id="locker-count" type="number" @change="emit('update:casierQuantity', desiredLockers)"

@@ -18,8 +18,8 @@
 
         <!-- Nom du produit -->
         <h3 class=" font-bold text-xs md:text-sm text-center mb-4 line-clamp-2">{{ product.product.name }} {{
-            product.label
-            }}</h3>
+            toLowercaseFirstLetterOfEachWord(product.label)
+        }}</h3>
 
         <!-- Image du produit -->
         <div class=" ml-5">
@@ -42,7 +42,7 @@
 <script setup lang="ts">
 // import Button from '@/components/ui/button/Button.vue';
 import type { CasierProduct, ProductResponse } from '@/services/locker-products/locker-products-type';
-import { formatPrice } from '@/shared/shared';
+import { formatPrice, toLowercaseFirstLetterOfEachWord } from '@/shared/shared';
 import { computed, type PropType } from 'vue';
 
 // Définition des props

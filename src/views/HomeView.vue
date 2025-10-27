@@ -9,14 +9,13 @@
       <article class="flex flex-col lg:flex-row lg:items-start lg:justify-between my-10 space-y-5 lg:space-y-0">
         <!-- <h3 class="text-clamp-lg">Nos produits disponibles</h3> -->
         <div class="lg:w-1/2">
-
-          <h3 class="text-clamp-lg font-bold font-tcc">Nos produits disponibles</h3>
+          <h3 class="text-clamp-lg font-bold font-tcc">Vos produits disponibles</h3>
         </div>
 
         <div class="space-y-3 lg:w-1/2  lg:pl-40">
 
-          <p>Compose ton casier comme tu veux ou choisissez directement un pack prêt à livrer. Des bouteilles, des
-            prix fixes, et la livraison offerte chez toi en 24h !</p>
+          <p>Composez vos casiers comme vous voulez ou choisissez directement un pack prêt à livrer. Des bouteilles, des
+            prix fixes, et la livraison offerte chez vous en 24h !</p>
 
           <!-- <div class="flex items-center gap-[5px]">
 
@@ -38,7 +37,7 @@
     <!-- Vos type de commande -->
     <section class="text-center space-y-8 my-20">
       <h3 class="text-clamp-lg font-bold font-tcc ">Vos types de commande</h3>
-      <p>Trois façons simples de commander vos boissons préférées</p>
+      <p>Trois façons simples de commander vos boissons préférées.</p>
       <div class="xl:mx-10">
 
         <OrderTypeCarousel></OrderTypeCarousel>
@@ -61,7 +60,7 @@
         </article>
         <article class="space-y-8">
           <TextLinkWithArrow @click="$router.push({ name: AppRoute.PRODUCTS.name })" color="text-white"
-            text="Commencez sans compte"></TextLinkWithArrow>
+            text="Commencer sans compte"></TextLinkWithArrow>
           <TextLinkWithArrow @click="$router.push({ name: AppRoute.ORDERS.name })" color="text-white"
             text="Retrouvez une commande"></TextLinkWithArrow>
         </article>
@@ -80,7 +79,7 @@
 
       <h3 class="text-clamp-lg  leading-[40px] font-bold font-tcc ">Comment ça marche ?</h3>
 
-      <p class="text-black">Trois étapes simples pour recevoir tes boissons</p>
+      <p class="text-black">Trois étapes simples pour recevoir vos boissons</p>
     </div>
 
     <article class="flex items-center  flex-wrap lg:flex-nowrap gap-3 justify-center mx-5 xl:mx-0">
@@ -92,8 +91,8 @@
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
         image: 'zap.png',
-        title: '2. Réception sous 24h',
-        description: 'Livraisons à votre domicile partout à Abidjan',
+        title: '2. Recevez sous 24h',
+        description: 'Livraison gratuite à votre domicile partout à Abidjan',
       }"></HowItWorkCard>
       <img class="hidden lg:block" src="/src/assets/allococa/home/comment-ca-marche/direction.png" alt="">
       <HowItWorkCard :data="{
@@ -133,7 +132,7 @@
           <div class=" text-center">
             <h4 class="text-clamp-sm  leading-[40px] font-bold font-tcc">Prêt à passer votre première commande ?
             </h4>
-            <p>Rejoignez des milliers de clients satisfaits à Abidjan</p>
+            <p>Rejoignez des milliers de clients satisfaits à Abidjan.</p>
 
           </div>
           <div class="flex md:justify-center md:items-center flex-col md:flex-row gap-4 ">

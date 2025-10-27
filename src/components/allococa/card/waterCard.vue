@@ -12,7 +12,8 @@
                 <span>{{ product.description }}</span>
             </p>
 
-            <p class="font-medium text-lg">{{ product.product.name }} {{ product.label }}</p>
+            <p class="font-medium text-lg">{{ product.product.name }} {{ toLowercaseFirstLetterOfEachWord(product.label)
+            }}</p>
 
             <div class="divide-x-[1px] divide-[#D1D1D1] space-x-[1px] mt-1 flex items-center gap-2">
                 <p class="text-sm text-[#888888]">{{ product.size }}</p>
@@ -47,7 +48,7 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
 import type { Product, ProductResponse } from '@/services/locker-products/locker-products-type';
-import { formatPrice } from '@/shared/shared';
+import { formatPrice, toLowercaseFirstLetterOfEachWord } from '@/shared/shared';
 import { ShoppingBasket } from 'lucide-vue-next';
 
 // Définition des props

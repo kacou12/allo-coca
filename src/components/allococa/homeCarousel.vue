@@ -15,10 +15,10 @@
                                 <div class=" xl:w-[50%] 2xl:w-[40%] absolute bottom-[60px] ml-5 xl:ml-0  space-y-8">
                                     <h1
                                         class="text-clamp-h1-lg font-bold font-tcc text-white leading-[50px] md:leading-[70px]">
-                                        Ton
-                                        casier
-                                        <br></br> Coca livré chez
-                                        toi,
+                                        Votre
+                                        casier de
+                                        <br> Coca livré chez
+                                        vous,
                                         sans bouger.
                                     </h1>
                                     <CustomButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
@@ -41,8 +41,8 @@
                                 <div class=" xl:w-[50%] 2xl:w-[40%] absolute bottom-[60px] ml-5 xl:ml-0 space-y-8">
                                     <h1
                                         class="text-clamp-h1-lg font-bold font-tcc text-white leading-[50px] md:leading-[70px]">
-                                        Ton pack
-                                        d’eau<br></br>livré chez toi,sans bouger.
+                                        Votre pack
+                                        d’eau<br>livré chez vous, sans bouger.
                                     </h1>
                                     <CustomButton @click="$router.push({ name: AppRoute.PRODUCTS.name })" type="default"
                                         class="text-white hover:bg-primary-50 ">
