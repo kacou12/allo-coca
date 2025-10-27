@@ -2,69 +2,73 @@ import type {
   CartLine,
   CartPayloadOrderLine,
   ProductResponse,
-} from "@/services/locker-products/locker-products-type";
-import { defineStore } from "pinia";
-import { computed, ref, watch } from "vue";
-import { clone, cloneDeep, uniqBy } from "lodash";
+} from '@/services/locker-products/locker-products-type'
+import { defineStore } from 'pinia'
+import { computed, ref, watch } from 'vue'
+import { clone, cloneDeep, uniqBy } from 'lodash'
 
 export const useCart = defineStore(
-  "cart",
+  'cart',
   () => {
-    const cart = ref<CartLine[]>([]);
+    const cart = ref<CartLine[]>([])
 
-    const count_has_own_lockers = ref(0);
+    const count_has_own_lockers = ref(0)
 
-    const has_own_lockers = ref(false);
+    const has_own_lockers = ref(false)
 
     watch(has_own_lockers, (newValue, oldValue) => {
-        if (!newValue) {
-            count_has_own_lockers.value = 0;
-        }
+      if (!newValue) {
+        count_has_own_lockers.value = 0
+      }
     })
 
-    const cartTabValue = ref<"casierCompose" | "casierComplet" | "water">(
-      "casierComplet",
-    );
+    watch(
+      () => cart.value.length,
+      (newValue, oldValue) => {
+        if (newValue == 0) {
+          has_own_lockers.value = false
+          count_has_own_lockers.value = 0
+        }
+      },
+    )
 
-    const setCartTabValue = (
-      value: "casierCompose" | "casierComplet" | "water",
+    const cartTabValue = ref<'casierCompose' | 'casierComplet' | 'water'>('casierComplet')
+
+    const setCartTabValue = (value: 'casierCompose' | 'casierComplet' | 'water') => {
+      cartTabValue.value = value
+    }
+
+    const productsDataGroupedOnlyLockerOrFullLocker = (
+      products: ProductResponse[],
+      type: 'locker' | 'fullLocker',
     ) => {
-      cartTabValue.value = value;
-    };
+      const groupedMap = new Map<string, ProductResponse>()
 
-  const productsDataGroupedOnlyLockerOrFullLocker = (products: ProductResponse[], type: "locker" | "fullLocker") => {
-    const groupedMap = new Map<string, ProductResponse>();
+      let setProducts = products
 
-    let setProducts = products;
+      setProducts = uniqBy(setProducts, 'id')
 
-    setProducts = uniqBy(setProducts, 'id');
-
-
-
-    setProducts.forEach(product => {
-      const cloneProducts = cloneDeep(products);
+      setProducts.forEach((product) => {
+        const cloneProducts = cloneDeep(products)
         cloneProducts.reduce((total, item) => {
-          if(item.id === product.id && total <= 23) {
+          if (item.id === product.id && total <= 23) {
             product.quantity += item.quantity
           }
-          return product.quantity;
+          return product.quantity
         }, 0)
 
-        groupedMap.set(product.id, { ...product });
-    });
+        groupedMap.set(product.id, { ...product })
+      })
 
-    return Array.from(groupedMap.values());
- 
-  };
+      return Array.from(groupedMap.values())
+    }
 
-
-
-const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
+    const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
       return cart.value.map((item) => {
-        let localGroupedProducts = item.products;
-        if(item.type !=  "water"){
+        let localGroupedProducts = item.products
+        if (item.type != 'water') {
           // localGroupedProducts =   productsDataGroupedOnlyLockerOrFullLocker(item.products, item.type)
-          localGroupedProducts =   productsDataGrouped(item.products, item.type)
+          localGroupedProducts = productsDataGrouped(item.products, item.type)
         }
         return {
           type: item.type,
@@ -73,136 +77,123 @@ const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
             return {
               variant_id: product.id,
               qty: product.quantity ?? 1,
-            };
+            }
           }),
-        };
-      });
-    };
+        }
+      })
+    }
 
     const casierQuantityLength = computed(() => {
       return cart.value
-        .filter(
-          (line: CartLine) =>
-            line.type === "locker" || line.type === "fullLocker",
-        )
+        .filter((line: CartLine) => line.type === 'locker' || line.type === 'fullLocker')
         .reduce((total, item) => {
-          return total + item.quantity;
-        }, 0);
-    });
+          return total + item.quantity
+        }, 0)
+    })
 
     const casierLength = computed(() => {
       return cart.value.filter(
-        (line: CartLine) =>
-          line.type === "locker" || line.type === "fullLocker",
-      ).length;
-    });
+        (line: CartLine) => line.type === 'locker' || line.type === 'fullLocker',
+      ).length
+    })
 
     const packLength = computed(() => {
-      return cart.value.filter((line: CartLine) => line.type === "water").length;
-    });
+      return cart.value.filter((line: CartLine) => line.type === 'water').length
+    })
 
     const cartQuantityLength = computed(() => {
       return cart.value.reduce((total, item) => {
-        return total + item.quantity;
-      }, 0);
-    });
+        return total + item.quantity
+      }, 0)
+    })
 
     const total = computed(() => {
       return cart.value.reduce((total, item) => {
-        return total + item.quantity * item.products[0].unit_price;
-      }, 0);
-    });
+        return total + item.quantity * item.products[0].unit_price
+      }, 0)
+    })
 
     const addCartLine = (product: CartLine) => {
-      const existingCartLine = cart.value.find(
-        (item) => item.id === product.id,
-      );
+      const existingCartLine = cart.value.find((item) => item.id === product.id)
       if (existingCartLine) {
-        existingCartLine.quantity++;
+        existingCartLine.quantity++
       } else {
-        cart.value.push(product);
+        cart.value.push(product)
       }
-    };
+    }
 
     const updateCartLine = (product: CartLine) => {
-      const existingCartLine = cart.value.find(
-        (item) => item.id === product.id,
-      );
+      const existingCartLine = cart.value.find((item) => item.id === product.id)
       if (existingCartLine) {
-        existingCartLine.quantity = product.quantity;
-        existingCartLine.products = product.products;
+        existingCartLine.quantity = product.quantity
+        existingCartLine.products = product.products
       }
-    };
+    }
 
     const removeCartLine = (product: CartLine) => {
-      cart.value = cart.value.filter((item) => item.id !== product.id);
-    };
+      cart.value = cart.value.filter((item) => item.id !== product.id)
+    }
 
     const clearCart = () => {
-      cart.value = [];
-      has_own_lockers.value = false;
-    };
+      cart.value = []
+      has_own_lockers.value = false
+    }
 
     const waterProductDefaultQuantity = (id_water_product: string) => {
       //  const waterCartLine = cart.value.filter(cartLine => cartLine.type === 'water');
       //   [].concat(array1, array2, array3)
-      return (
-        cart.value.find((cartLine) => cartLine.id === id_water_product)
-          ?.quantity ?? 0
-      );
-    };
+      return cart.value.find((cartLine) => cartLine.id === id_water_product)?.quantity ?? 0
+    }
 
     const productsDataGrouped = (
       products: ProductResponse[],
-      type: "locker" | "fullLocker" | "water",
+      type: 'locker' | 'fullLocker' | 'water',
     ) => {
-      const groupedMap = new Map<string, ProductResponse>();
+      const groupedMap = new Map<string, ProductResponse>()
 
-      let setProducts = products;
+      let setProducts = products
 
-      if (type === "locker") {
+      if (type === 'locker') {
         // setProducts = Array.from(new Set(products));
-        setProducts = uniqBy(setProducts, "id");
+        setProducts = uniqBy(setProducts, 'id')
       }
 
       // const setProducts = new Set(products);
 
       setProducts.forEach((product) => {
-        const existing = groupedMap.get(product.id);
+        const existing = groupedMap.get(product.id)
 
         if (existing) {
-          existing.quantity += product.quantity;
+          existing.quantity += product.quantity
         } else {
-          groupedMap.set(product.id, { ...product });
+          groupedMap.set(product.id, { ...product })
         }
-      });
+      })
 
-      return Array.from(groupedMap.values());
-    };
+      return Array.from(groupedMap.values())
+    }
 
     const subtotal = computed(() => {
-      return cart.value.reduce((total, cartLine) => {
-        const groupedProducts = productsDataGrouped(
-          cartLine.products,
-          cartLine.type,
-        );
-        return (
-          total +
-          groupedProducts.reduce((total, product) => {
-            return total + product.unit_price * product.quantity;
-          }, 0) *
-            cartLine.quantity
-        );
-      }, 0)+  amountConsignation.value;
-    });
+      return (
+        cart.value.reduce((total, cartLine) => {
+          const groupedProducts = productsDataGrouped(cartLine.products, cartLine.type)
+          return (
+            total +
+            groupedProducts.reduce((total, product) => {
+              return total + product.unit_price * product.quantity
+            }, 0) *
+              cartLine.quantity
+          )
+        }, 0) + amountConsignation.value
+      )
+    })
 
     const amountConsignation = computed(() => {
       if (has_own_lockers.value) {
-            return (casierQuantityLength.value - count_has_own_lockers.value) * 3600;
+        return (casierQuantityLength.value - count_has_own_lockers.value) * 3600
       }
-      return casierQuantityLength.value * 3600;
-
-   });
+      return casierQuantityLength.value * 3600
+    })
 
     return {
       cart,
@@ -223,9 +214,9 @@ const formatCartLineToOrderPayload = (): CartPayloadOrderLine[] => {
       amountConsignation,
       // setCartTabValue,
       // cartTabValue
-    };
+    }
   },
   {
     persist: true,
   },
-);
+)

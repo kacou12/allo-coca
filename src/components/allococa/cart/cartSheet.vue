@@ -35,7 +35,7 @@
 
 
         </SheetTrigger>
-        <SheetContent class=" px-3  w-[90%] sm:w-fit">
+        <SheetContent class=" px-3  lg:w-[90%] sm:w-fit">
             <form @submit.prevent="onSubmit" class="mx-5">
 
                 <section v-if="cartQuantityLength > 0">
