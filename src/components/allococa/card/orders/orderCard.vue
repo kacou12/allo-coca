@@ -1,157 +1,149 @@
 <template>
-    <div class="bg-[#F6F6F6] rounded-lg p-6 flex flex-col justify-between">
-        <!-- En-tête avec titre et date -->
-        <div class="flex items-center justify-between mb-4 space-x-2 ">
-            <h3 class="text-lg font-semibold text-gray-800">
-                Commande : {{ order.reference }}
-            </h3>
-            <OrderStatusBloc :order="order"></OrderStatusBloc>
+  <div class="bg-[#F6F6F6] rounded-lg p-6 flex flex-col justify-between">
+    <!-- En-tête avec titre et date -->
+    <div class="flex items-center justify-between mb-4 space-x-2">
+      <h3 class="text-lg font-semibold text-gray-800">Commande : {{ order.reference }}</h3>
+      <OrderStatusBloc :order="order"></OrderStatusBloc>
+    </div>
+
+    <!-- Items de la commande -->
+    <div class="space-y-2 mb-4 w-full">
+      <div class="flex items-start space-x-2 w-full">
+        <div class="flex items-center justify-between w-full">
+          <span class="text-sm font-semibold">Date : </span>
+          <span class="text-sm text-gray-600 ml-1">{{
+            formatRelativeDate(new Date(order.delivery.created_at))
+          }}</span>
         </div>
+      </div>
 
-        <!-- Items de la commande -->
-        <div class="space-y-2 mb-4 w-full ">
-            <div class="flex items-start space-x-2 w-full">
-                <div class="flex items-center justify-between w-full">
-                    <span class="text-sm font-semibold">Date : </span>
-                    <span class="text-sm text-gray-600 ml-1">{{ formatRelativeDate(new
-                        Date(order.delivery.created_at)) }}</span>
-                </div>
-            </div>
-
-            <!-- Casier -->
-            <div v-if="casiersRecap" class="flex items-start space-x-2 w-full">
-                <div class="flex items-center w-full justify-between">
-                    <span class="text-sm font-semibold">Casier(s) : </span>
-                    <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap }}</span>
-                </div>
-            </div>
-
-            <div v-if="order.is_settled" class="flex items-start space-x-2 w-full">
-                <div class="flex items-center w-full justify-between">
-                    <span class="text-sm font-semibold">Casier(s) consigné(s) : </span>
-                    <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.number_of_casier }}</span>
-                </div>
-            </div>
-
-
-            <!-- Packs -->
-            <div v-if="packsRecap" class="flex items-start space-x-2 w-full">
-                <div class="flex items-center w-full justify-between">
-                    <span class="text-sm font-semibold">Pack(s) : </span>
-                    <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ packsRecap }}</span>
-                </div>
-            </div>
+      <!-- Casier -->
+      <div v-if="casiersRecap" class="flex items-start space-x-2 w-full">
+        <div class="flex items-center w-full justify-between">
+          <span class="text-sm font-semibold">Casier(s) : </span>
+          <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap }}</span>
         </div>
+      </div>
 
-        <!-- Total -->
-        <div class="mb-4 flex items-center justify-between">
-            <div class="font-medium text-gray-800">
-                Total :
-            </div>
-            <div class="font-bold text-gray-900">
-                {{ formatPrice(order.total_amount) }}
-            </div>
+      <div v-if="order.is_settled" class="flex items-start space-x-2 w-full">
+        <div class="flex items-center w-full justify-between">
+          <span class="text-sm font-semibold">Casier(s) consigné(s) : </span>
+          <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ order.number_of_casier }}</span>
         </div>
+      </div>
 
-        <!-- Boutons d'action -->
-        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
-            <!-- <button @click="$emit('reorder')"
+      <!-- Packs -->
+      <div v-if="packsRecap" class="flex items-start space-x-2 w-full">
+        <div class="flex items-center w-full justify-between">
+          <span class="text-sm font-semibold">Pack(s) : </span>
+          <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ packsRecap }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total -->
+    <div class="mb-4 flex items-center justify-between">
+      <div class="font-medium text-gray-800">Total :</div>
+      <div class="font-bold text-gray-900">
+        {{ formatPrice(order.total_amount) }}
+      </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+      <!-- <button @click="$emit('reorder')"
                 class="sm:flex-1 bg-primary-50 hover:bg-primary-40 rounded-3xl text-white px-4 py-2 text-sm font-medium transition-colors">
                 Recommander
             </button> -->
-        </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import type { OrderResponse } from '@/services/locker-products/order-type'
-import { formatPrice, formatRelativeDate } from '@/shared/shared'
+import { formatPrice, formatRelativeDate, toLowercaseFirstLetterOfEachWord } from '@/shared/shared'
 import { computed, type PropType } from 'vue'
 import OrderStatusBloc from './orderStatusBloc.vue'
 
 const props = defineProps({
-    order: {
-        type: Object as PropType<OrderResponse>,
-        required: true
-    }
+  order: {
+    type: Object as PropType<OrderResponse>,
+    required: true,
+  },
 })
 
 interface Emits {
-    reorder: []
-    modify: []
+  reorder: []
+  modify: []
 }
 
 defineEmits<Emits>()
 
 // Formater la date de commande
 const formatOrderDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('fr-FR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    })
+  const date = new Date(dateString)
+  return date.toLocaleDateString('fr-FR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
 }
 
 // Récapitulatif des casiers
 const casiersRecap = computed(() => {
-    const casiers = props.order.items.filter(
-        (item) => item.type === 'locker' || item.type === 'fullLocker'
-    )
+  const casiers = props.order.items.filter(
+    (item) => item.type === 'locker' || item.type === 'fullLocker',
+  )
 
-    if (casiers.length === 0) return null
+  if (casiers.length === 0) return null
 
-    const productQuantities: Record<string, { name: string; quantity: number }> = {}
+  const productQuantities: Record<string, { name: string; quantity: number }> = {}
 
-    casiers.forEach((item) => {
-        const productId = item.variant.product.id
-        const totalQuantity = item.quantity
+  casiers.forEach((item) => {
+    const productId = item.variant.product.id
+    const totalQuantity = item.quantity
 
-        if (productQuantities[productId]) {
-            productQuantities[productId].quantity += totalQuantity
-        } else {
-            productQuantities[productId] = {
-                name: item.variant.product.name,
-                quantity: totalQuantity
-            }
-        }
-    })
+    if (productQuantities[productId]) {
+      productQuantities[productId].quantity += totalQuantity
+    } else {
+      productQuantities[productId] = {
+        name: `${item.variant.product.name} ${toLowercaseFirstLetterOfEachWord(item.variant.label)}`,
+        quantity: totalQuantity,
+      }
+    }
+  })
 
-    const items = Object.values(productQuantities).map(
-        ({ quantity, name }) => `${quantity}x ${name}`
-    )
+  const items = Object.values(productQuantities).map(
+    ({ quantity, name }) => `${quantity} x ${name}`,
+  )
 
-    return items.join(', ')
+  return items.join(', ')
 })
 
 // Récapitulatif des packs
 const packsRecap = computed(() => {
-    const packs = props.order.items.filter(
-        (item) => item.type === 'water'
-    )
+  const packs = props.order.items.filter((item) => item.type === 'water')
 
-    if (packs.length === 0) return null
+  if (packs.length === 0) return null
 
-    const productQuantities: Record<string, { name: string; quantity: number }> = {}
+  const productQuantities: Record<string, { name: string; quantity: number }> = {}
 
-    packs.forEach((item) => {
-        const productId = item.variant.product.id
-        const totalQuantity = item.quantity
+  packs.forEach((item) => {
+    const productId = item.variant.product.id
+    const totalQuantity = item.quantity
 
-        if (productQuantities[productId]) {
-            productQuantities[productId].quantity += totalQuantity
-        } else {
-            productQuantities[productId] = {
-                name: item.variant.product.name,
-                quantity: totalQuantity
-            }
-        }
-    })
+    if (productQuantities[productId]) {
+      productQuantities[productId].quantity += totalQuantity
+    } else {
+      productQuantities[productId] = {
+        name: `${item.variant.product.name} ${item.variant.label}`,
+        quantity: totalQuantity,
+      }
+    }
+  })
 
-    const items = Object.values(productQuantities).map(
-        ({ quantity, name }) => `${quantity}x ${name}`
-    )
+  const items = Object.values(productQuantities).map(({ quantity, name }) => `${quantity}x ${name}`)
 
-    return items.join(', ')
+  return items.join(', ')
 })
 </script>
