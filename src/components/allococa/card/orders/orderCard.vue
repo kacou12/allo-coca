@@ -18,10 +18,14 @@
       </div>
 
       <!-- Casier -->
-      <div v-if="casiersRecap" class="flex items-start space-x-2 w-full">
-        <div class="flex items-center w-full justify-between">
-          <span class="text-sm font-semibold">Casier(s) : </span>
-          <span class="text-sm text-gray-600 ml-1 line-clamp-3">{{ casiersRecap }}</span>
+      <div v-if="casiersRecap" class="flex items-start space-x-2">
+        <div class="flex justify-between w-full space-x-[5px]">
+          <span class="text-sm font-semibold">Casier(s): </span>
+          <div class="flex-1">
+            <p class="text-sm text-gray-600 ml-1">
+              {{ casiersRecap }}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -107,7 +111,7 @@ const casiersRecap = computed(() => {
       productQuantities[productId].quantity += totalQuantity
     } else {
       productQuantities[productId] = {
-        name: `${item.variant.product.name} ${toLowercaseFirstLetterOfEachWord(item.variant.label)}`,
+        name: `${item.variant.product.name} ${toLowercaseFirstLetterOfEachWord(item.variant.label)} ( ${item.variant.size} , ${item.variant.description} )`,
         quantity: totalQuantity,
       }
     }
