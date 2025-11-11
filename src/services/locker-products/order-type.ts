@@ -66,6 +66,7 @@ interface Variant {
   name: any
   label: string
   description: string
+  size: string
   product: Product
 }
 
