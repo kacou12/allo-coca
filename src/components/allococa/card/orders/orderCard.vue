@@ -140,7 +140,7 @@ const packsRecap = computed(() => {
       productQuantities[productId].quantity += totalQuantity
     } else {
       productQuantities[productId] = {
-        name: `${item.variant.product.name} ${item.variant.label}`,
+        name: `${item.variant.product.name} ${item.variant.label} ( ${item.variant.size} , ${item.variant.description} )`,
         quantity: totalQuantity,
       }
     }
