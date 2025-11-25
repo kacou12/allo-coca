@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 space-y-1 bg-[#F6F6F6] rounded-xl">
+    <div class="p-4  bg-[#F6F6F6] rounded-xl relative overflow-hidden">
         <section class="h-[268px]  flex items-center justify-center">
             <img class="min-w-[69px] max-h-[220px]" :src="product.image_url" alt=""></img>
         </section>
@@ -37,6 +37,19 @@
                 </button>
             </section>
         </section>
+
+         <!-- out of stock banner -->
+    <section v-if="!product.status" class="pointer-events-noner absolute inset-0">
+      <!-- Fond semi-transparent -->
+      <div class="absolute inset-0 bg-gray-400/50"></div>
+
+      <!-- Bandeau diagonal -->
+      <div
+        class="absolute top-10 -right-24 w-80 bg-red-600 text-white text-center py-3 font-bold text-sm tracking-wider transform rotate-45 shadow-lg"
+      >
+        RUPTURE DE STOCK
+      </div>
+    </section>
 
     </div>
 </template>
