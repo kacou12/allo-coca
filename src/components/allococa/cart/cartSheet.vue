@@ -42,7 +42,7 @@
         </article>
       </section>
     </SheetTrigger>
-    <SheetContent class="px-3 lg:w-[90%] sm:w-fit">
+    <SheetContent class="px-3 lg:w-[90%] sm:w-fit overflow-y-scroll">
       <form @submit.prevent="onSubmit" class="mx-5">
         <section v-if="cartQuantityLength > 0">
           <SheetHeader class="translate-y-[-10px]">
@@ -62,24 +62,26 @@
             </section>
 
             <!-- Résumé de ma commande -->
-            <div class="pb-12 md:pb-0">
-              <section class="py-4 space-y-4">
-                <div class="space-y-4">
-                  <h2 class="text-md font-bold">Résumé de ma commande</h2>
-                  <div class="flex justify-between items-center text-sm">
+            <div class="pb-2 md:pb-0">
+              <section class="py-2 space-y-2">
+                <div class="space-y-2">
+                  <h2 class="text-sm font-bold">Résumé de ma commande</h2>
+                  <div class="flex justify-between items-center text-xs md:text-sm">
                     <span>Sous-total</span>
                     <span class="font-semibold">{{ subtotal }} FCFA</span>
                   </div>
 
                   <div
-                    class="flex justify-between items-center text-sm border-t pt-3 border-gray-300"
+                    class="flex justify-between items-center text-xs md:text-sm border-t pt-1 border-gray-300"
                   >
-                    <span>Consignation</span>
-                    <span class="font-semibold">{{ amountConsignation }} FCFA</span>
+                    <span class="text-xs md:text-sm">Consignation</span>
+                    <span class="font-semibold text-xs md:text-sm"
+                      >{{ amountConsignation }} FCFA</span
+                    >
                   </div>
 
                   <article>
-                    <div class="flex items-center justify-between space-x-2 text-base">
+                    <div class="flex items-center justify-between space-x-2 text-xs md:text-sm">
                       <section class="flex items-center gap-1">
                         <input
                           type="checkbox"
@@ -87,7 +89,7 @@
                           v-model="has_own_lockers"
                           class="form-checkbox h-4 w-4 text-primary-50 rounded"
                         />
-                        <label for="consignation-checkbox" class="text-gray-700 text-sm"
+                        <label for="consignation-checkbox" class="text-gray-700 text-xs md:text-sm"
                           >Je possède déjà mes casiers (retirer la consigne)</label
                         >
                       </section>
@@ -121,12 +123,12 @@
                   <div
                     class="flex justify-between items-center text-sm border-t pt-3 border-gray-300"
                   >
-                    <span>Livraison</span>
-                    <span class="font-semibold">0 FCFA</span>
+                    <span class="text-xs md:text-sm">Livraison</span>
+                    <span class="font-semibold text-xs md:text-sm">0 FCFA</span>
                   </div>
 
                   <div
-                    class="flex justify-between items-center text-sm font-bold pt-3 border-t border-gray-300"
+                    class="flex justify-between items-center text-xs md:text-sm font-bold pt-3 border-t border-gray-300"
                   >
                     <span>Total</span>
                     <span class="text-primary-50">{{ total }} FCFA</span>
@@ -142,7 +144,7 @@
                 <Button
                   type="submit"
                   :disabled="!!errors.lockerCount || total < 5000"
-                  class="w-full py-5 text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60"
+                  class="w-full py-1 text-xs md:text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60"
                 >
                   Finaliser ma commande
                 </Button>

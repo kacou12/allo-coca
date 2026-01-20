@@ -40,6 +40,16 @@
             </article>
           </section>
         </CarouselItem>
+        <CarouselItem class="p-0 overflow-hidden">
+          <section
+            class="h-screen hidden sm:block bg-[#f40100] relative bg-[url(/src/assets/allococa/banner/banner-7.png)] bg-center bg-no-repeat md:bg-[50%_85%]"
+          ></section>
+          <div class="h-screen bg-[#f40100] flex flex-col items-center sm:hidden">
+            <section
+              class="w-full h-3/4 bg-[#f40100] bg-[url(/src/assets/allococa/banner/banner-mini-7.png)] bg-[50%_100%] bg-no-repeat md:bg-[50%_85%]"
+            ></section>
+          </div>
+        </CarouselItem>
         <CarouselItem class="p-0">
           <section
             class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-2.png)] bg-cover bg-center bg-no-repeat"
@@ -87,11 +97,6 @@
         <CarouselItem class="p-0">
           <section
             class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-6.jpg)] bg-cover bg-center bg-no-repeat"
-          ></section>
-        </CarouselItem>
-        <CarouselItem class="p-0 overflow-hidden">
-          <section
-            class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-7.png)] bg-cover bg-no-repeat bg-[50%_85%]"
           ></section>
         </CarouselItem>
       </CarouselContent>
