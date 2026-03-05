@@ -40,16 +40,48 @@
             </article>
           </section>
         </CarouselItem>
-        <!-- <CarouselItem class="p-0 overflow-hidden">
+
+        <!-- PACK NOURRISSONS -->
+        <CarouselItem class="p-0 overflow-hidden">
+          <!-- DESKTOP -->
           <section
-            class="h-screen hidden sm:block bg-[#f40100] relative bg-[url(/src/assets/allococa/banner/banner-7.png)] bg-center bg-no-repeat md:bg-[50%_85%]"
+            class="h-screen hidden sm:block bg-black relative bg-[url(/src/assets/allococa/banner/pack_nour_web.png)] bg-contain bg-no-repeat md:bg-[50%_85%]"
           ></section>
-          <div class="h-screen bg-[#f40100] flex flex-col items-center sm:hidden">
+          <!-- MOBILE -->
+          <div class="h-screen flex flex-col items-center sm:hidden bg-black">
             <section
-              class="w-full h-3/4 bg-[#f40100] bg-[url(/src/assets/allococa/banner/banner-mini-7.png)] bg-[50%_100%] bg-no-repeat md:bg-[50%_85%]"
+              class="w-full h-full bg-[url(/src/assets/allococa/banner/pack_nour_mobile.png)] bg-contain bg-center bg-no-repeat md:bg-[50%_85%]"
             ></section>
           </div>
-        </CarouselItem> -->
+        </CarouselItem>
+
+        <!-- PACK IFTAR -->
+        <CarouselItem class="p-0 overflow-hidden">
+          <!-- DESKTOP -->
+          <section
+            class="h-screen hidden sm:block bg-black relative bg-[url(/src/assets/allococa/banner/Pack_iftar_web.png)] bg-contain bg-no-repeat md:bg-[50%_85%]"
+          ></section>
+          <!-- MOBILE -->
+          <div class="h-screen flex flex-col items-center sm:hidden bg-black">
+            <section
+              class="w-full h-full bg-[url(/src/assets/allococa/banner/Pack_iftar_mobile.png)] bg-contain bg-center bg-no-repeat md:bg-[50%_85%]"
+            ></section>
+          </div>
+        </CarouselItem>
+        <!-- PACK IFTAR -->
+        <CarouselItem class="p-0 overflow-hidden">
+          <!-- DESKTOP -->
+          <section
+            class="h-screen hidden sm:block bg-black relative bg-[url(/src/assets/allococa/banner/Pack_baraka_web.png)] bg-contain bg-no-repeat md:bg-[50%_85%]"
+          ></section>
+          <!-- MOBILE -->
+          <div class="h-screen flex flex-col items-center sm:hidden bg-black">
+            <section
+              class="w-full h-full bg-[url(/src/assets/allococa/banner/Pack_baraka_mobile.png)] bg-contain bg-center bg-no-repeat md:bg-[50%_85%]"
+            ></section>
+          </div>
+        </CarouselItem>
+
         <CarouselItem class="p-0">
           <section
             class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-2.png)] bg-cover bg-center bg-no-repeat"
