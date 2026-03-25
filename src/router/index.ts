@@ -1,6 +1,6 @@
 import { AppRoute } from "@/constants/app-route";
 import { createRouter, createWebHistory } from "vue-router";
-import { requiresAuth } from "./guards";
+import { requiresAuth, trackGoogleTag } from "./guards";
 import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
 import { getAccessToken } from "@/services/auth/auth-util";
@@ -170,5 +170,6 @@ const router = createRouter({
 });
 
 router.beforeEach(requiresAuth)
+router.afterEach(trackGoogleTag)
 
 export default router;

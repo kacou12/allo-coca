@@ -1,4 +1,10 @@
 import { AppRoute } from '@/constants/app-route'
+
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void
+  }
+}
 import { getAccessToken } from '@/services/auth/auth-util'
 import type {
   _Awaitable,
@@ -8,6 +14,14 @@ import type {
   RouteRecordNameGeneric,
 } from 'vue-router'
 
+export function trackGoogleTag(to: RouteLocationNormalized): void {
+  if (to.name === AppRoute.PRODUCTS.name) {
+    window.gtag('event', 'page_view', { page_path: to.fullPath })
+    // window.gtag('event', 'add_to_cart', { ... })
+    // window.gtag('event', 'begin_checkout', { ... })
+  }
+}
+
 export function requiresAuth(
   to: RouteLocationNormalized,
 
@@ -16,12 +30,18 @@ export function requiresAuth(
   if (to.meta.requiresAuth) {
     // see more https://router.vuejs.org/guide/advanced/meta.html
     // see more https://router.vuejs.org/guide/advanced/navigation-guards.html
-    if (!getAccessToken() && (to.name !== AppRoute.LOGIN.name && to.name !== AppRoute.REGISTER.name)) {
+    if (
+      !getAccessToken() &&
+      to.name !== AppRoute.LOGIN.name &&
+      to.name !== AppRoute.REGISTER.name
+    ) {
       // RouteRecordNameGeneric
       return AppRoute.LOGIN.name
-    }else if((to.name === AppRoute.LOGIN.name || to.name === AppRoute.REGISTER.name) && getAccessToken()) {
+    } else if (
+      (to.name === AppRoute.LOGIN.name || to.name === AppRoute.REGISTER.name) &&
+      getAccessToken()
+    ) {
       return AppRoute.HOME.name
-
     }
   }
 }
