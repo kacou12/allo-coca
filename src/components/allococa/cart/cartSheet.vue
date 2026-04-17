@@ -135,7 +135,7 @@
                   </div>
                   <p class="text-xs text-primary-60">
                     Le montant minimum pour une commande est de
-                    <span class="font-bold">5000 FCFA</span>
+                    <span class="font-bold">10000 FCFA</span>
                   </p>
                 </div>
               </section>
@@ -143,7 +143,7 @@
               <div class="md:mt-1">
                 <Button
                   type="submit"
-                  :disabled="!!errors.lockerCount || total < 5000"
+                  :disabled="!!errors.lockerCount || total < 10000"
                   class="w-full py-1 text-xs md:text-sm rounded-[90px] bg-primary-50 hover:bg-primary-60"
                 >
                   Finaliser ma commande
