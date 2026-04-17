@@ -3,6 +3,7 @@ import { AppRoute } from '@/constants/app-route'
 declare global {
   interface Window {
     gtag: (...args: unknown[]) => void
+    fbq: (...args: unknown[]) => void
   }
 }
 import { getAccessToken } from '@/services/auth/auth-util'
@@ -17,8 +18,7 @@ import type {
 export function trackGoogleTag(to: RouteLocationNormalized): void {
   if (to.name === AppRoute.PRODUCTS.name) {
     window.gtag('event', 'page_view', { page_path: to.fullPath })
-    // window.gtag('event', 'add_to_cart', { ... })
-    // window.gtag('event', 'begin_checkout', { ... })
+    window.fbq('track', 'PageView')
   }
 }
 
