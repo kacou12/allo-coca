@@ -119,6 +119,12 @@ const router = createRouter({
           meta: { requiresAuth: true,  },
         },
         {
+          path: AppRoute.CART.path,
+          name: AppRoute.CART.name,
+          component: () => import("@/views/allococa/CartView.vue"),
+          meta: { requiresAuth: false },
+        },
+        {
           path: AppRoute.DELIVERY_INITIALISATON.path,
           name: AppRoute.DELIVERY_INITIALISATON.name,
           component: () =>

@@ -42,6 +42,10 @@ export const AppRoute = Object.freeze({
     name: "lost-password",
     path: "/lost-password",
   },
+  CART: {
+    name: "cart",
+    path: "/cart",
+  },
   ABOUT: {
     name: "about",
     path: "/about",
