@@ -51,7 +51,7 @@
 
                 <div class="hidden lg:flex items-center gap-5">
 
-                    <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+                    <CartIconButton :is-scrolled="isScrolledOrHomePage"></CartIconButton>
                     <!-- <section :class="[isScrolledOrHomePage ? 'bg-primary-50' : 'bg-transparent']"
                         class="rounded-full border-[1px] p-[4px] cursor-pointer"
                         @click="router.push({ name: AppRoute.LOGIN.name })">
@@ -65,7 +65,7 @@
 
             <div class="flex items-center gap-2 lg:hidden">
 
-                <CartSheet :is-scrolled="isScrolledOrHomePage"></CartSheet>
+                <CartIconButton :is-scrolled="isScrolledOrHomePage"></CartIconButton>
 
                 <!-- :class="[isScrolledOrHomePage ? 'text-black' : 'text-white']" -->
                 <section :class="[isScrolledOrHomePage ? 'bg-primary-50' : 'bg-transparent']"
@@ -90,7 +90,7 @@ import { UserCircle2, User2Icon } from 'lucide-vue-next';
 import { AppRoute } from "@/constants/app-route";
 import { useCart } from "@/composables/queries/useCart";
 import { storeToRefs } from "pinia";
-import CartSheet from "../allococa/cart/cartSheet.vue";
+import CartIconButton from "../allococa/cart/cartIconButton.vue";
 import DrawerSheet from "../dropdowns/drawer-sheet.vue";
 import UserMenu from "./userMenu.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
