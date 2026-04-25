@@ -41,47 +41,6 @@
           </section>
         </CarouselItem>
 
-        <!-- PACK NOURRISSONS -->
-        <CarouselItem class="p-0 overflow-hidden">
-          <!-- DESKTOP -->
-          <section
-            class="h-screen hidden sm:block bg-black relative bg-[url(/src/assets/allococa/banner/pack_nour_web.png)] bg-contain bg-no-repeat md:bg-[50%_85%]"
-          ></section>
-          <!-- MOBILE -->
-          <div class="h-screen flex flex-col items-center sm:hidden bg-black">
-            <section
-              class="w-full h-full bg-[url(/src/assets/allococa/banner/pack_nour_mobile.png)] bg-contain bg-center bg-no-repeat md:bg-[50%_85%]"
-            ></section>
-          </div>
-        </CarouselItem>
-
-        <!-- PACK IFTAR -->
-        <CarouselItem class="p-0 overflow-hidden">
-          <!-- DESKTOP -->
-          <section
-            class="h-screen hidden sm:block bg-black relative bg-[url(/src/assets/allococa/banner/Pack_iftar_web.png)] bg-contain bg-no-repeat md:bg-[50%_85%]"
-          ></section>
-          <!-- MOBILE -->
-          <div class="h-screen flex flex-col items-center sm:hidden bg-black">
-            <section
-              class="w-full h-full bg-[url(/src/assets/allococa/banner/Pack_iftar_mobile.png)] bg-contain bg-center bg-no-repeat md:bg-[50%_85%]"
-            ></section>
-          </div>
-        </CarouselItem>
-        <!-- PACK IFTAR -->
-        <CarouselItem class="p-0 overflow-hidden">
-          <!-- DESKTOP -->
-          <section
-            class="h-screen hidden sm:block bg-black relative bg-[url(/src/assets/allococa/banner/Pack_baraka_web.png)] bg-contain bg-no-repeat md:bg-[50%_85%]"
-          ></section>
-          <!-- MOBILE -->
-          <div class="h-screen flex flex-col items-center sm:hidden bg-black">
-            <section
-              class="w-full h-full bg-[url(/src/assets/allococa/banner/Pack_baraka_mobile.png)] bg-contain bg-center bg-no-repeat md:bg-[50%_85%]"
-            ></section>
-          </div>
-        </CarouselItem>
-
         <CarouselItem class="p-0">
           <section
             class="h-screen relative bg-[url(/src/assets/allococa/banner/banner-2.png)] bg-cover bg-center bg-no-repeat"
